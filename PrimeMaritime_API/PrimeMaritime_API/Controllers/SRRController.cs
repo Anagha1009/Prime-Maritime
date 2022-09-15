@@ -33,11 +33,13 @@ namespace PrimeMaritime_API.Controllers
             if(data != null)
             {
                 response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
                 response.Data = data;
             }
             else
             {
                 response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
             }
             
             return response;
