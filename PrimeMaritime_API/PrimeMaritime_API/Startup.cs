@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PrimeMaritime_API.IRepository;
+using PrimeMaritime_API.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,10 +35,8 @@ namespace PrimeMaritime_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PrimeMaritime_API", Version = "v1" });
             });
 
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Channel.API", Version = "v1" });
-            //});
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserRepo, UserRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

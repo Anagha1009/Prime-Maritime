@@ -49,5 +49,23 @@ namespace PrimeMaritime_API.Translators
             }
             return list;
         }
+
+        public static USER TranslateAsUser1(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+            var item = new USER();
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("Username"))
+                item.USERNAME = SqlHelper.GetNullableString(reader, "Username");            
+
+            return item;
+        }
     }
 }
