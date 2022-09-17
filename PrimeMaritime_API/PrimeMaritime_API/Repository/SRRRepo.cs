@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Repository
 {
-    public class UserDBClient
+    public class SRRRepo
     {
         public List<SRR> GetSRRList(string connstring)
         {
-            return SqlHelper.ExtecuteProcedureReturnData<List<SRR>>(connstring, "stp_GetSRRList", r => r.TranslateAsUsersList());
+            return SqlHelper.ExtecuteProcedureReturnData<List<SRR>>(connstring, "SP_GET_SRR", r => r.TranslateAsUsersList());
         }
     }
 }

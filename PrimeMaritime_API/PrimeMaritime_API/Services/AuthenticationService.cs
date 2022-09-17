@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PrimeMaritime_API.IRepository;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
+using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
@@ -15,7 +16,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimeMaritime_API.Repository
+namespace PrimeMaritime_API.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

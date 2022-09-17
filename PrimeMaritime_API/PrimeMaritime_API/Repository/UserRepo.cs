@@ -1,5 +1,4 @@
 ﻿using PrimeMaritime_API.Helpers;
-using PrimeMaritime_API.IRepository;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Translators;
 using System;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Repository
 {
-    public class UserRepo : IUserRepo
+    public class UserRepo
     {
         public USER GetUserByUsername(string connstring, string username)
         {

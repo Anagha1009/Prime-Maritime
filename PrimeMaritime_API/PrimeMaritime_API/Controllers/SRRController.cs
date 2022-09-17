@@ -1,48 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PrimeMaritime_API.Helpers;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
-using PrimeMaritime_API.Repository;
-using PrimeMaritime_API.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
+
     [ApiController]
     public class SRRController : ControllerBase
     {
 
-        private IConfiguration _config;
-        public SRRController(IConfiguration config)
+        private ISRRService _srrService;
+        public SRRController(ISRRService srrService)
         {
-            _config = config;
+            _srrService = srrService;
         }
 
         [HttpGet]
-        public Response<List<SRR>> GetSRRList()
+        public ActionResult<Response<List<SRR>>> GetSRRList()
         {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<List<SRR>> response = new Response<List<SRR>>();
-            var data = DbClientFactory<UserDBClient>.Instance.GetSRRList(dbConn);
-
-            if(data != null)
-            {
-                response.ResponseCode = 200;
-                response.ResponseMessage = "Success";
-                response.Data = data;
-            }
-            else
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "No Data";
-            }
-            
-            return response;
+            return Ok(_srrService.GetSRRList());
         }
     }
 }

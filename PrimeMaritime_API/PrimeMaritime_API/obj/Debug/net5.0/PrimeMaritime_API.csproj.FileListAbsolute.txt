@@ -38,3 +38,6 @@ D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\ob
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
+D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
