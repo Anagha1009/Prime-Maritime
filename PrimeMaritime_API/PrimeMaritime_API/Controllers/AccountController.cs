@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PrimeMaritime_API.IRepository;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using System;
@@ -24,6 +24,12 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request)
         {
             return Ok(_authenticationService.AuthenticateAsync(request));
+        }
+
+        [HttpPost("refresh-token")]
+        public ActionResult<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request)
+        {
+            return Ok(_authenticationService.RefreshTokenAsync(request));
         }
     }
 }

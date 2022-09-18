@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using PrimeMaritime_API.IRepository;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
+using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
@@ -15,7 +16,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PrimeMaritime_API.Repository
+namespace PrimeMaritime_API.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
@@ -72,9 +73,13 @@ namespace PrimeMaritime_API.Repository
             //}
 
             var refreshToken = GenerateRefreshToken();
-            response.RefreshToken = refreshToken.Token;
-            response.RefreshTokenExpiration = refreshToken.Expires;
+            refreshToken.USER_ID = user.ID;
+
+            response.RefreshToken = refreshToken.TOKEN;
+            response.RefreshTokenExpiration = refreshToken.EXPIRES;
             user.RefreshTokens.Add(refreshToken);
+
+            DbClientFactory<UserRepo>.Instance.CreateRefreshToken(dbConn, refreshToken);
 
             response.IsAuthenticated = true;
             response.Id = user.ID;
@@ -84,9 +89,51 @@ namespace PrimeMaritime_API.Repository
             return response;
         }
 
-        public Task<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request)
+        public RefreshTokenResponse RefreshTokenAsync(RefreshTokenRequest request)
         {
-            throw new NotImplementedException();
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            var response = new RefreshTokenResponse();
+            var user = DbClientFactory<UserRepo>.Instance.GetRefreshToken(dbConn, request.Token);
+
+            if (user == null)
+            {
+                response.IsAuthenticated = false;
+                response.Message = $"Token did not match any users.";
+                return response;
+            }
+
+            var refreshToken = DbClientFactory<UserRepo>.Instance.GetRefreshTokenByUserId(dbConn, request.Token, user.ID);
+
+            if (!refreshToken.IS_ACTIVE)
+            {
+                response.IsAuthenticated = false;
+                response.Message = $"Token Not Active.";
+                return response;
+            }
+
+            //Revoke Current Refresh Token
+            refreshToken.REVOKED = DateTime.UtcNow;
+            DbClientFactory<UserRepo>.Instance.RevokeRefreshToken(dbConn, refreshToken);
+
+            //Generate new Refresh Token and save to Database
+            var newRefreshToken = GenerateRefreshToken();
+            newRefreshToken.USER_ID = user.ID;
+            
+            user.RefreshTokens.Add(newRefreshToken);
+            DbClientFactory<UserRepo>.Instance.CreateRefreshToken(dbConn, newRefreshToken);
+
+            //Generates new jwt
+            response.IsAuthenticated = true;
+            JwtSecurityToken jwtSecurityToken = GenerateToken(user);
+            response.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            response.Email = user.EMAIL;
+            response.UserName = user.USERNAME;
+            response.RefreshToken = newRefreshToken.TOKEN;
+            response.RefreshTokenExpiration = newRefreshToken.EXPIRES;
+            response.IsActive = true;
+
+            return response;
         }
 
         public Task<RegistrationResponse> RegisterAsync(RegistrationRequest request)
@@ -140,9 +187,9 @@ namespace PrimeMaritime_API.Repository
                 generator.GetBytes(randomNumber);
                 return new RefreshToken
                 {
-                    Token = Convert.ToBase64String(randomNumber),
-                    Expires = DateTime.UtcNow.AddDays(10),
-                    Created = DateTime.UtcNow
+                    TOKEN = Convert.ToBase64String(randomNumber),
+                    EXPIRES = DateTime.UtcNow.AddDays(10),
+                    CREATED = DateTime.UtcNow
                 };
             }
         }

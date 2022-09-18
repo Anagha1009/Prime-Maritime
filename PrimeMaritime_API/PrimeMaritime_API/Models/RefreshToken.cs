@@ -7,11 +7,15 @@ namespace PrimeMaritime_API.Models
 {
     public class RefreshToken
     {
-        public string Token { get; set; }
-        public DateTime Expires { get; set; }
-        public bool IsExpired => DateTime.UtcNow >= Expires;
-        public DateTime Created { get; set; }
-        public DateTime? Revoked { get; set; }
-        public bool IsActive => Revoked == null && !IsExpired;
+        public int ID { get; set; }
+        public int USER_ID { get; set; }
+        public string TOKEN { get; set; }
+        public DateTime EXPIRES { get; set; }
+        public bool ISEXPIRED => DateTime.UtcNow >= EXPIRES;
+        public DateTime CREATED { get; set; }
+        public DateTime? REVOKED { get; set; }
+
+        //public bool IS_ACTIVE => REVOKED == null && !ISEXPIRED;
+        public bool IS_ACTIVE { get; set; }
     }
 }
