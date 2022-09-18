@@ -8,7 +8,7 @@ namespace PrimeMaritime_API.IServices
     {
         AuthenticationResponse AuthenticateAsync(AuthenticationRequest request);
         Task<RegistrationResponse> RegisterAsync(RegistrationRequest request);
-        Task<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request);
+        RefreshTokenResponse RefreshTokenAsync(RefreshTokenRequest request);
         Task<RevokeTokenResponse> RevokeToken(RevokeTokenRequest request);
     }
 }

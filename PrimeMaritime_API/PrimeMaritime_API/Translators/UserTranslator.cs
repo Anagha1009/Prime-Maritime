@@ -67,5 +67,39 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
+
+        public static RefreshToken TranslateAsRefreshToken(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new RefreshToken();
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("USER_ID"))
+                item.USER_ID = SqlHelper.GetNullableInt32(reader, "USER_ID");
+
+            if (reader.IsColumnExists("TOKEN"))
+                item.TOKEN = SqlHelper.GetNullableString(reader, "TOKEN");
+
+            if (reader.IsColumnExists("EXPIRES"))
+                item.EXPIRES = Convert.ToDateTime(SqlHelper.GetNullableString(reader, "EXPIRES"));
+
+            if (reader.IsColumnExists("CREATED"))
+                item.CREATED = Convert.ToDateTime(SqlHelper.GetNullableString(reader, "CREATED"));
+
+            if (reader.IsColumnExists("REVOKED"))
+                item.REVOKED = Convert.ToDateTime(SqlHelper.GetNullableString(reader, "REVOKED"));
+
+            if(reader.IsColumnExists("IS_ACTIVE"))
+                item.IS_ACTIVE = Convert.ToBoolean(SqlHelper.GetNullableString(reader, "IS_ACTIVE"));
+
+            return item;
+        }
     }
 }

@@ -25,5 +25,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(_authenticationService.AuthenticateAsync(request));
         }
+
+        [HttpPost("refresh-token")]
+        public ActionResult<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request)
+        {
+            return Ok(_authenticationService.RefreshTokenAsync(request));
+        }
     }
 }
