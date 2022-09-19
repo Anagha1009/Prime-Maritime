@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AzAvlRXveHsU/zUT43AoOKuGMbk7d83f1BequvDJ05z0FoXTe9xcb2J0h/9vgizmxjP8p+GfDT8NZJWBa+sLFA==",
+  "dgSpecHash": "T7bMFZd9HdI59fuSZqY8LIu4i9umGNsBdy3LQmE5fTQvQaWLcJohFYzhHv6o1HoBFcHQLauXrKvYLnyJm0i9tQ==",
   "success": true,
-  "projectFilePath": "D:\\Prime Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+  "projectFilePath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anaghat\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

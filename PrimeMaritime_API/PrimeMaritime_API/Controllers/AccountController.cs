@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Request;
@@ -21,6 +22,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("authenticate")]
+        [EnableCors("MyPolicy")]
         public ActionResult<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request)
         {
             return Ok(_authenticationService.AuthenticateAsync(request));

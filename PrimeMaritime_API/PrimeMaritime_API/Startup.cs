@@ -39,6 +39,13 @@ namespace PrimeMaritime_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PrimeMaritime_API", Version = "v1" });
             });
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
             services.AddAuthentication(options =>
@@ -97,10 +104,13 @@ namespace PrimeMaritime_API
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors("MyPolicy");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+                     
         }
     }
 }
