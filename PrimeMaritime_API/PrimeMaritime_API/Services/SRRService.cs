@@ -15,6 +15,33 @@ namespace PrimeMaritime_API.Services
         {
             _config = config;
         }
+        public Response<SRR> GetSRRBySRRNo(string SRR_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<SRR> response = new Response<SRR>();
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRData(dbConn, SRR_NO);
+
+            if ((data != null) && (data.Tables[0].Rows.Count > 0))
+            {
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                SRR srr = new SRR();
+                
+                srr = SRRRepo.GetSingleDataFromDataSet<SRR>(data.Tables[0]);
+                srr.SRR_CONTAINERS = SRRRepo.GetListFromDataSet<SRR_CONTAINERS>(data.Tables[1]);
+
+                response.Data = srr;
+            }
+            else
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
         public Response<List<SRR>> GetSRRList()
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -22,7 +49,7 @@ namespace PrimeMaritime_API.Services
             Response<List<SRR>> response = new Response<List<SRR>>();
             var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn);
 
-            if (data != null)
+            if(data != null)
             {
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";

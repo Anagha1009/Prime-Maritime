@@ -22,7 +22,6 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("authenticate")]
-        [EnableCors("MyPolicy")]
         public ActionResult<AuthenticationResponse> AuthenticateAsync(AuthenticationRequest request)
         {
             return Ok(_authenticationService.AuthenticateAsync(request));

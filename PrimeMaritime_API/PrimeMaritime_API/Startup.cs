@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Services;
@@ -16,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PrimeMaritime_API
@@ -39,12 +41,16 @@ namespace PrimeMaritime_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PrimeMaritime_API", Version = "v1" });
             });
 
-            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
+            });
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
@@ -70,6 +76,7 @@ namespace PrimeMaritime_API
 
             });
         }
+           
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -97,20 +104,20 @@ namespace PrimeMaritime_API
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeMaritime_API v1"));
             }
 
+            app.UseCors();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseCors("MyPolicy");
+            app.UseAuthorization();           
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-                     
+
         }
     }
 }

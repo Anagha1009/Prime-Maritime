@@ -44,5 +44,5 @@ namespace PrimeMaritime_API.Helpers
             this.Succeeded = true;
             this.Errors = null;
         }
-    }
+    }    
 }

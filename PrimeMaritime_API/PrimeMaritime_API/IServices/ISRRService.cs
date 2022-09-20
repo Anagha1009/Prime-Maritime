@@ -9,6 +9,8 @@ namespace PrimeMaritime_API.IServices
 {
     public interface ISRRService
     {
+        Response<SRR> GetSRRBySRRNo(string SRR_NO);
+
         Response<List<SRR>> GetSRRList();
     }
 }

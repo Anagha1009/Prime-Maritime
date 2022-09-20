@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "T7bMFZd9HdI59fuSZqY8LIu4i9umGNsBdy3LQmE5fTQvQaWLcJohFYzhHv6o1HoBFcHQLauXrKvYLnyJm0i9tQ==",
+  "dgSpecHash": "l+hN6pZaKkGsSwkmLSgNBCdHrO9Xa111WVXqVYRiiq48BmP3kmQ20g6FD2tALgX8FGogQLiuaSP+D6ODTZbjXQ==",
   "success": true,
   "projectFilePath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\anaghat\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\anaghat\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
+    "C:\\Users\\anaghat\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\anaghat\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.7.0\\runtime.native.system.data.sqlclient.sni.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
