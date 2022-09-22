@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
+using PrimeMaritime_API.Request;
+using PrimeMaritime_API.Response;
 using System.Collections.Generic;
 
 namespace PrimeMaritime_API.Controllers
@@ -29,9 +31,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRList")]
-        public ActionResult<Response<List<SRR>>> GetSRRList()
+        public ActionResult<Response<List<SRRList>>> GetSRRList()
         {
             return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList()));
+        }
+
+        [HttpPost("InsertSRR")]
+        public ActionResult<Response<SRR>> InsertSRR(SRRRequest request)
+        {
+            return Ok(_srrService.InsertSRR(request));
         }
     }
 }

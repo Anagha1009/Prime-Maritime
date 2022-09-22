@@ -32,6 +32,22 @@ namespace PrimeMaritime_API.Helpers
             return result;
         }
 
+        public static void ExecuteProcedureBulkInsert(string connString, DataTable dataTable, string tblName, string[] columns)
+        {
+            using (var sqlConnection = new SqlConnection(connString))
+            {
+                SqlBulkCopy objbulk = new SqlBulkCopy(sqlConnection);
+
+                objbulk.DestinationTableName = tblName;
+                foreach(var i in columns)
+                {
+                    objbulk.ColumnMappings.Add(i, i);
+                }
+                sqlConnection.Open();
+                objbulk.WriteToServer(dataTable);
+            }
+        }
+
         public static TData ExtecuteProcedureReturnData<TData>(string connString, string procName,
             Func<SqlDataReader, TData> translator,
             params SqlParameter[] parameters)

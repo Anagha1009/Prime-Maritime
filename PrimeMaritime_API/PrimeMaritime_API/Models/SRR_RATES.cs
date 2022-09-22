@@ -14,8 +14,8 @@ namespace PrimeMaritime_API.Models
         public string TRANSPORT_TYPE { get; set; }
         public string CURRENCY { get; set; }
         public string PAYMENT_TERM { get; set; }
-        public double STANDARD_RATE { get; set; }
-        public double RATE_REQUESTED { get; set; }
+        public decimal STANDARD_RATE { get; set; }
+        public decimal RATE_REQUESTED { get; set; }
         public string REMARKS { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }

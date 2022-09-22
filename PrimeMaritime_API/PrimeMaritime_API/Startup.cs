@@ -54,6 +54,7 @@ namespace PrimeMaritime_API
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
+            services.AddScoped<ICommonService, CommonService>();
             services.AddAuthentication(options =>
             {
 
