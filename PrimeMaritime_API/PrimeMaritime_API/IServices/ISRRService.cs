@@ -1,5 +1,7 @@
 ﻿using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.Models;
+using PrimeMaritime_API.Request;
+using PrimeMaritime_API.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,10 @@ namespace PrimeMaritime_API.IServices
 {
     public interface ISRRService
     {
-        Response<List<SRR>> GetSRRList();
+        Response<SRR> GetSRRBySRRNo(string SRR_NO);
+
+        Response<List<SRRList>> GetSRRList();
+
+        Response<SRR> InsertSRR(SRRRequest sRRRequest);
     }
 }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PrimeMaritime_API.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PrimeMaritime_API.Models
+namespace PrimeMaritime_API.Request
 {
-    public class SRR
+    public class SRRRequest
     {
         public int ID { get; set; }
         public string SRR_NO { get; set; }
@@ -36,7 +37,7 @@ namespace PrimeMaritime_API.Models
         public int POD_FREE_DAYS { get; set; }
         public int POL_FREE_DAYS { get; set; }
         public int IMM_VOLUME_EXPECTED { get; set; }
-        public int TOTAL_VOLUME_EXPECTED { get; set; }       
+        public int TOTAL_VOLUME_EXPECTED { get; set; }
         public string STATUS { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }

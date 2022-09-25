@@ -35,22 +35,22 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            var user = DbClientFactory<UserRepo>.Instance.GetUserByUsername(dbConn, request.Username);
+            var user = DbClientFactory<UserRepo>.Instance.GetUserByUsername(dbConn, request.USERNAME);
             AuthenticationResponse response = new AuthenticationResponse();
 
             if (user == null)
             {
                 response.IsAuthenticated = false;
-                response.Message = $"No Accounts Registered with {request.Username}.";
+                response.Message = $"No Accounts Registered with {request.USERNAME}.";
                 return response;
             }
 
-            var result = DbClientFactory<UserRepo>.Instance.ValidateUser(dbConn, request.Username, request.Password);
+            var result = DbClientFactory<UserRepo>.Instance.ValidateUser(dbConn, request.USERNAME, request.PASSWORD);
 
             if (result == null)
             {
                 response.IsAuthenticated = false;
-                response.Message = $"Credentials for '{request.Username} aren't valid";
+                response.Message = $"Credentials for '{request.USERNAME} aren't valid";
                 return response;
             }
 
