@@ -91,9 +91,9 @@ namespace PrimeMaritime_API.Repository
                 DataRow dr = tbl.NewRow();
 
                 dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = i.SRR_NO;
+                dr["SRR_NO"] = request.SRR_NO;
                 dr["NO_OF_CONTAINERS"] = i.NO_OF_CONTAINERS;
-                dr["CREATED_BY"] = i.CREATED_BY;
+                dr["CREATED_BY"] = request.CREATED_BY;
 
                 tbl.Rows.Add(dr);
             }
@@ -123,7 +123,7 @@ namespace PrimeMaritime_API.Repository
                 DataRow dr = tbl1.NewRow();
 
                 dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = i.SRR_NO;
+                dr["SRR_NO"] = request.SRR_NO;
                 dr["CHARGE_CODE"] = i.CHARGE_CODE;
                 dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
                 dr["CURRENCY"] = i.CURRENCY;
@@ -131,7 +131,7 @@ namespace PrimeMaritime_API.Repository
                 dr["STANDARD_RATE"] = i.STANDARD_RATE;
                 dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                 dr["REMARKS"] = i.REMARKS;
-                dr["CREATED_BY"] = i.CREATED_BY;
+                dr["CREATED_BY"] = request.CREATED_BY;
 
                 tbl1.Rows.Add(dr);
             }
@@ -171,7 +171,7 @@ namespace PrimeMaritime_API.Repository
                 DataRow dr = tbl2.NewRow();
 
                 dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = i.SRR_NO;
+                dr["SRR_NO"] = request.SRR_NO;
                 dr["COMMODITY_NAME"] = i.COMMODITY_NAME;
                 dr["LENGTH"] = i.LENGTH;
                 dr["WIDTH"] = i.WIDTH;
@@ -183,7 +183,7 @@ namespace PrimeMaritime_API.Repository
                 dr["FLASH_POINT"] = i.FLASH_POINT;
                 dr["CAS_NO"] = i.CAS_NO;
                 dr["REMARKS"] = i.REMARKS;
-                dr["CREATED_BY"] = i.CREATED_BY;
+                dr["CREATED_BY"] = request.CREATED_BY;
 
                 tbl2.Rows.Add(dr);
             }
