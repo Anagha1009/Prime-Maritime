@@ -14,7 +14,7 @@ using System.IO;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
-
+    [Authorize]
     [ApiController]
     public class SRRController : ControllerBase
     {
@@ -44,16 +44,20 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("UploadFiles")]
-        public IActionResult Index(List<IFormFile> postedFiles, string Module)
+        public IActionResult UploadFiles()
         {
-            string path = Path.Combine("Uploads", Module + "Files");
+            //List<IFormFile> x = (List<IFormFile>)Request.Form.Files;
+
+            var formFile = Request.Form.Files;
+
+            string path = Path.Combine("Uploads", "SRRFiles");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
             List<string> uploadedFiles = new List<string>();
-            foreach (IFormFile postedFile in postedFiles)
+            foreach (IFormFile postedFile in formFile)
             {
                 string fileName = Path.GetFileName(postedFile.FileName);
                 using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
