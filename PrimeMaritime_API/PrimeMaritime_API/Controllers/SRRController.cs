@@ -25,16 +25,16 @@ namespace PrimeMaritime_API.Controllers
             _srrService = srrService;
         }
 
-        [HttpGet]
+        [HttpGet("GetSRRBySRRNO")]
         public ActionResult<Response<SRR>> GetSRRBySRRNo(string SRR_NO)
         {
             return Ok(JsonConvert.SerializeObject(_srrService.GetSRRBySRRNo(SRR_NO)));
         }
 
         [HttpGet("GetSRRList")]
-        public ActionResult<Response<List<SRRList>>> GetSRRList()
+        public ActionResult<Response<List<SRRList>>> GetSRRList(string SRR_NO,string CUSTOMER_NAME, string STATUS)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList()));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(SRR_NO,CUSTOMER_NAME,STATUS)));
         }
 
         [HttpPost("InsertSRR")]

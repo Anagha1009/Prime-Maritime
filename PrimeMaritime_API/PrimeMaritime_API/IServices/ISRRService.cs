@@ -13,7 +13,7 @@ namespace PrimeMaritime_API.IServices
     {
         Response<SRR> GetSRRBySRRNo(string SRR_NO);
 
-        Response<List<SRRList>> GetSRRList();
+        Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS);
 
         Response<SRR> InsertSRR(SRRRequest sRRRequest);
     }

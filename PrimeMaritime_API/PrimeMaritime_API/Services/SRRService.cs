@@ -65,12 +65,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SRRList>> GetSRRList()
+        public Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SRRList>> response = new Response<List<SRRList>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,SRR_NO,CUSTOMER_NAME,STATUS);
 
             if (data != null)
             {

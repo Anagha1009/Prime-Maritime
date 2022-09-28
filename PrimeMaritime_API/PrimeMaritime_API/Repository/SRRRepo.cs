@@ -33,9 +33,16 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<SRRList> GetSRRList(string connstring)
+        public List<SRRList> GetSRRList(string connstring, string SRR_NO, string CUSTOMER_NAME, string STATUS)
         {
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_SRR");
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@ListSRRNO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+              new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = CUSTOMER_NAME },
+              new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
+            };
+
+            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_SRR", parameters);
             List<SRRList> srrList = SqlHelper.CreateListFromTable<SRRList>(dataTable);
 
             return srrList;
