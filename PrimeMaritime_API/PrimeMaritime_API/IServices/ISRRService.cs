@@ -11,10 +11,12 @@ namespace PrimeMaritime_API.IServices
 {
     public interface ISRRService
     {
-        Response<SRR> GetSRRBySRRNo(string SRR_NO);
+        Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE);
 
-        Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS);
+        Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS, string AGENT_CODE);
 
-        Response<SRR> InsertSRR(SRRRequest sRRRequest);
+        Response<string> InsertSRR(SRRRequest sRRRequest);
+
+        Response<string> InsertContainer(SRR_CONTAINERS request);
     }
 }

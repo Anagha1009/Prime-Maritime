@@ -14,7 +14,6 @@ using System.IO;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class SRRController : ControllerBase
     {
@@ -26,21 +25,27 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRBySRRNO")]
-        public ActionResult<Response<SRR>> GetSRRBySRRNo(string SRR_NO)
+        public ActionResult<Response<SRR>> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRBySRRNo(SRR_NO)));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRBySRRNo(SRR_NO, AGENT_CODE)));
         }
 
         [HttpGet("GetSRRList")]
-        public ActionResult<Response<List<SRRList>>> GetSRRList(string SRR_NO,string CUSTOMER_NAME, string STATUS)
+        public ActionResult<Response<List<SRRList>>> GetSRRList(string SRR_NO,string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(SRR_NO,CUSTOMER_NAME,STATUS)));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(SRR_NO,CUSTOMER_NAME,STATUS, AGENT_CODE)));
         }
 
         [HttpPost("InsertSRR")]
         public ActionResult<Response<SRR>> InsertSRR(SRRRequest request)
         {
             return Ok(_srrService.InsertSRR(request));
+        }
+
+        [HttpPost("InsertContainer")]
+        public ActionResult<Response<SRR>> InsertContainer(SRR_CONTAINERS request)
+        {
+            return Ok(_srrService.InsertContainer(request));
         }
 
         [HttpPost("UploadFiles")]

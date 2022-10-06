@@ -46,7 +46,8 @@ namespace PrimeMaritime_API
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:4200")
+                        builder.WithOrigins()
+                                            .AllowAnyOrigin()
                                             .AllowAnyHeader()
                                             .AllowAnyMethod();
                     });
@@ -55,6 +56,7 @@ namespace PrimeMaritime_API
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
             services.AddScoped<ICommonService, CommonService>();
+            services.AddScoped<IBookingService, BookingService>();
             services.AddAuthentication(options =>
             {
 

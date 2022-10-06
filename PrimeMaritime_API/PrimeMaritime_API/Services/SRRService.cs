@@ -17,7 +17,7 @@ namespace PrimeMaritime_API.Services
         {
             _config = config;
         }
-        public Response<SRR> GetSRRBySRRNo(string SRR_NO)
+        public Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -30,10 +30,11 @@ namespace PrimeMaritime_API.Services
                 return response;
             }
 
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRData(dbConn, SRR_NO);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRData(dbConn, SRR_NO, AGENT_CODE);
 
             if ((data != null) && (data.Tables[0].Rows.Count > 0))
             {
+                response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
                 SRR srr = new SRR();
@@ -58,6 +59,7 @@ namespace PrimeMaritime_API.Services
             }
             else
             {
+                response.Succeeded = false;
                 response.ResponseCode = 500;
                 response.ResponseMessage = "No Data";
             }
@@ -65,21 +67,23 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS)
+        public Response<List<SRRList>> GetSRRList(string SRR_NO, string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SRRList>> response = new Response<List<SRRList>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,SRR_NO,CUSTOMER_NAME,STATUS);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,SRR_NO,CUSTOMER_NAME,STATUS, AGENT_CODE);
 
-            if (data != null)
+            if (data.Count > 0)
             {
+                response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
                 response.Data = data;
             }
             else
             {
+                response.Succeeded = false;
                 response.ResponseCode = 500;
                 response.ResponseMessage = "No Data";
             }
@@ -87,13 +91,27 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<SRR> InsertSRR(SRRRequest sRRRequest)
+        public Response<string> InsertContainer(SRR_CONTAINERS request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.InsertContainer(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<string> InsertSRR(SRRRequest sRRRequest)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             DbClientFactory<SRRRepo>.Instance.InsertSRR(dbConn, sRRRequest);
 
-            Response<SRR> response = new Response<SRR>();
+            Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;

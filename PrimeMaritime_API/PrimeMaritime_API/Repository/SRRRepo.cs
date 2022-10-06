@@ -14,13 +14,16 @@ namespace PrimeMaritime_API.Repository
 {
     public class SRRRepo
     {
-        public DataSet GetSRRData(string connstring, string SRR_NO)
+        public DataSet GetSRRData(string connstring, string SRR_NO, string AGENT_CODE)
         {
-            SqlParameter parameters = new SqlParameter();
-            parameters.Value = SRR_NO;
-            parameters.ParameterName = "@SRR_NO";
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SRRDETAILS" },
+                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+            };
 
-            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_GET_SRR", parameters);
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
         }
 
         public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
@@ -33,185 +36,225 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<SRRList> GetSRRList(string connstring, string SRR_NO, string CUSTOMER_NAME, string STATUS)
+        public List<SRRList> GetSRRList(string connstring, string SRR_NO, string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
         {
-            SqlParameter[] parameters =
+            try
             {
-              new SqlParameter("@ListSRRNO", SqlDbType.VarChar, 50) { Value = SRR_NO },
-              new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = CUSTOMER_NAME },
-              new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
-            };
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SRRLIST" },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                  new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = CUSTOMER_NAME },
+                  new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
+                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+                };
 
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_SRR", parameters);
-            List<SRRList> srrList = SqlHelper.CreateListFromTable<SRRList>(dataTable);
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
+                List<SRRList> srrList = SqlHelper.CreateListFromTable<SRRList>(dataTable);
 
-            return srrList;
+                return srrList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void InsertSRR(string connstring, SRRRequest request)
         {
-            SqlParameter[] parameters =
+            try
             {
-              new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
-              new SqlParameter("@POL", SqlDbType.VarChar, 255) { Value = request.POL },
-              new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
-              new SqlParameter("@ORIGIN_ICD", SqlDbType.VarChar, 255) { Value = request.ORIGIN_ICD },
-              new SqlParameter("@DESTINATION_ICD", SqlDbType.VarChar, 255) { Value = request.DESTINATION_ICD },
-              new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
-              new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = request.EFFECT_FROM },
-              new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = request.EFFECT_TO },
-              new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
-              new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
-              new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
-              new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
-              new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
-              new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
-              new SqlParameter("@CONSIGNEE", SqlDbType.VarChar, 250) { Value = request.CONSIGNEE },
-              new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
-              new SqlParameter("@BROKERAGE_PARTY", SqlDbType.VarChar, 250) { Value = request.BROKERAGE_PARTY },
-              new SqlParameter("@FORWARDER", SqlDbType.VarChar, 250) { Value = request.FORWARDER },
-              new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
-              new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
-              new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
-              new SqlParameter("@TSP_1", SqlDbType.VarChar, 100) { Value = request.TSP_1 },
-              new SqlParameter("@TSP_2", SqlDbType.VarChar, 100) { Value = request.TSP_2 },
-              new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = request.CONTAINER_TYPE },
-              new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar, 50) { Value = request.CONTAINER_SIZE },
-              new SqlParameter("@SERVICE_MODE", SqlDbType.VarChar, 50) { Value = request.SERVICE_MODE },
-              new SqlParameter("@POD_FREE_DAYS", SqlDbType.Int) { Value = request.POD_FREE_DAYS },
-              new SqlParameter("@POL_FREE_DAYS", SqlDbType.Int) { Value = request.POL_FREE_DAYS },
-              new SqlParameter("@IMM_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.IMM_VOLUME_EXPECTED },
-              new SqlParameter("@TOTAL_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.TOTAL_VOLUME_EXPECTED },
-              new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY }
-            };
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_SRR" },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
+                  new SqlParameter("@POL", SqlDbType.VarChar, 255) { Value = request.POL },
+                  new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
+                  new SqlParameter("@ORIGIN_ICD", SqlDbType.VarChar, 255) { Value = request.ORIGIN_ICD },
+                  new SqlParameter("@DESTINATION_ICD", SqlDbType.VarChar, 255) { Value = request.DESTINATION_ICD },
+                  new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
+                  new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = request.EFFECT_FROM },
+                  new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = request.EFFECT_TO },
+                  new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
+                  new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
+                  new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
+                  new SqlParameter("@CONSIGNEE", SqlDbType.VarChar, 250) { Value = request.CONSIGNEE },
+                  new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
+                  new SqlParameter("@BROKERAGE_PARTY", SqlDbType.VarChar, 250) { Value = request.BROKERAGE_PARTY },
+                  new SqlParameter("@FORWARDER", SqlDbType.VarChar, 250) { Value = request.FORWARDER },
+                  new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
+                  new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
+                  new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
+                  new SqlParameter("@TSP_1", SqlDbType.VarChar, 100) { Value = request.TSP_1 },
+                  new SqlParameter("@TSP_2", SqlDbType.VarChar, 100) { Value = request.TSP_2 },
+                  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = request.CONTAINER_TYPE },
+                  new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar, 50) { Value = request.CONTAINER_SIZE },
+                  new SqlParameter("@SERVICE_MODE", SqlDbType.VarChar, 50) { Value = request.SERVICE_MODE },
+                  new SqlParameter("@POD_FREE_DAYS", SqlDbType.Int) { Value = request.POD_FREE_DAYS },
+                  new SqlParameter("@POL_FREE_DAYS", SqlDbType.Int) { Value = request.POL_FREE_DAYS },
+                  new SqlParameter("@IMM_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.IMM_VOLUME_EXPECTED },
+                  new SqlParameter("@TOTAL_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.TOTAL_VOLUME_EXPECTED },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
+                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
+                  new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME }
+                };
 
-            var SRRID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CREATE_SRR", parameters);
+                var SRRID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
 
-            DataTable tbl = new DataTable();
-            tbl.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
-            tbl.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
-            tbl.Columns.Add(new DataColumn("NO_OF_CONTAINERS", typeof(int)));
-            tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+                DataTable tbl = new DataTable();
+                tbl.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
+                tbl.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("NO_OF_CONTAINERS", typeof(int)));
+                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
-            foreach (var i in request.SRR_CONTAINERS)
-            {
-                DataRow dr = tbl.NewRow();
+                foreach (var i in request.SRR_CONTAINERS)
+                {
+                    DataRow dr = tbl.NewRow();
 
-                dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = request.SRR_NO;
-                dr["NO_OF_CONTAINERS"] = i.NO_OF_CONTAINERS;
-                dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["SRR_ID"] = Convert.ToInt32(SRRID);
+                    dr["SRR_NO"] = request.SRR_NO;
+                    dr["NO_OF_CONTAINERS"] = i.NO_OF_CONTAINERS;
+                    dr["CREATED_BY"] = request.CREATED_BY;
 
-                tbl.Rows.Add(dr);
+                    tbl.Rows.Add(dr);
+                }
+
+                string[] columns = new string[4];
+                columns[0] = "SRR_ID";
+                columns[1] = "SRR_NO";
+                columns[2] = "NO_OF_CONTAINERS";
+                columns[3] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SRR_CONTAINERS", columns);
+
+                DataTable tbl1 = new DataTable();
+                tbl1.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
+                tbl1.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("CHARGE_CODE", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("TRANSPORT_TYPE", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("CURRENCY", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("PAYMENT_TERM", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("STANDARD_RATE", typeof(decimal)));
+                tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
+                tbl1.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+
+                foreach (var i in request.SRR_RATES)
+                {
+                    DataRow dr = tbl1.NewRow();
+
+                    dr["SRR_ID"] = Convert.ToInt32(SRRID);
+                    dr["SRR_NO"] = request.SRR_NO;
+                    dr["CHARGE_CODE"] = i.CHARGE_CODE;
+                    dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
+                    dr["CURRENCY"] = i.CURRENCY;
+                    dr["PAYMENT_TERM"] = i.PAYMENT_TERM;
+                    dr["STANDARD_RATE"] = i.STANDARD_RATE;
+                    dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
+                    dr["REMARKS"] = i.REMARKS;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+
+                    tbl1.Rows.Add(dr);
+                }
+
+                string[] columns1 = new string[10];
+                columns1[0] = "SRR_ID";
+                columns1[1] = "SRR_NO";
+                columns1[2] = "CHARGE_CODE";
+                columns1[3] = "TRANSPORT_TYPE";
+                columns1[4] = "CURRENCY";
+                columns1[5] = "PAYMENT_TERM";
+                columns1[6] = "STANDARD_RATE";
+                columns1[7] = "RATE_REQUESTED";
+                columns1[8] = "REMARKS";
+                columns1[9] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
+
+                DataTable tbl2 = new DataTable();
+                tbl2.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
+                tbl2.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("COMMODITY_NAME", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("LENGTH", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("HAZ_APPROVAL_REF", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+
+                foreach (var i in request.SRR_COMMODITIES)
+                {
+                    DataRow dr = tbl2.NewRow();
+
+                    dr["SRR_ID"] = Convert.ToInt32(SRRID);
+                    dr["SRR_NO"] = request.SRR_NO;
+                    dr["COMMODITY_NAME"] = i.COMMODITY_NAME;
+                    dr["LENGTH"] = i.LENGTH;
+                    dr["WIDTH"] = i.WIDTH;
+                    dr["HEIGHT"] = i.HEIGHT;
+                    dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
+                    dr["IMO_CLASS"] = i.IMO_CLASS;
+                    dr["UN_NO"] = i.UN_NO;
+                    dr["HAZ_APPROVAL_REF"] = i.HAZ_APPROVAL_REF;
+                    dr["FLASH_POINT"] = i.FLASH_POINT;
+                    dr["CAS_NO"] = i.CAS_NO;
+                    dr["REMARKS"] = i.REMARKS;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+
+                    tbl2.Rows.Add(dr);
+                }
+
+                string[] columns2 = new string[14];
+                columns2[0] = "SRR_ID";
+                columns2[1] = "SRR_NO";
+                columns2[2] = "COMMODITY_NAME";
+                columns2[3] = "LENGTH";
+                columns2[4] = "WIDTH";
+                columns2[5] = "HEIGHT";
+                columns2[6] = "COMMODITY_TYPE";
+                columns2[7] = "IMO_CLASS";
+                columns2[8] = "UN_NO";
+                columns2[9] = "HAZ_APPROVAL_REF";
+                columns2[10] = "FLASH_POINT";
+                columns2[11] = "CAS_NO";
+                columns2[12] = "REMARKS";
+                columns2[13] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
             }
-
-            string[] columns = new string[4];
-            columns[0] = "SRR_ID";
-            columns[1] = "SRR_NO";
-            columns[2] = "NO_OF_CONTAINERS";
-            columns[3] = "CREATED_BY";
-
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SRR_CONTAINERS", columns);
-
-            DataTable tbl1 = new DataTable();
-            tbl1.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
-            tbl1.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("CHARGE_CODE", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("TRANSPORT_TYPE", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("CURRENCY", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("PAYMENT_TERM", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("STANDARD_RATE", typeof(decimal)));
-            tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
-            tbl1.Columns.Add(new DataColumn("REMARKS", typeof(string)));
-            tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
-
-            foreach (var i in request.SRR_RATES)
+            catch (Exception)
             {
-                DataRow dr = tbl1.NewRow();
-
-                dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = request.SRR_NO;
-                dr["CHARGE_CODE"] = i.CHARGE_CODE;
-                dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
-                dr["CURRENCY"] = i.CURRENCY;
-                dr["PAYMENT_TERM"] = i.PAYMENT_TERM;
-                dr["STANDARD_RATE"] = i.STANDARD_RATE;
-                dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
-                dr["REMARKS"] = i.REMARKS;
-                dr["CREATED_BY"] = request.CREATED_BY;
-
-                tbl1.Rows.Add(dr);
+                throw;
             }
+        }
 
-            string[] columns1 = new string[10];
-            columns1[0] = "SRR_ID";
-            columns1[1] = "SRR_NO";
-            columns1[2] = "CHARGE_CODE";
-            columns1[3] = "TRANSPORT_TYPE";
-            columns1[4] = "CURRENCY";
-            columns1[5] = "PAYMENT_TERM";
-            columns1[6] = "STANDARD_RATE";
-            columns1[7] = "RATE_REQUESTED";
-            columns1[8] = "REMARKS";
-            columns1[9] = "CREATED_BY";
-
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
-
-            DataTable tbl2 = new DataTable();
-            tbl2.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
-            tbl2.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("COMMODITY_NAME", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("LENGTH", typeof(decimal)));
-            tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
-            tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
-            tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("HAZ_APPROVAL_REF", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
-
-            foreach (var i in request.SRR_COMMODITIES)
+        public void InsertContainer(string connstring, SRR_CONTAINERS request)
+        {
+            try
             {
-                DataRow dr = tbl2.NewRow();
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CONTAINER" },
+                  new SqlParameter("@SRR_ID", SqlDbType.Int) { Value = request.SRR_ID },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
+                  new SqlParameter("@NO_OF_CONTAINERS", SqlDbType.Int) { Value = request.NO_OF_CONTAINERS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
+                };
 
-                dr["SRR_ID"] = Convert.ToInt32(SRRID);
-                dr["SRR_NO"] = request.SRR_NO;
-                dr["COMMODITY_NAME"] = i.COMMODITY_NAME;
-                dr["LENGTH"] = i.LENGTH;
-                dr["WIDTH"] = i.WIDTH;
-                dr["HEIGHT"] = i.HEIGHT;
-                dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
-                dr["IMO_CLASS"] = i.IMO_CLASS;
-                dr["UN_NO"] = i.UN_NO;
-                dr["HAZ_APPROVAL_REF"] = i.HAZ_APPROVAL_REF;
-                dr["FLASH_POINT"] = i.FLASH_POINT;
-                dr["CAS_NO"] = i.CAS_NO;
-                dr["REMARKS"] = i.REMARKS;
-                dr["CREATED_BY"] = request.CREATED_BY;
-
-                tbl2.Rows.Add(dr);
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
             }
-
-            string[] columns2 = new string[14];
-            columns2[0] = "SRR_ID";
-            columns2[1] = "SRR_NO";
-            columns2[2] = "COMMODITY_NAME";
-            columns2[3] = "LENGTH";
-            columns2[4] = "WIDTH";
-            columns2[5] = "HEIGHT";
-            columns2[6] = "COMMODITY_TYPE";
-            columns2[7] = "IMO_CLASS";
-            columns2[8] = "UN_NO";
-            columns2[9] = "HAZ_APPROVAL_REF";
-            columns2[10] = "FLASH_POINT";
-            columns2[11] = "CAS_NO";
-            columns2[12] = "REMARKS";
-            columns2[13] = "CREATED_BY";
-
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

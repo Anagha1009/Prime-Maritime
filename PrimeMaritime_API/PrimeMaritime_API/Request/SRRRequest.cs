@@ -39,6 +39,8 @@ namespace PrimeMaritime_API.Request
         public int IMM_VOLUME_EXPECTED { get; set; }
         public int TOTAL_VOLUME_EXPECTED { get; set; }
         public string STATUS { get; set; }
+        public string AGENT_CODE { get; set; }
+        public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
