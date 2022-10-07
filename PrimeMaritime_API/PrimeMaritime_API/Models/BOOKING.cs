@@ -5,6 +5,13 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Models
 {
+    public class BOOKING
+    {
+        public string SRR_NO { get; set; }
+        public string STATUS { get; set; }
+        public string AGENT_CODE { get; set; }
+    }
+
     public class SLOT_DETAILS
     {
         public int SRR_ID { get; set; }
@@ -17,7 +24,7 @@ namespace PrimeMaritime_API.Models
         public int NO_OF_SLOTS { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
-        public int AGENT_ID { get; set; }
+        public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
     }

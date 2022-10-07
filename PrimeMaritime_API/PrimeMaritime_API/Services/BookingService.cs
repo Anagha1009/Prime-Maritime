@@ -21,7 +21,7 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        public Response<CommonResponse> InsertSlots(BookingRequest request)
+        public Response<CommonResponse> InsertSlots(SLOT_DETAILS request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -54,6 +54,20 @@ namespace PrimeMaritime_API.Services
                 response.ResponseCode = 500;
                 response.ResponseMessage = "No Data";
             }
+
+            return response;
+        }
+
+        public Response<CommonResponse> InsertBooking(BOOKING request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BookingRepo>.Instance.InsertBooking(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Booked Successfully.";
+            response.ResponseCode = 200;
 
             return response;
         }
