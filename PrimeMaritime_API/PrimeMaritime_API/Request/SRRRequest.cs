@@ -30,14 +30,7 @@ namespace PrimeMaritime_API.Request
         public string PLACE_OF_RECEIPT { get; set; }
         public string PLACE_OF_DELIVERY { get; set; }
         public string TSP_1 { get; set; }
-        public string TSP_2 { get; set; }
-        public string CONTAINER_TYPE { get; set; }
-        public string CONTAINER_SIZE { get; set; }
-        public string SERVICE_MODE { get; set; }
-        public int POD_FREE_DAYS { get; set; }
-        public int POL_FREE_DAYS { get; set; }
-        public int IMM_VOLUME_EXPECTED { get; set; }
-        public int TOTAL_VOLUME_EXPECTED { get; set; }
+        public string TSP_2 { get; set; }        
         public string STATUS { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }

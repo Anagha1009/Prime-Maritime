@@ -152,8 +152,23 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("SRR_NO"))
                 item.SRR_NO = SqlHelper.GetNullableString(reader, "SRR_NO");
 
-            if (reader.IsColumnExists("NO_OF_CONTAINERS"))
-                item.NO_OF_CONTAINERS = SqlHelper.GetNullableInt32(reader, "NO_OF_CONTAINERS");
+            if (reader.IsColumnExists("CONTAINER_TYPE"))
+                item.CONTAINER_TYPE = SqlHelper.GetNullableString(reader, "CONTAINER_TYPE");
+
+            if (reader.IsColumnExists("CONTAINER_SIZE"))
+                item.CONTAINER_SIZE = SqlHelper.GetNullableString(reader, "CONTAINER_SIZE");
+
+            if (reader.IsColumnExists("POL_FREE_DAYS"))
+                item.POL_FREE_DAYS = SqlHelper.GetNullableInt32(reader, "POL_FREE_DAYS");
+
+            if (reader.IsColumnExists("POD_FREE_DAYS"))
+                item.POD_FREE_DAYS = SqlHelper.GetNullableInt32(reader, "POD_FREE_DAYS");
+
+            if (reader.IsColumnExists("IMM_VOLUME_EXPECTED"))
+                item.IMM_VOLUME_EXPECTED = SqlHelper.GetNullableInt32(reader, "IMM_VOLUME_EXPECTED");
+
+            if (reader.IsColumnExists("TOTAL_VOLUME_EXPECTED"))
+                item.TOTAL_VOLUME_EXPECTED = SqlHelper.GetNullableInt32(reader, "TOTAL_VOLUME_EXPECTED");
 
             return item;
         }
