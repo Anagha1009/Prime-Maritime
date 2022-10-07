@@ -72,19 +72,20 @@ namespace PrimeMaritime_API.Services
             //    //_context.SaveChanges();
             //}
 
-            var refreshToken = GenerateRefreshToken();
-            refreshToken.USER_ID = user.ID;
+            //var refreshToken = GenerateRefreshToken();
+            //refreshToken.USER_ID = user.ID;
 
-            response.RefreshToken = refreshToken.TOKEN;
-            response.RefreshTokenExpiration = refreshToken.EXPIRES;
-            user.RefreshTokens.Add(refreshToken);
+            //response.RefreshToken = refreshToken.TOKEN;
+            //response.RefreshTokenExpiration = refreshToken.EXPIRES;
+            //user.RefreshTokens.Add(refreshToken);
 
-            DbClientFactory<UserRepo>.Instance.CreateRefreshToken(dbConn, refreshToken);
+            //DbClientFactory<UserRepo>.Instance.CreateRefreshToken(dbConn, refreshToken);
 
             response.IsAuthenticated = true;
             response.Id = user.ID;
             response.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             response.UserName = user.USERNAME;
+            response.RoleCode = user.ROLE_ID;
 
             return response;
         }
