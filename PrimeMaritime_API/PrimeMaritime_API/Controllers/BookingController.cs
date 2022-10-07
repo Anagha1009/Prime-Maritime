@@ -24,9 +24,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertSlots")]
-        public ActionResult<Response<CommonResponse>> InsertSlots(BookingRequest request)
+        public ActionResult<Response<CommonResponse>> InsertSlots(SLOT_DETAILS request)
         {
             return Ok(_bookingService.InsertSlots(request));
+        }
+
+        [HttpPost("InsertBooking")]
+        public ActionResult<Response<CommonResponse>> InsertBooking(BOOKING request)
+        {
+            return Ok(_bookingService.InsertBooking(request));
         }
 
         [HttpGet("GetSlotList")]

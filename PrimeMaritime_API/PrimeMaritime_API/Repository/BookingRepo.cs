@@ -12,7 +12,7 @@ namespace PrimeMaritime_API.Repository
 {
     public class BookingRepo
     {
-        public void InsertSlots(string connstring, BookingRequest request)
+        public void InsertSlots(string connstring, SLOT_DETAILS request)
         {
             SqlParameter[] parameters =
             {
@@ -33,6 +33,19 @@ namespace PrimeMaritime_API.Repository
             };
 
             SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);          
+        }
+
+        public void InsertBooking(string connstring, BOOKING request)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "CREATE_BOOKING" },
+              new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
+              new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
+              new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
         }
 
         public List<SLOT_DETAILS> GetSlotList(string connstring, string AGENT_CODE, string SRR_NO)

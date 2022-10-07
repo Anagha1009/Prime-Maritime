@@ -11,8 +11,8 @@ namespace PrimeMaritime_API.IServices
 {
     public interface IBookingService
     {
-        Response<CommonResponse> InsertSlots(BookingRequest request);
-
+        Response<CommonResponse> InsertSlots(SLOT_DETAILS request);
+        Response<CommonResponse> InsertBooking(BOOKING request);
         Response<List<SLOT_DETAILS>> GetSlotList(string AgentID, string SRR_NO);
     }
 }
