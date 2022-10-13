@@ -21,19 +21,19 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        public Response<CommonResponse> InsertSlots(SLOT_DETAILS request)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
+        //public Response<CommonResponse> InsertSlots(SLOT_DETAILS request)
+        //{
+        //    string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<BookingRepo>.Instance.InsertSlots(dbConn, request);
+        //    DbClientFactory<BookingRepo>.Instance.InsertSlots(dbConn, request);
 
-            Response<CommonResponse> response = new Response<CommonResponse>();
-            response.Succeeded = true;
-            response.ResponseMessage = "Inserted Successfully.";
-            response.ResponseCode = 200;
+        //    Response<CommonResponse> response = new Response<CommonResponse>();
+        //    response.Succeeded = true;
+        //    response.ResponseMessage = "Inserted Successfully.";
+        //    response.ResponseCode = 200;
 
-            return response;
-        }
+        //    return response;
+        //}
         public Response<List<SLOT_DETAILS>> GetSlotList(string AGENT_CODE, string SRR_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
