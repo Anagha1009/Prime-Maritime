@@ -1320,23 +1320,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anaghat\\.nuget\\packages\\": {},
+    "C:\\Users\\prachig\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "projectUniqueName": "C:\\Users\\prachig\\Desktop\\PrimeMaritime\\Prime-API\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
       "projectName": "PrimeMaritime_API",
-      "projectPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
-      "packagesPath": "C:\\Users\\anaghat\\.nuget\\packages\\",
-      "outputPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
+      "projectPath": "C:\\Users\\prachig\\Desktop\\PrimeMaritime\\Prime-API\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "packagesPath": "C:\\Users\\prachig\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\prachig\\Desktop\\PrimeMaritime\\Prime-API\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\anaghat\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\prachig\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1393,24 +1393,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[5.0.17, 5.0.17]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[5.0.0, 5.0.0]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1419,7 +1401,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.412\\RuntimeIdentifierGraph.json"
       }
     }
   }
