@@ -22,12 +22,12 @@ namespace PrimeMaritime_API.Services
         }
 
 
-        public Response<List<CROResponse>> GetCROList(string OPERATION, string AGENT_CODE)
+        public Response<List<CROResponse>> GetCROList(string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CROResponse>> response = new Response<List<CROResponse>>();
-            var data = DbClientFactory<CRORepo>.Instance.GetCROList(dbConn, OPERATION, AGENT_CODE);
+            var data = DbClientFactory<CRORepo>.Instance.GetCROList(dbConn, AGENT_CODE);
 
             if (data.Count > 0)
             {
@@ -60,27 +60,41 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CRO> GetCRODetailsByBookingNo(string BOOKING_NO, string AGENT_CODE)
+        public Response<CRODetails> GetCRODetails(string CRO_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<CRO> response = new Response<CRO>();
+            Response<CRODetails> response = new Response<CRODetails>();
 
-            if ((BOOKING_NO == "") || (BOOKING_NO == null))
+            if ((CRO_NO == "") || (CRO_NO == null))
             {
                 response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide Booking No";
+                response.ResponseMessage = "Please provide CRO No";
                 return response;
             }
 
-            var data = DbClientFactory<CRORepo>.Instance.GetCRODetailsByBookingNo(dbConn, BOOKING_NO, AGENT_CODE);
+            var data = DbClientFactory<CRORepo>.Instance.GetCRODetails(dbConn, CRO_NO, AGENT_CODE);
 
-            if (data != null)
+            if ((data != null) && (data.Tables[0].Rows.Count > 0))
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
-                response.Data = data;
+                CRODetails cro = new CRODetails();
+
+                cro = BookingRepo.GetSingleDataFromDataSet<CRODetails>(data.Tables[0]);
+
+                if (data.Tables.Contains("Table1"))
+                {
+                    cro.ContainerList = SRRRepo.GetListFromDataSet<SRR_CONTAINERS>(data.Tables[1]);
+                }
+
+                if (data.Tables.Contains("Table2"))
+                {
+                    cro.BookingDetails = SRRRepo.GetSingleDataFromDataSet<BOOKING>(data.Tables[2]);
+                }
+
+                response.Data = cro;
             }
             else
             {
@@ -91,6 +105,5 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
     }
 }

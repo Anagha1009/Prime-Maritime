@@ -21,12 +21,13 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CRO" },
+                  new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = request.CRO_NO },
                   new SqlParameter("@BOOKING_ID", SqlDbType.Int) { Value = request.BOOKING_ID },
-                  new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 50) { Value = request.BOOKING_NO },
+                  new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = request.BOOKING_NO },
                   new SqlParameter("@STUFFING_TYPE", SqlDbType.VarChar, 100) { Value = request.STUFFING_TYPE },
                   new SqlParameter("@EMPTY_CONT_PCKP", SqlDbType.VarChar, 255) { Value = request.EMPTY_CONT_PCKP },
                   new SqlParameter("@LADEN_ACPT_LOCATION", SqlDbType.VarChar, 255) { Value = request.LADEN_ACPT_LOCATION },
-                  new SqlParameter("@RO_VALIDITY_DATE", SqlDbType.DateTime) { Value = request.RO_VALIDITY_DATE },
+                  new SqlParameter("@CRO_VALIDITY_DATE", SqlDbType.DateTime) { Value = request.CRO_VALIDITY_DATE },
                   new SqlParameter("@REMARKS", SqlDbType.VarChar, 255) { Value = request.REMARKS },
                   new SqlParameter("@REQ_QUANTITY", SqlDbType.Int) { Value = request.REQ_QUANTITY },
                   new SqlParameter("@GROSS_WT", SqlDbType.Decimal) { Value = request.GROSS_WT },
@@ -48,13 +49,13 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<CROResponse> GetCROList(string connstring, string OPERATION, string AGENT_CODE)
+        public List<CROResponse> GetCROList(string connstring, string AGENT_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = OPERATION },
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CROLIST" },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
                 };
 
@@ -69,24 +70,34 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public CRO GetCRODetailsByBookingNo(string connstring, string BOOKING_NO, string AGENT_CODE)
+        public DataSet GetCRODetails(string connstring, string CRO_NO, string AGENT_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
  {
-                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CRO_DETAILS_BY_BOOKING_NO" },
-                new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 50) { Value = BOOKING_NO },
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CRO_DETAILS" },
+                new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = CRO_NO },
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 
-               return SqlHelper.ExtecuteProcedureReturnData<CRO>(connstring, "SP_CRUD_CRO", r => r.TranslateAsCRO(), parameters);
+               return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_CRO", parameters);
             }
             catch (Exception)
             {
                 throw;
             }
 
+        }
+
+        public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
+        }
+
+        public static List<T> GetListFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateListFromTable<T>(dataTable);
         }
     }
 }

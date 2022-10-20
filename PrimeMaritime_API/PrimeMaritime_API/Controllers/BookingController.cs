@@ -23,22 +23,28 @@ namespace PrimeMaritime_API.Controllers
             _bookingService = bookingService;
         }
 
-        //[HttpPost("InsertSlots")]
-        //public ActionResult<Response<CommonResponse>> InsertSlots(SLOT_DETAILS request)
-        //{
-        //    return Ok(_bookingService.InsertSlots(request));
-        //}
-
         [HttpPost("InsertBooking")]
         public ActionResult<Response<CommonResponse>> InsertBooking(BOOKING request)
         {
             return Ok(_bookingService.InsertBooking(request));
         }
 
-        [HttpGet("GetSlotList")]
-        public ActionResult<Response<List<SLOT_DETAILS>>> GetSlotList(string AGENT_CODE, string SRR_NO)
+        [HttpGet("GetBookingList")]
+        public ActionResult<Response<List<BookingList>>> GetBookingList(string AGENT_CODE, string BOOKING_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_bookingService.GetSlotList(AGENT_CODE,SRR_NO)));
+            return Ok(JsonConvert.SerializeObject(_bookingService.GetBookingList(AGENT_CODE, BOOKING_NO)));
+        }
+
+        [HttpGet("GetBookingDetails")]
+        public ActionResult<Response<BookingDetails>> GetBookingDetails(string AGENT_CODE, string BOOKING_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_bookingService.GetBookingDetails(AGENT_CODE, BOOKING_NO)));
+        }
+
+        [HttpGet("ValidateSlots")]
+        public ActionResult<Response<string>> ValidateSlots(string SRR_NO,int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR)
+        {
+            return Ok(JsonConvert.SerializeObject(_bookingService.ValidateSlots(SRR_NO, NO_OF_SLOTS, BOOKING_NO, SLOT_OPERATOR)));
         }
     }
 }

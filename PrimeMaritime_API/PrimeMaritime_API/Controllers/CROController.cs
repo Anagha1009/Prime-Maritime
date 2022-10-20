@@ -24,9 +24,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCROList")]
-        public ActionResult<Response<List<CRO>>> GetCROList(string OPERATION, string AGENT_CODE)
+        public ActionResult<Response<List<CRO>>> GetCROList(string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(OPERATION, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(AGENT_CODE)));
         }
 
         [HttpPost("InsertCRO")]
@@ -35,10 +35,10 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_cROService.InsertCRO(request));
         }
 
-        [HttpGet("GetCROByBookingNo")]
-        public ActionResult<Response<CRO>> GetCROByBookingNo(string BOOKING_NO, string AGENT_CODE)
+        [HttpGet("GetCRODetails")]
+        public ActionResult<Response<CRO>> GetCRODetails(string CRO_NO, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_cROService.GetCRODetailsByBookingNo(BOOKING_NO, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_cROService.GetCRODetails(CRO_NO, AGENT_CODE)));
         }
     }
 }

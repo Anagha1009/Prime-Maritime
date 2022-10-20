@@ -21,25 +21,58 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        //public Response<CommonResponse> InsertSlots(SLOT_DETAILS request)
-        //{
-        //    string dbConn = _config.GetConnectionString("ConnectionString");
-
-        //    DbClientFactory<BookingRepo>.Instance.InsertSlots(dbConn, request);
-
-        //    Response<CommonResponse> response = new Response<CommonResponse>();
-        //    response.Succeeded = true;
-        //    response.ResponseMessage = "Inserted Successfully.";
-        //    response.ResponseCode = 200;
-
-        //    return response;
-        //}
-        public Response<List<SLOT_DETAILS>> GetSlotList(string AGENT_CODE, string SRR_NO)
+        public Response<BookingDetails> GetBookingDetails(string AgentID, string BOOKING_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<SLOT_DETAILS>> response = new Response<List<SLOT_DETAILS>>();
-            var data = DbClientFactory<BookingRepo>.Instance.GetSlotList(dbConn, AGENT_CODE, SRR_NO);
+            Response<BookingDetails> response = new Response<BookingDetails>();
+
+            if ((BOOKING_NO == "") || (BOOKING_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Booking No";
+                return response;
+            }
+
+            var data = DbClientFactory<BookingRepo>.Instance.GetBookingData(dbConn, BOOKING_NO, AgentID);
+
+            if ((data != null) && (data.Tables[0].Rows.Count > 0))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                BookingDetails bookng = new BookingDetails();
+
+                bookng = BookingRepo.GetSingleDataFromDataSet<BookingDetails>(data.Tables[0]);
+
+                if (data.Tables.Contains("Table1"))
+                {
+                    bookng.CONTAINER_LIST = SRRRepo.GetListFromDataSet<SRR_CONTAINERS>(data.Tables[1]);
+                }
+
+                if (data.Tables.Contains("Table2"))
+                {
+                    bookng.SLOT_LIST = SRRRepo.GetListFromDataSet<SLOT_DETAILS>(data.Tables[2]);
+                }
+
+                response.Data = bookng;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<List<BookingList>> GetBookingList(string AGENT_CODE, string BOOKING_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<BookingList>> response = new Response<List<BookingList>>();
+            var data = DbClientFactory<BookingRepo>.Instance.GetBookingList(dbConn, AGENT_CODE, BOOKING_NO);
 
             if (data != null)
             {
@@ -70,6 +103,31 @@ namespace PrimeMaritime_API.Services
             response.ResponseCode = 200;
 
             return response;
+        }
+
+        public Response<string> ValidateSlots(string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            string returnString = DbClientFactory<BookingRepo>.Instance.ValidateSlots(dbConn, SRR_NO, NO_OF_SLOTS,BOOKING_NO,SLOT_OPERATOR);
+
+            Response<string> response = new Response<string>();
+
+            if(returnString == "1")
+            {
+                response.Succeeded = true;
+                response.ResponseMessage = "Success";
+                response.ResponseCode = 200;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseMessage = "Sorry ! You cannot book more no of slots than no of container";
+                response.ResponseCode = 500;
+            }
+
+            return response;
+
         }
     }
 }
