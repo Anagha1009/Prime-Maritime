@@ -70,8 +70,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
                   new SqlParameter("@POL", SqlDbType.VarChar, 255) { Value = request.POL },
                   new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
-                  new SqlParameter("@ORIGIN_ICD", SqlDbType.VarChar, 255) { Value = request.ORIGIN_ICD },
-                  new SqlParameter("@DESTINATION_ICD", SqlDbType.VarChar, 255) { Value = request.DESTINATION_ICD },
+                  new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
                   new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = request.EFFECT_FROM },
                   new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = request.EFFECT_TO },
@@ -81,10 +80,9 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
                   new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
                   new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
-                  new SqlParameter("@CONSIGNEE", SqlDbType.VarChar, 250) { Value = request.CONSIGNEE },
                   new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
-                  new SqlParameter("@BROKERAGE_PARTY", SqlDbType.VarChar, 250) { Value = request.BROKERAGE_PARTY },
-                  new SqlParameter("@FORWARDER", SqlDbType.VarChar, 250) { Value = request.FORWARDER },
+                  new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
+                  new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
                   new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
                   new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
@@ -192,6 +190,7 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("LENGTH", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("WEIGHT", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
@@ -211,6 +210,7 @@ namespace PrimeMaritime_API.Repository
                     dr["LENGTH"] = i.LENGTH;
                     dr["WIDTH"] = i.WIDTH;
                     dr["HEIGHT"] = i.HEIGHT;
+                    dr["WEIGHT"] = i.WEIGHT;
                     dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
                     dr["IMO_CLASS"] = i.IMO_CLASS;
                     dr["UN_NO"] = i.UN_NO;
@@ -223,21 +223,22 @@ namespace PrimeMaritime_API.Repository
                     tbl2.Rows.Add(dr);
                 }
 
-                string[] columns2 = new string[14];
+                string[] columns2 = new string[15];
                 columns2[0] = "SRR_ID";
                 columns2[1] = "SRR_NO";
                 columns2[2] = "COMMODITY_NAME";
                 columns2[3] = "LENGTH";
                 columns2[4] = "WIDTH";
                 columns2[5] = "HEIGHT";
-                columns2[6] = "COMMODITY_TYPE";
-                columns2[7] = "IMO_CLASS";
-                columns2[8] = "UN_NO";
-                columns2[9] = "HAZ_APPROVAL_REF";
-                columns2[10] = "FLASH_POINT";
-                columns2[11] = "CAS_NO";
-                columns2[12] = "REMARKS";
-                columns2[13] = "CREATED_BY";
+                columns2[6] = "WEIGHT";
+                columns2[7] = "COMMODITY_TYPE";
+                columns2[8] = "IMO_CLASS";
+                columns2[9] = "UN_NO";
+                columns2[10] = "HAZ_APPROVAL_REF";
+                columns2[11] = "FLASH_POINT";
+                columns2[12] = "CAS_NO";
+                columns2[13] = "REMARKS";
+                columns2[14] = "CREATED_BY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
             }

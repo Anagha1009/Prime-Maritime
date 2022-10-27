@@ -12,7 +12,7 @@ namespace PrimeMaritime_API.Response
         public string BOOKING_NO { get; set; }
         public string VESSEL_NAME { get; set; }
         public string VOYAGE_NO { get; set; }
-        public string CUSTOMER_NO { get; set; }
+        public string CUSTOMER_NAME { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
         public string SERVICE_NAME { get; set; }

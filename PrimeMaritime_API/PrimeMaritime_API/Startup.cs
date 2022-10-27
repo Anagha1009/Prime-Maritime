@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using PrimeMaritime_API.IServices;
+using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Services;
 using System;
@@ -53,6 +54,7 @@ namespace PrimeMaritime_API
                     });
             });
 
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
             services.AddScoped<ICommonService, CommonService>();

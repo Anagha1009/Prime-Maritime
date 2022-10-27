@@ -11,6 +11,7 @@ namespace PrimeMaritime_API.Response
         public bool IsAuthenticated { get; set; }
         public int Id { get; set; }
         public string UserName { get; set; }
+        public string UserCode { get; set; }
         public int RoleCode { get; set; }
         public string Token { get; set; }
         public string RefreshToken { get; set; }

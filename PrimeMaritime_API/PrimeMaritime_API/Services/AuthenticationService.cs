@@ -86,6 +86,7 @@ namespace PrimeMaritime_API.Services
             response.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             response.UserName = user.USERNAME;
             response.RoleCode = user.ROLE_ID;
+            response.UserCode = user.USERCODE;
 
             return response;
         }
