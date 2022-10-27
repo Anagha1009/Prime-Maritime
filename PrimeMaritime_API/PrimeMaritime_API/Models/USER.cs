@@ -10,6 +10,7 @@ namespace PrimeMaritime_API.Models
         public int ID { get; set; }
         public string USERNAME { get; set; }
         public string USERTYPE { get; set; }
+        public string USERCODE { get; set; }
         public string PASSWORD { get; set; }
         public string EMAIL { get; set; }
         public int ROLE_ID { get; set; }

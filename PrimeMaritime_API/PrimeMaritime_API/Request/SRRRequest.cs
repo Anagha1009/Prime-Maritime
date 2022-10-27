@@ -12,8 +12,7 @@ namespace PrimeMaritime_API.Request
         public string SRR_NO { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
-        public string ORIGIN_ICD { get; set; }
-        public string DESTINATION_ICD { get; set; }
+        public string FINAL_DESTINATION { get; set; }
         public string SERVICE_NAME { get; set; }
         public DateTime EFFECT_FROM { get; set; }
         public DateTime EFFECT_TO { get; set; }
@@ -23,10 +22,9 @@ namespace PrimeMaritime_API.Request
         public string EMAIL { get; set; }
         public string CONTACT { get; set; }
         public string SHIPPER { get; set; }
-        public string CONSIGNEE { get; set; }
         public string NOTIFY_PARTY { get; set; }
-        public string BROKERAGE_PARTY { get; set; }
-        public string FORWARDER { get; set; }
+        public string OTHER_PARTY { get; set; }
+        public string OTHER_PARTY_NAME { get; set; }
         public string PLACE_OF_RECEIPT { get; set; }
         public string PLACE_OF_DELIVERY { get; set; }
         public string TSP_1 { get; set; }

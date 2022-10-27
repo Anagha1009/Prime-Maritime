@@ -1,6 +1,7 @@
 ﻿using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Request;
+using PrimeMaritime_API.Response;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,28 +13,28 @@ namespace PrimeMaritime_API.Repository
 {
     public class BookingRepo
     {
-        //public void InsertSlots(string connstring, SLOT_DETAILS request)
-        //{
-        //    SqlParameter[] parameters =
-        //    {
-        //      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "CREATE_SLOT" },
-        //      new SqlParameter("@SRR_ID", SqlDbType.Int) { Value = request.SRR_ID },
-        //      new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
-        //      new SqlParameter("@VESSEL_NAME", SqlDbType.VarChar, 255) { Value = request.VESSEL_NAME },
-        //      new SqlParameter("@VOYAGE_NO", SqlDbType.VarChar, 50) { Value = request.VOYAGE_NO },
-        //      new SqlParameter("@MOTHER_VESSEL_NAME", SqlDbType.VarChar, 255) { Value = request.MOTHER_VESSEL_NAME },
-        //      new SqlParameter("@MOTHER_VOYAGE_NO", SqlDbType.VarChar, 50) { Value = request.MOTHER_VOYAGE_NO },
-        //      new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar, 100) { Value = request.SLOT_OPERATOR },
-        //      new SqlParameter("@NO_OF_SLOTS", SqlDbType.Int) { Value = request.NO_OF_SLOTS },
-        //      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = request.POL },
-        //      new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = request.POD },
-        //      new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
-        //      new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME },
-        //      new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
-        //    };
 
-        //    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);          
-        //}
+        public DataSet GetBookingData(string connstring, string BOOKING_NO, string AGENT_CODE)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BOOKINGDETAILS" },
+                new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+                new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BOOKING", parameters);
+        }
+
+        public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
+        }
+
+        public static List<T> GetListFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateListFromTable<T>(dataTable);
+        }
 
         public void InsertBooking(string connstring, BOOKING request)
         {
@@ -85,19 +86,35 @@ namespace PrimeMaritime_API.Repository
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SLOT_DETAILS", columns);
         }
 
-        public List<SLOT_DETAILS> GetSlotList(string connstring, string AGENT_CODE, string SRR_NO)
+        public List<BookingList> GetBookingList(string connstring, string AGENT_CODE, string BOOKING_NO)
         {
             SqlParameter[] parameters =
             {
-              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_SLOTLIST" },
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_BOOKINGLIST" },
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
-              new SqlParameter("@SRR_NO", SqlDbType.VarChar,50) { Value = SRR_NO },
+              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
             };
 
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
-            List<SLOT_DETAILS> bookingList = SqlHelper.CreateListFromTable<SLOT_DETAILS>(dataTable);
+            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BOOKING", parameters);
+            List<BookingList> bookingList = SqlHelper.CreateListFromTable<BookingList>(dataTable);
 
             return bookingList;
+        }
+
+        public string ValidateSlots(string connstring, string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_SLOTS" },
+              new SqlParameter("@SRR_NO", SqlDbType.VarChar,50) { Value = SRR_NO },
+              new SqlParameter("@NO_OF_SLOTS", SqlDbType.Int) { Value = NO_OF_SLOTS },
+              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+              new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar,100) { Value = SLOT_OPERATOR },
+            };
+
+            string validateSlot = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
+           
+            return validateSlot;
         }
     }
 }

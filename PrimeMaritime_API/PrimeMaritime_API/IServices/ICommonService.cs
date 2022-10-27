@@ -10,5 +10,6 @@ namespace PrimeMaritime_API.IServices
     public interface ICommonService
     {
         Response<List<DROPDOWN>> GetDropdownData(string key);
+        Task SendEmailAsync(MailRequest mailRequest);
     }
 }

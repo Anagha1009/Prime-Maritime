@@ -85,3 +85,10 @@ D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_AP
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll

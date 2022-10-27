@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
 using PrimeMaritime_API.IServices;
+using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Services;
 using System;
@@ -53,6 +54,7 @@ namespace PrimeMaritime_API
                     });
             });
 
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
             services.AddScoped<ICommonService, CommonService>();
@@ -85,7 +87,7 @@ namespace PrimeMaritime_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 if (env.IsDevelopment())
