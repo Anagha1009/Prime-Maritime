@@ -75,7 +75,7 @@ namespace PrimeMaritime_API.Repository
             try
             {
                 SqlParameter[] parameters =
- {
+            {
                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CRO_DETAILS" },
                 new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = CRO_NO },
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
