@@ -14,7 +14,7 @@ namespace PrimeMaritime_API.Repository
 {
     public class CRORepo
     {
-        public void InsertCRO(string connstring, CRORequest request)
+        public string InsertCRO(string connstring, CRORequest request)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace PrimeMaritime_API.Repository
 
                 };
 
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CRO", parameters);
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CRO", parameters);
             }
             catch (Exception)
             {
@@ -49,7 +49,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<CROResponse> GetCROList(string connstring, string AGENT_CODE)
+        public List<CRO> GetCROList(string connstring, string AGENT_CODE)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CRO", parameters);
-                List<CROResponse> cROResponses = SqlHelper.CreateListFromTable<CROResponse>(dataTable);
+                List<CRO> cROResponses = SqlHelper.CreateListFromTable<CRO>(dataTable);
 
                 return cROResponses;
             }

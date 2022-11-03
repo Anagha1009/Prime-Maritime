@@ -28,7 +28,7 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_commonService.GetDropdownData(key)));
         }
 
-        [HttpPost("Send")]
+        [HttpPost("SendEmail")]
         public async Task<IActionResult> Send([FromForm] MailRequest request)
         {
             try

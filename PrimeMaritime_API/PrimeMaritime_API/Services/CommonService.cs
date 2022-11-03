@@ -13,6 +13,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using System.IO;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
 
 namespace PrimeMaritime_API.Services
 {
@@ -56,7 +57,8 @@ namespace PrimeMaritime_API.Services
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
             email.Subject = mailRequest.Subject;
-            var builder = new BodyBuilder();
+            var builder = new BodyBuilder();       
+
             if (mailRequest.Attachments != null)
             {
                 byte[] fileBytes;
