@@ -37,8 +37,8 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("LADEN_ACPT_LOCATION"))
                 item.LADEN_ACPT_LOCATION = SqlHelper.GetNullableString(reader, "LADEN_ACPT_LOCATION");
 
-            if (reader.IsColumnExists("RO_VALIDITY_DATE"))
-                item.RO_VALIDITY_DATE = SqlHelper.GetDateTime(reader, "RO_VALIDITY_DATE");
+            if (reader.IsColumnExists("CRO_VALIDITY_DATE"))
+                item.CRO_VALIDITY_DATE = SqlHelper.GetDateTime(reader, "CRO_VALIDITY_DATE");
 
             if (reader.IsColumnExists("REMARKS"))
                 item.REMARKS = SqlHelper.GetNullableString(reader, "REMARKS");

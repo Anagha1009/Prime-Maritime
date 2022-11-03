@@ -22,11 +22,11 @@ namespace PrimeMaritime_API.Services
         }
 
 
-        public Response<List<CROResponse>> GetCROList(string AGENT_CODE)
+        public Response<List<CRO>> GetCROList(string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<CROResponse>> response = new Response<List<CROResponse>>();
+            Response<List<CRO>> response = new Response<List<CRO>>();
             var data = DbClientFactory<CRORepo>.Instance.GetCROList(dbConn, AGENT_CODE);
 
             if (data.Count > 0)
@@ -50,12 +50,13 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<CRORepo>.Instance.InsertCRO(dbConn, CRORequest);
+            string CRONo = DbClientFactory<CRORepo>.Instance.InsertCRO(dbConn, CRORequest);
 
             Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
+            response.Data = CRONo;
 
             return response;
         }
