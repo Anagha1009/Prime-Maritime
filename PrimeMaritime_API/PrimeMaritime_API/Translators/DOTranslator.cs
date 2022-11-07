@@ -10,9 +10,15 @@ namespace PrimeMaritime_API.Translators
 {
     public static class DOTranslator
     {
-        public static DO TranslateDO(this SqlDataReader reader)
+        public static DO TranslateDO(this SqlDataReader reader,bool isList = false)
         {
-            
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
             var item = new DO();
             if (reader.IsColumnExists("ID"))
                 item.ID = SqlHelper.GetNullableInt32(reader, "ID");
