@@ -19,6 +19,7 @@ namespace PrimeMaritime_API.Models
         public string AGENT_NAME { get; set; }
         public string STATUS { get; set; }
         public string CREATED_BY { get; set; }
+        public Boolean IS_ROLLOVER { get; set; }
         public List<SLOT_DETAILS> SLOT_LIST { get; set; }
     }
 

@@ -52,13 +52,15 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@AGENT_NAME", SqlDbType.VarChar,255) { Value = request.AGENT_NAME },
               new SqlParameter("@STATUS", SqlDbType.VarChar,50) { Value = request.STATUS },
               new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = request.CREATED_BY },
+              new SqlParameter("@IS_ROLLOVER", SqlDbType.Bit) { Value = request.IS_ROLLOVER },
             };
 
-            var BOOKINGID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
+            var RETURNID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
 
             DataTable tbl = new DataTable();
             tbl.Columns.Add(new DataColumn("BOOKING_ID", typeof(int)));
             tbl.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
+            tbl.Columns.Add(new DataColumn("ROLLOVER_ID", typeof(int)));
             tbl.Columns.Add(new DataColumn("SLOT_OPERATOR", typeof(string)));
             tbl.Columns.Add(new DataColumn("NO_OF_SLOTS", typeof(string)));
             tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
@@ -67,8 +69,9 @@ namespace PrimeMaritime_API.Repository
             {
                 DataRow dr = tbl.NewRow();
 
-                dr["BOOKING_ID"] = Convert.ToInt32(BOOKINGID);
+                dr["BOOKING_ID"] = Convert.ToInt32(request.IS_ROLLOVER ? request.ID : RETURNID);
                 dr["BOOKING_NO"] = request.BOOKING_NO;
+                dr["ROLLOVER_ID"] = Convert.ToInt32(!request.IS_ROLLOVER ? 0 : RETURNID); ;
                 dr["SLOT_OPERATOR"] = i.SLOT_OPERATOR;
                 dr["NO_OF_SLOTS"] = i.NO_OF_SLOTS;
                 dr["CREATED_BY"] = request.CREATED_BY;
@@ -76,12 +79,13 @@ namespace PrimeMaritime_API.Repository
                 tbl.Rows.Add(dr);
             }
 
-            string[] columns = new string[5];
+            string[] columns = new string[6];
             columns[0] = "BOOKING_ID";
             columns[1] = "BOOKING_NO";
-            columns[2] = "SLOT_OPERATOR";
-            columns[3] = "NO_OF_SLOTS";
-            columns[4] = "CREATED_BY";
+            columns[2] = "ROLLOVER_ID";
+            columns[3] = "SLOT_OPERATOR";
+            columns[4] = "NO_OF_SLOTS";
+            columns[5] = "CREATED_BY";
 
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SLOT_DETAILS", columns);
         }
