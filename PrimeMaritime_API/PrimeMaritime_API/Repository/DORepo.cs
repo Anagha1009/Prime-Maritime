@@ -49,6 +49,30 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_DO", parameters);
+
+                //var DONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_DO", parameters);
+
+                //foreach (var i in request.CONTAINER_LIST)
+                //{
+                //    i.DO_NO = request.DO_NO;
+                //}
+
+                //string[] columns = new string[12];
+                //columns[0] = "BL_NO";
+                //columns[1] = "DO_NO";
+                //columns[2] = "CONTAINER_NO";
+                //columns[3] = "CONTAINER_TYPE";
+                //columns[4] = "CONTAINER_SIZE";
+                //columns[5] = "SEAL_NO";
+                //columns[6] = "MARKS_NOS";
+                //columns[7] = "DESC_OF_GOODS";
+                //columns[8] = "GROSS_WEIGHT";
+                //columns[9] = "MEASUREMENT";
+                //columns[10] = "AGENT_CODE";
+                //columns[11] = "AGENT_NAME";
+                //columns[12] = "CREATED_BY";
+
+                //SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
             }
             catch (Exception)
             {
@@ -77,14 +101,14 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public DO GetDODetails(string connstring, string BL_NO, string AGENT_CODE)
+        public DO GetDODetails(string connstring, string DO_NO, string AGENT_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
             {
                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DO_DETAILS" },
-                new SqlParameter("@BL_NO", SqlDbType.VarChar, 100) { Value = BL_NO },
+                new SqlParameter("@DO_NO", SqlDbType.VarChar, 100) { Value = DO_NO },
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 

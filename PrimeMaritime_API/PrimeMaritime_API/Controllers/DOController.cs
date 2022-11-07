@@ -34,9 +34,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetDODetails")]
-        public ActionResult<Response<DO>> GetDODetails(string BL_NO, string AGENT_CODE)
+        public ActionResult<Response<DO>> GetDODetails(string DO_NO, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_doService.GetDODetails(BL_NO, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_doService.GetDODetails(DO_NO, AGENT_CODE)));
         }
     }
 }

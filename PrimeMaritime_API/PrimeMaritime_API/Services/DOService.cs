@@ -59,13 +59,13 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<DO> GetDODetails(string BL_NO, string AGENT_CODE)
+        public Response<DO> GetDODetails(string DO_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<DO> response = new Response<DO>();
 
-            if ((BL_NO == "") || (BL_NO == null))
+            if ((DO_NO == "") || (DO_NO == null))
             {
                 response.ResponseCode = 500;
                 response.ResponseMessage = "Please provide BL No";
@@ -73,7 +73,7 @@ namespace PrimeMaritime_API.Services
             }
 
             
-            var data = DbClientFactory<DORepo>.Instance.GetDODetails(dbConn, BL_NO, AGENT_CODE);
+            var data = DbClientFactory<DORepo>.Instance.GetDODetails(dbConn, DO_NO, AGENT_CODE);
 
             if ((data != null))
             {
