@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj": {}
+    "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj": {}
   },
   "projects": {
-    "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj": {
+    "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+        "projectUniqueName": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
         "projectName": "PrimeMaritime_API",
-        "projectPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
-        "packagesPath": "C:\\Users\\archanac\\.nuget\\packages\\",
-        "outputPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
+        "projectPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+        "packagesPath": "C:\\Users\\anaghat\\.nuget\\packages\\",
+        "outputPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\archanac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anaghat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,6 +78,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -83,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
         }
       }
     }
