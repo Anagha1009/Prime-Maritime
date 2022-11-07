@@ -12,6 +12,6 @@ namespace PrimeMaritime_API.IServices
     {
         Response<CommonResponse> InsertBL(BL request);
 
-        Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO);
+        Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO,string BL_NO);
     }
 }

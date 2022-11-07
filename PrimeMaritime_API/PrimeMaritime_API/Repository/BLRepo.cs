@@ -84,7 +84,7 @@ namespace PrimeMaritime_API.Repository
            SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
 
-        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO)
+        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO)
         {
             SqlParameter[] parameters =
             {
@@ -92,6 +92,7 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
               new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
               new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },
             };
 
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
