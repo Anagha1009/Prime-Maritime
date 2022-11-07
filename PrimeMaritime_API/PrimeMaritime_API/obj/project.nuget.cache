@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3P0p3RLi2E7JxkfUrHx7VAPL3jM+iDXVUPQUBt51IAKZP6YF0nNKSwaUdUi8H8HCmnOSOP+JMi4X4Vwn3vHLWw==",
+  "dgSpecHash": "19Rh1QwmNSe/OHiM38rAAUsEOyrN0RFMkFe/GZtwCPks2YLjSSxQGcDvZbxBGx3zwBr3LTDee5wvJO9hVCnCRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mariak\\Source\\Repos\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+  "projectFilePath": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mariak\\.nuget\\packages\\mailkit\\3.2.0\\mailkit.3.2.0.nupkg.sha512",
     "C:\\Users\\mariak\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",
