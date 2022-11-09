@@ -33,45 +33,92 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@LOAD_DEPOT", SqlDbType.VarChar,100) { Value = request.LOAD_DEPOT },
                   new SqlParameter("@DISCHARGE_DEPOT", SqlDbType.VarChar,100) { Value = request.DISCHARGE_DEPOT },
                   new SqlParameter("@MOVEMENT_DATE", SqlDbType.DateTime) { Value = request.MOVEMENT_DATE },
-                  new SqlParameter("@LIFT_ON_CHARGE", SqlDbType.DateTime) { Value = request.LIFT_ON_CHARGE },
-                  new SqlParameter("@LIFT_OFF_CHARGE", SqlDbType.DateTime) { Value = request.LIFT_OFF_CHARGE },
+                  new SqlParameter("@LIFT_ON_CHARGE", SqlDbType.Decimal) { Value = request.LIFT_ON_CHARGE },
+                  new SqlParameter("@LIFT_OFF_CHARGE", SqlDbType.Decimal) { Value = request.LIFT_OFF_CHARGE },
                   new SqlParameter("@CURRENCY", SqlDbType.VarChar, 50) { Value = request.CURRENCY },
-                  new SqlParameter("@NO_OF_CONTAINER", SqlDbType.VarChar, 50) { Value = request.NO_OF_CONTAINER },
-                  new SqlParameter("@REASON", SqlDbType.DateTime) { Value = request.REASON },
-                  new SqlParameter("@REMARKS", SqlDbType.VarChar,100) { Value = request.REMARKS },
-                  new SqlParameter("@STATUS", SqlDbType.VarChar, 100) { Value = request.STATUS },
+                  new SqlParameter("@NO_OF_CONTAINER", SqlDbType.Int) { Value = request.NO_OF_CONTAINER },
+                  new SqlParameter("@MODE_OF_TRANSPORT", SqlDbType.VarChar,50) { Value = request.MODE_OF_TRANSPORT },
+                  new SqlParameter("@REASON", SqlDbType.VarChar, 255) { Value = request.REASON },
+                  new SqlParameter("@REMARKS", SqlDbType.VarChar, 255) { Value = request.REMARKS },
+                  new SqlParameter("@STATUS", SqlDbType.Int) { Value = request.STATUS },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
                   new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME },
                   new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY }
 
                 };
 
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EMPTY_REPO", parameters);
+                var repoNO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EMPTY_REPO", parameters);
 
-                var DONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EMPTY_REPO", parameters);
+                DataTable tbl = new DataTable();
+                tbl.Columns.Add(new DataColumn("REPO_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_TYPE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_SIZE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("SEAL_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("MARKS_NOS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("DESC_OF_GOODS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("GROSS_WEIGHT", typeof(decimal)));
+                tbl.Columns.Add(new DataColumn("MEASUREMENT", typeof(string)));
+                tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("AGENT_NAME", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
                 foreach (var i in request.CONTAINER_LIST)
                 {
-                    i.REPO_NO = request.REPO_NO;
+                    DataRow dr = tbl.NewRow();
+
+                    dr["REPO_NO"] = request.REPO_NO;
+                    dr["CONTAINER_NO"] = i.CONTAINER_NO;
+                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
+                    dr["CONTAINER_SIZE"] = i.CONTAINER_SIZE;
+                    dr["SEAL_NO"] = i.SEAL_NO;
+                    dr["MARKS_NOS"] = i.MARKS_NOS;
+                    dr["DESC_OF_GOODS"] = i.DESC_OF_GOODS;
+                    dr["GROSS_WEIGHT"] = i.GROSS_WEIGHT;
+                    dr["MEASUREMENT"] = i.MEASUREMENT;
+                    dr["AGENT_CODE"] = i.AGENT_CODE;
+                    dr["AGENT_NAME"] = i.AGENT_NAME;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+
+                    tbl.Rows.Add(dr);
                 }
 
                 string[] columns = new string[12];
-                columns[0] = "BL_NO";
-                columns[1] = "DO_NO";
-                columns[2] = "REPO_NO";
-                columns[3] = "CONTAINER_NO";
-                columns[4] = "CONTAINER_TYPE";
-                columns[5] = "CONTAINER_SIZE";
-                columns[6] = "SEAL_NO";
-                columns[7] = "MARKS_NOS";
-                columns[8] = "DESC_OF_GOODS";
-                columns[9] = "GROSS_WEIGHT";
-                columns[10] = "MEASUREMENT";
-                columns[11] = "AGENT_CODE";
-                columns[12] = "AGENT_NAME";
-                columns[13] = "CREATED_BY";
+                columns[0] = "REPO_NO";
+                columns[1] = "CONTAINER_NO";
+                columns[2] = "CONTAINER_TYPE";
+                columns[3] = "CONTAINER_SIZE";
+                columns[4] = "SEAL_NO";
+                columns[5] = "MARKS_NOS";
+                columns[6] = "DESC_OF_GOODS";
+                columns[7] = "GROSS_WEIGHT";
+                columns[8] = "MEASUREMENT";
+                columns[9] = "AGENT_CODE";
+                columns[10] = "AGENT_NAME";
+                columns[11] = "CREATED_BY";
 
-                SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_ER_CONTAINER", columns);
+
+                //foreach (var i in request.CONTAINER_LIST)
+                //{
+                //    i.REPO_NO = request.REPO_NO;
+                //}
+
+                //string[] columns = new string[12];
+                //columns[0] = "REPO_NO";
+                //columns[1] = "CONTAINER_NO";
+                //columns[2] = "CONTAINER_TYPE";
+                //columns[3] = "CONTAINER_SIZE";
+                //columns[4] = "SEAL_NO";
+                //columns[5] = "MARKS_NOS";
+                //columns[6] = "DESC_OF_GOODS";
+                //columns[7] = "GROSS_WEIGHT";
+                //columns[8] = "MEASUREMENT";
+                //columns[9] = "AGENT_CODE";
+                //columns[10] = "AGENT_NAME";
+                //columns[11] = "CREATED_BY";
+
+                //SqlHelper.UpdateData<ER_CONTAINER>(request.CONTAINER_LIST, "TB_ER_CONTAINER", connstring, columns);
             }
             catch (Exception)
             {

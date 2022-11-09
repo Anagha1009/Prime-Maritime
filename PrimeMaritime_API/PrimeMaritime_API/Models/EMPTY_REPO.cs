@@ -16,12 +16,14 @@ namespace PrimeMaritime_API.Models
 		public decimal LIFT_OFF_CHARGE { get; set; }
 		public string CURRENCY { get; set; }
 		public int NO_OF_CONTAINER { get; set; }
+
+		public string MODE_OF_TRANSPORT { get; set; }
 		public string REASON { get; set; }
 		public string REMARKS { get; set; }
 		public int STATUS { get; set; }
 		public string AGENT_CODE { get; set; }
 		public string AGENT_NAME { get; set; }
 		public string CREATED_BY { get; set; }
-		public List<CONTAINERS> CONTAINER_LIST { get; set; } = new List<CONTAINERS>();
+		public List<ER_CONTAINER> CONTAINER_LIST { get; set; } = new List<ER_CONTAINER>();
 	}
 }
