@@ -122,7 +122,7 @@ namespace PrimeMaritime_API.Services
             else
             {
                 response.Succeeded = false;
-                response.ResponseMessage = "Sorry ! You cannot book more no of slots than no of container";
+                response.ResponseMessage = "Sorry ! You cannot book more no of slots than no of containers";
                 response.ResponseCode = 500;
             }
 
