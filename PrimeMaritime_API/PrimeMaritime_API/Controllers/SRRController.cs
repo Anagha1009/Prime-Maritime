@@ -43,7 +43,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertContainer")]
-        public ActionResult<Response<SRR>> InsertContainer(SRR_CONTAINERS request)
+        public ActionResult<Response<SRR>> InsertContainer(SRR request)
         {
             return Ok(_srrService.InsertContainer(request));
         }
