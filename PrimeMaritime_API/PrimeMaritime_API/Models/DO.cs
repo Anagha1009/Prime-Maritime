@@ -29,7 +29,7 @@ namespace PrimeMaritime_API.Models
 		public string AGENT_NAME { get; set; }
 		public string CREATED_BY { get; set; }
 
-		public List<CONTAINERS> CONTAINER_LIST { get; set; } = new List<CONTAINERS>();
+		public List<CONTAINERS> CONTAINER_LIST2 { get; set; } = new List<CONTAINERS>();
 
 	}
 }

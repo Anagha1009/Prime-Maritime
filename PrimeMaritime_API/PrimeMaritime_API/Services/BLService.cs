@@ -22,12 +22,12 @@ namespace PrimeMaritime_API.Services
 
         
 
-        public Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO, string BL_NO)
+        public Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO, string BL_NO,string DO_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AgentID, BOOKING_NO, CRO_NO,BL_NO);
+            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AgentID, BOOKING_NO, CRO_NO,BL_NO,DO_NO);
 
              if (data != null)
             {
