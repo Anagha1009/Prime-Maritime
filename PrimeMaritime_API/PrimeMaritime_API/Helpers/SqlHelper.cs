@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -48,6 +49,55 @@ namespace PrimeMaritime_API.Helpers
             }
         }
 
+        public static void UpdateData<T>(List<T> list, string TableName, string connString, string[] columns)
+        {
+            DataTable dt = new DataTable("TB_CONTAINER");
+            dt = ConvertToDataTable(list);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand("", conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        //Creating temp table on database
+                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),DO_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),CONTAINER_SIZE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(255),GROSS_WEIGHT numeric(18,2),MEASUREMENT varchar(50)," +
+                            "AGENT_CODE varchar(20),AGENT_NAME varchar(255),CREATED_BY varchar(255))";
+                        command.ExecuteNonQuery();
+
+                        //Bulk insert into temp table
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(conn))
+                        {
+                            bulkcopy.BulkCopyTimeout = 660;
+                            bulkcopy.DestinationTableName = "#TmpTable";
+                            foreach (var i in columns)
+                            {
+                                bulkcopy.ColumnMappings.Add(i, i);
+                            }
+                            bulkcopy.WriteToServer(dt);
+                            bulkcopy.Close();
+                        }
+
+                        // Updating destination table, and dropping temp table
+                        command.CommandTimeout = 300;
+                        command.CommandText = "UPDATE T SET BL_NO = Temp.BL_NO,DO_NO = Temp.DO_NO,CONTAINER_NO= Temp.CONTAINER_NO,CONTAINER_TYPE= Temp.CONTAINER_TYPE,CONTAINER_SIZE= Temp.CONTAINER_SIZE,SEAL_NO= Temp.SEAL_NO,MARKS_NOS= Temp.MARKS_NOS,DESC_OF_GOODS= Temp.DESC_OF_GOODS,GROSS_WEIGHT= Temp.GROSS_WEIGHT,MEASUREMENT= Temp.MEASUREMENT," +
+                            "AGENT_CODE= Temp.AGENT_CODE,AGENT_NAME= Temp.AGENT_NAME,CREATED_BY= Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO; DROP TABLE #TmpTable;";
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
         public static TData ExtecuteProcedureReturnData<TData>(string connString, string procName,
             Func<SqlDataReader, TData> translator,
             params SqlParameter[] parameters)
@@ -78,6 +128,22 @@ namespace PrimeMaritime_API.Helpers
                     }
                 }
             }
+        }
+
+        public static DataTable ConvertToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
         }
 
         public static DataTable ExtecuteProcedureReturnDataTable(string connString, string procName,

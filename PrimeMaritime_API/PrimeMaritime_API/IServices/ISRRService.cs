@@ -17,6 +17,6 @@ namespace PrimeMaritime_API.IServices
 
         Response<string> InsertSRR(SRRRequest sRRRequest);
 
-        Response<string> InsertContainer(SRR_CONTAINERS request);
+        Response<string> InsertContainer(SRR request);
     }
 }

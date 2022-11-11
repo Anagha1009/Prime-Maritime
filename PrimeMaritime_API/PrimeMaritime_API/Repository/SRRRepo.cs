@@ -248,26 +248,70 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void InsertContainer(string connstring, SRR_CONTAINERS request)
+        public void InsertContainer(string connstring, SRR request)
         {
             try
             {
-                SqlParameter[] parameters =
-                {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CONTAINER" },
-                  new SqlParameter("@SRR_ID", SqlDbType.Int) { Value = request.SRR_ID },
-                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
-                  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,100) { Value = request.CONTAINER_TYPE },
-                  new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar,50) { Value = request.CONTAINER_SIZE },
-                  new SqlParameter("@SERVICE_MODE", SqlDbType.VarChar,50) { Value = request.SERVICE_MODE },
-                  new SqlParameter("@POD_FREE_DAYS", SqlDbType.Int) { Value = request.POD_FREE_DAYS },
-                  new SqlParameter("@POL_FREE_DAYS", SqlDbType.Int) { Value = request.POL_FREE_DAYS },
-                  new SqlParameter("@IMM_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.IMM_VOLUME_EXPECTED },
-                  new SqlParameter("@TOTAL_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.TOTAL_VOLUME_EXPECTED },
-                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
-                };
+                //SqlParameter[] parameters =
+                //{
+                //  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CONTAINER" },
+                //  new SqlParameter("@SRR_ID", SqlDbType.Int) { Value = request.SRR_ID },
+                //  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
+                //  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,100) { Value = request.CONTAINER_TYPE },
+                //  new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar,50) { Value = request.CONTAINER_SIZE },
+                //  new SqlParameter("@SERVICE_MODE", SqlDbType.VarChar,50) { Value = request.SERVICE_MODE },
+                //  //new SqlParameter("@POD_FREE_DAYS", SqlDbType.Int) { Value = request.POD_FREE_DAYS },
+                // // new SqlParameter("@POL_FREE_DAYS", SqlDbType.Int) { Value = request.POL_FREE_DAYS },
+                //  new SqlParameter("@IMM_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.IMM_VOLUME_EXPECTED },
+                //  //new SqlParameter("@TOTAL_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.TOTAL_VOLUME_EXPECTED },
+                //  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
+                //};
 
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+                //SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+
+                DataTable tbl = new DataTable();
+                tbl.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
+                tbl.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_TYPE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_SIZE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("SERVICE_MODE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("POD_FREE_DAYS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("POL_FREE_DAYS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("IMM_VOLUME_EXPECTED", typeof(string)));
+                tbl.Columns.Add(new DataColumn("TOTAL_VOLUME_EXPECTED", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+
+                foreach (var i in request.SRR_CONTAINERS)
+                {
+                    DataRow dr = tbl.NewRow();
+
+                    dr["SRR_ID"] = Convert.ToInt32(i.SRR_ID);
+                    dr["SRR_NO"] = i.SRR_NO;
+                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
+                    dr["CONTAINER_SIZE"] = i.CONTAINER_SIZE;
+                    dr["SERVICE_MODE"] = i.SERVICE_MODE;
+                    dr["POD_FREE_DAYS"] = 0;
+                    dr["POL_FREE_DAYS"] = 0;
+                    dr["IMM_VOLUME_EXPECTED"] = i.IMM_VOLUME_EXPECTED;
+                    dr["TOTAL_VOLUME_EXPECTED"] = 0;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+
+                    tbl.Rows.Add(dr);
+                }
+
+                string[] columns = new string[10];
+                columns[0] = "SRR_ID";
+                columns[1] = "SRR_NO";
+                columns[2] = "CONTAINER_TYPE";
+                columns[3] = "CONTAINER_SIZE";
+                columns[4] = "SERVICE_MODE";
+                columns[5] = "POD_FREE_DAYS";
+                columns[6] = "POL_FREE_DAYS";
+                columns[7] = "IMM_VOLUME_EXPECTED";
+                columns[8] = "TOTAL_VOLUME_EXPECTED";
+                columns[9] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SRR_CONTAINERS", columns);
             }
             catch (Exception)
             {
