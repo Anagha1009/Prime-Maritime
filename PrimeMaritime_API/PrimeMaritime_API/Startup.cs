@@ -63,6 +63,7 @@ namespace PrimeMaritime_API
             services.AddScoped<IDOService, DOService>();
             services.AddScoped<IERService,ERService>();
             services.AddScoped<IBLService, BLService>();
+            services.AddScoped<IDepoService, DepoService>();
             services.AddAuthentication(options =>
             {
 
