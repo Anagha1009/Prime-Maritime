@@ -12,24 +12,22 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
-    public class BLService : IBLService
+    public class ContainerMovementService:IContainerMovementService
     {
         private readonly IConfiguration _config;
-        public BLService(IConfiguration config)
+        public ContainerMovementService(IConfiguration config)
         {
             _config = config;
         }
 
-        
-
-        public Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO, string BL_NO,string DO_NO,bool fromDO)
+        public Response<List<CONTAINER_MOVEMENT>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AgentID, BOOKING_NO, CRO_NO,BL_NO,DO_NO,fromDO);
+            Response<List<CONTAINER_MOVEMENT>> response = new Response<List<CONTAINER_MOVEMENT>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
 
-             if (data != null)
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
@@ -46,18 +44,20 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> InsertBL(BL request)
+        public Response<CommonResponse> InsertContainerMovement(CONTAINER_MOVEMENT request, bool fromXL)
         {
+
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<BLRepo>.Instance.InsertBL(dbConn, request);
+            DbClientFactory<ContainerMovementRepo>.Instance.InsertContainerMovement(dbConn, request,fromXL);
 
             Response<CommonResponse> response = new Response<CommonResponse>();
             response.Succeeded = true;
-            response.ResponseMessage = "BL Created Successfully.";
+            response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
 
             return response;
+
         }
     }
 }

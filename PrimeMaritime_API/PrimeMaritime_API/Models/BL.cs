@@ -35,6 +35,7 @@ namespace PrimeMaritime_API.Models
 
     public class CONTAINERS
     {
+        public int ID { get; set; }
         public string BOOKING_NO { get; set; }
         public string CRO_NO { get; set; }
         public string BL_NO { get; set; }

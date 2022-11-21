@@ -71,7 +71,7 @@ namespace PrimeMaritime_API.Repository
 
                 dr["BOOKING_ID"] = Convert.ToInt32(request.IS_ROLLOVER ? request.ID : RETURNID);
                 dr["BOOKING_NO"] = request.BOOKING_NO;
-                dr["ROLLOVER_ID"] = Convert.ToInt32(!request.IS_ROLLOVER ? 0 : RETURNID); ;
+                dr["ROLLOVER_ID"] = Convert.ToInt32(!request.IS_ROLLOVER ? 0 : RETURNID); 
                 dr["SLOT_OPERATOR"] = i.SLOT_OPERATOR;
                 dr["NO_OF_SLOTS"] = i.NO_OF_SLOTS;
                 dr["CREATED_BY"] = request.CREATED_BY;
