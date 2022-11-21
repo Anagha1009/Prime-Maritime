@@ -24,8 +24,12 @@ namespace PrimeMaritime_API.Models
         public string PORT_OF_LOADING { get; set; }
         public string PORT_OF_DISCHARGE { get; set; }
         public string PLACE_OF_DELIVERY { get; set; }
+        public string FINAL_DESTINATION { get; set; }
+        public string PREPAID_AT { get; set; }
+        public string PAYABLE_AT { get; set; }
         public string BL_ISSUE_PLACE { get; set; }
         public DateTime BL_ISSUE_DATE { get; set; }
+        public decimal TOTAL_PREPAID { get; set; }
         public int NO_OF_ORIGINAL_BL { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
