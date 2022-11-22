@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using PrimeMaritime_API.Helpers;
-using PrimeMaritime_API.Translators;
 
 namespace PrimeMaritime_API.Repository
 {
@@ -33,12 +32,8 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@PORT_OF_LOADING", SqlDbType.VarChar,255) { Value = request.PORT_OF_LOADING },
               new SqlParameter("@PORT_OF_DISCHARGE", SqlDbType.VarChar,255) { Value = request.PORT_OF_DISCHARGE },
               new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar,255) { Value = request.PLACE_OF_DELIVERY },
-              new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar,255) { Value = request.FINAL_DESTINATION },
-              new SqlParameter("@PREPAID_AT", SqlDbType.VarChar,255) { Value = request.PREPAID_AT },
-              new SqlParameter("@PAYABLE_AT", SqlDbType.VarChar,255) { Value = request.PAYABLE_AT },
               new SqlParameter("@BL_ISSUE_PLACE", SqlDbType.VarChar,100) { Value = request.BL_ISSUE_PLACE },
-              new SqlParameter("@BL_ISSUE_DATE", SqlDbType.DateTime) { Value = request.BL_ISSUE_DATE },
-              new SqlParameter("@TOTAL_PREPAID", SqlDbType.Decimal) { Value = request.TOTAL_PREPAID },
+            //  new SqlParameter("@BL_ISSUE_DATE", SqlDbType.DateTime) { Value = request.BL_ISSUE_DATE },
               new SqlParameter("@NO_OF_ORIGINAL_BL", SqlDbType.Int) { Value = request.NO_OF_ORIGINAL_BL },
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = request.AGENT_CODE },
               new SqlParameter("@AGENT_NAME", SqlDbType.VarChar,255) { Value = request.AGENT_NAME },
@@ -47,7 +42,7 @@ namespace PrimeMaritime_API.Repository
 
             var BLNO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
 
-            foreach (var i in request.CONTAINER_LIST)
+            foreach(var i in request.CONTAINER_LIST)
             {
                 i.BL_NO = request.BL_NO;
             }
@@ -66,9 +61,8 @@ namespace PrimeMaritime_API.Repository
             columns[10] = "AGENT_NAME";
             columns[11] = "CREATED_BY";
 
-            SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
+           SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
-
         public DataSet GetBLData(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
@@ -81,7 +75,6 @@ namespace PrimeMaritime_API.Repository
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
         }
-
         public DataSet GetSRRDetails(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
@@ -105,23 +98,40 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO)
+        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO)
         {
-            SqlParameter[] parameters =
+            
+            if (fromDO == true)
             {
-              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLIST" },
-              new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = AGENT_CODE },
-              new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
-              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
-              new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
-              new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },
-              new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = DO_NO }
-            };
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLISTFORDO" },
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                   new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO }
+                 };
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
+                return containerList;
+            }
+            else 
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLIST" },
+                    new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+                    new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },
+                    new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = DO_NO }
+                };
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
+                return containerList;
 
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
-            List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
+            }
 
-            return containerList;
         }
-    }
+
+
+    }   
 }

@@ -80,13 +80,16 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<DO> GetDOList(string connstring, string AGENT_CODE)
+        public List<DO> GetDOList(string connstring, string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DOLIST" },
+                  new SqlParameter("@DO_NO", SqlDbType.VarChar, 100) { Value = DO_NO },
+                  new SqlParameter("@DO_DATE", SqlDbType.DateTime) { Value = DO_DATE },
+                  new SqlParameter("@DO_VALIDITY", SqlDbType.DateTime) { Value = DO_VALIDITY },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
                 };
 

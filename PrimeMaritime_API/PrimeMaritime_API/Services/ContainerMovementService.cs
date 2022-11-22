@@ -1,0 +1,63 @@
+﻿using Microsoft.Extensions.Configuration;
+using PrimeMaritime_API.Helpers;
+using PrimeMaritime_API.IServices;
+using PrimeMaritime_API.Models;
+using PrimeMaritime_API.Repository;
+using PrimeMaritime_API.Response;
+using PrimeMaritime_API.Utility;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace PrimeMaritime_API.Services
+{
+    public class ContainerMovementService:IContainerMovementService
+    {
+        private readonly IConfiguration _config;
+        public ContainerMovementService(IConfiguration config)
+        {
+            _config = config;
+        }
+
+        public Response<List<CONTAINER_MOVEMENT>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CONTAINER_MOVEMENT>> response = new Response<List<CONTAINER_MOVEMENT>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> InsertContainerMovement(CONTAINER_MOVEMENT request, bool fromXL)
+        {
+
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<ContainerMovementRepo>.Instance.InsertContainerMovement(dbConn, request,fromXL);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+
+        }
+    }
+}

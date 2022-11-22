@@ -41,9 +41,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetContainerList")]
-        public ActionResult<Response<List<CONTAINERS>>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO)
+        public ActionResult<Response<List<CONTAINERS>>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetContainerList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetContainerList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO,fromDO)));
         }
     }
 }
