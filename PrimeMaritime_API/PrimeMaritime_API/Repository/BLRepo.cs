@@ -42,26 +42,6 @@ namespace PrimeMaritime_API.Repository
 
             var BLNO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
 
-            //DataTable tbl = new DataTable();
-            //tbl.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
-            //tbl.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
-            //tbl.Columns.Add(new DataColumn("BL_NO", typeof(string)));
-            //tbl.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
-            //tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
-
-            //foreach (var i in request.SLOT_LIST)
-            //{
-            //    DataRow dr = tbl.NewRow();
-
-            //    dr["BOOKING_ID"] = Convert.ToInt32(BOOKINGID);
-            //    dr["BOOKING_NO"] = request.BOOKING_NO;
-            //    dr["SLOT_OPERATOR"] = i.SLOT_OPERATOR;
-            //    dr["NO_OF_SLOTS"] = i.NO_OF_SLOTS;
-            //    dr["CREATED_BY"] = request.CREATED_BY;
-
-            //    tbl.Rows.Add(dr);
-            //}
-
             foreach(var i in request.CONTAINER_LIST)
             {
                 i.BL_NO = request.BL_NO;
@@ -83,23 +63,75 @@ namespace PrimeMaritime_API.Repository
 
            SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
-
-        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO)
+        public DataSet GetBLData(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
             {
-              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLIST" },
-              new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
-              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
-              new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
-              new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },
-              new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = DO_NO }
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BLDETAILS" },
+                new SqlParameter("@BL_NO", SqlDbType.VarChar, 100) { Value = BL_NO },
+                new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+                new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
-            List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
-
-            return containerList;
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
         }
+        public DataSet GetSRRDetails(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_SRRDETAILS" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 100) { Value = BL_NO },
+              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+              new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
+        }
+        public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
+        }
+
+        public static List<T> GetListFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateListFromTable<T>(dataTable);
+        }
+
+        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO)
+        {
+            
+            if (fromDO == true)
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLISTFORDO" },
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                   new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO }
+                 };
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
+                return containerList;
+            }
+            else 
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLIST" },
+                    new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+                    new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },
+                    new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = DO_NO }
+                };
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
+                return containerList;
+
+            }
+
+        }
+
+
     }   
 }
