@@ -26,5 +26,17 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_activityService.GetActivityList()));
         }
+
+        [HttpGet("GetActivityDetailsByCode")]
+        public ActionResult<Response<ACTIVITY>> GetActivityDetailsByCode(string ACT_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_activityService.GetActivityDetailsByCode(ACT_CODE)));
+        }
+
+        [HttpGet("GetActivityMappingDetailsByID")]
+        public ActionResult<Response<ACTIVITY>> GetActivityMappingDetailsByID(int ACT_ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_activityService.GetActivityMappingDetailsByID(ACT_ID)));
+        }
     }
 }
