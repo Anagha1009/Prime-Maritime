@@ -33,7 +33,6 @@ namespace PrimeMaritime_API.Services
                 return response;
             }
 
-
             var data = DbClientFactory<ActivityRepo>.Instance.GetActivityDetailsByCode(dbConn, ACT_CODE);
 
             if ((data != null))
@@ -81,8 +80,6 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            
-
             Response<ActivityMappingResponse> response = new Response<ActivityMappingResponse>();
 
             if ((ACT_ID == 0))
@@ -102,6 +99,7 @@ namespace PrimeMaritime_API.Services
                 ActivityMappingResponse activity = new ActivityMappingResponse();
 
                 activity = ActivityRepo.GetSingleDataFromDataSet<ActivityMappingResponse>(data.Tables[0]);
+
                 activity.ActivityList = ActivityRepo.GetListFromDataSet<ACTIVITY>(data.Tables[0]);
 
                 response.Data = activity;

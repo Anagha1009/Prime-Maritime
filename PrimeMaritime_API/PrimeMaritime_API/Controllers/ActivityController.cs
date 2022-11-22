@@ -34,7 +34,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetActivityMappingDetailsByID")]
-        public ActionResult<Response<CRO>> GetActivityMappingDetailsByID(int ACT_ID)
+        public ActionResult<Response<ACTIVITY>> GetActivityMappingDetailsByID(int ACT_ID)
         {
             return Ok(JsonConvert.SerializeObject(_activityService.GetActivityMappingDetailsByID(ACT_ID)));
         }
