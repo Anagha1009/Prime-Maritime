@@ -59,5 +59,38 @@ namespace PrimeMaritime_API.Services
             return response;
 
         }
+
+        public Response<CM> GetSingleContainerMovement(string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CM> response = new Response<CM>();
+
+            if ((CONTAINER_NO == "") || (CONTAINER_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Container No";
+                return response;
+            }
+
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetSingleContainerMovement(dbConn, CONTAINER_NO);
+
+            if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
     }
 }
