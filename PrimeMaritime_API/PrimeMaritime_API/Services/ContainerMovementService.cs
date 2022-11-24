@@ -3,6 +3,7 @@ using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
+using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
 using System;
 using System.Collections.Generic;
@@ -11,38 +12,22 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
-    public class DOService:IDOService
+    public class ContainerMovementService:IContainerMovementService
     {
         private readonly IConfiguration _config;
-        public DOService(IConfiguration config)
+        public ContainerMovementService(IConfiguration config)
         {
             _config = config;
         }
 
-
-        
-        public Response<string> InsertDO(DO doRequest)
+        public Response<List<CONTAINER_MOVEMENT>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<DORepo>.Instance.InsertDO(dbConn, doRequest);
+            Response<List<CONTAINER_MOVEMENT>> response = new Response<List<CONTAINER_MOVEMENT>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
 
-            Response<string> response = new Response<string>();
-            response.Succeeded = true;
-            response.ResponseMessage = "Inserted Successfully.";
-            response.ResponseCode = 200;
-
-            return response;
-        }
-
-        public Response<List<DO>> GetDOList(string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<List<DO>> response = new Response<List<DO>>();
-            var data = DbClientFactory<DORepo>.Instance.GetDOList(dbConn, OPERATION, DO_NO, DO_DATE, DO_VALIDITY,AGENT_CODE);
-
-            if (data.Count > 0)
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
@@ -59,21 +44,37 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<DO> GetDODetails(string DO_NO, string AGENT_CODE)
+        public Response<CommonResponse> InsertContainerMovement(CONTAINER_MOVEMENT request, bool fromXL)
+        {
+
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<ContainerMovementRepo>.Instance.InsertContainerMovement(dbConn, request,fromXL);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+
+        }
+
+        public Response<CM> GetSingleContainerMovement(string CONTAINER_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<DO> response = new Response<DO>();
+            Response<CM> response = new Response<CM>();
 
-            if ((DO_NO == "") || (DO_NO == null))
+            if ((CONTAINER_NO == "") || (CONTAINER_NO == null))
             {
                 response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide BL No";
+                response.ResponseMessage = "Please provide Container No";
                 return response;
             }
 
-            
-            var data = DbClientFactory<DORepo>.Instance.GetDODetails(dbConn, DO_NO, AGENT_CODE);
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetSingleContainerMovement(dbConn, CONTAINER_NO);
 
             if ((data != null))
             {

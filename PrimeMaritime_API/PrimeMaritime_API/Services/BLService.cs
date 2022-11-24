@@ -20,6 +20,21 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
+        
+
+        public Response<CommonResponse> InsertBL(BL request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BLRepo>.Instance.InsertBL(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "BL Created Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
         public Response<BL> GetBLDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -49,30 +64,6 @@ namespace PrimeMaritime_API.Services
                 }
 
                 response.Data = bl;
-            }
-            else
-            {
-                response.Succeeded = false;
-                response.ResponseCode = 500;
-                response.ResponseMessage = "No Data";
-            }
-
-            return response;
-        }
-
-        public Response<List<CONTAINERS>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO,string DO_NO)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO);
-
-             if (data != null)
-            {
-                response.Succeeded = true;
-                response.ResponseCode = 200;
-                response.ResponseMessage = "Success";
-                response.Data = data;
             }
             else
             {
@@ -116,16 +107,26 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> InsertBL(BL request)
+        public Response<List<CONTAINERS>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<BLRepo>.Instance.InsertBL(dbConn, request);
+            Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
+            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AGENT_CODE, BOOKING_NO, CRO_NO, BL_NO, DO_NO, fromDO);
 
-            Response<CommonResponse> response = new Response<CommonResponse>();
-            response.Succeeded = true;
-            response.ResponseMessage = "BL Created Successfully.";
-            response.ResponseCode = 200;
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
 
             return response;
         }
