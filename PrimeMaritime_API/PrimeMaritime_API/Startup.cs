@@ -66,6 +66,7 @@ namespace PrimeMaritime_API
             services.AddScoped<IActivityService, ActivityService>();
             services.AddScoped<IActivityMappingService, ActivityMappingService>();
             services.AddScoped<IContainerMovementService, ContainerMovementService>();
+            services.AddScoped<IDepoService, DepoService>();
             services.AddAuthentication(options =>
             {
 
