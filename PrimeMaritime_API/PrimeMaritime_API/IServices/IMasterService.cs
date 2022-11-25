@@ -33,25 +33,16 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> DeleteContainerMasterList(int ID);
         #endregion
 
-        #region "CONTAINER SIZE MASTER"
-        Response<CommonResponse> InsertContainerSize(SIZE request);
+        #region "COMMON MASTER"
+        Response<CommonResponse> InsertMaster(MASTER request);
 
-        Response<List<SIZE>> GetContainerSizeList();
-        Response<SIZE> GetContainerSizeDetails(int ID);
+        Response<List<MASTER>> GetMasterList(string key);
 
-        Response<CommonResponse> UpdateContainerSizeList(SIZE request);
+        Response<MASTER> GetMasterDetails(int ID);
 
-        Response<CommonResponse> DeleteContainerSizeList(int ID);
+        Response<CommonResponse> UpdateMaster(MASTER request);
+
+        Response<CommonResponse> DeleteMaster(int ID);
         #endregion
-
-        Response<CommonResponse> InsertServiceTypeMaster(MASTER request);
-
-        Response<List<MASTER>> GetServiceTypeMasterList();
-
-        Response<MASTER> GetServiceTypeMasterDetails(string CODE);
-
-        Response<CommonResponse> UpdateServiceTypeMaster(MASTER request);
-
-        Response<CommonResponse> DeleteServiceTypeMaster(string CODE);
     }
 }

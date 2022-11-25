@@ -18,9 +18,7 @@ namespace PrimeMaritime_API.Services
         public BLService(IConfiguration config)
         {
             _config = config;
-        }
-
-        
+        }       
 
         public Response<CommonResponse> InsertBL(BL request)
         {

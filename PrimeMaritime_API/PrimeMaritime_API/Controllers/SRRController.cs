@@ -74,5 +74,11 @@ namespace PrimeMaritime_API.Controllers
 
             return Ok();
         }
+
+        [HttpPost("ApproveRate")]
+        public ActionResult<Response<CommonResponse>> ApproveRate(List<SRR_RATES> request)
+        {
+            return Ok(_srrService.ApproveRate(request));
+        }
     }
 }
