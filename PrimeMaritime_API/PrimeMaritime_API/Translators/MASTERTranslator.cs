@@ -100,47 +100,8 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("DROP_LOCATION"))
                 item.DROP_LOCATION = SqlHelper.GetNullableString(reader, "DROP_LOCATION");
 
-
-
-
-
-
-
-
-
-
             return item;
         }
-
-        public static SIZE TranslateAsContainerSize(this SqlDataReader reader, bool isList = false)
-        {
-            if (!isList)
-            {
-                if (!reader.HasRows)
-                    return null;
-                reader.Read();
-            }
-
-            var item = new SIZE();
-
-            if (reader.IsColumnExists("ID"))
-                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
-
-            if (reader.IsColumnExists("CONT_SIZE"))
-                item.CONT_SIZE = SqlHelper.GetNullableString(reader, "CONT_SIZE");
-
-            if (reader.IsColumnExists("STATUS"))
-                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
-
-            if (reader.IsColumnExists("CREATED_BY"))
-                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
-
-            if (reader.IsColumnExists("UPDATED_BY"))
-                item.UPDATED_BY = SqlHelper.GetNullableString(reader, "UPDATED_BY");
-
-            return item;
-        }
-
         public static MASTER TranslateAsMaster(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)

@@ -63,20 +63,6 @@ namespace PrimeMaritime_API.Models
         public DateTime? UPDATED_DATE { get; set; } = null;
     }
 
-    public class SIZE
-    {
-        public int ID { get; set; }
-        public string CONT_SIZE { get; set; }
-        public Boolean STATUS { get; set; }
-        public string CREATED_BY { get; set; }
-
-        public DateTime? CREATED_DATE { get; set; } = null;
-
-        public string UPDATED_BY { get; set; }
-
-        public DateTime? UPDATED_DATE { get; set; } = null;
-    }
-
     public class MASTER
     {
         public int ID { get; set; }

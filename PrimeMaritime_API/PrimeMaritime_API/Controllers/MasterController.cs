@@ -53,7 +53,7 @@ namespace PrimeMaritime_API.Controllers
         }
         #endregion
 
-        #region "CONTAINER"
+        #region "CONTAINER MASTER"
         [HttpPost("InsertContainerMaster")]
         public ActionResult<Response<CommonResponse>> InsertContainerMaster(CONTAINER_MASTER request)
         {
@@ -86,71 +86,36 @@ namespace PrimeMaritime_API.Controllers
         }
         #endregion
 
-        #region "Container Size"
-        [HttpPost("InsertContainerSize")]
-        public ActionResult<Response<CommonResponse>> InsertContainerSize(SIZE request)
+        #region "COMMON MASTER"
+        [HttpPost("InsertMaster")]
+        public ActionResult<Response<CommonResponse>> InsertMaster(MASTER request)
         {
-            return Ok(_masterService.InsertContainerSize(request));
+            return Ok(_masterService.InsertMaster(request));
         }
 
-        [HttpGet("GetContainerSizeList")]
-        public ActionResult<Response<List<SIZE>>> GetContainerSizeList()
+        [HttpGet("GetMasterList")]
+        public ActionResult<Response<List<MASTER>>> GetMasterList(string key)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerSizeList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetMasterList(key)));
         }
 
-        [HttpGet("GetContainerSizeDetails")]
-        public ActionResult<Response<SIZE>> GetContainerSizeDetails(int ID)
+        [HttpGet("GetMasterDetails")]
+        public ActionResult<Response<MASTER>> GetMasterDetails(int ID)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerSizeDetails(ID)));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetMasterDetails(ID)));
         }
 
-        [HttpPost("UpdateContainerSizeList")]
-        public ActionResult<Response<CONTAINER_MASTER>> UpdateContainerSizeList(SIZE request)
+        [HttpPost("UpdateMaster")]
+        public ActionResult<Response<MASTER>> UpdateMaster(MASTER request)
         {
-            return Ok(_masterService.UpdateContainerSizeList(request));
+            return Ok(_masterService.UpdateMaster(request));
         }
 
-        [HttpDelete("DeleteContainerSizeList")]
-        public ActionResult<Response<SIZE>> DeleteContainerSizeList(int ID)
+        [HttpDelete("DeleteMaster")]
+        public ActionResult<Response<MASTER>> DeleteMaster(int ID)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerSizeList(ID)));
-        }
-        #endregion
-
-        #region "Servie Type"
-        [HttpPost("InsertServiceTypeMaster")]
-        public ActionResult<Response<CommonResponse>> InsertServiceTypeMaster(MASTER request)
-        {
-            return Ok(_masterService.InsertServiceTypeMaster(request));
-        }
-
-        [HttpGet("GetServiceTypeMasterList")]
-        public ActionResult<Response<List<MASTER>>> GetServiceTypeMasterList()
-        {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceTypeMasterList()));
-        }
-
-        [HttpGet("GetServiceTypeMasterDetails")]
-        public ActionResult<Response<MASTER>> GetServiceTypeMasterDetails(string CODE)
-        {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceTypeMasterDetails(CODE)));
-        }
-
-        [HttpPost("UpdateServiceTypeMaster")]
-        public ActionResult<Response<MASTER>> UpdateServiceTypeMaster(MASTER request)
-        {
-            return Ok(_masterService.UpdateServiceTypeMaster(request));
-        }
-
-        [HttpDelete("DeleteServiceTypeMaster")]
-        public ActionResult<Response<MASTER>> DeleteServiceTypeMaster(string CODE)
-        {
-            return Ok(JsonConvert.SerializeObject(_masterService.DeleteServiceTypeMaster(CODE)));
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteMaster(ID)));
         }
         #endregion
-
-
-
     }
 }
