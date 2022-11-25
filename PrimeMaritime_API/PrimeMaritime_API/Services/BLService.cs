@@ -130,5 +130,50 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<List<CONTAINERS>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Response<CargoManifest> GetCargoManifestList(string AgentCode,string BL_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CargoManifest> response = new Response<CargoManifest>();
+
+            if ((BL_NO == "") || (BL_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide BL No";
+                return response;
+            }
+
+            var data = DbClientFactory<BLRepo>.Instance.CargoManifestData(dbConn,AgentCode, BL_NO);
+
+            if ((data != null) && (data.Tables[0].Rows.Count > 0))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                CargoManifest cargoManifest = new CargoManifest();
+
+                cargoManifest = BLRepo.GetSingleDataFromDataSet<CargoManifest>(data.Tables[0]);
+
+                if (data.Tables.Contains("Table1"))
+                {
+                    cargoManifest.CONTAINER_LIST = BLRepo.GetListFromDataSet<BL_CONTAINERS>(data.Tables[1]);
+                }
+                response.Data = cargoManifest;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
     }
 }
