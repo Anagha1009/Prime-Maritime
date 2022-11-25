@@ -224,12 +224,12 @@ namespace PrimeMaritime_API.Services
         }
         #endregion
 
-        #region "CONTAINER SIZE MASTER"
-        public Response<CommonResponse> InsertContainerSize(SIZE request)
+        #region "COMMON MASTER"
+        public Response<CommonResponse> InsertMaster(MASTER request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<MasterRepo>.Instance.InsertContainerSize(dbConn, request);
+            DbClientFactory<MasterRepo>.Instance.InsertMaster(dbConn, request);
 
 
             Response<CommonResponse> response = new Response<CommonResponse>();
@@ -239,12 +239,13 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-        public Response<List<SIZE>> GetContainerSizeList()
+
+        public Response<List<MASTER>> GetMasterList(string key)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<SIZE>> response = new Response<List<SIZE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerSizeList(dbConn);
+            Response<List<MASTER>> response = new Response<List<MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetMasterList(dbConn,key);
 
             if (data != null)
             {
@@ -263,12 +264,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<SIZE> GetContainerSizeDetails(int ID)
+        public Response<MASTER> GetMasterDetails(int ID)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<SIZE> response = new Response<SIZE>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerSizeDetails(dbConn, ID);
+            Response<MASTER> response = new Response<MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetMasterDetails(dbConn, ID);
 
             if (data != null)
             {
@@ -287,12 +288,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> UpdateContainerSizeList(SIZE request)
+        public Response<CommonResponse> UpdateMaster(MASTER request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<CommonResponse> response = new Response<CommonResponse>();
-            DbClientFactory<MasterRepo>.Instance.UpdateContainerSizeList(dbConn, request);
+            DbClientFactory<MasterRepo>.Instance.UpdateMaster(dbConn, request);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master updated Successfully.";
@@ -301,121 +302,20 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> DeleteContainerSizeList(int ID)
+        public Response<CommonResponse> DeleteMaster(int ID)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<CommonResponse> response = new Response<CommonResponse>();
 
-            if ((ID == 0) || (ID == 0))
+            if (ID == 0)
             {
                 response.ResponseCode = 500;
                 response.ResponseMessage = "Please provide ID ";
                 return response;
             }
 
-            DbClientFactory<MasterRepo>.Instance.DeleteContainerSizeList(dbConn, ID);
-
-            response.Succeeded = true;
-            response.ResponseMessage = "Master deleted Successfully.";
-            response.ResponseCode = 200;
-
-            return response;
-        }
-        #endregion
-
-        #region "SERVICE TYPE"
-        public Response<CommonResponse> InsertServiceTypeMaster(MASTER request)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            DbClientFactory<MasterRepo>.Instance.InsertServiceTypeMaster(dbConn, request);
-
-
-            Response<CommonResponse> response = new Response<CommonResponse>();
-            response.Succeeded = true;
-            response.ResponseMessage = "Master saved Successfully.";
-            response.ResponseCode = 200;
-
-            return response;
-        }
-
-        public Response<List<MASTER>> GetServiceTypeMasterList()
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<List<MASTER>> response = new Response<List<MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetServiceTypeMasterList(dbConn);
-
-            if (data != null)
-            {
-                response.Succeeded = true;
-                response.ResponseCode = 200;
-                response.ResponseMessage = "Success";
-                response.Data = data;
-            }
-            else
-            {
-                response.Succeeded = false;
-                response.ResponseCode = 500;
-                response.ResponseMessage = "No Data";
-            }
-
-            return response;
-        }
-
-        public Response<MASTER> GetServiceTypeMasterDetails(string CODE)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<MASTER> response = new Response<MASTER>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetServiceTypeMasterDetails(dbConn, CODE);
-
-            if (data != null)
-            {
-                response.Succeeded = true;
-                response.ResponseCode = 200;
-                response.ResponseMessage = "Success";
-                response.Data = data;
-            }
-            else
-            {
-                response.Succeeded = false;
-                response.ResponseCode = 500;
-                response.ResponseMessage = "No Data";
-            }
-
-            return response;
-        }
-
-        public Response<CommonResponse> UpdateServiceTypeMaster(MASTER request)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<CommonResponse> response = new Response<CommonResponse>();
-            DbClientFactory<MasterRepo>.Instance.UpdateServiceTypeMaster(dbConn, request);
-
-            response.Succeeded = true;
-            response.ResponseMessage = "Master updated Successfully.";
-            response.ResponseCode = 200;
-
-            return response;
-        }
-
-        public Response<CommonResponse> DeleteServiceTypeMaster(string CODE)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<CommonResponse> response = new Response<CommonResponse>();
-
-            if ((CODE == null) || (CODE == ""))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide CODE ";
-                return response;
-            }
-
-            DbClientFactory<MasterRepo>.Instance.DeleteServiceTypeMaster(dbConn, CODE);
+            DbClientFactory<MasterRepo>.Instance.DeleteMaster(dbConn, ID);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";

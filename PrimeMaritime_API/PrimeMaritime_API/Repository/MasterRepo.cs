@@ -271,111 +271,8 @@ namespace PrimeMaritime_API.Repository
         }
         #endregion
 
-        #region "CONTAINER SIZE MASTER"
-        public void InsertContainerSize(string connstring, SIZE master)
-        {
-            try
-            {
-                SqlParameter[] parameters =
-                {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_CONTAINER_SIZE" },
-                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID},
-                  new SqlParameter("@CONT_SIZE", SqlDbType.VarChar, 20) { Value = master.CONT_SIZE },
-                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
-                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
-                  new SqlParameter("@CREATED_DATE", SqlDbType.DateTime) { Value = master.CREATED_DATE },
-                  new SqlParameter("@UPDATED_BY", SqlDbType.VarChar,255) { Value = master.UPDATED_BY },
-                  new SqlParameter("@UPDATED_DATE", SqlDbType.DateTime) { Value = master.UPDATED_DATE },
-                };
-
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_SIZE", parameters);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public List<SIZE> GetContainerSizeList(string dbConn)
-        {
-            try
-            {
-                SqlParameter[] parameters =
-                {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_CONTAINER_SIZE_LIST" },
-
-                };
-
-                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_MST_CONT_SIZE", parameters);
-                List<SIZE> master = SqlHelper.CreateListFromTable<SIZE>(dataTable);
-
-                return master;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-
-        public SIZE GetContainerSizeDetails(string connstring, int ID)
-        {
-            try
-            {
-                SqlParameter[] parameters =
-                {
-
-                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
-                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_CONTAINER_SIZE_DETAILS" }
-                };
-
-                return SqlHelper.ExtecuteProcedureReturnData<SIZE>(connstring, "[SP_MST_CONT_SIZE]", r => r.TranslateAsContainerSize(), parameters);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public void UpdateContainerSizeList(string connstring, SIZE master)
-        {
-            try
-            {
-                SqlParameter[] parameters =
-               {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_CONTAINER_SIZE" },
-                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID},
-                  new SqlParameter("@CONT_SIZE", SqlDbType.VarChar, 20) { Value = master.CONT_SIZE },
-                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
-                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
-
-                };
-
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_SIZE", parameters);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public void DeleteContainerSizeList(string connstring, int ID)
-        {
-            SqlParameter[] parameters =
-            {
-              new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
-               new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_CONTAINER_SIZE" }
-            };
-            
-            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_SIZE", parameters);
-        }
-        #endregion
-
-        #region "SERVICE TYPE"
-        public void InsertServiceTypeMaster(string connstring, MASTER master)
+        #region "COMMON MASTER"
+        public void InsertMaster(string connstring, MASTER master)
         {
             try
             {
@@ -403,13 +300,14 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<MASTER> GetServiceTypeMasterList(string dbConn)
+        public List<MASTER> GetMasterList(string dbConn, string key)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_MASTER_LIST" },
+                  new SqlParameter("@KEY_NAME", SqlDbType.VarChar, 100) { Value =  key},
 
                 };
 
@@ -422,17 +320,16 @@ namespace PrimeMaritime_API.Repository
             {
                 throw;
             }
-
         }
 
-        public MASTER GetServiceTypeMasterDetails(string connstring, string CODE)
+        public MASTER GetMasterDetails(string connstring, int ID)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
 
-                   new SqlParameter("@CODE", SqlDbType.VarChar) { Value = CODE },
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_MASTER_DETAILS" }
                 };
 
@@ -445,7 +342,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void UpdateServiceTypeMaster(string connstring, MASTER master)
+        public void UpdateMaster(string connstring, MASTER master)
         {
             try
             {
@@ -470,11 +367,11 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void DeleteServiceTypeMaster(string connstring, string CODE)
+        public void DeleteMaster(string connstring, int ID)
         {
             SqlParameter[] parameters =
             {
-              new SqlParameter("@CODE", SqlDbType.VarChar,255) { Value = CODE },
+              new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
                new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_MASTER" }
             };
 
