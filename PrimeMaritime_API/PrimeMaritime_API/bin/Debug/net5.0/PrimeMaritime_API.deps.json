@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "PrimeMaritime_API/1.0.0": {
         "dependencies": {
+          "IdentityModel": "6.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.17",
           "NETCore.MailKit": "2.1.0",
           "Newtonsoft.Json": "13.0.1",
@@ -325,6 +326,17 @@
         },
         "compile": {
           "PrimeMaritime_API.dll": {}
+        }
+      },
+      "IdentityModel/6.0.0": {
+        "runtime": {
+          "lib/net5.0/IdentityModel.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/net5.0/IdentityModel.dll": {}
         }
       },
       "MailKit/3.2.0": {
@@ -2403,6 +2415,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "IdentityModel/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eVHCR7a6m/dm5RFcBzE3qs/Jg5j9R5Rjpu8aTOv9e4AFvaQtBXb5ah7kmwU+YwA0ufRwz4wf1hnIvsD2hSnI4g==",
+      "path": "identitymodel/6.0.0",
+      "hashPath": "identitymodel.6.0.0.nupkg.sha512"
     },
     "MailKit/3.2.0": {
       "type": "package",
