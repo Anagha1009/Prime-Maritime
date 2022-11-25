@@ -147,6 +147,53 @@ namespace PrimeMaritime_API.Helpers
             }
         }
 
+        public static void UpdateSRRData<T>(List<T> list, string TableName, string connString, string[] columns)
+        {
+            DataTable dt = new DataTable("TB_SRR_RATES");
+            dt = ConvertToDataTable(list);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand("", conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        //Creating temp table on database
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), APPROVED_RATE decimal)";
+                        command.ExecuteNonQuery();
+
+                        //Bulk insert into temp table
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(conn))
+                        {
+                            bulkcopy.BulkCopyTimeout = 660;
+                            bulkcopy.DestinationTableName = "#TmpTable";
+                            foreach (var i in columns)
+                            {
+                                bulkcopy.ColumnMappings.Add(i, i);
+                            }
+                            bulkcopy.WriteToServer(dt);
+                            bulkcopy.Close();
+                        }
+
+                        // Updating destination table, and dropping temp table
+                        command.CommandTimeout = 300;
+                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
         public static TData ExtecuteProcedureReturnData<TData>(string connString, string procName,
             Func<SqlDataReader, TData> translator,
             params SqlParameter[] parameters)

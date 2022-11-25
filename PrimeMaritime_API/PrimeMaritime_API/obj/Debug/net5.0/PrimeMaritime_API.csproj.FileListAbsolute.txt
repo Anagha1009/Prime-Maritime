@@ -41,6 +41,108 @@ D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\ob
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
 D:\Prime Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.json
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.exe
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.deps.json
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.json
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.dev.json
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\ref\PrimeMaritime_API.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.pdb
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Data.SqlClient.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CoreCompileInputs.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.Manifest.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.xml
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\scopedcss\bundle\PrimeMaritime_API.styles.css
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.RazorTargetAssemblyInfo.cache
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CopyComplete
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
+C:\Users\mariak\source\repos\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.Development.json
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.json
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.exe
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.deps.json
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.json
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.dev.json
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\ref\PrimeMaritime_API.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.pdb
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Data.SqlClient.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CoreCompileInputs.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cs
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.Manifest.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.xml
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\scopedcss\bundle\PrimeMaritime_API.styles.css
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.RazorTargetAssemblyInfo.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CopyComplete
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.Development.json
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.json
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.exe
@@ -50,7 +152,10 @@ D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_AP
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\ref\PrimeMaritime_API.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.pdb
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
@@ -58,16 +163,22 @@ D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_AP
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Data.SqlClient.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
@@ -83,64 +194,3 @@ D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_AP
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
-D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.Development.json
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.json
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.exe
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.deps.json
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.json
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.runtimeconfig.dev.json
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\ref\PrimeMaritime_API.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.pdb
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\IdentityModel.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MailKit.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Microsoft.OpenApi.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\MimeKit.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\NETCore.MailKit.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Newtonsoft.Json.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\BouncyCastle.Crypto.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Data.SqlClient.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-arm64\native\sni.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x64\native\sni.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CoreCompileInputs.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cs
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.Manifest.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.xml
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\scopedcss\bundle\PrimeMaritime_API.styles.css
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.RazorTargetAssemblyInfo.cache
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CopyComplete
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache

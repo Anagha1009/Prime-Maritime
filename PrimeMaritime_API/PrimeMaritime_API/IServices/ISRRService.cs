@@ -18,5 +18,7 @@ namespace PrimeMaritime_API.IServices
         Response<string> InsertSRR(SRRRequest sRRRequest);
 
         Response<string> InsertContainer(SRR request);
+
+        Response<CommonResponse> ApproveRate(List<SRR_RATES> request);
     }
 }

@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "IdentityModel/6.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net5.0/IdentityModel.dll": {}
-        },
-        "runtime": {
-          "lib/net5.0/IdentityModel.dll": {}
-        }
-      },
       "MailKit/3.2.0": {
         "type": "package",
         "dependencies": {
@@ -512,33 +503,6 @@
     }
   },
   "libraries": {
-    "IdentityModel/6.0.0": {
-      "sha512": "eVHCR7a6m/dm5RFcBzE3qs/Jg5j9R5Rjpu8aTOv9e4AFvaQtBXb5ah7kmwU+YwA0ufRwz4wf1hnIvsD2hSnI4g==",
-      "type": "package",
-      "path": "identitymodel/6.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "icon.jpg",
-        "identitymodel.6.0.0.nupkg.sha512",
-        "identitymodel.nuspec",
-        "lib/net461/IdentityModel.dll",
-        "lib/net461/IdentityModel.pdb",
-        "lib/net461/IdentityModel.xml",
-        "lib/net472/IdentityModel.dll",
-        "lib/net472/IdentityModel.pdb",
-        "lib/net472/IdentityModel.xml",
-        "lib/net5.0/IdentityModel.dll",
-        "lib/net5.0/IdentityModel.pdb",
-        "lib/net5.0/IdentityModel.xml",
-        "lib/net6.0/IdentityModel.dll",
-        "lib/net6.0/IdentityModel.pdb",
-        "lib/net6.0/IdentityModel.xml",
-        "lib/netstandard2.0/IdentityModel.dll",
-        "lib/netstandard2.0/IdentityModel.pdb",
-        "lib/netstandard2.0/IdentityModel.xml"
-      ]
-    },
     "MailKit/3.2.0": {
       "sha512": "5MTpTqmjqT7HPvYbP3HozRZMth5vSaT0ReN0iM3rAM4CgLI/R1qqtLDDNWGnFFIlcNzeJkZQRJJMkv8cgzWBbA==",
       "type": "package",
@@ -1728,7 +1692,6 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
-      "IdentityModel >= 6.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 5.0.17",
       "NETCore.MailKit >= 2.1.0",
       "Newtonsoft.Json >= 13.0.1",
@@ -1738,19 +1701,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\archanac\\.nuget\\packages\\": {}
+    "C:\\Users\\anaghat\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "projectUniqueName": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
       "projectName": "PrimeMaritime_API",
-      "projectPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
-      "packagesPath": "C:\\Users\\archanac\\.nuget\\packages\\",
-      "outputPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
+      "projectPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "packagesPath": "C:\\Users\\anaghat\\.nuget\\packages\\",
+      "outputPath": "D:\\Prime Maritime Projects\\Prime-Maritime API\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\archanac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anaghat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1776,10 +1743,6 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
-          "IdentityModel": {
-            "target": "Package",
-            "version": "[6.0.0, )"
-          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[5.0.17, )"
@@ -1815,6 +1778,24 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[5.0.17, 5.0.17]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[5.0.0, 5.0.0]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1823,7 +1804,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.411\\RuntimeIdentifierGraph.json"
       }
     }
   }
