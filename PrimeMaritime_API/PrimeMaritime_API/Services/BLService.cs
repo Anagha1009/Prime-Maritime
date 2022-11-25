@@ -18,33 +18,7 @@ namespace PrimeMaritime_API.Services
         public BLService(IConfiguration config)
         {
             _config = config;
-        }
-
-        
-
-        public Response<List<CONTAINERS>> GetContainerList(string AgentID, string BOOKING_NO, string CRO_NO, string BL_NO,string DO_NO,bool fromDO)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AgentID, BOOKING_NO, CRO_NO,BL_NO,DO_NO,fromDO);
-
-             if (data != null)
-            {
-                response.Succeeded = true;
-                response.ResponseCode = 200;
-                response.ResponseMessage = "Success";
-                response.Data = data;
-            }
-            else
-            {
-                response.Succeeded = false;
-                response.ResponseCode = 500;
-                response.ResponseMessage = "No Data";
-            }
-
-            return response;
-        }
+        }       
 
         public Response<CommonResponse> InsertBL(BL request)
         {
@@ -133,38 +107,17 @@ namespace PrimeMaritime_API.Services
 
         public Response<List<CONTAINERS>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
         {
-            throw new NotImplementedException();
-        }
-
-        public Response<CargoManifest> GetCargoManifestList(string AgentCode,string BL_NO)
-        {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<CargoManifest> response = new Response<CargoManifest>();
+            Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
+            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AGENT_CODE, BOOKING_NO, CRO_NO, BL_NO, DO_NO, fromDO);
 
-            if ((BL_NO == "") || (BL_NO == null))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide BL No";
-                return response;
-            }
-
-            var data = DbClientFactory<BLRepo>.Instance.CargoManifestData(dbConn,AgentCode, BL_NO);
-
-            if ((data != null) && (data.Tables[0].Rows.Count > 0))
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
-                CargoManifest cargoManifest = new CargoManifest();
-
-                cargoManifest = BLRepo.GetSingleDataFromDataSet<CargoManifest>(data.Tables[0]);
-
-                if (data.Tables.Contains("Table1"))
-                {
-                    cargoManifest.CONTAINER_LIST = BLRepo.GetListFromDataSet<BL_CONTAINERS>(data.Tables[1]);
-                }
-                response.Data = cargoManifest;
+                response.Data = data;
             }
             else
             {
