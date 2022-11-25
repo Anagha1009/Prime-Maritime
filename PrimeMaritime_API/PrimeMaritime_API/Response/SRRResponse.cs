@@ -18,5 +18,7 @@ namespace PrimeMaritime_API.Response
         public DateTime CREATED_DATE { get; set; }
         public int NO_OF_CONTAINERS { get; set; }
         public int TOTAL_VOLUME_EXPECTED { get; set; }
+        public decimal TOTAL_RATE_REQUESTED { get; set; }
+        public string CURRENCY { get; set; }
     }
 }

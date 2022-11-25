@@ -28,10 +28,22 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_blService.InsertBL(request));
         }
 
-        [HttpGet("GetContainerList")]
-        public ActionResult<Response<List<CONTAINERS>>> GetContainerList(string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO)
+        [HttpGet("GetBLDetails")]
+        public ActionResult<Response<BL>> GetBLDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetContainerList(AGENT_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLDetails(BL_NO, BOOKING_NO, AGENT_CODE)));
+        }
+
+        [HttpGet("GetSRRDetails")]
+        public ActionResult<Response<SRR>> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetSRRDetails(BL_NO, BOOKING_NO, AGENT_CODE)));
+        }
+
+        [HttpGet("GetContainerList")]
+        public ActionResult<Response<List<CONTAINERS>>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetContainerList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO,fromDO)));
         }
     }
 }
