@@ -26,13 +26,13 @@ namespace PrimeMaritime_API.Services
             _config = config;
             _mailSettings = mailSettings.Value;
         }
-        public Response<List<DROPDOWN>> GetDropdownData(string key)
+        public Response<List<DROPDOWN>> GetDropdownData(string key, string port)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<DROPDOWN>> response = new Response<List<DROPDOWN>>();
 
-            var data = DbClientFactory<CommonRepo>.Instance.GetDropdownData(dbConn, key);
+            var data = DbClientFactory<CommonRepo>.Instance.GetDropdownData(dbConn, key,port);
 
             if(data != null)
             {
