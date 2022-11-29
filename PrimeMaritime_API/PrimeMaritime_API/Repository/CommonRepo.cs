@@ -11,13 +11,15 @@ namespace PrimeMaritime_API.Repository
 {
     public class CommonRepo
     {
-        public List<DROPDOWN> GetDropdownData(string connstring, string key)
+        public List<DROPDOWN> GetDropdownData(string connstring, string key, string port)
         {
-            SqlParameter sqlParameter = new SqlParameter();
-            sqlParameter.Value = key;
-            sqlParameter.ParameterName = "@KEY";
+            SqlParameter[] parameters =
+           {
+                new SqlParameter("@KEY", SqlDbType.VarChar, 100) { Value = key },
+                new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = port },
+            };
 
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_MASTER_DATA", sqlParameter);
+            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_MASTER_DATA", parameters);
             List<DROPDOWN> dropdownList = SqlHelper.CreateListFromTable<DROPDOWN>(dataTable);
 
             return dropdownList;

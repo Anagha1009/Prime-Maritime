@@ -125,12 +125,13 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<SRRRepo>.Instance.InsertSRR(dbConn, sRRRequest);
+            string SRRID = DbClientFactory<SRRRepo>.Instance.InsertSRR(dbConn, sRRRequest);
 
             Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
+            response.Data = SRRID;
 
             return response;
         }
