@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
 using PrimeMaritime_API.Helpers;
+using PrimeMaritime_API.Response;
 
 namespace PrimeMaritime_API.Repository
 {
@@ -42,7 +43,7 @@ namespace PrimeMaritime_API.Repository
 
             var BLNO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
 
-            foreach(var i in request.CONTAINER_LIST)
+            foreach (var i in request.CONTAINER_LIST)
             {
                 i.BL_NO = request.BL_NO;
             }
@@ -61,7 +62,7 @@ namespace PrimeMaritime_API.Repository
             columns[10] = "AGENT_NAME";
             columns[11] = "CREATED_BY";
 
-           SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
+            SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
         public DataSet GetBLData(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
@@ -98,9 +99,9 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO)
+        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
         {
-            
+
             if (fromDO == true)
             {
                 SqlParameter[] parameters =
@@ -113,7 +114,7 @@ namespace PrimeMaritime_API.Repository
                 List<CONTAINERS> containerList = SqlHelper.CreateListFromTable<CONTAINERS>(dataTable);
                 return containerList;
             }
-            else 
+            else
             {
                 SqlParameter[] parameters =
                 {
@@ -132,6 +133,24 @@ namespace PrimeMaritime_API.Repository
 
         }
 
+        public DataSet CargoManifestData(string connstring,string AGENT_CODE, string BL_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+{
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CARGO_MANIFEST_LIST" },
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                   new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO }
+                 };
+        
+                return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-    }   
+    }
 }
