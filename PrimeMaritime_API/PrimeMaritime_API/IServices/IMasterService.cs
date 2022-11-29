@@ -44,5 +44,33 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> DeleteMaster(int ID);
         #endregion
+
+        #region "VESSEL MASTER"
+        Response<CommonResponse> InsertVesselMaster(VESSEL_MASTER request);
+        Response<List<VESSEL_MASTER>> GetVesselMasterList();
+
+        Response<VESSEL_MASTER> GetVesselMasterDetails(int ID);
+
+        Response<CommonResponse> UpdateVesselMasterList(VESSEL_MASTER request);
+
+        Response<CommonResponse> DeleteVesselMasterList(int ID);
+        #endregion
+
+
+        #region "SERVICE MASTER"
+        Response<CommonResponse> InsertServiceMaster(SERVICE_MASTER request);
+        Response<List<SERVICE_MASTER>> GetServiceMasterList();
+        Response<SERVICE_MASTER> GetServiceMasterDetails(int ID);
+
+        Response<CommonResponse> UpdateServiceMasterList(SERVICE_MASTER request);
+
+        Response<CommonResponse> DeleteServiceMasterList(int ID);
+
+
+        #endregion
+
+
+
+
     }
 }

@@ -85,6 +85,44 @@ namespace PrimeMaritime_API.Models
 
         public DateTime? UPDATED_DATE { get; set; } = null;
 
-
     }
+
+    public class VESSEL_MASTER
+    {
+        public int ID { get; set; }
+
+        public string VESSEL_NAME { get; set; }
+
+        public string IMO_NO { get; set; }
+
+        public string COUNTRY_CODE { get; set; }
+
+        public string VESSEL_CODE { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public string CREATED_BY { get; set; }
+
+        //public DateTime CREATED_ON { get; set; }
+
+        //public string UPDATED_BY { get; set; }
+
+        //public DateTime UPDATED_DATE { get; set; }
+    }
+
+    public class SERVICE_MASTER
+    {
+        public int ID { get; set; }
+
+        public int LINER_ID { get; set; }
+
+        public String SERVICE_NAME { get; set; }
+
+        public String PORT_CODE { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public string CREATED_BY { get; set; }
+    }
+
 }
