@@ -62,7 +62,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void InsertSRR(string connstring, SRRRequest request)
+        public string InsertSRR(string connstring, SRRRequest request)
         {
             try
             {
@@ -74,17 +74,17 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
                   new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
-                  new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = request.EFFECT_FROM },
-                  new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = request.EFFECT_TO },
-                  new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
+                  new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_FROM) ? null : Convert.ToDateTime(request.EFFECT_FROM) },
+                  new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_TO) ? null : Convert.ToDateTime(request.EFFECT_TO)},
+                  //new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
                   new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
-                  new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
-                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
-                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
-                  new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
-                  new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
-                  new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
-                  new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
+                  //new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
+                  //new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
+                  //new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
+                  //new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
+                  //new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
+                  //new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
+                  //new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
                   new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
                   new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
@@ -246,6 +246,8 @@ namespace PrimeMaritime_API.Repository
                 columns2[14] = "CREATED_BY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
+
+                return SRRID;
             }
             catch (Exception)
             {

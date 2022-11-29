@@ -23,9 +23,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetDropdownData")]
-        public ActionResult<Response<List<DROPDOWN>>> GetDropdownData(string key)
+        public ActionResult<Response<List<DROPDOWN>>> GetDropdownData(string key,string port)
         {
-            return Ok(JsonConvert.SerializeObject(_commonService.GetDropdownData(key)));
+            return Ok(JsonConvert.SerializeObject(_commonService.GetDropdownData(key,port)));
         }
 
         [HttpPost("SendEmail")]

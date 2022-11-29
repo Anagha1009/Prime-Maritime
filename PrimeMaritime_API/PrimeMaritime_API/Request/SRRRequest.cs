@@ -14,8 +14,8 @@ namespace PrimeMaritime_API.Request
         public string POD { get; set; }
         public string FINAL_DESTINATION { get; set; }
         public string SERVICE_NAME { get; set; }
-        public DateTime EFFECT_FROM { get; set; }
-        public DateTime EFFECT_TO { get; set; }
+        public string EFFECT_FROM { get; set; }
+        public string EFFECT_TO { get; set; }
         public bool MTY_REPO { get; set; }
         public string CUSTOMER_NAME { get; set; }
         public string ADDRESS { get; set; }

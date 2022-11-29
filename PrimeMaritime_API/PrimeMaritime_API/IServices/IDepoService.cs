@@ -11,5 +11,6 @@ namespace PrimeMaritime_API.IServices
     public interface IDepoService
     {
         Response<CommonResponse> InsertContainer(DEPO_CONTAINER request);
+        Response<CommonResponse> InsertMRRequest(List<MR_LIST> request);
     }
 }
