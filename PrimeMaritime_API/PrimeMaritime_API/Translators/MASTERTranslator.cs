@@ -146,5 +146,92 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
+
+        public static VESSEL_MASTER TranslateAsVessel(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new VESSEL_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("VESSEL_NAME"))
+                item.VESSEL_NAME = SqlHelper.GetNullableString(reader, "VESSEL_NAME");
+
+            if (reader.IsColumnExists("IMO_NO"))
+                item.IMO_NO = SqlHelper.GetNullableString(reader, "IMO_NO");
+
+            if (reader.IsColumnExists("COUNTRY_CODE"))
+                item.COUNTRY_CODE = SqlHelper.GetNullableString(reader, "COUNTRY_CODE");
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+            if (reader.IsColumnExists("VESSEL_CODE"))
+                item.VESSEL_CODE = SqlHelper.GetNullableString(reader, "VESSEL_CODE");
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+            //if (reader.IsColumnExists("CREATED_ON"))
+            //    item.CREATED_ON = SqlHelper.GetDateTime(reader, "CREATED_ON");
+
+            //if (reader.IsColumnExists("UPDATED_BY"))
+            //    item.UPDATED_BY = SqlHelper.GetNullableString(reader, "UPDATED_BY");
+
+            //if (reader.IsColumnExists("UPDATED_DATE"))
+            //    item.UPDATED_DATE = SqlHelper.GetDateTime(reader, "UPDATED_DATE");
+
+            return item;
+        }
+
+        public static SERVICE_MASTER TranslateAsService(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new SERVICE_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("LINER_ID"))
+                item.LINER_ID = SqlHelper.GetNullableInt32(reader, "LINER_ID");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+           
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+            //if (reader.IsColumnExists("CREATED_ON"))
+            //    item.CREATED_ON = SqlHelper.GetDateTime(reader, "CREATED_ON");
+
+            //if (reader.IsColumnExists("UPDATED_BY"))
+            //    item.UPDATED_BY = SqlHelper.GetNullableString(reader, "UPDATED_BY");
+
+            //if (reader.IsColumnExists("UPDATED_DATE"))
+            //    item.UPDATED_DATE = SqlHelper.GetDateTime(reader, "UPDATED_DATE");
+
+            return item;
+        }
+
+
     }
 }
