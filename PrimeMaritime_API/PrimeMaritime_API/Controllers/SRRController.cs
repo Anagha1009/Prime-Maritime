@@ -31,9 +31,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRList")]
-        public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO,string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
+        public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO,string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(OPERATION,SRR_NO,CUSTOMER_NAME,STATUS, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(OPERATION,SRR_NO,CUSTOMER_NAME,STATUS,FROMDATE,TODATE, AGENT_CODE)));
         }
 
         [HttpPost("InsertSRR")]
@@ -73,6 +73,12 @@ namespace PrimeMaritime_API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost("ApproveRate")]
+        public ActionResult<Response<CommonResponse>> ApproveRate(List<SRR_RATES> request)
+        {
+            return Ok(_srrService.ApproveRate(request));
         }
     }
 }

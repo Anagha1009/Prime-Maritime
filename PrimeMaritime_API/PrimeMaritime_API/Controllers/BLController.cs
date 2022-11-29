@@ -45,5 +45,13 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_blService.GetContainerList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO,BL_NO,DO_NO,fromDO)));
         }
+
+        [HttpGet("GetCargoManifestList")]
+        public ActionResult<Response<List<CargoManifest>>> GetCargoManifestList(string AGENT_CODE, string BL_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, BL_NO)));
+        }
+
+
     }
 }

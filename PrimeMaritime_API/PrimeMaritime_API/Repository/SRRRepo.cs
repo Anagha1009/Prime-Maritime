@@ -36,7 +36,7 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<SRRList> GetSRRList(string connstring, string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
+        public List<SRRList> GetSRRList(string connstring, string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
         {
             try
             {
@@ -46,8 +46,10 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
                   new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = CUSTOMER_NAME },
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
+                  new SqlParameter("@FROMDATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(FROMDATE) ? null : Convert.ToDateTime(FROMDATE) },
+                  new SqlParameter("@TODATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(TODATE) ? null : Convert.ToDateTime(TODATE) },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
-                };
+                };                
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
                 List<SRRList> srrList = SqlHelper.CreateListFromTable<SRRList>(dataTable);
@@ -60,7 +62,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void InsertSRR(string connstring, SRRRequest request)
+        public string InsertSRR(string connstring, SRRRequest request)
         {
             try
             {
@@ -72,17 +74,17 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
                   new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
-                  new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = request.EFFECT_FROM },
-                  new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = request.EFFECT_TO },
-                  new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
+                  new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_FROM) ? null : Convert.ToDateTime(request.EFFECT_FROM) },
+                  new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_TO) ? null : Convert.ToDateTime(request.EFFECT_TO)},
+                  //new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
                   new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
-                  new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
-                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
-                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
-                  new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
-                  new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
-                  new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
-                  new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
+                  //new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
+                  //new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
+                  //new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
+                  //new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
+                  //new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
+                  //new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
+                  //new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
                   new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
                   new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
@@ -142,6 +144,7 @@ namespace PrimeMaritime_API.Repository
                 DataTable tbl1 = new DataTable();
                 tbl1.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
                 tbl1.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("CONTAINER_TYPE", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("CHARGE_CODE", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("TRANSPORT_TYPE", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("CURRENCY", typeof(string)));
@@ -157,6 +160,7 @@ namespace PrimeMaritime_API.Repository
 
                     dr["SRR_ID"] = Convert.ToInt32(SRRID);
                     dr["SRR_NO"] = request.SRR_NO;
+                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
                     dr["CHARGE_CODE"] = i.CHARGE_CODE;
                     dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
                     dr["CURRENCY"] = i.CURRENCY;
@@ -169,17 +173,18 @@ namespace PrimeMaritime_API.Repository
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[10];
+                string[] columns1 = new string[11];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
-                columns1[2] = "CHARGE_CODE";
-                columns1[3] = "TRANSPORT_TYPE";
-                columns1[4] = "CURRENCY";
-                columns1[5] = "PAYMENT_TERM";
-                columns1[6] = "STANDARD_RATE";
-                columns1[7] = "RATE_REQUESTED";
-                columns1[8] = "REMARKS";
-                columns1[9] = "CREATED_BY";
+                columns1[2] = "CONTAINER_TYPE";
+                columns1[3] = "CHARGE_CODE";
+                columns1[4] = "TRANSPORT_TYPE";
+                columns1[5] = "CURRENCY";
+                columns1[6] = "PAYMENT_TERM";
+                columns1[7] = "STANDARD_RATE";
+                columns1[8] = "RATE_REQUESTED";
+                columns1[9] = "REMARKS";
+                columns1[10] = "CREATED_BY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 
@@ -241,6 +246,8 @@ namespace PrimeMaritime_API.Repository
                 columns2[14] = "CREATED_BY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
+
+                return SRRID;
             }
             catch (Exception)
             {
@@ -252,23 +259,6 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                //SqlParameter[] parameters =
-                //{
-                //  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CONTAINER" },
-                //  new SqlParameter("@SRR_ID", SqlDbType.Int) { Value = request.SRR_ID },
-                //  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
-                //  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,100) { Value = request.CONTAINER_TYPE },
-                //  new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar,50) { Value = request.CONTAINER_SIZE },
-                //  new SqlParameter("@SERVICE_MODE", SqlDbType.VarChar,50) { Value = request.SERVICE_MODE },
-                //  //new SqlParameter("@POD_FREE_DAYS", SqlDbType.Int) { Value = request.POD_FREE_DAYS },
-                // // new SqlParameter("@POL_FREE_DAYS", SqlDbType.Int) { Value = request.POL_FREE_DAYS },
-                //  new SqlParameter("@IMM_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.IMM_VOLUME_EXPECTED },
-                //  //new SqlParameter("@TOTAL_VOLUME_EXPECTED", SqlDbType.Int) { Value = request.TOTAL_VOLUME_EXPECTED },
-                //  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
-                //};
-
-                //SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
-
                 DataTable tbl = new DataTable();
                 tbl.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
                 tbl.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
@@ -312,6 +302,33 @@ namespace PrimeMaritime_API.Repository
                 columns[9] = "CREATED_BY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SRR_CONTAINERS", columns);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void ApproveRate(string connstring, List<SRR_RATES> request)
+        {
+            try
+            {
+                string[] columns = new string[4];
+                columns[0] = "SRR_NO";
+                columns[1] = "CHARGE_CODE";
+                columns[2] = "APPROVED_RATE";
+                columns[3] = "CONTAINER_TYPE";
+
+                SqlHelper.UpdateSRRData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
+
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "APPROVE_SRR" },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request[0].SRR_NO },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+
             }
             catch (Exception)
             {

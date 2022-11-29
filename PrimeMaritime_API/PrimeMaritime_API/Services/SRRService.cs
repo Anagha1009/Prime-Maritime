@@ -17,6 +17,22 @@ namespace PrimeMaritime_API.Services
         {
             _config = config;
         }
+
+        public Response<CommonResponse> ApproveRate(List<SRR_RATES> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.ApproveRate(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Rate Approved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+
+        }
+
         public Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -67,12 +83,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string AGENT_CODE)
+        public Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SRRList>> response = new Response<List<SRRList>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,OPERATION,SRR_NO,CUSTOMER_NAME,STATUS, AGENT_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,OPERATION,SRR_NO,CUSTOMER_NAME,STATUS,FROMDATE,TODATE, AGENT_CODE);
 
             if (data.Count > 0)
             {
@@ -109,12 +125,13 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<SRRRepo>.Instance.InsertSRR(dbConn, sRRRequest);
+            string SRRID = DbClientFactory<SRRRepo>.Instance.InsertSRR(dbConn, sRRRequest);
 
             Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
+            response.Data = SRRID;
 
             return response;
         }

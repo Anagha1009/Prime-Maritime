@@ -33,5 +33,19 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<CommonResponse> InsertMRRequest(List<MR_LIST> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<DEPORepo>.Instance.InsertMRRequest(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "M&R Request is inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
     }
 }
