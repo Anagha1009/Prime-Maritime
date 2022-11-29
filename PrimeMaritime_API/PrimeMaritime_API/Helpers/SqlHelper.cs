@@ -202,6 +202,7 @@ namespace PrimeMaritime_API.Helpers
             {
                 using (var sqlCommand = sqlConnection.CreateCommand())
                 {
+                    sqlCommand.Parameters.Clear();
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                     sqlCommand.CommandText = procName;
                     if (parameters != null)
@@ -218,7 +219,8 @@ namespace PrimeMaritime_API.Helpers
                             dataAdapter.Fill(dt);
                             return dt;
                         }
-                    }                    
+                    }
+                    
                 }
             }
         }
