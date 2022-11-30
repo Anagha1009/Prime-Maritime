@@ -26,5 +26,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(_depoService.InsertContainer(request));
         }
+
+        [HttpPost("InsertMRRequest")]
+        public ActionResult<Response<CommonResponse>> InsertMRRequest(List<MR_LIST> request)
+        {
+            return Ok(_depoService.InsertMRRequest(request));
+        }
     }
 }

@@ -41,13 +41,13 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpDelete("DeletePartyMasterDetails")]
-        public ActionResult<Response<PARTY_MASTER>> DeletePartyMasterDetails(string AGENT_CODE, int CUSTOMER_ID)
+        public ActionResult<Response<CommonResponse>> DeletePartyMasterDetails(string AGENT_CODE, int CUSTOMER_ID)
         {
             return Ok(JsonConvert.SerializeObject(_masterService.DeletePartyMasterDetails(AGENT_CODE, CUSTOMER_ID)));
         }
 
         [HttpPost("UpdatePartyMasterDetails")]
-        public ActionResult<Response<PARTY_MASTER>> UpdatePartyMasterDetails(PARTY_MASTER request)
+        public ActionResult<Response<CommonResponse>> UpdatePartyMasterDetails(PARTY_MASTER request)
         {
             return Ok(_masterService.UpdatePartyMasterDetails(request));
         }
@@ -74,13 +74,13 @@ namespace PrimeMaritime_API.Controllers
 
 
         [HttpPost("UpdateContainerMasterList")]
-        public ActionResult<Response<CONTAINER_MASTER>> UpdateContainerMasterList(CONTAINER_MASTER request)
+        public ActionResult<Response<CommonResponse>> UpdateContainerMasterList(CONTAINER_MASTER request)
         {
             return Ok(_masterService.UpdateContainerMasterList(request));
         }
 
         [HttpDelete("DeleteContainerMasterList")]
-        public ActionResult<Response<CONTAINER_MASTER>> DeleteContainerMasterList( int ID)
+        public ActionResult<Response<CommonResponse>> DeleteContainerMasterList( int ID)
         {
             return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerMasterList(ID)));
         }
@@ -106,16 +106,86 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("UpdateMaster")]
-        public ActionResult<Response<MASTER>> UpdateMaster(MASTER request)
+        public ActionResult<Response<CommonResponse>> UpdateMaster(MASTER request)
         {
             return Ok(_masterService.UpdateMaster(request));
         }
 
         [HttpDelete("DeleteMaster")]
-        public ActionResult<Response<MASTER>> DeleteMaster(int ID)
+        public ActionResult<Response<CommonResponse>> DeleteMaster(int ID)
         {
             return Ok(JsonConvert.SerializeObject(_masterService.DeleteMaster(ID)));
         }
         #endregion
+
+        #region "VESSEL MASTER"
+        [HttpPost("InsertVesselMaster")]
+        public ActionResult<Response<CommonResponse>> InsertVesselMaster(VESSEL_MASTER request)
+        {
+            return Ok(_masterService.InsertVesselMaster(request));
+        }
+
+        [HttpGet("GetVesselMasterList")]
+        public ActionResult<Response<List<VESSEL_MASTER>>> GetVesselMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetVesselMasterList()));
+        }
+
+        [HttpGet("GetVesselMasterDetails")]
+        public ActionResult<Response<VESSEL_MASTER>> GetVesselMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetVesselMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateVesselMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateVesselMasterList(VESSEL_MASTER request)
+        {
+            return Ok(_masterService.UpdateVesselMasterList(request));
+        }
+
+        [HttpDelete("DeleteVesselMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteVesselMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteVesselMasterList(ID)));
+        }
+        #endregion
+
+
+        #region "SERVICE MASTER"
+        [HttpPost("InsertServiceMaster")]
+        public ActionResult<Response<CommonResponse>> InsertServiceMaster(SERVICE_MASTER request)
+        {
+            return Ok(_masterService.InsertServiceMaster(request));
+        }
+
+        [HttpGet("GetServiceMasterList")]
+        public ActionResult<Response<List<SERVICE_MASTER>>> GetServiceMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceMasterList()));
+        }
+
+        [HttpGet("GetServiceMasterDetails")]
+        public ActionResult<Response<SERVICE_MASTER>> GetServiceMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateServiceMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateServiceMasterList(SERVICE_MASTER request)
+        {
+            return Ok(_masterService.UpdateServiceMasterList(request));
+        }
+
+        [HttpDelete("DeleteServiceMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteServiceMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteServiceMasterList(ID)));
+        }
+        #endregion
+
+
+
+
+
     }
 }
