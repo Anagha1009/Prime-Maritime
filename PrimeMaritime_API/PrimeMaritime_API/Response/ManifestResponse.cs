@@ -28,6 +28,7 @@ namespace PrimeMaritime_API.Response
         public int TWEENTY_FT { get; set; }
         public int FORTY_FT { get; set; }
         public List<BL_CONTAINERS> CONTAINER_LIST { get; set; }
+        public List<FREIGHT_DETAILS> FREIGHT_DETAILS { get; set; }
 
     }
 
@@ -42,5 +43,13 @@ namespace PrimeMaritime_API.Response
         public decimal GROSS_WEIGHT { get; set; }
         public string IMO_CLASS { get; set; }
         public string UN_NO { get; set; }
+    }
+
+    public class FREIGHT_DETAILS
+    {
+        public int ID { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string CURRENCY { get; set; }
+        public decimal APPROVED_RATE { get; set; }
     }
 }
