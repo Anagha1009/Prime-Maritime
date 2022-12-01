@@ -13,5 +13,7 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> InsertContainerTracking(CONTAINER_TRACKING request);
         Response<List<CT>> GetContainerTrackingList(string CONTAINER_NO);
 
+        Response<List<CT>> GetContainerTrackingAsPerBooking(string BOOKING_NO, string CRO_NO, string CONTAINER_NO);
+
     }
 }

@@ -214,6 +214,32 @@ namespace PrimeMaritime_API.Repository
             return cmList;
         }
 
+
+        public List<CM> GetContainerMovementBooking(string connstring,string BOOKING_NO,string CRO_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CONTAINER_MOVEMENT_BOOKING" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = CRO_NO }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+                return containerList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+
         public CM GetSingleContainerMovement(string connstring, string CONTAINER_NO)
         {
             try

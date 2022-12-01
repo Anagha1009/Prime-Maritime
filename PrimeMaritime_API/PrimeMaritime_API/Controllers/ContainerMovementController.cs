@@ -35,6 +35,12 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO)));
         }
+        
+        [HttpGet("GetContainerMovementBooking")]
+        public ActionResult<Response<List<CM>>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementBooking(BOOKING_NO, CRO_NO)));
+        }
 
         [HttpGet("GetSingleContainerMovement")]
         public ActionResult<Response<CM>> GetSingleContainerMovement(string CONTAINER_NO)
@@ -54,6 +60,12 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<Response<List<CMList>>> GetContainerTrackingList(string CONTAINER_NO)
         {
             return Ok(JsonConvert.SerializeObject(_ctService.GetContainerTrackingList(CONTAINER_NO)));
+        }
+
+        [HttpGet("GetContainerTrackingAsPerBooking")]
+        public ActionResult<Response<List<CMList>>> GetContainerTrackingAsPerBooking(string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_ctService.GetContainerTrackingAsPerBooking(BOOKING_NO, CRO_NO,CONTAINER_NO)));
         }
 
 

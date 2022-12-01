@@ -108,6 +108,60 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public List<CT> GetContainerTrackingAsPerBooking(string connstring,string BOOKING_NO,string CRO_NO,string CONTAINER_NO)
+        {
+            try
+            {
+                string prevRowCurrentActivity = "";
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CONTAINER_TRACKING" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = CRO_NO },
+                    new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 100) { Value = CONTAINER_NO }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_TRACKING", parameters);
+                List<CT> containerList = SqlHelper.CreateListFromTable<CT>(dataTable);
+                containerList.Reverse();
+                List<CT> containerTrackingList = new List<CT>();
+                foreach (var i in containerList)
+                {
+                    CT ct = new CT();
+                    if (prevRowCurrentActivity != i.PREV_ACTIVITY)
+                    {
+                        ct.BOOKING_NO = i.BOOKING_NO;
+                        ct.CRO_NO = i.CRO_NO;
+                        ct.CONTAINER_NO = i.CONTAINER_NO;
+                        ct.ACTIVITY = i.PREV_ACTIVITY;
+                        ct.ACTIVITY_DATE = i.ACTIVITY_DATE;
+                        ct.LOCATION = i.LOCATION;
+                        ct.STATUS = i.STATUS;
+
+                        containerTrackingList.Add(ct);
+
+                    }
+                    prevRowCurrentActivity = i.ACTIVITY;
+                    ct.BOOKING_NO = i.BOOKING_NO;
+                    ct.CRO_NO = i.CRO_NO;
+                    ct.CONTAINER_NO = i.CONTAINER_NO;
+                    ct.ACTIVITY = i.ACTIVITY;
+                    ct.ACTIVITY_DATE = i.ACTIVITY_DATE;
+                    ct.LOCATION = i.LOCATION;
+                    ct.STATUS = i.STATUS;
+
+                    containerTrackingList.Add(ct);
+                }
+                return containerTrackingList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
 
 
 

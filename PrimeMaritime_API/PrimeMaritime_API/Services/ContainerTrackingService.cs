@@ -20,6 +20,30 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
+        public Response<List<CT>> GetContainerTrackingAsPerBooking(string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CT>> response = new Response<List<CT>>();
+            var data = DbClientFactory<ContainerTrackingRepo>.Instance.GetContainerTrackingAsPerBooking(dbConn, BOOKING_NO, CRO_NO,CONTAINER_NO);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
         public Response<List<CT>> GetContainerTrackingList(string CONTAINER_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
