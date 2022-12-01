@@ -184,6 +184,51 @@ namespace PrimeMaritime_API.Controllers
         #endregion
 
 
+        #region "CONTAINER TYPE MASTER"
+        [HttpPost("InsertContainerTypeMaster")]
+        public ActionResult<Response<CommonResponse>> InsertContainerTypeMaster(CONTAINER_TYPE request)
+        {
+            return Ok(_masterService.InsertContainerTypeMaster(request));
+        }
+
+        [HttpGet("GetContainerTypeMasterList")]
+        public ActionResult<Response<List<CONTAINER_TYPE>>> GetContainerTypeMasterList()
+        {
+           return Ok(JsonConvert.SerializeObject(_masterService.GetContainerTypeMasterList()));
+        }
+
+        [HttpGet("GetContainerTypeMasterDetails")]
+        public ActionResult<Response<CONTAINER_TYPE>> GetContainerTypeMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerTypeMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateConatinerTypeMaster")]
+        public ActionResult<Response<CommonResponse>> UpdateConatinerTypeMaster(CONTAINER_TYPE request)
+        {
+            return Ok(_masterService.UpdateConatinerTypeMaster(request));
+        }
+
+        [HttpDelete("DeleteContainerTypeMaster")]
+        public ActionResult<Response<CommonResponse>> DeleteContainerTypeMaster(int ID)
+        {
+           return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerTypeMaster(ID)));
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

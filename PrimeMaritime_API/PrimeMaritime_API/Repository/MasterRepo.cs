@@ -494,7 +494,7 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_SERVICE" },
-                  new SqlParameter("@LINER_ID", SqlDbType.Int) { Value = master.LINER_ID},
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar,100) { Value = master.LINER_CODE},
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar,255) { Value = master.SERVICE_NAME},
                   new SqlParameter("@PORT_CODE  ", SqlDbType.VarChar, 100) { Value = master.PORT_CODE   },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
@@ -560,7 +560,7 @@ namespace PrimeMaritime_API.Repository
                {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_SERVICE" },
                   new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID },
-                  new SqlParameter("@LINER_ID", SqlDbType.Int) { Value = master.LINER_ID},
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar,100) { Value = master.LINER_CODE},
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar,255) { Value = master.SERVICE_NAME},
                   new SqlParameter("@PORT_CODE  ", SqlDbType.VarChar, 100) { Value = master.PORT_CODE   },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
@@ -593,10 +593,125 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         #endregion
+
+        #region "CONTAINER TYPE MASTER"
+        public void InsertContainerTypeMaster(string connstring, CONTAINER_TYPE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_CONT_TYPE" },
+                  new SqlParameter("@CONT_TYPE_CODE", SqlDbType.VarChar,15) { Value = master.CONT_TYPE_CODE},
+                  new SqlParameter("@CONT_TYPE  ", SqlDbType.VarChar, 50) { Value = master.CONT_TYPE   },
+                  new SqlParameter("@CONT_SIZE",SqlDbType.Int){Value=master.CONT_SIZE},
+                  new SqlParameter("@ISO_CODE",SqlDbType.VarChar,50){Value=master.ISO_CODE},
+                  new SqlParameter("@TEUS",SqlDbType.Int){Value=master.TEUS},
+                  new SqlParameter("@OUT_DIM",SqlDbType.VarChar,100){Value=master.OUT_DIM},
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_TYPE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public List<CONTAINER_TYPE> GetContainerTypeMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_CONT_TYPE_LIST" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_MST_CONT_TYPE", parameters);
+                List<CONTAINER_TYPE> master = SqlHelper.CreateListFromTable<CONTAINER_TYPE>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public CONTAINER_TYPE GetContainerTypeMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_CONT_TYPE_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<CONTAINER_TYPE>(connstring, "SP_MST_CONT_TYPE", r => r.TranslateAsContainerType(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateConatinerTypeMaster(string connstring, CONTAINER_TYPE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+               {
+                 new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_CONT_TYPE" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID },
+                  new SqlParameter("@CONT_TYPE_CODE", SqlDbType.VarChar,15) { Value = master.CONT_TYPE_CODE},
+                  new SqlParameter("@CONT_TYPE  ", SqlDbType.VarChar, 50) { Value = master.CONT_TYPE   },
+                  new SqlParameter("@CONT_SIZE",SqlDbType.Int){Value=master.CONT_SIZE},
+                  new SqlParameter("@ISO_CODE",SqlDbType.VarChar,50){Value=master.ISO_CODE},
+                  new SqlParameter("@TEUS",SqlDbType.Int){Value=master.TEUS},
+                  new SqlParameter("@OUT_DIM",SqlDbType.VarChar,100){Value=master.OUT_DIM},
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+                
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_TYPE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteContainerTypeMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_CONT_TYPE" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_MST_CONT_TYPE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }
+    #endregion
 }
 

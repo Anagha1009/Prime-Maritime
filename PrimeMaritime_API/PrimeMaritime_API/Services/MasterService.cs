@@ -531,7 +531,104 @@ namespace PrimeMaritime_API.Services
 
         #endregion
 
+        #region "CONTAINER TYPE MASTER"
+        public Response<CommonResponse> InsertContainerTypeMaster(CONTAINER_TYPE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertContainerTypeMaster(dbConn, request);
 
 
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CONTAINER_TYPE>> response = new Response<List<CONTAINER_TYPE>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerTypeMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CONTAINER_TYPE> GetContainerTypeMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CONTAINER_TYPE> response = new Response<CONTAINER_TYPE>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerTypeMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateConatinerTypeMaster(CONTAINER_TYPE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateConatinerTypeMaster(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteContainerTypeMaster(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if ((ID == 0) || (ID == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteContainerTypeMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
     }
+    #endregion
 }
