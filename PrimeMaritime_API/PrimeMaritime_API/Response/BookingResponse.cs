@@ -10,6 +10,7 @@ namespace PrimeMaritime_API.Response
     {
         public int ID { get; set; }
         public string BOOKING_NO { get; set; }
+        public string SRR_NO { get; set; }
         public string VESSEL_NAME { get; set; }
         public string VOYAGE_NO { get; set; }
         public string CUSTOMER_NAME { get; set; }
@@ -21,6 +22,11 @@ namespace PrimeMaritime_API.Response
         public string PLACE_OF_DELIVERY { get; set; }
         public string PLACE_OF_RECEIPT { get; set; }
         public int NO_OF_CONTAINERS { get; set; }
+        public string CONTAINERS { get; set; }
+        public string COMMODITY { get; set; }
+        public DateTime ETA { get; set; }
+        public DateTime ETD { get; set; }
+        public string SLOTS { get; set; }
     }
 
     public class BookingDetails

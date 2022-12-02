@@ -335,5 +335,32 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+
+        public void CounterRate(string connstring, List<SRR_RATES> request)
+        {
+            try
+            {
+                string[] columns = new string[4];
+                columns[0] = "SRR_NO";
+                columns[1] = "CHARGE_CODE";
+                columns[2] = "RATE_REQUESTED";
+                columns[3] = "CONTAINER_TYPE";
+
+                SqlHelper.UpdateSRRCounterData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
+
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "COUNTER_SRR" },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request[0].SRR_NO },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
