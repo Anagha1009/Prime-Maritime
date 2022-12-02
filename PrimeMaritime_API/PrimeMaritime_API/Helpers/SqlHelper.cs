@@ -86,7 +86,7 @@ namespace PrimeMaritime_API.Helpers
                             "AGENT_CODE= Temp.AGENT_CODE,AGENT_NAME= Temp.AGENT_NAME,CREATED_BY= Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
                         
                     }
@@ -135,7 +135,7 @@ namespace PrimeMaritime_API.Helpers
                             "CREATED_BY= Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
@@ -182,7 +182,7 @@ namespace PrimeMaritime_API.Helpers
                         command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }
@@ -296,6 +296,7 @@ namespace PrimeMaritime_API.Helpers
             {
                 using (var sqlCommand = sqlConnection.CreateCommand())
                 {
+                    sqlCommand.Parameters.Clear();
                     sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                     sqlCommand.CommandText = procName;
                     if (parameters != null)
@@ -312,7 +313,8 @@ namespace PrimeMaritime_API.Helpers
                             dataAdapter.Fill(dt);
                             return dt;
                         }
-                    }                    
+                    }
+                    
                 }
             }
         }
