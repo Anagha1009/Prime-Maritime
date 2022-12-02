@@ -157,6 +157,10 @@ namespace PrimeMaritime_API.Services
                 {
                     cargoManifest.CONTAINER_LIST = BLRepo.GetListFromDataSet<BL_CONTAINERS>(data.Tables[1]);
                 }
+                if (data.Tables.Contains("Table2"))
+                {
+                    cargoManifest.FREIGHT_DETAILS = BLRepo.GetListFromDataSet<FREIGHT_DETAILS>(data.Tables[2]);
+                }
                 response.Data = cargoManifest;
             }
             else
