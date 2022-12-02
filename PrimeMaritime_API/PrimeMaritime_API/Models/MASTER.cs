@@ -114,15 +114,35 @@ namespace PrimeMaritime_API.Models
     {
         public int ID { get; set; }
 
-        public int LINER_ID { get; set; }
+        public string LINER_CODE { get; set; }
 
-        public String SERVICE_NAME { get; set; }
+        public string SERVICE_NAME { get; set; }
 
-        public String PORT_CODE { get; set; }
+        public string PORT_CODE { get; set; }
 
         public Boolean STATUS { get; set; }
 
         public string CREATED_BY { get; set; }
     }
 
+    public class CONTAINER_TYPE
+    {
+        public int ID { get; set; }
+
+        public string CONT_TYPE_CODE { get; set; }
+
+        public string CONT_TYPE { get; set; }
+
+        public int CONT_SIZE { get; set; }
+
+        public string ISO_CODE { get; set; }
+
+        public int TEUS { get; set; }
+
+        public string OUT_DIM { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public string CREATED_BY { get; set; }
+    }
 }
