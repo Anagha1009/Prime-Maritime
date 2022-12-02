@@ -20,11 +20,11 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        public Response<List<CONTAINER_MOVEMENT>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        public Response<List<CMList>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<CONTAINER_MOVEMENT>> response = new Response<List<CONTAINER_MOVEMENT>>();
+            Response<List<CMList>> response = new Response<List<CMList>>();
             var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
 
             if (data != null)
@@ -77,6 +77,30 @@ namespace PrimeMaritime_API.Services
             var data = DbClientFactory<ContainerMovementRepo>.Instance.GetSingleContainerMovement(dbConn, CONTAINER_NO);
 
             if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<List<CM>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CM>> response = new Response<List<CM>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementBooking(dbConn,BOOKING_NO, CRO_NO);
+
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;

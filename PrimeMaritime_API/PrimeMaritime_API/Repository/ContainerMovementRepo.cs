@@ -18,17 +18,23 @@ namespace PrimeMaritime_API.Repository
 
             if (request.CONTAINER_NO != "")
             {
+
                 
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINER_MOVEMENT" },
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_SINGLE_CONTAINER_MOVEMENT" },
                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 100) { Value = request.CONTAINER_NO }
                 };
 
                 var cmID= SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
                 if (cmID != "")
                 {
-                    DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                    SqlParameter[] parameters1 =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_SINGLE_CONTAINER_MOVEMENT" },
+                        new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 100) { Value = request.CONTAINER_NO }
+                    };
+                    DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters1);
                     List<CM> containerMovementList = SqlHelper.CreateListFromTable<CM>(dataTable);
 
                     foreach (var i in containerMovementList)
@@ -36,8 +42,16 @@ namespace PrimeMaritime_API.Repository
                         i.BOOKING_NO = request.BOOKING_NO;
                         i.CRO_NO = request.CRO_NO;
                         i.CONTAINER_NO = request.CONTAINER_NO;
-                        i.ACTIVITY = request.ACTIVITY;
-                        i.PREV_ACTIVITY = i.ACTIVITY;
+                        if (i.ACTIVITY != request.ACTIVITY)
+                        {
+                            i.PREV_ACTIVITY = i.ACTIVITY;
+                            i.ACTIVITY = request.ACTIVITY;
+                        }
+                        else if (i.ACTIVITY == request.ACTIVITY)
+                        {
+                            i.PREV_ACTIVITY = i.PREV_ACTIVITY;
+                            i.ACTIVITY = i.ACTIVITY;
+                        }
                         i.ACTIVITY_DATE = request.ACTIVITY_DATE;
                         i.LOCATION = request.LOCATION;
                         i.STATUS = request.STATUS;
@@ -141,10 +155,8 @@ namespace PrimeMaritime_API.Repository
                     //No need to bind other list properties at backend
                     foreach (var i in request.CONTAINER_MOVEMENT_LIST)
                     {
-                        i.BOOKING_NO = request.BOOKING_NO;
-                        i.CRO_NO = request.CRO_NO;
-                        i.ACTIVITY_DATE = request.ACTIVITY_DATE;
-                        i.LOCATION = request.LOCATION;
+                        //i.BOOKING_NO = request.BOOKING_NO;
+                        //i.CRO_NO = request.CRO_NO;
                         i.AGENT_CODE = request.AGENT_CODE;
                         i.DEPO_CODE = request.DEPO_CODE;
                         i.CREATED_BY = request.CREATED_BY;
@@ -169,7 +181,7 @@ namespace PrimeMaritime_API.Repository
 
             }
         }
-        public List<CONTAINER_MOVEMENT> GetContainerMovementList(string connstring, string AGENT_CODE, string DEPO_CODE,string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        public List<CMList> GetContainerMovementList(string connstring, string AGENT_CODE, string DEPO_CODE,string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
             SqlParameter[] parameters =
             {
@@ -181,9 +193,52 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,100) { Value = CONTAINER_NO }
              };
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
-            List<CONTAINER_MOVEMENT> containerList = SqlHelper.CreateListFromTable<CONTAINER_MOVEMENT>(dataTable);
-            return containerList;
+            List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);
+
+            var uniqueCMList = containerList.GroupBy(x => x.CONTAINER_NO);
+
+            List<CMList> cmList = new List<CMList>();
+            foreach(var cont in uniqueCMList)
+            {
+                CMList cm = new CMList();
+                cm = cont.FirstOrDefault();
+
+                var nextActList = cont
+                .Where(x => x.CONTAINER_NO == cm.CONTAINER_NO)
+                .Select(n => n.Column1).ToList();
+
+                cm.NEXT_ACTIVITY_LIST = nextActList;
+                cmList.Add(cm);
+            }
+
+            return cmList;
         }
+
+
+        public List<CM> GetContainerMovementBooking(string connstring,string BOOKING_NO,string CRO_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CONTAINER_MOVEMENT_BOOKING" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = CRO_NO }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+                return containerList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
 
         public CM GetSingleContainerMovement(string connstring, string CONTAINER_NO)
         {
