@@ -13,6 +13,8 @@ namespace PrimeMaritime_API.Models
         public string BOOKING_NO { get; set; }
         public int SRR_ID { get; set; }
         public string SRR_NO { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
         public string CUSTOMER_NAME { get; set; }
         public string STUFFING_TYPE { get; set; }
         public string EMPTY_CONT_PCKP { get; set; }

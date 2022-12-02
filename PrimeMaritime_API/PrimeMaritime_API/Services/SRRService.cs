@@ -33,6 +33,21 @@ namespace PrimeMaritime_API.Services
 
         }
 
+        public Response<CommonResponse> CounterRate(List<SRR_RATES> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.CounterRate(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Counter Rate inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+
+        }
+
         public Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

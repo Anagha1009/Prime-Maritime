@@ -80,5 +80,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(_srrService.ApproveRate(request));
         }
+
+        [HttpPost("CounterRate")]
+        public ActionResult<Response<CommonResponse>> CounterRate(List<SRR_RATES> request)
+        {
+            return Ok(_srrService.CounterRate(request));
+        }
     }
 }
