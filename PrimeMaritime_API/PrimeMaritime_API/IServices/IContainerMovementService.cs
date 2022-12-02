@@ -13,7 +13,9 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> InsertContainerMovement(CONTAINER_MOVEMENT request,bool fromXL);
         Response<CM> GetSingleContainerMovement(string CONTAINER_NO);
 
-        Response<List<CONTAINER_MOVEMENT>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO);
-      
+        Response<List<CMList>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO);
+
+        Response<List<CM>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO);
+
     }
 }
