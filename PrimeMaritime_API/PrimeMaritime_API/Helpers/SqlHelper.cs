@@ -229,7 +229,7 @@ namespace PrimeMaritime_API.Helpers
                         command.CommandText = "UPDATE T SET RATE_REQUESTED = Temp.RATE_REQUESTED FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
 
                     }
