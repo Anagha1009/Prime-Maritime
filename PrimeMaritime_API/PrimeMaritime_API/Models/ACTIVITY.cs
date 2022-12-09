@@ -11,6 +11,8 @@ namespace PrimeMaritime_API.Models
         public string ACT_NAME { get; set; }
         public string ACT_CODE { get; set; }
         public string ACT_TYPE { get; set; }
+
+        public string ACTIVITY_BY { get; set; }
         public string CREATED_BY { get; set; }
        
     }
