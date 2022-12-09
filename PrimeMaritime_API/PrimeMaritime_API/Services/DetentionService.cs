@@ -20,14 +20,15 @@ namespace PrimeMaritime_API.Services
         {
             _config = config;
         }
-        public Response<List<DETENTION_REQUEST>> GetDetentionList(string AGENT_CODE)
+
+        public Response<List<DETENTION_WAIVER_REQUEST>> GetDetentionListByDO(string DO_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<DETENTION_REQUEST>> response = new Response<List<DETENTION_REQUEST>>();
-            var data = DbClientFactory<DetentionRepo>.Instance.GetDetentionList(dbConn, AGENT_CODE);
+            Response<List<DETENTION_WAIVER_REQUEST>> response = new Response<List<DETENTION_WAIVER_REQUEST>>();
+            var data = DbClientFactory<DetentionRepo>.Instance.GetDetentionList(dbConn, DO_NO);
 
-            if (data != null)
+            if (data.Count > 0)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
@@ -44,19 +45,18 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> InsertDetention(DETENTION_REQUEST request)
+        public Response<string> InsertDetention(DETENTION Request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<DetentionRepo>.Instance.InsertDetention(dbConn, request);
+            DbClientFactory<DetentionRepo>.Instance.InsertDetention(dbConn, Request);
 
-            Response<CommonResponse> response = new Response<CommonResponse>();
+            Response<string> response = new Response<string>();
             response.Succeeded = true;
-            response.ResponseMessage = "Detention saved Successfully.";
+            response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
 
             return response;
         }
-
     }
 }

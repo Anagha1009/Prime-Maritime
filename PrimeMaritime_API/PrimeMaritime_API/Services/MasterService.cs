@@ -163,12 +163,14 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID)
+
+        public Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID, string CONTAINER_NO)
         {
+
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<CONTAINER_MASTER> response = new Response<CONTAINER_MASTER>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterDetails(dbConn,ID);
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterDetails(dbConn, ID, CONTAINER_NO);
 
             if (data != null)
             {
@@ -528,6 +530,8 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+
 
         #endregion
 

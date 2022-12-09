@@ -67,9 +67,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetContainerMasterDetails")]
-        public ActionResult<Response<CONTAINER_MASTER>> GetContainerMasterDetails(int ID)
+        public ActionResult<Response<CONTAINER_MASTER>> GetContainerMasterDetails(int ID, string CONTAINER_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerMasterDetails(ID)));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerMasterDetails(ID, CONTAINER_NO)));
         }
 
 
