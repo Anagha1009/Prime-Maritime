@@ -69,6 +69,21 @@ namespace PrimeMaritime_API.IServices
 
         #endregion
 
+        #region "CONTAINER TYPE MASTER"
+
+        Response<CommonResponse> InsertContainerTypeMaster(CONTAINER_TYPE request);
+
+        Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList();
+
+        Response<CONTAINER_TYPE> GetContainerTypeMasterDetails(int ID);
+
+        Response<CommonResponse> UpdateConatinerTypeMaster(CONTAINER_TYPE request);
+
+        Response<CommonResponse> DeleteContainerTypeMaster(int ID);
+
+
+        #endregion
+
 
 
 
