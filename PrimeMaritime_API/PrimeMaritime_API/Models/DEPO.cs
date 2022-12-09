@@ -43,6 +43,7 @@ namespace PrimeMaritime_API.Models
     public class MNR_LIST
     {
         public string MR_NO { get; set; }
+        public string CONTAINER_NO { get; set; }
         public string DEPO_CODE { get; set; }
         public string DEPO_NAME { get; set; }
         public string STATUS { get; set; }
