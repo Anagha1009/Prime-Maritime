@@ -21,7 +21,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertActivityMapping")]
-        public ActionResult<Response<ACTIVITY_MAPPING>> InsertER(ACTIVITY_MAPPING request)
+        public ActionResult<Response<ACTIVITY_MAPPING>> InsertActivityMapping(ACTIVITY_MAPPING request)
         {
             return Ok(_activityMappingService.InsertActivityMapping(request));
         }

@@ -26,7 +26,7 @@ namespace PrimeMaritime_API.IServices
 
         Response<List<CONTAINER_MASTER>> GetContainerMasterList();
 
-        Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID);
+        Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID, string CONTAINER_NO);
 
         Response<CommonResponse> UpdateContainerMasterList(CONTAINER_MASTER request);
 
