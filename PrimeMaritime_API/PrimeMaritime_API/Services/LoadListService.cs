@@ -3,7 +3,6 @@ using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
-using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,23 +11,23 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
-    public class DetentionService : IDetentionService
+    public class LoadlistService : ILoadtlistService
     {
         private readonly IConfiguration _config;
 
-        public DetentionService(IConfiguration config)
+        public LoadlistService(IConfiguration config)
         {
             _config = config;
         }
 
-        public Response<List<DETENTION_WAIVER_REQUEST>> GetDetentionListByDO(string DO_NO)
+        public Response<List<LOAD_LIST>> GetLoadList(string VESSEL_NAME,string VOYAGE_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<List<DETENTION_WAIVER_REQUEST>> response = new Response<List<DETENTION_WAIVER_REQUEST>>();
-            var data = DbClientFactory<DetentionRepo>.Instance.GetDetentionList(dbConn, DO_NO);
+            Response<List<LOAD_LIST>> response = new Response<List<LOAD_LIST>>();
+            var data = DbClientFactory<LoadlistRepo>.Instance.GetLoadList(dbConn ,VESSEL_NAME,VOYAGE_NO);
 
-            if (data.Count > 0)
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
@@ -45,18 +44,5 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<string> InsertDetention(DETENTION Request)
-        {
-            string dbConn = _config.GetConnectionString("ConnectionString");
-
-            DbClientFactory<DetentionRepo>.Instance.InsertDetention(dbConn, Request);
-
-            Response<string> response = new Response<string>();
-            response.Succeeded = true;
-            response.ResponseMessage = "Inserted Successfully.";
-            response.ResponseCode = 200;
-
-            return response;
-        }
     }
 }
