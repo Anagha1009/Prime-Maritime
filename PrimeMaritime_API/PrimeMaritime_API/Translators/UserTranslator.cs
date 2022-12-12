@@ -34,6 +34,12 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("ROLE_ID"))
                 item.ROLE_ID = SqlHelper.GetNullableInt32(reader, "ROLE_ID");
 
+            if (reader.IsColumnExists("PORT"))
+                item.PORT = SqlHelper.GetNullableString(reader, "PORT");
+
+            if (reader.IsColumnExists("DEPO"))
+                item.DEPO = SqlHelper.GetNullableString(reader, "DEPO");
+
             return item;
         }
 

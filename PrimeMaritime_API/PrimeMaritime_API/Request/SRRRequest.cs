@@ -16,6 +16,7 @@ namespace PrimeMaritime_API.Request
         public string SERVICE_NAME { get; set; }
         public string EFFECT_FROM { get; set; }
         public string EFFECT_TO { get; set; }
+        public bool IS_VESSELVALIDITY { get; set; }
         public bool MTY_REPO { get; set; }
         public string CUSTOMER_NAME { get; set; }
         public string ADDRESS { get; set; }
