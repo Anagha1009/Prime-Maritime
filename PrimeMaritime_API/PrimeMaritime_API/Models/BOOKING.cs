@@ -32,4 +32,24 @@ namespace PrimeMaritime_API.Models
         public int NO_OF_SLOTS { get; set; }
         public string CREATED_BY { get; set; }
     }
+
+    public class VOYAGE
+    {
+        public int ID { get; set; }
+        public string VESSEL_NAME { get; set; }
+        public string VOYAGE_NO { get; set; }
+        public DateTime ATA { get; set; }
+        public DateTime ATD { get; set; }
+        public DateTime ETA { get; set; }
+        public DateTime ETD { get; set; }
+        public string IMM_CURR { get; set; }
+        public decimal IMM_CURR_RATE { get; set; }
+        public string EXP_CURR { get; set; }
+        public decimal EXP_CURR_RATE { get; set; }
+        public string TERMINAL_CODE { get; set; }
+        public string SERVICE_NAME { get; set; }
+        public string VIA_NO { get; set; }
+        public string PORT_CODE { get; set; }
+        public string CREATED_BY { get; set; }
+    }
 }
