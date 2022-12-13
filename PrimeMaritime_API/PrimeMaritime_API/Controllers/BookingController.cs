@@ -46,5 +46,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_bookingService.ValidateSlots(SRR_NO, NO_OF_SLOTS, BOOKING_NO, SLOT_OPERATOR)));
         }
+
+        [HttpPost("InsertVoyage")]
+        public ActionResult<Response<CommonResponse>> InsertVoyage(VOYAGE request)
+        {
+            return Ok(_bookingService.InsertVoyage(request));
+        }
     }
 }

@@ -55,9 +55,18 @@ namespace PrimeMaritime_API.Repository
                         i.ACTIVITY_DATE = request.ACTIVITY_DATE;
                         i.LOCATION = request.LOCATION;
                         i.STATUS = request.STATUS;
-                        i.AGENT_CODE = request.AGENT_CODE;
-                        i.DEPO_CODE = request.DEPO_CODE;
-                        i.CREATED_BY = request.CREATED_BY;
+                        //i.AGENT_CODE = request.AGENT_CODE;
+                        //i.DEPO_CODE = request.DEPO_CODE;
+                        if (request.AGENT_CODE != "")
+                        {
+                            i.AGENT_CODE = request.AGENT_CODE;
+                        }
+                        if (request.DEPO_CODE != "")
+                        {
+                            i.DEPO_CODE = request.DEPO_CODE;
+                        }
+                        //Commented created by in update and allow only in insert
+                        //i.CREATED_BY = request.CREATED_BY;
                     }
 
                     string[] columns = new string[11];
@@ -157,9 +166,13 @@ namespace PrimeMaritime_API.Repository
                     {
                         //i.BOOKING_NO = request.BOOKING_NO;
                         //i.CRO_NO = request.CRO_NO;
-                        i.AGENT_CODE = request.AGENT_CODE;
-                        i.DEPO_CODE = request.DEPO_CODE;
-                        i.CREATED_BY = request.CREATED_BY;
+                        //i.AGENT_CODE = request.AGENT_CODE;
+                        if (request.DEPO_CODE != "")
+                        {
+                            i.DEPO_CODE = request.DEPO_CODE;
+                        }
+                        //Commented created by in update and allow only in insert
+                        //i.CREATED_BY = request.CREATED_BY;
                     }
 
                     string[] columns = new string[11];
@@ -191,6 +204,7 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
                 new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
                 new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,100) { Value = CONTAINER_NO }
+
              };
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
             List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);

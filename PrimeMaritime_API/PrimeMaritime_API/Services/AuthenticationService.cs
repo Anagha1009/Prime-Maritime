@@ -87,6 +87,8 @@ namespace PrimeMaritime_API.Services
             response.UserName = user.USERNAME;
             response.RoleCode = user.ROLE_ID;
             response.UserCode = user.USERCODE;
+            response.Port = user.PORT;
+            response.Depo = user.DEPO;
 
             return response;
         }
