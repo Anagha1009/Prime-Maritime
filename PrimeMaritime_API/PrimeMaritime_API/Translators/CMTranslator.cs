@@ -44,6 +44,9 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("LOCATION"))
                 item.LOCATION = SqlHelper.GetNullableString(reader, "LOCATION");
 
+            if (reader.IsColumnExists("CURRENT_LOCATION"))
+                item.CURRENT_LOCATION = SqlHelper.GetNullableString(reader, "CURRENT_LOCATION");
+
             if (reader.IsColumnExists("STATUS"))
                 item.STATUS = SqlHelper.GetNullableString(reader, "STATUS");
 
