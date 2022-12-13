@@ -21,7 +21,7 @@ namespace PrimeMaritime_API.Models
         public string COMPONENT { get; set; }
         public string DAMAGE { get; set; }
         public string REPAIR { get; set; }
-        public string DESCRIPTION { get; set; }
+        public string DESC { get; set; }
         public decimal LENGTH { get; set; }
         public decimal WIDTH { get; set; }
         public decimal HEIGHT { get; set; }
@@ -38,6 +38,7 @@ namespace PrimeMaritime_API.Models
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public decimal APPROVED_RATE { get; set; }
+        public string REMARKS { get; set; }
     }
 
     public class MNR_LIST
