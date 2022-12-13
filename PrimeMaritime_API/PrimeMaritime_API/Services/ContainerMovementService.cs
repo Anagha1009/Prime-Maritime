@@ -116,5 +116,29 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<List<CM>> GetCMAvailable(string STATUS, string CURRENT_LOCATION)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CM>> response = new Response<List<CM>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetCMAvailable(dbConn, STATUS, CURRENT_LOCATION);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
     }
 }

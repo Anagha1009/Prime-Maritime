@@ -42,6 +42,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementBooking(BOOKING_NO, CRO_NO)));
         }
 
+        [HttpGet("GetCMAvailable")]
+        public ActionResult<Response<List<CM>>> GetCMAvailable(string STATUS, string CURRENT_LOCATION)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetCMAvailable(STATUS, CURRENT_LOCATION)));
+        }
+
         [HttpGet("GetSingleContainerMovement")]
         public ActionResult<Response<CM>> GetSingleContainerMovement(string CONTAINER_NO)
         {
