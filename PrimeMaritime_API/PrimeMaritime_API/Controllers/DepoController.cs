@@ -38,28 +38,34 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_depoService.InsertMRRequest(request));
         }
 
+        [HttpPost("InsertNewMRRequest")]
+        public ActionResult<Response<string>> InsertNewMRRequest(List<MR_LIST> request)
+        {
+            return Ok(_depoService.InsertNewMRRequest(request));
+        }
+
         [HttpGet("GetMNRList")]
         public ActionResult<Response<List<MNR_LIST>>> GetMNRList(string OPERATION, string DEPO_CODE)
         {
             return Ok(JsonConvert.SerializeObject(_depoService.GetMNRList(OPERATION, DEPO_CODE)));
         }
 
-        [HttpGet("GetMNRDescription")]
-        public ActionResult<Response<string>> GetMNRDescription(string IST_CHARACTER, string IIND_CHARACTER, string IIIRD_CHARACTER, string IVTH_CHARACTER, string COMPONENT_CODE, string DAMAGE_CODE, string REPAIR_CODE)
-        {
-            return Ok(JsonConvert.SerializeObject(_depoService.GetMNRDesc(IST_CHARACTER, IIND_CHARACTER, IIIRD_CHARACTER, IVTH_CHARACTER, COMPONENT_CODE, DAMAGE_CODE, REPAIR_CODE)));
-        }
-
         [HttpGet("GetMRDetails")]
-        public ActionResult<Response<List<MR_LIST>>> GetMRDetails(string MR_NO)
+        public ActionResult<Response<List<MR_LIST>>> GetMRDetails(string OPERATION, string MR_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_depoService.GetMNRDetails(MR_NO)));
+            return Ok(JsonConvert.SerializeObject(_depoService.GetMNRDetails(OPERATION, MR_NO)));
         }
 
         [HttpPost("ApproveRate")]
         public ActionResult<Response<CommonResponse>> ApproveRate(List<MR_LIST> request)
         {
             return Ok(_depoService.ApproveRate(request));
+        }
+
+        [HttpPost("DeleteMRequest")]
+        public ActionResult<Response<string>> DeleteMRequest(string MR_NO, string LOCATION)
+        {
+            return Ok(_depoService.DeleteMRRequest(MR_NO, LOCATION));
         }
 
         [HttpPost("UploadMNRFiles")]
@@ -87,6 +93,65 @@ namespace PrimeMaritime_API.Controllers
             return Ok();
         }
 
+        //[HttpGet("GetImages")]
+        //public IActionResult GetImages()
+        //{
+        //    try
+        //    {
+        //        var folderName = Path.Combine("Uploads", "MNRFiles");
+        //        var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+        //        var photos = Directory.EnumerateFiles(pathToRead)
+        //            .Where(IsAPhotoFile)
+        //            .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)));
+        //        return Ok(new { photos });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"Internal server error: {ex}");
+        //    }
+        //}
+        //private bool IsAPhotoFile(string fileName)
+        //{
+        //    return fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
+        //        || fileName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+        //        || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
+        //}
+
+        [HttpGet("GetImage")]
+        public ActionResult<Response<List<string>>> GetImage(string MR_NO)
+        {
+            string[] array1 = Directory.GetFiles("Uploads\\MNRFiles");
+            List<string> array2 = new List<string>();
+            Response<List<string>> response = new Response<List<string>>();
+
+            // Get list of files.
+            List<string> filesList = array1.ToList();
+
+            foreach (var file in filesList)
+            {
+                if (file.Contains(MR_NO))
+                {
+                    array2.Add(file);
+
+                }
+            }
+
+            if (array2.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = array2;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+            return response;
+        }
+
         //[HttpGet("GetImage")]
         //public HttpResponseMessage GetImage(string fileName)
         //{
@@ -104,6 +169,8 @@ namespace PrimeMaritime_API.Controllers
         //    response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/*");
         //    return response;
         //}
+
+
 
     }
 }
