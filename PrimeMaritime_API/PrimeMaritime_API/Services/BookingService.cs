@@ -105,6 +105,20 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<CommonResponse> InsertVoyage(VOYAGE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BookingRepo>.Instance.InsertVoyage(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Voyage Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
         public Response<string> ValidateSlots(string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

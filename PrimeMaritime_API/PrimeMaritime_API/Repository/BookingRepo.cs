@@ -120,5 +120,30 @@ namespace PrimeMaritime_API.Repository
            
             return validateSlot;
         }
+
+        public void InsertVoyage(string connstring, VOYAGE request)
+        {
+            SqlParameter[] parameters =
+           {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_VOYAGE" },
+              new SqlParameter("@VESSEL_NAME", SqlDbType.VarChar,255) { Value = request.VESSEL_NAME },
+              new SqlParameter("@VOYAGE_NO", SqlDbType.VarChar,50) { Value = request.VOYAGE_NO },
+              new SqlParameter("@ATA", SqlDbType.DateTime) { Value = request.ATA },
+              new SqlParameter("@ATD", SqlDbType.DateTime) { Value = request.ATD },
+              new SqlParameter("@ETA", SqlDbType.DateTime) { Value = request.ETA },
+              new SqlParameter("@ETD", SqlDbType.DateTime) { Value = request.ETD },
+              new SqlParameter("@IMM_CURR", SqlDbType.VarChar,50) { Value = request.IMM_CURR },
+              new SqlParameter("@IMM_CURR_RATE", SqlDbType.Decimal) { Value = request.IMM_CURR_RATE },
+              new SqlParameter("@EXP_CURR", SqlDbType.VarChar,50) { Value = request.EXP_CURR },
+              new SqlParameter("@EXP_CURR_RATE", SqlDbType.Decimal) { Value = request.EXP_CURR_RATE },
+              new SqlParameter("@TERMINAL_CODE", SqlDbType.VarChar,100) { Value = request.TERMINAL_CODE },
+              new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar,255) { Value = request.SERVICE_NAME },
+              new SqlParameter("@VIA_NO", SqlDbType.VarChar,100) { Value = request.VIA_NO },
+              new SqlParameter("@PORT_CODE", SqlDbType.VarChar,100) { Value = request.PORT_CODE },
+              new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = request.CREATED_BY },
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
+        }
     }
 }

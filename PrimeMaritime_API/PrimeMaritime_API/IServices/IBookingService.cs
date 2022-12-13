@@ -15,5 +15,7 @@ namespace PrimeMaritime_API.IServices
         Response<List<BookingList>> GetBookingList(string AgentID, string BOOKING_NO);
         Response<BookingDetails> GetBookingDetails(string AgentID, string BOOKING_NO);
         Response<string> ValidateSlots(string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR);
+        Response<CommonResponse> InsertVoyage(VOYAGE request);
+
     }
 }
