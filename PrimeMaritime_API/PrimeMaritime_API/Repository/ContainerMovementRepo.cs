@@ -54,9 +54,8 @@ namespace PrimeMaritime_API.Repository
                         }
                         i.ACTIVITY_DATE = request.ACTIVITY_DATE;
                         i.LOCATION = request.LOCATION;
+                        i.CURRENT_LOCATION = request.CURRENT_LOCATION;
                         i.STATUS = request.STATUS;
-                        //i.AGENT_CODE = request.AGENT_CODE;
-                        //i.DEPO_CODE = request.DEPO_CODE;
                         if (request.AGENT_CODE != "")
                         {
                             i.AGENT_CODE = request.AGENT_CODE;
@@ -69,7 +68,7 @@ namespace PrimeMaritime_API.Repository
                         //i.CREATED_BY = request.CREATED_BY;
                     }
 
-                    string[] columns = new string[11];
+                    string[] columns = new string[12];
                     columns[0] = "BOOKING_NO";
                     columns[1] = "CRO_NO";
                     columns[2] = "CONTAINER_NO";
@@ -77,10 +76,11 @@ namespace PrimeMaritime_API.Repository
                     columns[4] = "PREV_ACTIVITY";
                     columns[5] = "ACTIVITY_DATE";
                     columns[6] = "LOCATION";
-                    columns[7] = "STATUS";
-                    columns[8] = "AGENT_CODE";
-                    columns[9] = "DEPO_CODE";
-                    columns[10] = "CREATED_BY";
+                    columns[7] = "CURRENT_LOCATION";
+                    columns[8] = "STATUS";
+                    columns[9] = "AGENT_CODE";
+                    columns[10] = "DEPO_CODE";
+                    columns[11] = "CREATED_BY";
 
                     SqlHelper.UpdateCMData<CM>(containerMovementList, "TB_CONTAINER_MOVEMENT", connstring, columns);
                 }
@@ -96,6 +96,7 @@ namespace PrimeMaritime_API.Repository
                       new SqlParameter("@PREV_ACTIVITY", SqlDbType.VarChar, 50) { Value = request.PREV_ACTIVITY },
                       new SqlParameter("@ACTIVITY_DATE", SqlDbType.DateTime) { Value = request.ACTIVITY_DATE },
                       new SqlParameter("@LOCATION", SqlDbType.VarChar, 100) { Value = request.LOCATION },
+                      new SqlParameter("@CURRENT_LOCATION", SqlDbType.VarChar, 100) { Value = request.CURRENT_LOCATION },
                       new SqlParameter("@STATUS", SqlDbType.VarChar,50) { Value = request.STATUS },
                       new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = request.AGENT_CODE },
                       new SqlParameter("@DEPO_CODE", SqlDbType.VarChar, 20) { Value = request.DEPO_CODE },
@@ -119,6 +120,7 @@ namespace PrimeMaritime_API.Repository
                     tbl.Columns.Add(new DataColumn("PREV_ACTIVITY", typeof(string)));
                     tbl.Columns.Add(new DataColumn("ACTIVITY_DATE", typeof(DateTime)));
                     tbl.Columns.Add(new DataColumn("LOCATION", typeof(string)));
+                    tbl.Columns.Add(new DataColumn("CURRENT_LOCATION", typeof(string)));
                     tbl.Columns.Add(new DataColumn("STATUS", typeof(string)));
                     tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
                     tbl.Columns.Add(new DataColumn("DEPO_CODE", typeof(string)));
@@ -135,6 +137,7 @@ namespace PrimeMaritime_API.Repository
                         dr["PREV_ACTIVITY"] = i.PREV_ACTIVITY;
                         dr["ACTIVITY_DATE"] = i.ACTIVITY_DATE;
                         dr["LOCATION"] = i.LOCATION;
+                        dr["CURRENT_LOCATION"] = i.CURRENT_LOCATION;
                         dr["STATUS"] = i.STATUS;
                         dr["AGENT_CODE"] = i.AGENT_CODE;
                         dr["DEPO_CODE"] = i.DEPO_CODE;
@@ -143,7 +146,7 @@ namespace PrimeMaritime_API.Repository
                         tbl.Rows.Add(dr);
                     }
 
-                    string[] columns = new string[11];
+                    string[] columns = new string[12];
                     columns[0] = "BOOKING_NO";
                     columns[1] = "CRO_NO";
                     columns[2] = "CONTAINER_NO";
@@ -151,10 +154,11 @@ namespace PrimeMaritime_API.Repository
                     columns[4] = "PREV_ACTIVITY";
                     columns[5] = "ACTIVITY_DATE";
                     columns[6] = "LOCATION";
-                    columns[7] = "STATUS";
-                    columns[8] = "AGENT_CODE";
-                    columns[9] = "DEPO_CODE";
-                    columns[10] = "CREATED_BY";
+                    columns[7] = "CURRENT_LOCATION";
+                    columns[8] = "STATUS";
+                    columns[9] = "AGENT_CODE";
+                    columns[10] = "DEPO_CODE";
+                    columns[11] = "CREATED_BY";
 
                     SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER_MOVEMENT", columns);
 
@@ -164,18 +168,16 @@ namespace PrimeMaritime_API.Repository
                     //No need to bind other list properties at backend
                     foreach (var i in request.CONTAINER_MOVEMENT_LIST)
                     {
-                        //i.BOOKING_NO = request.BOOKING_NO;
-                        //i.CRO_NO = request.CRO_NO;
-                        //i.AGENT_CODE = request.AGENT_CODE;
                         if (request.DEPO_CODE != "")
                         {
                             i.DEPO_CODE = request.DEPO_CODE;
                         }
+                        i.CURRENT_LOCATION = request.CURRENT_LOCATION;
                         //Commented created by in update and allow only in insert
                         //i.CREATED_BY = request.CREATED_BY;
                     }
 
-                    string[] columns = new string[11];
+                    string[] columns = new string[12];
                     columns[0] = "BOOKING_NO";
                     columns[1] = "CRO_NO";
                     columns[2] = "CONTAINER_NO";
@@ -183,10 +185,11 @@ namespace PrimeMaritime_API.Repository
                     columns[4] = "PREV_ACTIVITY";
                     columns[5] = "ACTIVITY_DATE";
                     columns[6] = "LOCATION";
-                    columns[7] = "STATUS";
-                    columns[8] = "AGENT_CODE";
-                    columns[9] = "DEPO_CODE";
-                    columns[10] = "CREATED_BY";
+                    columns[7] = "CURRENT_LOCATION";
+                    columns[8] = "STATUS";
+                    columns[9] = "AGENT_CODE";
+                    columns[10] = "DEPO_CODE";
+                    columns[11] = "CREATED_BY";
 
                     SqlHelper.UpdateCMData<CM>(request.CONTAINER_MOVEMENT_LIST, "TB_CONTAINER_MOVEMENT", connstring, columns);
                 }
@@ -251,7 +254,27 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public List<CM> GetCMAvailable(string connstring, string STATUS, string CURRENT_LOCATION)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CM_AVAILABLE" },
+                    new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
+                    new SqlParameter("@CURRENT_LOCATION", SqlDbType.VarChar, 100) { Value = CURRENT_LOCATION }
+                };
 
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+                return containerList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
         public CM GetSingleContainerMovement(string connstring, string CONTAINER_NO)
