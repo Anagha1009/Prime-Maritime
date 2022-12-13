@@ -112,7 +112,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(BOOKING_NO varchar(100),CRO_NO varchar(100),CONTAINER_NO varchar(100),ACTIVITY varchar(50),PREV_ACTIVITY varchar(50),ACTIVITY_DATE datetime,LOCATION varchar(100),STATUS varchar(50),AGENT_CODE varchar(20),DEPO_CODE varchar(20)," +
+                        command.CommandText = "CREATE TABLE #TmpTable(BOOKING_NO varchar(100),CRO_NO varchar(100),CONTAINER_NO varchar(100),ACTIVITY varchar(50),PREV_ACTIVITY varchar(50),ACTIVITY_DATE datetime,LOCATION varchar(100),CURRENT_LOCATION varchar(100),STATUS varchar(50),AGENT_CODE varchar(20),DEPO_CODE varchar(20)," +
                             "CREATED_BY varchar(255))";
                         command.ExecuteNonQuery();
 
@@ -131,7 +131,7 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET BOOKING_NO = Temp.BOOKING_NO,CRO_NO = Temp.CRO_NO,CONTAINER_NO= Temp.CONTAINER_NO,ACTIVITY= Temp.ACTIVITY,PREV_ACTIVITY= Temp.PREV_ACTIVITY,ACTIVITY_DATE= Temp.ACTIVITY_DATE,LOCATION= Temp.LOCATION,STATUS= Temp.STATUS,AGENT_CODE= Temp.AGENT_CODE,DEPO_CODE= Temp.DEPO_CODE," +
+                        command.CommandText = "UPDATE T SET BOOKING_NO = Temp.BOOKING_NO,CRO_NO = Temp.CRO_NO,CONTAINER_NO= Temp.CONTAINER_NO,ACTIVITY= Temp.ACTIVITY,PREV_ACTIVITY= Temp.PREV_ACTIVITY,ACTIVITY_DATE= Temp.ACTIVITY_DATE,LOCATION= Temp.LOCATION,CURRENT_LOCATION= Temp.CURRENT_LOCATION,STATUS= Temp.STATUS,AGENT_CODE= Temp.AGENT_CODE,DEPO_CODE= Temp.DEPO_CODE," +
                             "CREATED_BY= Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
@@ -402,7 +402,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(MR_NO VARCHAR(100), LOCATION VARCHAR(100), APPROVED_RATE decimal(18,2))";
+                        command.CommandText = "CREATE TABLE #TmpTable(MR_NO VARCHAR(100), LOCATION VARCHAR(100), TAX decimal(18,2), FINAL_TOTAL decimal(18,2), REMARKS VARCHAR(MAX))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -420,7 +420,7 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.MR_NO = Temp.MR_NO AND T.LOCATION = Temp.LOCATION; DROP TABLE #TmpTable;";
+                        command.CommandText = "UPDATE T SET TAX = Temp.TAX, FINAL_TOTAL = Temp.FINAL_TOTAL, REMARKS = Temp.REMARKS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.MR_NO = Temp.MR_NO AND T.LOCATION = Temp.LOCATION; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
                     catch (Exception ex)

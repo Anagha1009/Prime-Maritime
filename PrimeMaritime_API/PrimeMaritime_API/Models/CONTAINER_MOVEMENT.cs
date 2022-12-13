@@ -17,6 +17,8 @@ namespace PrimeMaritime_API.Models
 		public DateTime ACTIVITY_DATE { get; set; }
 		
 		public string LOCATION { get; set; }
+
+		public string CURRENT_LOCATION { get; set; }
 		public string STATUS { get; set; }
 		public string AGENT_CODE { get; set; }
 		public string DEPO_CODE { get; set; }
@@ -36,6 +38,7 @@ namespace PrimeMaritime_API.Models
 		public string PREV_ACTIVITY { get; set; }
 		public DateTime ACTIVITY_DATE { get; set; }
 		public string LOCATION { get; set; }
+		public string CURRENT_LOCATION { get; set; }
 		public string STATUS { get; set; }
 		public string AGENT_CODE { get; set; }
 		public string DEPO_CODE { get; set; }
@@ -56,6 +59,8 @@ namespace PrimeMaritime_API.Models
 		public string PREV_ACT_NAME { get; set; }
 		public DateTime ACTIVITY_DATE { get; set; }
 		public string LOCATION { get; set; }
+
+		public string CURRENT_LOCATION { get; set; }
 		public string STATUS { get; set; }
 		public string AGENT_CODE { get; set; }
 		public string DEPO_CODE { get; set; }
@@ -66,24 +71,5 @@ namespace PrimeMaritime_API.Models
 
 	}
 
-	////frontend containerlist class
-	//public class CM_FList
-	//{
-	//	public int ID { get; set; }
-	//	public string BOOKING_NO { get; set; }
-	//	public string CRO_NO { get; set; }
-	//	public string CONTAINER_NO { get; set; }
-	//	public string ACTIVITY { get; set; }
-	//	public string PREV_ACTIVITY { get; set; }
-	//	public DateTime ACTIVITY_DATE { get; set; }
-	//	public string LOCATION { get; set; }
-	//	public string STATUS { get; set; }
-	//	public string AGENT_CODE { get; set; }
-	//	public string DEPO_CODE { get; set; }
-	//	public string CREATED_BY { get; set; }
-
-	//	public List<string> NEXT_ACTIVITY_LIST { get; set; }
-
-	//}
 
 }
