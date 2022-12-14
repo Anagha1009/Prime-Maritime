@@ -13,49 +13,19 @@ namespace PrimeMaritime_API.Repository
     public class DetentionRepo
     {
 
-        public void InsertDetention(string connstring, DETENTION_REQUEST request)
-        {
-            SqlParameter[] parameters =
-            {
-              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_DETENTION_REQUEST" },
-              new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = request.CONTAINER_NO},
-              new SqlParameter("@DOCUMENT_TYPE", SqlDbType.VarChar, 50) { Value = request.DOCUMENT_TYPE },
-              new SqlParameter("@DOCUMENT_NO", SqlDbType.VarChar, 255) { Value = request.DOCUMENT_NO },
-              new SqlParameter("@SHIPPER_NAME", SqlDbType.VarChar, 50) { Value = request.SHIPPER_NAME },
-              new SqlParameter("@CLEARING_PARTY", SqlDbType.VarChar, 255) { Value = request.CLEARING_PARTY },
-              new SqlParameter("@DETENTION_DAYS", SqlDbType.Int) { Value = request.DETENTION_DAYS },
-              new SqlParameter("@DETENTION", SqlDbType.Decimal) { Value = request.DETENTION},
-              new SqlParameter("@CURRENCY", SqlDbType.VarChar, 50) { Value = request.CURRENCY },
-              new SqlParameter("@TARRIF_ID", SqlDbType.Int) { Value = request.TARRIF_ID },
-              new SqlParameter("@WAIVER_REQUESTED", SqlDbType.Decimal) { Value = request.WAIVER_REQUESTED },
-              new SqlParameter("@WAIVER_APPROVED", SqlDbType.Decimal) { Value = request.WAIVER_APPROVED },
-              new SqlParameter("@AGENT_REMARKS", SqlDbType.VarChar,255) { Value = request.AGENT_REMARKS },
-              new SqlParameter("@PRINCIPAL_REMARKS", SqlDbType.VarChar,255) { Value = request.PRINCIPAL_REMARKS },
-              new SqlParameter("@STATUS", SqlDbType.VarChar,255) { Value = request.STATUS },
-              new SqlParameter("@MODIFIED_ON", SqlDbType.DateTime) { Value = request.MODIFIED_ON },
-              new SqlParameter("@MODIFIED_BY", SqlDbType.VarChar,255) { Value = request.MODIFIED_BY },
-              new SqlParameter("@CREATED_ON", SqlDbType.DateTime) { Value = request.CREATED_ON },
-              new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = request.CREATED_BY },
-            };
 
-            var ID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_DETENTION_REQUEST", parameters);
-
-
-        }
-
-        public List<DETENTION_REQUEST> GetDetentionList(string dbConn, string AGENT_CODE)
+        public List<DETENTION_WAIVER_REQUEST> GetDetentionList(string dbConn, string DO_NO)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DETENTION_REQUEST" },
-                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE }
-
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_DETENTION_WAIVER_BY_DO_NO" },
+                   new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = DO_NO},
                 };
 
-                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_DETENTION_REQUEST", parameters);
-                List<DETENTION_REQUEST> detention_Request = SqlHelper.CreateListFromTable<DETENTION_REQUEST>(dataTable);
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_DETENTION", parameters);
+                List<DETENTION_WAIVER_REQUEST> detention_Request = SqlHelper.CreateListFromTable<DETENTION_WAIVER_REQUEST>(dataTable);
 
                 return detention_Request;
             }
@@ -66,28 +36,60 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        //public List<DETENTION_REQUEST> GET_DETAILS_BY_CONTAINER_NO(string dbConn, string CONTAINER_NO)
-        //    {
-        //        try
-        //        {
-        //            SqlParameter[] parameters =
-        //            {
-        //          new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DETAILS_BY_CONTAINER_NO" },
-        //          new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 50) { Value = CONTAINER_NO }
+        public void InsertDetention(string connstr, DETENTION request)
+        {
+            try
+            {
+                DataTable tbl = new DataTable();
+                tbl.Columns.Add(new DataColumn("DO_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("LOCATION", typeof(string)));
+                tbl.Columns.Add(new DataColumn("IMPORTER", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CLEARING_PARTY", typeof(string)));
+                tbl.Columns.Add(new DataColumn("DETENTION_DAYS", typeof(int)));
+                tbl.Columns.Add(new DataColumn("DETENTION_RATE", typeof(decimal)));
+                tbl.Columns.Add(new DataColumn("CURRENCY", typeof(string)));
+                tbl.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
-        //        };
+                foreach (var i in request.DETENTION_LIST)
+                {
+                    DataRow dr = tbl.NewRow();
 
-        //            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_DETENTION_REQUEST", parameters);
-        //            List<DETENTION_REQUEST> detention_Request = SqlHelper.CreateListFromTable<DETENTION_REQUEST>(dataTable);
+                    dr["DO_NO"] = request.DO_NO;
+                    dr["CONTAINER_NO"] = i.CONTAINER_NO;
+                    dr["LOCATION"] = i.PORT_OF_DISCHARGE;
+                    dr["IMPORTER"] = i.CONSIGNEE;
+                    dr["CLEARING_PARTY"] = i.CLEARING_PARTY;
+                    dr["DETENTION_DAYS"] = i.DETENTION_DAYS;
+                    dr["DETENTION_RATE"] = i.DETENTION_RATE;
+                    dr["CURRENCY"] = i.CURRENCY;
+                    dr["REMARKS"] = i.REMARK;
+                    dr["CREATED_BY"] = i.CREATED_BY;
 
-        //            return detention_Request;
-        //        }
-        //        catch (Exception)
-        //        {
-        //            throw;
-        //        }
-            
-            
+                    tbl.Rows.Add(dr);
+                }
+
+                string[] columns = new string[10];
+                columns[0] = "DO_NO";
+                columns[1] = "CONTAINER_NO";
+                columns[2] = "LOCATION";
+                columns[3] = "IMPORTER";
+                columns[4] = "CLEARING_PARTY";
+                columns[5] = "DETENTION_DAYS";
+                columns[6] = "DETENTION_RATE";
+                columns[7] = "CURRENCY";
+                columns[8] = "REMARKS";
+                columns[9] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstr, tbl, "TB_DETENTION", columns);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
     }
+}
 

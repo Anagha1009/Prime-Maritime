@@ -50,6 +50,9 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("IGM_DATE"))
                 item.IGM_DATE = SqlHelper.GetDateTime(reader, "IGM_DATE");
 
+            if (reader.IsColumnExists("CLEARING_PARTY"))
+                item.CLEARING_PARTY = SqlHelper.GetNullableString(reader, "CLEARING_PARTY");
+
             if (reader.IsColumnExists("ACCEPTANCE_LOCATION"))
                 item.ACCEPTANCE_LOCATION = SqlHelper.GetNullableString(reader, "ACCEPTANCE_LOCATION");
 

@@ -15,6 +15,7 @@ namespace PrimeMaritime_API.Models
 
     public class MR_LIST
     {
+        public string MR_NO { get; set; }
         public string CONTAINER_NO { get; set; }
         public string LOCATION { get; set; }
         public string COMPONENT { get; set; }
@@ -30,5 +31,25 @@ namespace PrimeMaritime_API.Models
         public decimal LABOUR { get; set; }
         public decimal MATERIAL { get; set; }
         public decimal TOTAL { get; set; }
+        public decimal TAX { get; set; }
+        public decimal FINAL_TOTAL { get; set; }
+        public string DEPO_CODE { get; set; }
+        public string DEPO_NAME { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+        public decimal APPROVED_RATE { get; set; }
+        public string REMARKS { get; set; }
     }
+
+    public class MNR_LIST
+    {
+        public string MR_NO { get; set; }
+        public string CONTAINER_NO { get; set; }
+        public string DEPO_CODE { get; set; }
+        public string DEPO_NAME { get; set; }
+        public string STATUS { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+    }
+
 }

@@ -76,6 +76,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = request.SERVICE_NAME },
                   new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_FROM) ? null : Convert.ToDateTime(request.EFFECT_FROM) },
                   new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_TO) ? null : Convert.ToDateTime(request.EFFECT_TO)},
+                  new SqlParameter("@IS_VESSELVALIDITY",SqlDbType.Bit) {Value = request.IS_VESSELVALIDITY},
                   //new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
                   new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
                   //new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },

@@ -21,25 +21,18 @@ namespace PrimeMaritime_API.Controllers
             _detentionService = detentionService;
         }
 
+
+        [HttpGet("GetDetentionListByDO")]
+        public ActionResult<Response<List<DETENTION_WAIVER_REQUEST>>> GetDetentionListByDO(string DO_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_detentionService.GetDetentionListByDO(DO_NO)));
+        }
+
         [HttpPost("InsertDetention")]
-        public ActionResult<Response<CommonResponse>> InsertDetention(DETENTION_REQUEST request)
+        public ActionResult<Response<ACTIVITY_MAPPING>> InsertDetention(DETENTION request)
         {
             return Ok(_detentionService.InsertDetention(request));
         }
-
-        [HttpGet("GetDetentionList")]
-        public ActionResult<Response<List<DETENTION_REQUEST>>> GetDetentionList(string AGENT_CODE)
-        {
-            return Ok(JsonConvert.SerializeObject(_detentionService.GetDetentionList(AGENT_CODE)));
-        }
-
-        //[HttpGet("GET_DETAILS_BY_CONTAINER_NO")]
-        //public ActionResult<Response<List<DETENTION_REQUEST>>> GET_DETAILS_BY_CONTAINER_NO(string CONTAINER_NO)
-        //{
-        //    return Ok(JsonConvert.SerializeObject(_detentionService.GET_DETAILS_BY_CONTAINER_NO(CONTAINER_NO)));
-        //}
-
-
 
     }
 }

@@ -14,6 +14,9 @@ namespace PrimeMaritime_API.Response
         public string POD { get; set; }
         public DateTime EFFECT_FROM { get; set; }
         public DateTime EFFECT_TO { get; set; }
+        public bool IS_VESSELVALIDITY { get; set; }
+        public DateTime ETA { get; set; }
+        public DateTime ETD { get; set; }
         public string STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public int NO_OF_CONTAINERS { get; set; }

@@ -196,13 +196,14 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        public CONTAINER_MASTER GetContainerMasterDetails(string connstring, int ID)
+        public CONTAINER_MASTER GetContainerMasterDetails(string connstring, int ID, string CONTAINER_NO)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                    new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 20) { Value = CONTAINER_NO },
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_CONTAINERDETAILS" }
                 };
 
