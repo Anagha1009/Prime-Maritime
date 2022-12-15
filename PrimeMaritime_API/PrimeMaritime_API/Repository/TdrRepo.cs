@@ -41,6 +41,30 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
 
+
         }
+
+        public List<TDR> GetTdrList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_TDR_LIST" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_TDR", parameters);
+                List<TDR> tdrList = SqlHelper.CreateListFromTable<TDR>(dataTable);
+
+                return tdrList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
