@@ -34,5 +34,30 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<List<TDR>> GetTdrList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<TDR>> response = new Response<List<TDR>>();
+            var data = DbClientFactory<TdrRepo>.Instance.GetTdrList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+
     }
 }

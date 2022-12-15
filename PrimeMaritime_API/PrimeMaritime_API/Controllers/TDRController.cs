@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Response;
@@ -23,6 +24,12 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<Response<CommonResponse>> InsertTdr(TDR request)
         {
             return Ok(_tdrService.InsertTdr(request));
+        }
+
+        [HttpGet("GetTdrList")]
+        public ActionResult<Response<List<TDR>>> GET_CONTAINERLIST()
+        {
+            return Ok(JsonConvert.SerializeObject(_tdrService.GetTdrList()));
         }
 
     }
