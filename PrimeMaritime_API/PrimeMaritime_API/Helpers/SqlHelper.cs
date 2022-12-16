@@ -402,7 +402,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(MR_NO VARCHAR(100), LOCATION VARCHAR(100), APPROVED_RATE decimal(18,2))";
+                        command.CommandText = "CREATE TABLE #TmpTable(MR_NO VARCHAR(100), LOCATION VARCHAR(100), TAX decimal(18,2), FINAL_TOTAL decimal(18,2), REMARKS VARCHAR(MAX))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -420,10 +420,10 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.MR_NO = Temp.MR_NO AND T.LOCATION = Temp.LOCATION; DROP TABLE #TmpTable;";
+                        command.CommandText = "UPDATE T SET TAX = Temp.TAX, FINAL_TOTAL = Temp.FINAL_TOTAL, REMARKS = Temp.REMARKS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.MR_NO = Temp.MR_NO AND T.LOCATION = Temp.LOCATION; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         throw;
                     }

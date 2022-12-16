@@ -2561,23 +2561,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mariak\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\archanac\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "projectUniqueName": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
       "projectName": "PrimeMaritime_API",
-      "projectPath": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
-      "packagesPath": "C:\\Users\\mariak\\.nuget\\packages\\",
-      "outputPath": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
+      "projectPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "packagesPath": "C:\\Users\\archanac\\.nuget\\packages\\",
+      "outputPath": "D:\\Prime  Maritime Projects\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\mariak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\archanac\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
