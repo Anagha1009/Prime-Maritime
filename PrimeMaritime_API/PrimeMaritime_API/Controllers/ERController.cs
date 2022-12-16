@@ -28,9 +28,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertER")]
-        public ActionResult<Response<EMPTY_REPO>> InsertER(EMPTY_REPO request)
+        public ActionResult<Response<EMPTY_REPO>> InsertER(EMPTY_REPO request, bool isVessel)
         {
-            return Ok(_erService.InsertER(request));
+            return Ok(_erService.InsertER(request,isVessel));
         }
 
         [HttpGet("GetERDetails")]
