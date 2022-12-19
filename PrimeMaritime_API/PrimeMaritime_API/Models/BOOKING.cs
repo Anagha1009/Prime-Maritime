@@ -28,6 +28,8 @@ namespace PrimeMaritime_API.Models
         public int ID { get; set; }
         public int BOOKING_ID { get; set; }
         public string BOOKING_NO { get; set; }
+
+        public string REPO_NO { get; set; }
         public string SLOT_OPERATOR { get; set; }
         public int NO_OF_SLOTS { get; set; }
         public string CREATED_BY { get; set; }
