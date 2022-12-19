@@ -145,5 +145,25 @@ namespace PrimeMaritime_API.Repository
 
             SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
         }
+
+        public string GetTrackingDetail(string connstring, string BOOKING_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_TRACKING_DETAILS" },
+                new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = BOOKING_NO },
+            };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BOOKING", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
