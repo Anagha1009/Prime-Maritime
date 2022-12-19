@@ -71,6 +71,7 @@ namespace PrimeMaritime_API
             services.AddScoped<IDetentionService, DetentionService>();
             services.AddScoped<IMasterService, MasterService>();
             services.AddScoped<ILoadtlistService, LoadlistService>();
+            services.AddScoped<ISRRReportService, SRRReportService>();
             services.AddAuthentication(options =>
             {
 
