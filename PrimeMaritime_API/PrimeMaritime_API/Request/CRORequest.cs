@@ -11,6 +11,8 @@ namespace PrimeMaritime_API.Request
         public string CRO_NO { get; set; }
         public int BOOKING_ID { get; set; }
         public string BOOKING_NO { get; set; }
+
+        public string REPO_NO { get; set; }
         public string STUFFING_TYPE { get; set; }
         public string EMPTY_CONT_PCKP { get; set; }
         public string LADEN_ACPT_LOCATION { get; set; }

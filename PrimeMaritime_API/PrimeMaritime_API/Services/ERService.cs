@@ -21,11 +21,11 @@ namespace PrimeMaritime_API.Services
 
 
 
-        public Response<string> InsertER(EMPTY_REPO erRequest)
+        public Response<string> InsertER(EMPTY_REPO erRequest, bool isVessel)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<ERRepo>.Instance.InsertER(dbConn, erRequest);
+            DbClientFactory<ERRepo>.Instance.InsertER(dbConn, erRequest,isVessel);
 
             Response<string> response = new Response<string>();
             response.Succeeded = true;
