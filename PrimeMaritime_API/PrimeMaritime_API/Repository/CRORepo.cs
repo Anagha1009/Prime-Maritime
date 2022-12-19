@@ -24,6 +24,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = request.CRO_NO },
                   new SqlParameter("@BOOKING_ID", SqlDbType.Int) { Value = request.BOOKING_ID },
                   new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = request.BOOKING_NO },
+                  new SqlParameter("@REPO_NO", SqlDbType.VarChar, 100) { Value = request.REPO_NO },
                   new SqlParameter("@STUFFING_TYPE", SqlDbType.VarChar, 100) { Value = request.STUFFING_TYPE },
                   new SqlParameter("@EMPTY_CONT_PCKP", SqlDbType.VarChar, 255) { Value = request.EMPTY_CONT_PCKP },
                   new SqlParameter("@LADEN_ACPT_LOCATION", SqlDbType.VarChar, 255) { Value = request.LADEN_ACPT_LOCATION },

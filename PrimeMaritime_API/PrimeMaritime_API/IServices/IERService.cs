@@ -9,7 +9,7 @@ namespace PrimeMaritime_API.IServices
 {
     public interface IERService
     {
-        Response<string> InsertER(EMPTY_REPO doRequest);
+        Response<string> InsertER(EMPTY_REPO doRequest, bool isVessel);
 
         Response<List<EMPTY_REPO>> GetERList(string AGENT_CODE);
 
