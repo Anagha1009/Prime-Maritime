@@ -153,6 +153,7 @@ namespace PrimeMaritime_API.Repository
                 tbl1.Columns.Add(new DataColumn("STANDARD_RATE", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("STATUS", typeof(string)));
 
                 foreach (var i in request.SRR_RATES)
                 {
@@ -168,11 +169,12 @@ namespace PrimeMaritime_API.Repository
                     dr["STANDARD_RATE"] = i.STANDARD_RATE;
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["STATUS"] = "Requested";
 
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[10];
+                string[] columns1 = new string[11];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
                 columns1[2] = "CONTAINER_TYPE";
@@ -183,6 +185,7 @@ namespace PrimeMaritime_API.Repository
                 columns1[7] = "STANDARD_RATE";
                 columns1[8] = "RATE_REQUESTED";
                 columns1[9] = "CREATED_BY";
+                columns1[10] = "STATUS";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 
@@ -311,13 +314,14 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[6];
+                string[] columns = new string[7];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "APPROVED_RATE";
                 columns[3] = "CONTAINER_TYPE";
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
+                columns[6] = "CREATED_BY";
 
                 SqlHelper.UpdateSRRData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
@@ -340,13 +344,14 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[6];
+                string[] columns = new string[7];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "RATE_REQUESTED";
                 columns[3] = "CONTAINER_TYPE";
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
+                columns[6] = "CREATED_BY";
 
                 SqlHelper.UpdateSRRCounterData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
