@@ -52,5 +52,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(_bookingService.InsertVoyage(request));
         }
+
+        [HttpGet("GetTrackingDetail")]
+        public ActionResult<Response<int>> GetTrackingDetail(string BOOKING_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_bookingService.GetTrackingDetails(BOOKING_NO)));
+        }
     }
 }

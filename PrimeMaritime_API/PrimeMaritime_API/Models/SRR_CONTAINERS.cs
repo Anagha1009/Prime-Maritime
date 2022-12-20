@@ -21,5 +21,8 @@ namespace PrimeMaritime_API.Models
         public DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public DateTime UPDATED_DATE { get; set; }
+        public string CONTAINERS { get; set; }
+        public string STATUS { get; set; }
+
     }
 }

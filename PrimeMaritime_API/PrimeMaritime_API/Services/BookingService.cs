@@ -91,6 +91,21 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<int> GetTrackingDetails(string BOOKING_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            int returnNo = Convert.ToInt32(DbClientFactory<BookingRepo>.Instance.GetTrackingDetail(dbConn, BOOKING_NO));
+
+            Response<int> response = new Response<int>();
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.Data = returnNo;
+
+            return response;
+        }
+
         public Response<CommonResponse> InsertBooking(BOOKING request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -123,11 +138,11 @@ namespace PrimeMaritime_API.Services
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            string returnString = DbClientFactory<BookingRepo>.Instance.ValidateSlots(dbConn, SRR_NO, NO_OF_SLOTS,BOOKING_NO,SLOT_OPERATOR);
+            string returnString = DbClientFactory<BookingRepo>.Instance.ValidateSlots(dbConn, SRR_NO, NO_OF_SLOTS, BOOKING_NO, SLOT_OPERATOR);
 
             Response<string> response = new Response<string>();
 
-            if(returnString == "1")
+            if (returnString == "1")
             {
                 response.Succeeded = true;
                 response.ResponseMessage = "Success";
