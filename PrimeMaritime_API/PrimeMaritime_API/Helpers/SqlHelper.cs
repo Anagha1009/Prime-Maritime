@@ -161,7 +161,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), APPROVED_RATE decimal)";
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), APPROVED_RATE decimal, STATUS varchar(50), REMARKS varchar(255))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -179,7 +179,7 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
+                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE, STATUS = Temp.STATUS, REMARKS = Temp.REMARKS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
                     catch (Exception)
@@ -208,7 +208,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), RATE_REQUESTED decimal)";
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), RATE_REQUESTED decimal,STATUS varchar(50), REMARKS varchar(255))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -226,7 +226,7 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET RATE_REQUESTED = Temp.RATE_REQUESTED FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
+                        command.CommandText = "UPDATE T SET RATE_REQUESTED = Temp.RATE_REQUESTED,STATUS = Temp.STATUS, REMARKS = Temp.REMARKS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
                     catch (Exception )
