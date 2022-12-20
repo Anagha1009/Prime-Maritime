@@ -34,5 +34,11 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_detentionService.InsertDetention(request));
         }
 
+        [HttpGet("GetTotalDetentionCost")]
+        public ActionResult<Response<decimal>> GetTotalDetentionCost(string CONTAINER_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_detentionService.GetTotalDetentionCost(CONTAINER_NO)));
+        }
+
     }
 }
