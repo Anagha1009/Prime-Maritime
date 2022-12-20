@@ -22,9 +22,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetERList")]
-        public ActionResult<Response<List<EMPTY_REPO>>> GetERList(string AGENT_CODE)
+        public ActionResult<Response<List<EMPTY_REPO>>> GetERList(string AGENT_CODE,string DEPO_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_erService.GetERList(AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_erService.GetERList(AGENT_CODE, DEPO_CODE)));
         }
 
         [HttpPost("InsertER")]
@@ -34,9 +34,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetERDetails")]
-        public ActionResult<Response<EMPTY_REPO>> GetERDetails(string REPO_NO, string AGENT_CODE)
+        public ActionResult<Response<EMPTY_REPO>> GetERDetails(string REPO_NO, string AGENT_CODE, string DEPO_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_erService.GetERDetails(REPO_NO, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_erService.GetERDetails(REPO_NO, AGENT_CODE, DEPO_CODE)));
+        }
+
+        [HttpGet("GetERContainerDetails")]
+        public ActionResult<Response<ER_CONTAINER>> GetERContainerDetails(string REPO_NO, string AGENT_CODE, string DEPO_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_erService.GetERContainerDetails(REPO_NO, AGENT_CODE, DEPO_CODE)));
         }
     }
 }

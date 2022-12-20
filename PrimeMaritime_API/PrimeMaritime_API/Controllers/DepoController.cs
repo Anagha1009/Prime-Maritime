@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
@@ -21,9 +22,11 @@ namespace PrimeMaritime_API.Controllers
     public class DepoController : ControllerBase
     {
         private IDepoService _depoService;
-        public DepoController(IDepoService depoService)
+        private readonly IWebHostEnvironment _environment;
+        public DepoController(IDepoService depoService, IWebHostEnvironment environment)
         {
             _depoService = depoService;
+            _environment = environment;
         }
 
         [HttpPost("InsertContainer")]
@@ -73,7 +76,7 @@ namespace PrimeMaritime_API.Controllers
         {
             var formFile = Request.Form.Files;
 
-            string path = Path.Combine("Uploads", "MNRFiles");
+            string path = Path.Combine(_environment.ContentRootPath, "Uploads", "MNRFiles");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -83,7 +86,7 @@ namespace PrimeMaritime_API.Controllers
             foreach (IFormFile postedFile in formFile)
             {
                 string fileName = Path.GetFileName(MR_NO + "_" + postedFile.FileName);
-                using (FileStream stream = new FileStream(Path.Combine(path, fileName), FileMode.Create))
+                using (FileStream stream = new FileStream(Path.Combine(_environment.ContentRootPath, path, fileName), FileMode.Create))
                 {
                     postedFile.CopyTo(stream);
                     uploadedFiles.Add(fileName);
@@ -117,12 +120,22 @@ namespace PrimeMaritime_API.Controllers
         //        || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
         //}
 
+        //[HttpPost()]
+        //public async Task<IActionResult> GetImage(string imageName)
+        //{
+
+        //    Byte[] b;
+        //    b = await System.IO.File.ReadAllBytesAsync(Path.Combine(_environment.ContentRootPath, "Uploads", "MNRFiles" , $"{imageName}"));
+        //    return File(b, "image/png");
+        //}
+
         [HttpGet("GetImage")]
-        public ActionResult<Response<List<string>>> GetImage(string MR_NO)
+        public ActionResult<Response<List<ALL_FILE>>> GetImage(string MR_NO)
         {
-            string[] array1 = Directory.GetFiles("Uploads\\MNRFiles");
-            List<string> array2 = new List<string>();
-            Response<List<string>> response = new Response<List<string>>();
+            string[] array1 = Directory.GetFiles("Uploads/MNRFiles/");
+            //List<string> array2 = new List<string>();
+            List<ALL_FILE> imgFiles = new List<ALL_FILE>();
+            Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
 
             // Get list of files.
             List<string> filesList = array1.ToList();
@@ -131,17 +144,23 @@ namespace PrimeMaritime_API.Controllers
             {
                 if (file.Contains(MR_NO))
                 {
-                    array2.Add(file);
+                    ALL_FILE img = new ALL_FILE();
+                    long length = new System.IO.FileInfo(file).Length / 1024;
+                    img.FILE_NAME = file.Split('/')[2];
+                    img.FILE_SIZE = length.ToString() +"KB";
+                    img.FILE_PATH = file;
+
+                    imgFiles.Add(img);
 
                 }
             }
 
-            if (array2.Count > 0)
+            if (imgFiles.Count > 0)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
-                response.Data = array2;
+                response.Data = imgFiles;
             }
             else
             {
