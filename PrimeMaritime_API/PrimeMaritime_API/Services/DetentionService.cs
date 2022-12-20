@@ -45,6 +45,21 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<decimal> GetTotalDetentionCost(string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            decimal Total = Convert.ToDecimal(DbClientFactory<DetentionRepo>.Instance.GetTotalDetentionCost(dbConn, CONTAINER_NO));
+
+            Response<decimal> response = new Response<decimal>();
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.Data = Total;
+
+            return response;
+        }
+
         public Response<string> InsertDetention(DETENTION Request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
