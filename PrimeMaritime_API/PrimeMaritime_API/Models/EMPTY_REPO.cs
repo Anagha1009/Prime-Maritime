@@ -9,8 +9,15 @@ namespace PrimeMaritime_API.Models
     {
         public int ID { get; set; }
 		public string REPO_NO { get; set; }
+
+		public string CRO_NO { get; set; }
 		public string LOAD_DEPOT { get; set; }
 		public string DISCHARGE_DEPOT { get; set; }
+		public string LOAD_PORT { get; set; }
+		public string DISCHARGE_PORT { get; set; }
+
+		public string VESSEL_NAME { get; set; }
+		public string VOYAGE_NO { get; set; }
 		public DateTime MOVEMENT_DATE { get; set; }
 		public decimal LIFT_ON_CHARGE { get; set; }
 		public decimal LIFT_OFF_CHARGE { get; set; }
@@ -23,7 +30,14 @@ namespace PrimeMaritime_API.Models
 		public int STATUS { get; set; }
 		public string AGENT_CODE { get; set; }
 		public string AGENT_NAME { get; set; }
+
+		public string DEPO_CODE { get; set; }
 		public string CREATED_BY { get; set; }
+
+		public List<SLOT_DETAILS> SLOT_LIST { get; set; }
 		public List<ER_CONTAINER> CONTAINER_LIST { get; set; } = new List<ER_CONTAINER>();
+
+		public List<ER_RATES> CONTAINER_RATES { get; set; } = new List<ER_RATES>();
 	}
+
 }

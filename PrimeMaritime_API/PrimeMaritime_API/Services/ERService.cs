@@ -21,11 +21,11 @@ namespace PrimeMaritime_API.Services
 
 
 
-        public Response<string> InsertER(EMPTY_REPO erRequest)
+        public Response<string> InsertER(EMPTY_REPO erRequest, bool isVessel)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            DbClientFactory<ERRepo>.Instance.InsertER(dbConn, erRequest);
+            DbClientFactory<ERRepo>.Instance.InsertER(dbConn, erRequest,isVessel);
 
             Response<string> response = new Response<string>();
             response.Succeeded = true;
@@ -35,12 +35,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<EMPTY_REPO>> GetERList(string AGENT_CODE)
+        public Response<List<EMPTY_REPO>> GetERList(string AGENT_CODE, string DEPO_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<EMPTY_REPO>> response = new Response<List<EMPTY_REPO>>();
-            var data = DbClientFactory<ERRepo>.Instance.GetERList(dbConn, AGENT_CODE);
+            var data = DbClientFactory<ERRepo>.Instance.GetERList(dbConn, AGENT_CODE, DEPO_CODE);
 
             if (data.Count > 0)
             {
@@ -59,7 +59,7 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<EMPTY_REPO> GetERDetails(string REPO_NO, string AGENT_CODE)
+        public Response<EMPTY_REPO> GetERDetails(string REPO_NO, string AGENT_CODE, string DEPO_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -73,9 +73,33 @@ namespace PrimeMaritime_API.Services
             }
 
 
-            var data = DbClientFactory<ERRepo>.Instance.GetERDetails(dbConn, REPO_NO, AGENT_CODE);
+            var data = DbClientFactory<ERRepo>.Instance.GetERDetails(dbConn, REPO_NO, AGENT_CODE, DEPO_CODE);
 
             if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<List<ER_CONTAINER>> GetERContainerDetails(string REPO_NO, string AGENT_CODE, string DEPO_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<ER_CONTAINER>> response = new Response<List<ER_CONTAINER>>();
+            var data = DbClientFactory<ERRepo>.Instance.GetERContainerDetails(dbConn, REPO_NO,AGENT_CODE, DEPO_CODE);
+
+            if (data.Count > 0)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;

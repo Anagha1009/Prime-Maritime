@@ -11,6 +11,8 @@ namespace PrimeMaritime_API.Models
         public string CRO_NO { get; set; }
         public int BOOKING_ID { get; set; }
         public string BOOKING_NO { get; set; }
+
+        public string REPO_NO { get; set; }
         public int SRR_ID { get; set; }
         public string SRR_NO { get; set; }
         public string POL { get; set; }

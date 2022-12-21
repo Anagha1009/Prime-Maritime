@@ -18,6 +18,20 @@ namespace PrimeMaritime_API.Models
         public string MEASUREMENT { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
+
+        public string DEPO_CODE { get; set; }
+        public string CREATED_BY { get; set; }
+    }
+
+    public class ER_RATES
+    {
+        public int ID { get; set; }
+        public string REPO_NO { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string CURRENCY { get; set; }
+        public decimal STANDARD_RATE { get; set; }
+        public string CHARGE_TYPE { get; set; }
+        public string REMARKS { get; set; }
         public string CREATED_BY { get; set; }
     }
 }

@@ -13,6 +13,6 @@ namespace PrimeMaritime_API.IServices
     {
         Response<List<DETENTION_WAIVER_REQUEST>> GetDetentionListByDO(string DO_NO);
         Response<string> InsertDetention(DETENTION Request);
-
+        Response<decimal> GetTotalDetentionCost(string CONTAINER_NO);
     }
 }
