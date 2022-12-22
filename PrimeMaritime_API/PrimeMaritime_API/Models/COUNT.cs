@@ -12,5 +12,9 @@ namespace PrimeMaritime_API.Models
         public int BOOKING_COUNT { get; set; }
 
         public int CRO_COUNT { get; set; }
+
+        public int BL_COUNT { get; set; }
+
+        public int DO_COUNT { get; set; }
     }
 }

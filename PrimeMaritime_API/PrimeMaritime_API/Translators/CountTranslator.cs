@@ -28,7 +28,14 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("CRO_COUNT"))
                 item.CRO_COUNT = SqlHelper.GetNullableInt32(reader, "CRO_COUNT");
 
-           
+            if (reader.IsColumnExists("BL_COUNT"))
+                item.CRO_COUNT = SqlHelper.GetNullableInt32(reader, "BL_COUNT");
+
+            if (reader.IsColumnExists("DO_COUNT"))
+                item.CRO_COUNT = SqlHelper.GetNullableInt32(reader, "DO_COUNT");
+
+
+
             return item;
         }
     }
