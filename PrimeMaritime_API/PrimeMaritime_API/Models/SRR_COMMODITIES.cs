@@ -15,12 +15,16 @@ namespace PrimeMaritime_API.Models
         public double WIDTH { get; set; }
         public double HEIGHT { get; set; }
         public double WEIGHT { get; set; }
+        public string WEIGHT_UNIT { get; set; }
         public string COMMODITY_TYPE { get; set; }
         public string IMO_CLASS { get; set; }
         public string UN_NO { get; set; }
         public string HAZ_APPROVAL_REF { get; set; }
         public string FLASH_POINT { get; set; }
         public string CAS_NO { get; set; }
+        public decimal TEMPERATURE { get; set; }
+        public decimal VENTILATION { get; set; }
+        public decimal HUMIDITY { get; set; }
         public string REMARKS { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
