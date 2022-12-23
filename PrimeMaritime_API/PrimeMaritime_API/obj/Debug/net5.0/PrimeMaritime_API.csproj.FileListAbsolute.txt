@@ -247,6 +247,8 @@ D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_AP
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
 D:\Prime Maritime Projects\Prime-Maritime API\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
+D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CoreCompileInputs.cache
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\IdentityModel.dll
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.Development.json
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\appsettings.json
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\PrimeMaritime_API.exe
@@ -287,7 +289,6 @@ D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\o
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
-D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.CoreCompileInputs.cache
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cs
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.MvcApplicationPartsAssemblyInfo.cache
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\staticwebassets\PrimeMaritime_API.StaticWebAssets.Manifest.cache
@@ -299,4 +300,3 @@ D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\o
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\ref\PrimeMaritime_API.dll
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.pdb
 D:\Prime  Maritime Projects\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.genruntimeconfig.cache
-D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\IdentityModel.dll
