@@ -197,6 +197,7 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("WEIGHT", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("WEIGHT_UNIT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
@@ -204,6 +205,9 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("TEMPERATURE", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("VENTILATION", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("HUMIDITY", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
                 foreach (var i in request.SRR_COMMODITIES)
@@ -217,6 +221,7 @@ namespace PrimeMaritime_API.Repository
                     dr["WIDTH"] = i.WIDTH;
                     dr["HEIGHT"] = i.HEIGHT;
                     dr["WEIGHT"] = i.WEIGHT;
+                    dr["WEIGHT_UNIT"] = i.WEIGHT_UNIT;
                     dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
                     dr["IMO_CLASS"] = i.IMO_CLASS;
                     dr["UN_NO"] = i.UN_NO;
@@ -225,11 +230,14 @@ namespace PrimeMaritime_API.Repository
                     dr["CAS_NO"] = i.CAS_NO;
                     dr["REMARKS"] = i.REMARKS;
                     dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["TEMPERATURE"] = i.TEMPERATURE;
+                    dr["VENTILATION"] = i.VENTILATION;
+                    dr["HUMIDITY"] = i.HUMIDITY;
 
                     tbl2.Rows.Add(dr);
                 }
 
-                string[] columns2 = new string[15];
+                string[] columns2 = new string[19];
                 columns2[0] = "SRR_ID";
                 columns2[1] = "SRR_NO";
                 columns2[2] = "COMMODITY_NAME";
@@ -245,6 +253,10 @@ namespace PrimeMaritime_API.Repository
                 columns2[12] = "CAS_NO";
                 columns2[13] = "REMARKS";
                 columns2[14] = "CREATED_BY";
+                columns2[15] = "WEIGHT_UNIT";
+                columns2[16] = "TEMPERATURE";
+                columns2[17] = "VENTILATION";
+                columns2[18] = "HUMIDITY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
 
