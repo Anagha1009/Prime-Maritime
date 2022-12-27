@@ -11,6 +11,8 @@ namespace PrimeMaritime_API.Models
 		public string REPO_NO { get; set; }
 
 		public string CRO_NO { get; set; }
+
+		public DateTime CRO_VALIDITY_DATE { get; set; }
 		public string LOAD_DEPOT { get; set; }
 		public string DISCHARGE_DEPOT { get; set; }
 		public string LOAD_PORT { get; set; }

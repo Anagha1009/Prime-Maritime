@@ -26,6 +26,18 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
         }
 
+        public DataSet GetRates(string connstring, string POL, string POD)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_RATES" },
+                new SqlParameter("@POL", SqlDbType.VarChar, 20) { Value = POL },
+                new SqlParameter("@POD", SqlDbType.VarChar, 20) { Value = POD },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
+        }
+
         public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
         {
             return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
@@ -153,6 +165,7 @@ namespace PrimeMaritime_API.Repository
                 tbl1.Columns.Add(new DataColumn("STANDARD_RATE", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("STATUS", typeof(string)));
 
                 foreach (var i in request.SRR_RATES)
                 {
@@ -168,11 +181,12 @@ namespace PrimeMaritime_API.Repository
                     dr["STANDARD_RATE"] = i.STANDARD_RATE;
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["STATUS"] = "Requested";
 
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[10];
+                string[] columns1 = new string[11];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
                 columns1[2] = "CONTAINER_TYPE";
@@ -183,6 +197,7 @@ namespace PrimeMaritime_API.Repository
                 columns1[7] = "STANDARD_RATE";
                 columns1[8] = "RATE_REQUESTED";
                 columns1[9] = "CREATED_BY";
+                columns1[10] = "STATUS";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 
@@ -194,6 +209,7 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("WEIGHT", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("WEIGHT_UNIT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
@@ -201,6 +217,9 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("TEMPERATURE", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("VENTILATION", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("HUMIDITY", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
                 foreach (var i in request.SRR_COMMODITIES)
@@ -214,6 +233,7 @@ namespace PrimeMaritime_API.Repository
                     dr["WIDTH"] = i.WIDTH;
                     dr["HEIGHT"] = i.HEIGHT;
                     dr["WEIGHT"] = i.WEIGHT;
+                    dr["WEIGHT_UNIT"] = i.WEIGHT_UNIT;
                     dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
                     dr["IMO_CLASS"] = i.IMO_CLASS;
                     dr["UN_NO"] = i.UN_NO;
@@ -222,11 +242,14 @@ namespace PrimeMaritime_API.Repository
                     dr["CAS_NO"] = i.CAS_NO;
                     dr["REMARKS"] = i.REMARKS;
                     dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["TEMPERATURE"] = i.TEMPERATURE;
+                    dr["VENTILATION"] = i.VENTILATION;
+                    dr["HUMIDITY"] = i.HUMIDITY;
 
                     tbl2.Rows.Add(dr);
                 }
 
-                string[] columns2 = new string[15];
+                string[] columns2 = new string[19];
                 columns2[0] = "SRR_ID";
                 columns2[1] = "SRR_NO";
                 columns2[2] = "COMMODITY_NAME";
@@ -242,6 +265,10 @@ namespace PrimeMaritime_API.Repository
                 columns2[12] = "CAS_NO";
                 columns2[13] = "REMARKS";
                 columns2[14] = "CREATED_BY";
+                columns2[15] = "WEIGHT_UNIT";
+                columns2[16] = "TEMPERATURE";
+                columns2[17] = "VENTILATION";
+                columns2[18] = "HUMIDITY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
 
@@ -311,13 +338,14 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[6];
+                string[] columns = new string[7];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "APPROVED_RATE";
                 columns[3] = "CONTAINER_TYPE";
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
+                columns[6] = "CREATED_BY";
 
                 SqlHelper.UpdateSRRData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
@@ -340,13 +368,14 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[6];
+                string[] columns = new string[7];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "RATE_REQUESTED";
                 columns[3] = "CONTAINER_TYPE";
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
+                columns[6] = "CREATED_BY";
 
                 SqlHelper.UpdateSRRCounterData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
