@@ -710,9 +710,80 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        #endregion
 
+        #region ICD MASTER"
+        public List<ICD_MASTER> GetICDMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_MST_ICD" },
 
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_MASTER", parameters);
+                List<ICD_MASTER> master = SqlHelper.CreateListFromTable<ICD_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        #endregion
+
+        #region DEPO MASTER"
+        public List<DEPO_MASTER> GetDEPOMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_MST_DEPO" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_MASTER", parameters);
+                List<DEPO_MASTER> master = SqlHelper.CreateListFromTable<DEPO_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        #endregion
+
+        #region TERMINAL MASTER"
+        public List<TERMINAL_MASTER> GetTerminalMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_MST_TERMINAL" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_MASTER", parameters);
+                List<TERMINAL_MASTER> master = SqlHelper.CreateListFromTable<TERMINAL_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        #endregion
     }
-    #endregion
+
 }
 
