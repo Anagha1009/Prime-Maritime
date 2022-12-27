@@ -2552,23 +2552,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mariak\\.nuget\\packages\\": {},
+    "C:\\Users\\prachig\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "projectUniqueName": "D:\\Prime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
       "projectName": "PrimeMaritime_API",
-      "projectPath": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
-      "packagesPath": "C:\\Users\\mariak\\.nuget\\packages\\",
-      "outputPath": "D:\\Primemaritime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
+      "projectPath": "D:\\Prime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\PrimeMaritime_API.csproj",
+      "packagesPath": "C:\\Users\\prachig\\.nuget\\packages\\",
+      "outputPath": "D:\\Prime\\Prime-Maritime\\PrimeMaritime_API\\PrimeMaritime_API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\mariak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\prachig\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2645,7 +2645,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.413\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.412\\RuntimeIdentifierGraph.json"
       }
     }
   }
