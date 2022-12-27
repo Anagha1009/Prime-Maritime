@@ -26,6 +26,18 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
         }
 
+        public DataSet GetRates(string connstring, string POL, string POD)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_RATES" },
+                new SqlParameter("@POL", SqlDbType.VarChar, 20) { Value = POL },
+                new SqlParameter("@POD", SqlDbType.VarChar, 20) { Value = POD },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
+        }
+
         public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
         {
             return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
