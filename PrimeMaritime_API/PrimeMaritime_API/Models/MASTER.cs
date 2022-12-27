@@ -145,4 +145,46 @@ namespace PrimeMaritime_API.Models
 
         public string CREATED_BY { get; set; }
     }
+
+    public class ICD_MASTER
+    {
+        public int ID { get; set; }
+        public string LOC_NAME { get; set; }
+        public string LOC_CODE { get; set; }
+        public string LOC_TYPE { get; set; }
+        public string ADDRESS { get; set; }
+        public string COUNTRY_CODE { get; set; }
+        public string ASSOCIATE_PORT_CODE { get; set; }
+        public bool LOC_TYPE_STATUS { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+
+    }
+
+    public class DEPO_MASTER
+    {
+        public int ID { get; set; }
+        public string LOC_NAME { get; set; }
+        public string LOC_CODE { get; set; }
+        public string LOC_TYPE { get; set; }
+        public string ADDRESS { get; set; }
+        public string COUNTRY_CODE { get; set; }
+        public string ASSOCIATE_PORT_CODE { get; set; }
+        public string LOC_TYPE_STATUS { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+
+    }
+
+    public class TERMINAL_MASTER
+    {
+        public int ID { get; set; }
+        public string LOC_NAME { get; set; }
+        public string LOC_CODE { get; set; }
+        public string LOC_TYPE { get; set; }
+        public string ADDRESS { get; set; }
+        public string COUNTRY_CODE { get; set; }
+        public string ASSOCIATE_PORT_CODE { get; set; }
+        public bool LOC_TYPE_STATUS { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+
+    }
 }
