@@ -23,6 +23,6 @@ namespace PrimeMaritime_API.Models
         public DateTime UPDATED_DATE { get; set; }
         public string CONTAINERS { get; set; }
         public string STATUS { get; set; }
-
+        public string COMMODITY { get; set; }
     }
 }
