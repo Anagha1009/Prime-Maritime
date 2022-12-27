@@ -16,5 +16,7 @@ namespace PrimeMaritime_API.IServices
         Response<EMPTY_REPO> GetERDetails(string REPO_NO, string AGENT_CODE ,string DEPO_CODE);
 
         Response<List<ER_CONTAINER>> GetERContainerDetails(string REPO_NO, string AGENT_CODE, string DEPO_CODE);
+
+        Response<List<ER_RATES>> GetERRateDetails(string REPO_NO);
     }
 }

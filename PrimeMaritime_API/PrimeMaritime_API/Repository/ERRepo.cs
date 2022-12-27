@@ -258,5 +258,27 @@ namespace PrimeMaritime_API.Repository
 
         }
 
+        public List<ER_RATES> GetERRateDetails(string connstring, string REPO_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_ERRATES_BY_REPO" },
+                  new SqlParameter("@REPO_NO", SqlDbType.VarChar, 100) { Value = REPO_NO }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_EMPTY_REPO", parameters);
+                List<ER_RATES> erRateList = SqlHelper.CreateListFromTable<ER_RATES>(dataTable);
+
+                return erRateList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
