@@ -85,7 +85,33 @@ namespace PrimeMaritime_API.IServices
         #endregion
 
 
+        #region "ICD MASTER"
 
+        Response<List<ICD_MASTER>> GetICDMasterList();
+
+
+        #endregion
+
+        #region "DEPO MASTER"
+
+        Response<List<DEPO_MASTER>> GetDEPOMasterList();
+
+
+        #endregion
+
+        #region "TERMINAL MASTER"
+
+        Response<List<TERMINAL_MASTER>> GetTerminalMasterList();
+
+
+        #endregion
+
+        #region "CLEARING PARTY"
+
+        Response<List<CLEARING_PARTY>> GetClearingPartyList();
+        Response<string> InsertCP(CLEARING_PARTY request);
+
+        #endregion
 
     }
 }

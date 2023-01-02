@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
-    public class MasterService: IMasterService
+    public class MasterService : IMasterService
     {
         private readonly IConfiguration _config;
 
@@ -22,7 +22,7 @@ namespace PrimeMaritime_API.Services
         }
 
         #region "PARTY MASTER"
-        public Response<CommonResponse> DeletePartyMasterDetails(string AgentID,int CUSTOMER_ID)
+        public Response<CommonResponse> DeletePartyMasterDetails(string AgentID, int CUSTOMER_ID)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -36,7 +36,7 @@ namespace PrimeMaritime_API.Services
             }
 
             DbClientFactory<MasterRepo>.Instance.DeletePartyMasterDetails(dbConn, AgentID, CUSTOMER_ID);
-          
+
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";
             response.ResponseCode = 200;
@@ -49,7 +49,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<PARTY_MASTER>> response = new Response<List<PARTY_MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterList(dbConn,Agent_code);
+            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterList(dbConn, Agent_code);
 
             if (data != null)
             {
@@ -73,7 +73,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<PARTY_MASTER> response = new Response<PARTY_MASTER>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterDetails(dbConn, Agent_code,CUSTOMER_ID);
+            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterDetails(dbConn, Agent_code, CUSTOMER_ID);
 
             if (data != null)
             {
@@ -209,14 +209,14 @@ namespace PrimeMaritime_API.Services
 
             Response<CommonResponse> response = new Response<CommonResponse>();
 
-            if ((ID ==0) || (ID == 0))
+            if ((ID == 0) || (ID == 0))
             {
                 response.ResponseCode = 500;
                 response.ResponseMessage = "Please provide ID ";
                 return response;
             }
 
-            DbClientFactory<MasterRepo>.Instance.DeleteContainerMaster(dbConn,ID);
+            DbClientFactory<MasterRepo>.Instance.DeleteContainerMaster(dbConn, ID);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";
@@ -247,7 +247,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<MASTER>> response = new Response<List<MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetMasterList(dbConn,key);
+            var data = DbClientFactory<MasterRepo>.Instance.GetMasterList(dbConn, key);
 
             if (data != null)
             {
@@ -633,6 +633,137 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        #endregion
+
+        #region "ICD MASTER"
+
+        public Response<List<ICD_MASTER>> GetICDMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<ICD_MASTER>> response = new Response<List<ICD_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetICDMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+
+        #endregion
+
+        #region "DEPO MASTER"
+
+        public Response<List<DEPO_MASTER>> GetDEPOMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<DEPO_MASTER>> response = new Response<List<DEPO_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetDEPOMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+
+
+        #endregion
+
+        #region "TERMINAL MASTER"
+
+
+        public Response<List<TERMINAL_MASTER>> GetTerminalMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<TERMINAL_MASTER>> response = new Response<List<TERMINAL_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetTerminalMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        #endregion
+
+        #region CLEARING_PARTY"
+
+        public Response<List<CLEARING_PARTY>> GetClearingPartyList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CLEARING_PARTY>> response = new Response<List<CLEARING_PARTY>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetClearingPartyList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<string> InsertCP(CLEARING_PARTY request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertCP(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        #endregion
     }
-    #endregion
 }
