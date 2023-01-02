@@ -252,6 +252,22 @@ namespace PrimeMaritime_API.Controllers
 
         #endregion
 
+        #region CLEARING_PARTY"
+
+        [HttpGet("GetClearingPartyList")]
+        public ActionResult<Response<List<CLEARING_PARTY>>> GetClearingPartyList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetClearingPartyList()));
+        }
+
+        [HttpPost("InsertCP")]
+        public ActionResult<Response<CommonResponse>> InsertCP(CLEARING_PARTY request)
+        {
+            return Ok(_masterService.InsertCP(request));
+        }
+
+        #endregion
+
 
 
 
