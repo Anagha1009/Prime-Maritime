@@ -46,7 +46,7 @@ namespace PrimeMaritime_API.Models
         public string DO_NO { get; set; }
         public string CONTAINER_NO { get; set; }
         public string CONTAINER_TYPE { get; set; }
-        public string CONTAINER_SIZE { get; set; }
+        public int CONTAINER_SIZE { get; set; }
         public string SEAL_NO { get; set; }
         public string MARKS_NOS { get; set; }
         public string DESC_OF_GOODS { get; set; }
