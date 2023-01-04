@@ -106,5 +106,12 @@ namespace PrimeMaritime_API.IServices
 
         #endregion
 
+        #region "CLEARING PARTY"
+
+        Response<List<CLEARING_PARTY>> GetClearingPartyList();
+        Response<string> InsertCP(CLEARING_PARTY request);
+
+        #endregion
+
     }
 }

@@ -722,7 +722,48 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        
+        #endregion
+
+        #region CLEARING_PARTY"
+
+        public Response<List<CLEARING_PARTY>> GetClearingPartyList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CLEARING_PARTY>> response = new Response<List<CLEARING_PARTY>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetClearingPartyList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<string> InsertCP(CLEARING_PARTY request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertCP(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
         #endregion
     }
 }

@@ -783,6 +783,60 @@ namespace PrimeMaritime_API.Repository
 
         }
         #endregion
+
+        #region CLEARING PARTY"
+        public List<CLEARING_PARTY> GetClearingPartyList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CLEARING_PARTY_LIST" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CLEARING_PARTY", parameters);
+                List<CLEARING_PARTY> master = SqlHelper.CreateListFromTable<CLEARING_PARTY>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public void InsertCP(string connstring, CLEARING_PARTY request)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+          
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_CLEARING_PARTY" },
+                  new SqlParameter("@NAME", SqlDbType.VarChar,100) { Value = request.NAME },
+                  new SqlParameter("@EMAIL_ID", SqlDbType.VarChar,255) { Value = request.EMAIL_ID },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
+                  new SqlParameter("@LOCATION", SqlDbType.VarChar,50) { Value = request.LOCATION },
+                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 100) { Value = request.CREATED_BY }
+
+                };
+
+                //SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_DO", parameters);
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CLEARING_PARTY", parameters);
+
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 
 }
