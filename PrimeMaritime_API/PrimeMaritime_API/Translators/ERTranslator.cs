@@ -32,6 +32,21 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("DISCHARGE_DEPOT"))
                 item.DISCHARGE_DEPOT = SqlHelper.GetNullableString(reader, "DISCHARGE_DEPOT");
 
+            if (reader.IsColumnExists("LOAD_PORT"))
+                item.LOAD_PORT = SqlHelper.GetNullableString(reader, "LOAD_PORT");
+
+            if (reader.IsColumnExists("DISCHARGE_PORT"))
+                item.DISCHARGE_PORT = SqlHelper.GetNullableString(reader, "DISCHARGE_PORT");
+
+            if (reader.IsColumnExists("VESSEL_NAME"))
+                item.VESSEL_NAME = SqlHelper.GetNullableString(reader, "VESSEL_NAME");
+
+            if (reader.IsColumnExists("VOYAGE_NO"))
+                item.VOYAGE_NO = SqlHelper.GetNullableString(reader, "VOYAGE_NO");
+
+            if (reader.IsColumnExists("MODE_OF_TRANSPORT"))
+                item.MODE_OF_TRANSPORT = SqlHelper.GetNullableString(reader, "MODE_OF_TRANSPORT");
+
             if (reader.IsColumnExists("MOVEMENT_DATE"))
                 item.MOVEMENT_DATE = SqlHelper.GetDateTime(reader, "MOVEMENT_DATE");
 

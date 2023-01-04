@@ -26,6 +26,18 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
         }
 
+        public DataSet GetRates(string connstring, string POL, string POD)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_RATES" },
+                new SqlParameter("@POL", SqlDbType.VarChar, 20) { Value = POL },
+                new SqlParameter("@POD", SqlDbType.VarChar, 20) { Value = POD },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
+        }
+
         public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
         {
             return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
@@ -197,6 +209,7 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("WIDTH", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("HEIGHT", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("WEIGHT", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("WEIGHT_UNIT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("COMMODITY_TYPE", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("IMO_CLASS", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("UN_NO", typeof(string)));
@@ -204,6 +217,9 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("TEMPERATURE", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("VENTILATION", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("HUMIDITY", typeof(decimal)));
                 tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
                 foreach (var i in request.SRR_COMMODITIES)
@@ -217,6 +233,7 @@ namespace PrimeMaritime_API.Repository
                     dr["WIDTH"] = i.WIDTH;
                     dr["HEIGHT"] = i.HEIGHT;
                     dr["WEIGHT"] = i.WEIGHT;
+                    dr["WEIGHT_UNIT"] = i.WEIGHT_UNIT;
                     dr["COMMODITY_TYPE"] = i.COMMODITY_TYPE;
                     dr["IMO_CLASS"] = i.IMO_CLASS;
                     dr["UN_NO"] = i.UN_NO;
@@ -225,11 +242,14 @@ namespace PrimeMaritime_API.Repository
                     dr["CAS_NO"] = i.CAS_NO;
                     dr["REMARKS"] = i.REMARKS;
                     dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["TEMPERATURE"] = i.TEMPERATURE;
+                    dr["VENTILATION"] = i.VENTILATION;
+                    dr["HUMIDITY"] = i.HUMIDITY;
 
                     tbl2.Rows.Add(dr);
                 }
 
-                string[] columns2 = new string[15];
+                string[] columns2 = new string[19];
                 columns2[0] = "SRR_ID";
                 columns2[1] = "SRR_NO";
                 columns2[2] = "COMMODITY_NAME";
@@ -245,6 +265,10 @@ namespace PrimeMaritime_API.Repository
                 columns2[12] = "CAS_NO";
                 columns2[13] = "REMARKS";
                 columns2[14] = "CREATED_BY";
+                columns2[15] = "WEIGHT_UNIT";
+                columns2[16] = "TEMPERATURE";
+                columns2[17] = "VENTILATION";
+                columns2[18] = "HUMIDITY";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_SRR_COMMODITIES", columns2);
 
@@ -256,53 +280,17 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void InsertContainer(string connstring, SRR request)
+        public void InsertContainer(string connstring, List<SRR_CONTAINERS> request)
         {
             try
             {
-                DataTable tbl = new DataTable();
-                tbl.Columns.Add(new DataColumn("SRR_ID", typeof(int)));
-                tbl.Columns.Add(new DataColumn("SRR_NO", typeof(string)));
-                tbl.Columns.Add(new DataColumn("CONTAINER_TYPE", typeof(string)));
-                tbl.Columns.Add(new DataColumn("CONTAINER_SIZE", typeof(string)));
-                tbl.Columns.Add(new DataColumn("SERVICE_MODE", typeof(string)));
-                tbl.Columns.Add(new DataColumn("POD_FREE_DAYS", typeof(string)));
-                tbl.Columns.Add(new DataColumn("POL_FREE_DAYS", typeof(string)));
-                tbl.Columns.Add(new DataColumn("IMM_VOLUME_EXPECTED", typeof(string)));
-                tbl.Columns.Add(new DataColumn("TOTAL_VOLUME_EXPECTED", typeof(string)));
-                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+                string[] columns = new string[3];
+                columns[0] = "SRR_NO";
+                columns[1] = "CONTAINER_TYPE";
+                columns[2] = "IMM_VOLUME_EXPECTED";
 
-                foreach (var i in request.SRR_CONTAINERS)
-                {
-                    DataRow dr = tbl.NewRow();
+                SqlHelper.UpdateSRRContainer<SRR_CONTAINERS>(request, "TB_SRR_CONTAINERS", connstring, columns);
 
-                    dr["SRR_ID"] = Convert.ToInt32(i.SRR_ID);
-                    dr["SRR_NO"] = i.SRR_NO;
-                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
-                    dr["CONTAINER_SIZE"] = i.CONTAINER_SIZE;
-                    dr["SERVICE_MODE"] = i.SERVICE_MODE;
-                    dr["POD_FREE_DAYS"] = 0;
-                    dr["POL_FREE_DAYS"] = 0;
-                    dr["IMM_VOLUME_EXPECTED"] = i.IMM_VOLUME_EXPECTED;
-                    dr["TOTAL_VOLUME_EXPECTED"] = 0;
-                    dr["CREATED_BY"] = request.CREATED_BY;
-
-                    tbl.Rows.Add(dr);
-                }
-
-                string[] columns = new string[10];
-                columns[0] = "SRR_ID";
-                columns[1] = "SRR_NO";
-                columns[2] = "CONTAINER_TYPE";
-                columns[3] = "CONTAINER_SIZE";
-                columns[4] = "SERVICE_MODE";
-                columns[5] = "POD_FREE_DAYS";
-                columns[6] = "POL_FREE_DAYS";
-                columns[7] = "IMM_VOLUME_EXPECTED";
-                columns[8] = "TOTAL_VOLUME_EXPECTED";
-                columns[9] = "CREATED_BY";
-
-                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SRR_CONTAINERS", columns);
             }
             catch (Exception)
             {

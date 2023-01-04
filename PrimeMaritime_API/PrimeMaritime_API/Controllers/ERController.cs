@@ -44,5 +44,11 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_erService.GetERContainerDetails(REPO_NO, AGENT_CODE, DEPO_CODE)));
         }
+
+        [HttpGet("GetERRateDetails")]
+        public ActionResult<Response<ER_RATES>> GetERRateDetails(string REPO_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_erService.GetERRateDetails(REPO_NO)));
+        }
     }
 }

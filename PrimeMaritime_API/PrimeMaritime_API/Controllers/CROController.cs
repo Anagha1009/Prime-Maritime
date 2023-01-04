@@ -36,7 +36,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCRODetails")]
-        public ActionResult<Response<CRO>> GetCRODetails(string CRO_NO, string AGENT_CODE)
+        public ActionResult<Response<CRODetails>> GetCRODetails(string CRO_NO, string AGENT_CODE)
         {
             return Ok(JsonConvert.SerializeObject(_cROService.GetCRODetails(CRO_NO, AGENT_CODE)));
         }

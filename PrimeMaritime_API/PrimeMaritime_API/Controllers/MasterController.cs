@@ -218,14 +218,55 @@ namespace PrimeMaritime_API.Controllers
         #endregion
 
 
+        #region ICD MASTER"
+
+        [HttpGet("GetMstICD")]
+        public ActionResult<Response<List<ICD_MASTER>>> GetMstICD()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetICDMasterList()));
+        }
 
 
+        #endregion
 
 
+        #region DEPO MASTER"
+
+        [HttpGet("GetMstDEPO")]
+        public ActionResult<Response<List<DEPO_MASTER>>> GetMstDEPO()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetDEPOMasterList()));
+        }
 
 
+        #endregion
+
+        #region TERMINAL MASTER"
+
+        [HttpGet("GetMstTerminal")]
+        public ActionResult<Response<List<DEPO_MASTER>>> GetMstTerminal()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetTerminalMasterList()));
+        }
 
 
+        #endregion
+
+        #region CLEARING_PARTY"
+
+        [HttpGet("GetClearingPartyList")]
+        public ActionResult<Response<List<CLEARING_PARTY>>> GetClearingPartyList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetClearingPartyList()));
+        }
+
+        [HttpPost("InsertCP")]
+        public ActionResult<Response<CommonResponse>> InsertCP(CLEARING_PARTY request)
+        {
+            return Ok(_masterService.InsertCP(request));
+        }
+
+        #endregion
 
 
 
