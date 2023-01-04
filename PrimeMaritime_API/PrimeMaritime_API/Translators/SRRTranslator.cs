@@ -156,7 +156,7 @@ namespace PrimeMaritime_API.Translators
                 item.CONTAINER_TYPE = SqlHelper.GetNullableString(reader, "CONTAINER_TYPE");
 
             if (reader.IsColumnExists("CONTAINER_SIZE"))
-                item.CONTAINER_SIZE = SqlHelper.GetNullableString(reader, "CONTAINER_SIZE");
+                item.CONTAINER_SIZE = SqlHelper.GetNullableInt32(reader, "CONTAINER_SIZE");
 
             if (reader.IsColumnExists("POL_FREE_DAYS"))
                 item.POL_FREE_DAYS = SqlHelper.GetNullableInt32(reader, "POL_FREE_DAYS");
