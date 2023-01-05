@@ -12,7 +12,7 @@ namespace PrimeMaritime_API.IServices
     public interface ISRRService
     {
         Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE);
-        Response<RATES> GetRates(string POL, string POD);
+        Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE);
         Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS,string FROMDATE,string TODATE, string AGENT_CODE);
         Response<string> InsertSRR(SRRRequest sRRRequest);
         Response<string> InsertContainer(List<SRR_CONTAINERS> request);
