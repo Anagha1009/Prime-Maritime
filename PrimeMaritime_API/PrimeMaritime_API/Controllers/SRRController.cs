@@ -11,6 +11,7 @@ using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PrimeMaritime_API.Controllers
 {
@@ -130,6 +131,48 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<Response<CommonResponse>> CounterRate(List<SRR_RATES> request)
         {
             return Ok(_srrService.CounterRate(request));
+        }
+
+        [HttpGet("GetSRRFiles")]
+        public ActionResult<Response<List<ALL_FILE>>> GetSRRFiles(string SRR_NO)
+        {
+            string[] array1 = Directory.GetFiles("Uploads/SRRFiles");
+
+            List<ALL_FILE> imgFiles = new List<ALL_FILE>();
+            Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
+
+            // Get list of files.
+            List<string> filesList = array1.ToList();
+
+            foreach (var file in filesList)
+            {
+                if (file.Contains(SRR_NO))
+                {
+                    ALL_FILE img = new ALL_FILE();
+                    long length = new System.IO.FileInfo(file).Length / 1024;
+                    img.FILE_NAME = file.Split('/')[2];
+                    img.FILE_SIZE = length.ToString() + "KB";
+                    img.FILE_PATH = file;
+
+                    imgFiles.Add(img);
+
+                }
+            }
+
+            if (imgFiles.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = imgFiles;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+            return response;
         }
     }
 }
