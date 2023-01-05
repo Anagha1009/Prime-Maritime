@@ -9,7 +9,6 @@ namespace PrimeMaritime_API.Models
     {
         public string FILE_NAME { get; set; }
         public string FILE_SIZE { get; set; }
-
         public string FILE_PATH { get; set; }
     }
 }
