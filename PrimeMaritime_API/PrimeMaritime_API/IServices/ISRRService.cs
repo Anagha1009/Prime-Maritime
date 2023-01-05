@@ -15,7 +15,7 @@ namespace PrimeMaritime_API.IServices
         Response<RATES> GetRates(string POL, string POD);
         Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS,string FROMDATE,string TODATE, string AGENT_CODE);
         Response<string> InsertSRR(SRRRequest sRRRequest);
-        Response<string> InsertContainer(SRR request);
+        Response<string> InsertContainer(List<SRR_CONTAINERS> request);
         Response<CommonResponse> ApproveRate(List<SRR_RATES> request);
         Response<CommonResponse> CounterRate(List<SRR_RATES> request);
     }

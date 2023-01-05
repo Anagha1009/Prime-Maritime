@@ -11,7 +11,7 @@ namespace PrimeMaritime_API.Models
         public int SRR_ID { get; set; }
         public string SRR_NO { get; set; }
         public string CONTAINER_TYPE { get; set; }
-        public string CONTAINER_SIZE { get; set; }
+        public int CONTAINER_SIZE { get; set; }
         public string SERVICE_MODE { get; set; }
         public int POD_FREE_DAYS { get; set; }
         public int POL_FREE_DAYS { get; set; }
