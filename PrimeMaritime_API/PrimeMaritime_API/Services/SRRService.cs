@@ -168,7 +168,7 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<string> InsertContainer(SRR request)
+        public Response<string> InsertContainer(List<SRR_CONTAINERS> request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
