@@ -96,44 +96,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok();
         }
 
-        //[HttpGet("GetImages")]
-        //public IActionResult GetImages()
-        //{
-        //    try
-        //    {
-        //        var folderName = Path.Combine("Uploads", "MNRFiles");
-        //        var pathToRead = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-        //        var photos = Directory.EnumerateFiles(pathToRead)
-        //            .Where(IsAPhotoFile)
-        //            .Select(fullPath => Path.Combine(folderName, Path.GetFileName(fullPath)));
-        //        return Ok(new { photos });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex}");
-        //    }
-        //}
-        //private bool IsAPhotoFile(string fileName)
-        //{
-        //    return fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase)
-        //        || fileName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
-        //        || fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase);
-        //}
-
-        //[HttpPost()]
-        //public async Task<IActionResult> GetImage(string imageName)
-        //{
-
-        //    Byte[] b;
-        //    b = await System.IO.File.ReadAllBytesAsync(Path.Combine(_environment.ContentRootPath, "Uploads", "MNRFiles" , $"{imageName}"));
-        //    return File(b, "image/png");
-        //}
 
         [HttpGet("GetImage")]
         public ActionResult<Response<List<ALL_FILE>>> GetImage(string MR_NO)
         {
             string[] array1 = Directory.GetFiles("Uploads/MNRFiles/");
-            //List<string> array2 = new List<string>();
+           
             List<ALL_FILE> imgFiles = new List<ALL_FILE>();
             Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
 
@@ -170,25 +138,6 @@ namespace PrimeMaritime_API.Controllers
             }
             return response;
         }
-
-        //[HttpGet("GetImage")]
-        //public HttpResponseMessage GetImage(string fileName)
-        //{
-
-        //    string filePath = Path.Combine("Uploads", "MNRFiles");
-        //    if (!Directory.Exists(filePath))
-        //    {
-        //        return new HttpResponseMessage(HttpStatusCode.NotFound);
-        //    }
-        //    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-        //    response.Content = new StreamContent(new FileStream(Path.Combine(filePath, fileName), FileMode.Open, FileAccess.Read));
-        //    response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-        //    response.Content.Headers.ContentDisposition.FileName = Path.GetFileName(fileName);
-        //    response.Content.Headers.ContentLength = Path.Combine(filePath, fileName).Length;
-        //    response.Content.Headers.ContentType = new MediaTypeHeaderValue("image/*");
-        //    return response;
-        //}
-
 
 
     }

@@ -46,6 +46,10 @@ namespace PrimeMaritime_API.Response
         public int NO_OF_PACKAGES { get; set; }
         public string CUSTOMER_NAME { get; set; }
         public string ADDRESS { get; set; }
+
+        public string EMAIL { get; set; }
+
+        public string CONTACT { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
         public BOOKING BookingDetails { get; set; }
