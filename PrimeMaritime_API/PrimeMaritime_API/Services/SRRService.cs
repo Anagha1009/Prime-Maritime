@@ -48,41 +48,20 @@ namespace PrimeMaritime_API.Services
 
         }
 
-        public Response<RATES> GetRates(string POL, string POD)
+        public Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<RATES> response = new Response<RATES>();
+            Response<string> response = new Response<string>();
 
-            if ((POL == "") || (POL == null))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide POL";
-                return response;
-            }
-            else if ((POD == "") || (POD == null))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide POD";
-                return response;
-            }
+            var data = DbClientFactory<SRRRepo>.Instance.GetRates(dbConn, POL, POD, CHARGE, CONT_TYPE);
 
-            var data = DbClientFactory<SRRRepo>.Instance.GetRates(dbConn, POL, POD);
-
-            if ((data != null) && (data.Tables[0].Rows.Count > 0))
+            if (data != null || data != "")
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
-                RATES rates = new RATES();
-
-                rates = SRRRepo.GetSingleDataFromDataSet<RATES>(data.Tables[0]);
-                if (data.Tables.Contains("Table1"))
-                {
-                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[1]);
-                }
-
-                response.Data = rates;
+                response.Data = data;
             }
             else
             {
