@@ -113,5 +113,42 @@ namespace PrimeMaritime_API.IServices
 
         #endregion
 
+        #region "LINER"
+
+        Response<CommonResponse> InsertLiner(LINER request);
+
+        Response<List<LINER>> GetLinerList();
+
+        Response<LINER> GetLinerDetails( int ID);
+        Response<CommonResponse> UpdateLinerList(LINER request);
+
+        Response<CommonResponse> DeleteLinerList(int ID);
+
+        #endregion
+
+        #region "LinerService"
+        Response<CommonResponse> InsertService(SERVICE request);
+
+        Response<List<SERVICE>> GetServiceList();
+
+        Response<SERVICE> GetServiceDetails(int ID);
+
+        Response<CommonResponse> UpdateService(SERVICE request);
+
+        Response<CommonResponse> DeleteService(int ID);
+        #endregion
+
+        #region "VESSELSCHEDULE"
+        Response<CommonResponse> InsertSchedule(SCHEDULE request);
+
+        Response<List<SCHEDULE>> GetScheduleList();
+
+        Response<SCHEDULE> GetScheduleDetails(int ID);
+
+        Response<CommonResponse> UpdateSchedule(SCHEDULE request);
+
+        Response<CommonResponse> DeleteSchedule(int ID);
+
+        #endregion
     }
 }

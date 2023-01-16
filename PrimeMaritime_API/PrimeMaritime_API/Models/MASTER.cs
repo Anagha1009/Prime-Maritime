@@ -187,4 +187,83 @@ namespace PrimeMaritime_API.Models
         public DateTime CREATED_DATE { get; set; }
 
     }
+
+    public class LINER
+    {
+        public int ID { get; set; }
+
+        public string NAME { get; set; }
+
+        public string CODE { get; set; }
+
+        public string DESCRIPTION { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public DateTime CREATED_DATE { get; set; }
+
+        public string CREATED_BY { get; set; }
+
+        public string UPDATED_BY { get; set; }
+
+        public DateTime UPDATED_DATE { get; set; }
+    }
+
+    public class SERVICE
+    {
+        public int ID { get; set; }
+
+        public String LINER_CODE { get; set; }
+
+        public String SERVICE_NAME { get; set; }
+
+        public String PORT_CODE { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public DateTime CREATED_DATE { get; set; }
+
+        public string CREATED_BY { get; set; }
+
+        public string UPDATED_BY { get; set; }
+
+        public DateTime UPDATED_DATE { get; set; }
+
+
+    }
+
+    public class SCHEDULE
+    {
+        public int ID { get; set; }
+
+        public string VESSEL_NAME { get; set; }
+
+        public string SERVICE_NAME { get; set; }
+
+        public string PORT_CODE { get; set; }
+
+        public string VIA_NO { get; set; }
+
+        public DateTime ETA { get; set; }
+        public DateTime ETD { get; set; }
+
+        public Boolean STATUS { get; set; }
+
+        public DateTime CREATED_DATE { get; set; }
+
+        public string CREATED_BY { get; set; }
+
+        public string UPDATED_BY { get; set; }
+
+        public DateTime UPDATED_DATE { get; set; }
+
+
+
+
+
+
+
+
+    }
+
 }
