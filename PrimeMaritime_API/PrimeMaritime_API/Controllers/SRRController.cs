@@ -140,37 +140,54 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRFiles")]
-        public ActionResult<Response<List<ALL_FILE>>> GetSRRFiles(string SRR_NO)
+        public ActionResult<Response<List<ALL_FILE>>> GetSRRFiles([FromQuery(Name = "SRR_NO")] string SRR_NO, [FromQuery(Name = "COMM_TYPE")] string COMM_TYPE)
         {
-            string[] array1 = Directory.GetFiles("Uploads/SRRFiles");
+            string[] commodityList = COMM_TYPE.Split(",");
 
-            List<ALL_FILE> imgFiles = new List<ALL_FILE>();
-            Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
+            List<List<string>> files = new List<List<string>>();
 
-            // Get list of files.
-            List<string> filesList = array1.ToList();
-
-            foreach (var file in filesList)
+            foreach(var type in commodityList)
             {
-                if (file.Contains(SRR_NO))
+                if (type == "HAZ")
                 {
-                    ALL_FILE img = new ALL_FILE();
-                    long length = new System.IO.FileInfo(file).Length / 1024;
-                    img.FILE_NAME = file.Split('/')[2];
-                    img.FILE_SIZE = length.ToString() + "KB";
-                    img.FILE_PATH = file;
-
-                    imgFiles.Add(img);
-
+                    files.Add(Directory.GetFiles("Uploads/SRRFiles/HAZFiles/").Where(file => file.Contains(SRR_NO)).ToList());
+                }
+                if (type == "FLEXIBAG")
+                {
+                    files.Add(Directory.GetFiles("Uploads/SRRFiles/FLEXIBAGFiles/").Where(file => file.Contains(SRR_NO)).ToList());
+                }
+                if (type == "SP")
+                {
+                    files.Add(Directory.GetFiles("Uploads/SRRFiles/SPFiles/").Where(file => file.Contains(SRR_NO)).ToList());
                 }
             }
 
-            if (imgFiles.Count > 0)
+            List<ALL_FILE> Files = new List<ALL_FILE>();
+            Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
+
+            foreach (var file in files)
+            {
+                if(file.Count > 0)
+                {
+                    foreach(var f in file)
+                    {
+                        ALL_FILE img = new ALL_FILE();
+                        long length = new System.IO.FileInfo(f).Length / 1024;
+                        img.FILE_NAME = f.Split('/')[3];
+                        img.FILE_SIZE = length.ToString() + "KB";
+                        img.FILE_PATH = f;
+
+                        Files.Add(img);
+                    }
+                }
+            }
+
+            if (files.Count > 0)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
-                response.Data = imgFiles;
+                response.Data = Files;
             }
             else
             {
@@ -180,5 +197,7 @@ namespace PrimeMaritime_API.Controllers
             }
             return response;
         }
+
+
     }
 }
