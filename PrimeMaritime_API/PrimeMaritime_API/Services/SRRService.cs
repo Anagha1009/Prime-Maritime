@@ -6,6 +6,7 @@ using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
+using System;
 using System.Collections.Generic;
 
 namespace PrimeMaritime_API.Services
@@ -46,6 +47,50 @@ namespace PrimeMaritime_API.Services
 
             return response;
 
+        }
+
+        public Response<RATES> GetCalRates(string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<RATES> response = new Response<RATES>();
+
+            var data = DbClientFactory<SRRRepo>.Instance.GetCalRates(dbConn, POL, POD, CONTAINER_TYPE, SRR_NO, NO_OF_CONTAINERS);
+
+            if ((data != null) && (data.Tables.Count > 0))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                RATES rates = new RATES();
+
+                rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
+
+                if (data.Tables.Contains("Table1"))
+                {
+                    rates.IMP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                }
+
+                if (data.Tables.Contains("Table2"))
+                {
+                    rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
+                }
+
+                if (data.Tables.Contains("Table3"))
+                {
+                    rates.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[3].Rows[0].ItemArray[0]);
+                }
+
+                response.Data = rates;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
         }
 
         public Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE)
