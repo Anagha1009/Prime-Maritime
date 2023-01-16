@@ -42,6 +42,7 @@ namespace PrimeMaritime_API.Models
         public DateTime CREATED_DATE { get; set; }
         public decimal APPROVED_RATE { get; set; }
         public string REMARKS { get; set; }
+        public string STATUS { get; set; }
     }
 
     public class MNR_LIST
