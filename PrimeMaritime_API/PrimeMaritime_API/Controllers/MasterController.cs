@@ -267,7 +267,107 @@ namespace PrimeMaritime_API.Controllers
         }
 
         #endregion
+        #region "LINER"
+        [HttpPost("InsertLiner")]
+        public ActionResult<Response<CommonResponse>> InsertLiner(LINER request)
+        {
+            return Ok(_masterService.InsertLiner(request));
+        }
 
+        [HttpGet("GetLinerList")]
+
+        public ActionResult<Response<List<CommonResponse>>> GetLinerList( )
+        {
+            return Ok (JsonConvert.SerializeObject(_masterService.GetLinerList()));
+        }
+
+        [HttpPost("UpdateLinerList")]
+        public ActionResult<Response<CommonResponse>>UpdateLinerList(LINER request)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UpdateLinerList(request)));
+        }
+
+        [HttpDelete("DeleteLinerList")]
+        public ActionResult<Response<CommonResponse>>DeleteLinerList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteLinerList(ID)));
+        }
+
+        [HttpGet("GetLinerDetails")]
+        public ActionResult<Response<LINER>> GetLinerDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetLinerDetails( ID)));
+        }
+
+        #endregion
+
+        #region "LinerService"
+        [HttpPost("InsertService")]
+        public ActionResult<Response<CommonResponse>> InsertService(SERVICE request)
+        {
+            return Ok(_masterService.InsertService(request));
+        }
+
+        [HttpGet("GetServiceList")]
+        public ActionResult<Response<List<CommonResponse>>> GetServiceList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceList()));
+        }
+
+        [HttpGet("GetServiceDetails")]
+
+        public ActionResult<Response<LINER>> GetServiceDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceDetails(ID)));
+        }
+
+        [HttpPost("UpdateService")]
+        public ActionResult<Response<CommonResponse>> UpdateService(SERVICE request)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UpdateService(request)));
+        }
+
+        [HttpDelete("DeleteService")]
+        public ActionResult<Response<CommonResponse>> DeleteService(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteService(ID)));
+        }
+
+        #endregion
+
+        #region "VESSELSCHEDULE"
+        [HttpPost("InsertSchedule")]
+        public ActionResult<Response<CommonResponse>> InsertSchedule(SCHEDULE request)
+        {
+            return Ok(_masterService.InsertSchedule(request));
+        }
+
+        [HttpGet("GetScheduleList")]
+
+        public ActionResult<Response<List<CommonResponse>>> GetScheduleList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetScheduleList()));
+        }
+
+        [HttpGet("GetScheduleDetails")]
+        public ActionResult<Response<SCHEDULE>> GetScheduleDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetScheduleDetails(ID)));
+        }
+
+        [HttpPost("UpdateSchedule")]
+        public ActionResult<Response<CommonResponse>> UpdateSchedule(SCHEDULE request)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UpdateSchedule(request)));
+        }
+
+        [HttpDelete("DeleteSchedule")]
+        public ActionResult<Response<CommonResponse>> DeleteSchedule(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteSchedule(ID)));
+        }
+
+        #endregion
 
 
 

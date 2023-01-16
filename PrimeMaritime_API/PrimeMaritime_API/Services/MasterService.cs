@@ -765,5 +765,313 @@ namespace PrimeMaritime_API.Services
         }
 
         #endregion
+
+        #region "LINER"
+        public Response<CommonResponse> InsertLiner(LINER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertLiner(dbConn, request);
+
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<LINER>> GetLinerList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<LINER>> response = new Response<List<LINER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetLinerList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<LINER> GetLinerDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<LINER> response = new Response<LINER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetLinerDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> UpdateLinerList(LINER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateLinerList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteLinerList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if ((ID == 0) || (ID == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteLinerList(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
+        #region "LINERSERVICE"
+        public Response<CommonResponse> InsertService(SERVICE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertService(dbConn, request);
+
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<SERVICE>> GetServiceList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<SERVICE>> response = new Response<List<SERVICE>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetServiceList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<SERVICE> GetServiceDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<SERVICE> response = new Response<SERVICE>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetServiceDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateService(SERVICE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateService(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteService(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if ((ID == 0) || (ID == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteService(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+
+
+        #endregion
+
+        #region "VESSELSCHEDULE"
+        public Response<CommonResponse> InsertSchedule(SCHEDULE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertSchedule(dbConn, request);
+
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<SCHEDULE>> GetScheduleList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<SCHEDULE>> response = new Response<List<SCHEDULE>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<SCHEDULE> GetScheduleDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<SCHEDULE> response = new Response<SCHEDULE>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> UpdateSchedule(SCHEDULE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateSchedule(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteSchedule(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if ((ID == 0) || (ID == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteSchedule(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+
+
+        #endregion
     }
 }
