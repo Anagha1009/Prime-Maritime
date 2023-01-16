@@ -284,6 +284,7 @@ D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\ne
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win-x86\native\sni.dll
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\bin\Debug\net5.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.csproj.AssemblyReference.cache
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.GeneratedMSBuildEditorConfig.editorconfig
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfoInputs.cache
 D:\Primemaritime\Prime-Maritime\PrimeMaritime_API\PrimeMaritime_API\obj\Debug\net5.0\PrimeMaritime_API.AssemblyInfo.cs
