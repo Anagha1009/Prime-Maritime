@@ -837,6 +837,361 @@ namespace PrimeMaritime_API.Repository
             }
         }
         #endregion
+
+        #region "LINER"
+        public void InsertLiner(string connstring, LINER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_LINER" },
+                  new SqlParameter("@NAME",SqlDbType.VarChar,255){Value=master.NAME},
+                  new SqlParameter("@CODE",SqlDbType.VarChar,50){Value=master.CODE},
+                  new SqlParameter("@DESCRIPTION",SqlDbType.VarChar,255){Value=master.DESCRIPTION},
+                  
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+                  
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
+                 
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_LINER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<LINER> GetLinerList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_LINER_LIST" },
+                 
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_LINER", parameters);
+                List<LINER> master = SqlHelper.CreateListFromTable<LINER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public LINER GetLinerDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_LINER_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<LINER>(connstring, "SP_LINER", r => r.TranslateAsLiner(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateLinerList(string connstring, LINER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_LINER" },
+                  new SqlParameter("@ID",SqlDbType.Int){Value=master.ID},
+                  new SqlParameter("@NAME",SqlDbType.VarChar,255){Value=master.NAME},
+                  new SqlParameter("@CODE",SqlDbType.VarChar,50){Value=master.CODE},
+                  new SqlParameter("@DESCRIPTION",SqlDbType.VarChar,255){Value=master.DESCRIPTION},
+
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+                  
+                  
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_LINER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteLinerList(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_LINER" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_LINER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        #endregion
+
+        #region "LINERSERVICE"
+        public void InsertService(string connstring, SERVICE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_SERVICE" },
+                  new SqlParameter("@LINER_CODE",SqlDbType.VarChar,100){Value=master.LINER_CODE},
+                  new SqlParameter("SERVICE_NAME",SqlDbType.VarChar,255){Value=master.SERVICE_NAME},
+                  new SqlParameter("@PORT_CODE",SqlDbType.VarChar,100){Value=master.PORT_CODE},
+
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
+
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SERVICE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public List<SERVICE> GetServiceList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SERVICELIST" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_SERVICE_MASTER", parameters);
+                List<SERVICE> master = SqlHelper.CreateListFromTable<SERVICE>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public SERVICE GetServiceDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SERVICEDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<SERVICE>(connstring, "SP_CRUD_SERVICE_MASTER", r => r.TranslateAsLinerService(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateService(string connstring, SERVICE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_SERVICE" },
+                  new SqlParameter("@ID",SqlDbType.Int){Value=master.ID},
+                  new SqlParameter("@LINER_CODE",SqlDbType.VarChar,100){Value=master.LINER_CODE},
+                  new SqlParameter("@SERVICE_NAME",SqlDbType.VarChar,255){Value=master.SERVICE_NAME},
+                  new SqlParameter("@PORT_CODE",SqlDbType.VarChar,100){Value=master.PORT_CODE},
+
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+
+
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SERVICE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteService(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_SERVICE" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SERVICE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
+        #endregion
+        #region "VESSELSCHEDULE"
+        public void InsertSchedule(string connstring, SCHEDULE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "INSERT_SCHEDULE" },
+                  new SqlParameter("@VESSEL_NAME",SqlDbType.VarChar,255){Value=master.VESSEL_NAME},
+                  new SqlParameter("SERVICE_NAME",SqlDbType.VarChar,255){Value=master.SERVICE_NAME},
+                  new SqlParameter("@PORT_CODE",SqlDbType.VarChar,100){Value=master.PORT_CODE},
+                  new SqlParameter("@VIA_NO",SqlDbType.VarChar,100){Value=master.VIA_NO},
+                  new SqlParameter("@ETA",SqlDbType.DateTime){Value=master.ETA},
+                  new SqlParameter("@ETD",SqlDbType.DateTime){Value=master.ETD},
+
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = master.CREATED_BY },
+
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_VESSEL_SCHEDULE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public List<SCHEDULE> GetScheduleList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SCHEDULE" },
+
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_VESSEL_SCHEDULE", parameters);
+                List<SCHEDULE> master = SqlHelper.CreateListFromTable<SCHEDULE>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public SCHEDULE GetScheduleDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<SCHEDULE>(connstring, "SP_VESSEL_SCHEDULE", r => r.TranslateAsSchedule(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateSchedule(string connstring, SCHEDULE master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_SCHEDULE" },
+                  new SqlParameter("@ID",SqlDbType.Int){Value=master.ID},
+                  new SqlParameter("@VESSEL_NAME",SqlDbType.VarChar,255){Value=master.VESSEL_NAME},
+                  new SqlParameter("@SERVICE_NAME",SqlDbType.VarChar,255){Value=master.SERVICE_NAME},
+                  new SqlParameter("@PORT_CODE",SqlDbType.VarChar,100){Value=master.PORT_CODE},
+                  new SqlParameter("@VIA_NO",SqlDbType.VarChar,100){Value=master.VIA_NO},
+                  new SqlParameter("@ETA",SqlDbType.DateTime){Value=master.ETA},
+                  new SqlParameter("@ETD",SqlDbType.DateTime){Value=master.ETD},
+
+
+
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
+
+
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_VESSEL_SCHEDULE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void DeleteSchedule(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "DELETE_SCHEDULE" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_VESSEL_SCHEDULE", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 
 }
