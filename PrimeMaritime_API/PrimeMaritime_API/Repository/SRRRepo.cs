@@ -25,6 +25,20 @@ namespace PrimeMaritime_API.Repository
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
         }
+        public DataSet GetCalRates(string connstring, string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CALCULATOR_RATES" },
+                new SqlParameter("@POL", SqlDbType.VarChar, 100) { Value = POL },
+                new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = POD },
+                new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = CONTAINER_TYPE },
+                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                new SqlParameter("@NO_OF_CONTAINERS", SqlDbType.Int) { Value = NO_OF_CONTAINERS },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
+        }
 
         public string GetRates(string connstring, string POL, string POD, string CHARGE, string CONT_TYPE)
         {

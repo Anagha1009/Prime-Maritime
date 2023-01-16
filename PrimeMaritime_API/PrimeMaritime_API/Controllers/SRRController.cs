@@ -40,6 +40,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_srrService.GetRate(POL, POD, CHARGE, CONT_TYPE)));
         }
 
+        [HttpGet("GetCalRates")]
+        public ActionResult<Response<RATES>> GetCalRates(string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS)
+        {
+            return Ok(JsonConvert.SerializeObject(_srrService.GetCalRates(POL, POD, CONTAINER_TYPE, SRR_NO, NO_OF_CONTAINERS)));
+        }
+
         [HttpGet("GetSRRList")]
         public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
         {
