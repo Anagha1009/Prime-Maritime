@@ -280,6 +280,123 @@ namespace PrimeMaritime_API.Translators
             return item;
         }
 
+        public static LINER TranslateAsLiner(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new LINER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("CODE"))
+                item.CODE = SqlHelper.GetNullableString(reader, "CODE");
+
+            if (reader.IsColumnExists("NAME"))
+                item.NAME = SqlHelper.GetNullableString(reader, "NAME");
+
+            if (reader.IsColumnExists("DESCRIPTION"))
+                item.DESCRIPTION = SqlHelper.GetNullableString(reader, "DESCRIPTION");
+
+           
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+
+            return item;
+        }
+
+        public static SERVICE TranslateAsLinerService(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new SERVICE();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("LINER_CODE"))
+                item.LINER_CODE = SqlHelper.GetNullableString(reader, "LINER_CODE");
+
+            if (reader.IsColumnExists("SERVICE_NAME"))
+                item.SERVICE_NAME = SqlHelper.GetNullableString(reader, "SERVICE_NAME");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+
+            return item;
+        }
+
+        public static SCHEDULE TranslateAsSchedule(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new SCHEDULE();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("VESSEL_NAME"))
+                item.VESSEL_NAME = SqlHelper.GetNullableString(reader, "VESSEL_NAME");
+
+            if (reader.IsColumnExists("SERVICE_NAME"))
+                item.SERVICE_NAME = SqlHelper.GetNullableString(reader, "SERVICE_NAME");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            if (reader.IsColumnExists("VIA_NO"))
+                item.VIA_NO = SqlHelper.GetNullableString(reader, "VIA_NO");
+
+            //if (reader.IsColumnExists("ETA"))
+            //    item.ETA = SqlHelper.GetDateTime(reader, "VIA_NO");
+
+            //if (reader.IsColumnExists("ETD"))
+            //    item.ETD = SqlHelper.GetDateTime(reader, "ETD");
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+
+            return item;
+        }
+
+
+
+
+
 
     }
 }

@@ -8,6 +8,10 @@ namespace PrimeMaritime_API.Models
     public class RATES
     {
         public List<FREIGHT> FREIGHTLIST { get; set; } = new List<FREIGHT>();
+        public List<CHARGE> IMP_COSTLIST { get; set; } = new List<CHARGE>();
+        public List<CHARGE> EXP_COSTLIST { get; set; } = new List<CHARGE>();
+        public decimal LADEN_BACK_COST { get; set; }
+
     }
 
     public class FREIGHT
@@ -16,7 +20,20 @@ namespace PrimeMaritime_API.Models
         public string POD { get; set; }
         public string CHARGE { get; set; }
         public string CURRENCY { get; set; }
-        public string LADEN_STATUS { get; set; }
         public string CONTAINER_TYPE { get; set; }
+        public decimal RATE { get; set; }
+        public decimal RATE_REQUESTED { get; set; }
+    }
+
+    public class CHARGE
+    {
+        public string POL { get; set; }
+        public string POD { get; set; }
+        public string CURRENCY { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string IE { get; set; }
+        public string CHARGE_TYPE { get; set; }
+        public decimal RATE { get; set; }
+        public decimal RATE_REQUESTED { get; set; }
     }
 }
