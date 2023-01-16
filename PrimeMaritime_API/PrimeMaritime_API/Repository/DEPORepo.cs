@@ -262,13 +262,13 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[5];
+                string[] columns = new string[6];
                 columns[0] = "MR_NO";
                 columns[1] = "LOCATION";
                 columns[2] = "FINAL_TOTAL";
                 columns[3] = "TAX";
                 columns[4] = "REMARKS";
-
+                columns[5] = "STATUS";
 
                 SqlHelper.UpdateMRData<MR_LIST>(request, "TB_MR_REQUEST", connstring, columns);
 
@@ -276,6 +276,7 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "APPROVE_RATE" },
                   new SqlParameter("@MR_NO", SqlDbType.VarChar, 100) { Value = request[0].MR_NO },
+                  new SqlParameter("@STATUS", SqlDbType.VarChar, 100) { Value = request[0].STATUS },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_MNR", parameters);
