@@ -14,7 +14,7 @@ namespace PrimeMaritime_API.Models
         public double LENGTH { get; set; }
         public double WIDTH { get; set; }
         public double HEIGHT { get; set; }
-        public double WEIGHT { get; set; }
+        public decimal WEIGHT { get; set; }
         public string WEIGHT_UNIT { get; set; }
         public string COMMODITY_TYPE { get; set; }
         public string IMO_CLASS { get; set; }
