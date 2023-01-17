@@ -29,9 +29,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetPartyMasterList")]
-        public ActionResult<Response<List<PARTY_MASTER>>> GetPartyMasterList(string AGENT_CODE)
+        public ActionResult<Response<List<PARTY_MASTER>>> GetPartyMasterList(string AGENT_CODE, string CUST_NAME, string CUST_TYPE, bool STATUS, string FROM_DATE, string TO_DATE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetPartyMasterList(AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetPartyMasterList(AGENT_CODE, CUST_NAME, CUST_TYPE, STATUS, FROM_DATE, TO_DATE)));
         }
 
         [HttpGet("GetPartyMasterDetails")]
@@ -41,9 +41,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpDelete("DeletePartyMasterDetails")]
-        public ActionResult<Response<CommonResponse>> DeletePartyMasterDetails(string AGENT_CODE, int CUSTOMER_ID)
+        public ActionResult<Response<CommonResponse>> DeletePartyMasterDetails(int CUSTOMER_ID)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.DeletePartyMasterDetails(AGENT_CODE, CUSTOMER_ID)));
+            return Ok(JsonConvert.SerializeObject(_masterService.DeletePartyMasterDetails(CUSTOMER_ID)));
         }
 
         [HttpPost("UpdatePartyMasterDetails")]
