@@ -172,6 +172,31 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<List<BL>> GetBLHistory(string AGENT_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<BL>> response = new Response<List<BL>>();
+            var data = DbClientFactory<BLRepo>.Instance.GetBLHistory(dbConn, AGENT_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+
+        }
     }
 
 }

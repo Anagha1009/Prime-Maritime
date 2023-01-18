@@ -296,6 +296,23 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public void UpdateSRR(string connstring, List<SRRRequest> request)
+        {
+            try
+            {
+                string[] columns = new string[2];
+                columns[0] = "SRR_NO";
+                columns[1] = "STATUS";
+
+                SqlHelper.UpdateSRR<SRRRequest>(request, "TB_SRR", connstring, columns);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void InsertContainer(string connstring, List<SRR_CONTAINERS> request)
         {
             try
