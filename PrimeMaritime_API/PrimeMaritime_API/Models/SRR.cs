@@ -11,6 +11,8 @@ namespace PrimeMaritime_API.Models
         public string SRR_NO { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
+
+        public string FINAL_DESTINATION { get; set; }
         public string ORIGIN_ICD { get; set; }
         public string DESTINATION_ICD { get; set; }
         public string SERVICE_NAME { get; set; }

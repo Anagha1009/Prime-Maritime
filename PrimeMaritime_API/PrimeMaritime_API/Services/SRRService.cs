@@ -220,5 +220,20 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<string> UpdateSRR(List<SRRRequest> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.UpdateSRR(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Updated Successfully.";
+            response.ResponseCode = 200;
+            response.Data = "1";
+
+            return response;
+        }
     }
 }
