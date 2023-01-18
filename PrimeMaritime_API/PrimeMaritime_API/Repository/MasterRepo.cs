@@ -43,7 +43,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<PARTY_MASTER> GetPartyMasterList(string dbConn, string AgentCode)
+        public List<PARTY_MASTER> GetPartyMasterList(string dbConn, string AgentCode, string CustName, string CustType, bool Status, string FROM_DATE, string TO_DATE)
         {
             try
             {
@@ -51,6 +51,11 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CUSTOMERLIST" },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AgentCode },
+                  new SqlParameter("@CUST_NAME", SqlDbType.VarChar, 255) { Value = CustName },
+                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar, 10) { Value = CustType },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = Status },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
 
                 };
 
@@ -86,13 +91,12 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void DeletePartyMasterDetails(string connstring, string AGENT_CODE, int CUSTOMER_ID)
+        public void DeletePartyMasterDetails(string connstring, int CUSTOMER_ID)
         {
             try
             {
                 SqlParameter[] parameters =
-                {
-                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+                {                  
                   new SqlParameter("@CUST_ID", SqlDbType.Int) { Value = CUSTOMER_ID },
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_CUSTOMER" }
                 };

@@ -22,20 +22,12 @@ namespace PrimeMaritime_API.Services
         }
 
         #region "PARTY MASTER"
-        public Response<CommonResponse> DeletePartyMasterDetails(string AgentID, int CUSTOMER_ID)
+        public Response<CommonResponse> DeletePartyMasterDetails(int CUSTOMER_ID)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<CommonResponse> response = new Response<CommonResponse>();
-
-            if ((AgentID == "") || (AgentID == null))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide AgentID ";
-                return response;
-            }
-
-            DbClientFactory<MasterRepo>.Instance.DeletePartyMasterDetails(dbConn, AgentID, CUSTOMER_ID);
+            DbClientFactory<MasterRepo>.Instance.DeletePartyMasterDetails(dbConn, CUSTOMER_ID);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";
@@ -44,12 +36,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<PARTY_MASTER>> GetPartyMasterList(string Agent_code)
+        public Response<List<PARTY_MASTER>> GetPartyMasterList(string Agent_code, string CustName, string CustType, bool Status, string FROM_DATE, string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<PARTY_MASTER>> response = new Response<List<PARTY_MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterList(dbConn, Agent_code);
+            var data = DbClientFactory<MasterRepo>.Instance.GetPartyMasterList(dbConn, Agent_code, CustName, CustType, Status, FROM_DATE, TO_DATE);
 
             if (data != null)
             {
