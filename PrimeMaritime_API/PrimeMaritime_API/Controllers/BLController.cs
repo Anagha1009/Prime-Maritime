@@ -34,6 +34,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_blService.GetBLDetails(BL_NO, BOOKING_NO, AGENT_CODE)));
         }
 
+        [HttpGet("GetBLHistory")]
+        public ActionResult<Response<List<BL>>> GetBLHistory(string AGENT_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE)));
+        }
+
         [HttpGet("GetSRRDetails")]
         public ActionResult<Response<SRR>> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {

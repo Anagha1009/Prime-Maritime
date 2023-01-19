@@ -76,6 +76,27 @@ namespace PrimeMaritime_API.Repository
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
         }
+
+        public List<BL> GetBLHistory(string connstring,string AGENT_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_HISTORY" },
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<BL> blList = SqlHelper.CreateListFromTable<BL>(dataTable);
+                return blList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public DataSet GetSRRDetails(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
@@ -89,6 +110,8 @@ namespace PrimeMaritime_API.Repository
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
         }
+
+
         public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
         {
             return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
