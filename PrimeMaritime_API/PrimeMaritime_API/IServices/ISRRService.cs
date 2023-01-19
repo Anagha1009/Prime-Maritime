@@ -19,5 +19,6 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> ApproveRate(List<SRR_RATES> request);
         Response<CommonResponse> CounterRate(List<SRR_RATES> request);
         Response<RATES> GetCalRates(string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS);
+        Response<SRR_RATE_LIST> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS);
     }
 }
