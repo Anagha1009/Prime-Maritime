@@ -33,7 +33,14 @@ namespace PrimeMaritime_API.Models
         public string CHARGE_CODE { get; set; }
         public string IE { get; set; }
         public string CHARGE_TYPE { get; set; }
+        public string CONTAINER_TYPE { get; set; }
         public decimal RATE { get; set; }
         public decimal RATE_REQUESTED { get; set; }
+    }
+
+    public class SRR_RATE_LIST
+    {
+        public List<FREIGHT> FREIGHTLIST { get; set; } = new List<FREIGHT>();
+        public List<CHARGE> EXP_COSTLIST { get; set; } = new List<CHARGE>();
     }
 }

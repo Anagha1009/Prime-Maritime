@@ -77,7 +77,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@FROMDATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(FROMDATE) ? null : Convert.ToDateTime(FROMDATE) },
                   new SqlParameter("@TODATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(TODATE) ? null : Convert.ToDateTime(TODATE) },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
-                };                
+                };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
                 List<SRRList> srrList = SqlHelper.CreateListFromTable<SRRList>(dataTable);
@@ -118,7 +118,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
                   new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
                   new SqlParameter("@TSP_1", SqlDbType.VarChar, 100) { Value = request.TSP_1 },
-                  new SqlParameter("@TSP_2", SqlDbType.VarChar, 100) { Value = request.TSP_2 },                  
+                  new SqlParameter("@TSP_2", SqlDbType.VarChar, 100) { Value = request.TSP_2 },
                   new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
                   new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME }
@@ -383,6 +383,29 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet GetSRRRateList(string connstring, string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS)
+        {
+            try
+            {
+
+                SqlParameter[] parameters =
+                {
+                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SRR_RATES" },
+                  new SqlParameter("@POL", SqlDbType.VarChar, 255) { Value = POL },
+                  new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = POD },
+                  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = CONTAINER_TYPE },
+                  new SqlParameter("@NO_OF_CONTAINERS", SqlDbType.Int) { Value = NO_OF_CONTAINERS },
+                };
+    
+                return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
 
             }
             catch (Exception)
