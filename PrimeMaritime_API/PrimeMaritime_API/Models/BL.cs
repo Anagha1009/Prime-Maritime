@@ -9,6 +9,7 @@ namespace PrimeMaritime_API.Models
     {
         public int ID { get; set; }
         public string BL_NO { get; set; }
+        public string BOOKING_NO { get; set; }
         public int SRR_ID { get; set; }
         public string SRR_NO { get; set; }
         public string SHIPPER { get; set; }
@@ -31,6 +32,8 @@ namespace PrimeMaritime_API.Models
         public DateTime BL_ISSUE_DATE { get; set; }
         public decimal TOTAL_PREPAID { get; set; }
         public int NO_OF_ORIGINAL_BL { get; set; }
+
+        public string BL_STATUS { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
