@@ -64,16 +64,16 @@ namespace PrimeMaritime_API.Services
                 response.ResponseMessage = "Success";
                 RATES rates = new RATES();
 
-                rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
+                rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[0]);
 
                 if (data.Tables.Contains("Table1"))
                 {
-                    rates.IMP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                    rates.POL_EXP = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[1]);
                 }
 
                 if (data.Tables.Contains("Table2"))
                 {
-                    rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
+                    rates.POD_IMP = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
                 }
 
                 if (data.Tables.Contains("Table3"))
@@ -173,7 +173,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SRRList>> response = new Response<List<SRRList>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn,OPERATION,SRR_NO,CUSTOMER_NAME,STATUS,FROMDATE,TODATE, AGENT_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn, OPERATION, SRR_NO, CUSTOMER_NAME, STATUS, FROMDATE, TODATE, AGENT_CODE);
 
             if (data.Count > 0)
             {
@@ -181,6 +181,55 @@ namespace PrimeMaritime_API.Services
                 response.ResponseCode = 200;
                 response.ResponseMessage = "Success";
                 response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<SRR_RATE_LIST> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<SRR_RATE_LIST> response = new Response<SRR_RATE_LIST>();
+
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRRateList(dbConn, POL, POD, CONTAINER_TYPE, NO_OF_CONTAINERS);
+
+            if ((data != null) && (data.Tables.Count > 0))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                SRR_RATE_LIST rates = new SRR_RATE_LIST();
+
+                var x = data.Tables[0].Rows[0].ItemArray[0].ToString();
+
+                if (String.IsNullOrEmpty(x))
+                {
+                    rates.FREIGHTLIST = new List<FREIGHT>();
+                }
+                else
+                {
+                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
+                }
+
+                var y = data.Tables[1].Rows[0].ItemArray[0].ToString();
+
+                if (String.IsNullOrEmpty(y))
+                {
+                    rates.EXP_COSTLIST = new List<CHARGE>();
+                }
+                else
+                {
+                    rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                }
+
+                response.Data = rates;
             }
             else
             {
