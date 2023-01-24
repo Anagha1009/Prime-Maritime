@@ -7,9 +7,9 @@ namespace PrimeMaritime_API.Models
 {
     public class RATES
     {
-        public List<FREIGHT> FREIGHTLIST { get; set; } = new List<FREIGHT>();
-        public List<CHARGE> IMP_COSTLIST { get; set; } = new List<CHARGE>();
-        public List<CHARGE> EXP_COSTLIST { get; set; } = new List<CHARGE>();
+        public List<SRR_RATES> FREIGHTLIST { get; set; } = new List<SRR_RATES>();
+        public List<SRR_RATES> POL_EXP { get; set; } = new List<SRR_RATES>();
+        public List<CHARGE> POD_IMP { get; set; } = new List<CHARGE>();
         public decimal LADEN_BACK_COST { get; set; }
 
     }

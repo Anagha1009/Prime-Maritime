@@ -64,16 +64,16 @@ namespace PrimeMaritime_API.Services
                 response.ResponseMessage = "Success";
                 RATES rates = new RATES();
 
-                rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
+                rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[0]);
 
                 if (data.Tables.Contains("Table1"))
                 {
-                    rates.IMP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                    rates.POL_EXP = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[1]);
                 }
 
                 if (data.Tables.Contains("Table2"))
                 {
-                    rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
+                    rates.POD_IMP = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
                 }
 
                 if (data.Tables.Contains("Table3"))
