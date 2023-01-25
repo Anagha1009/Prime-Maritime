@@ -19,6 +19,13 @@ namespace PrimeMaritime_API.Models
         public string POD { get; set; }
         public string CUSTOMER_NAME { get; set; }
         public string EMAIL { get; set; }
+        public string VESSEL_NAME { get; set; }
+
+        public string SERVICE_NAME { get; set; }
+
+        public string FINAL_DESTINATION { get; set; }
+
+        public string SHIPPER_NAME { get; set; }
 
         public string ADDRESS { get; set; }
         public string STUFFING_TYPE { get; set; }

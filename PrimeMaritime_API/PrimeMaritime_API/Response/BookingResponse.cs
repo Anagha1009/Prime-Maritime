@@ -27,6 +27,7 @@ namespace PrimeMaritime_API.Response
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
         public string SLOTS { get; set; }
+        public DateTime CREATED_DATE { get; set; }
     }
 
     public class BookingDetails
