@@ -211,7 +211,7 @@ namespace PrimeMaritime_API.Repository
              };
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
             List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);
-
+ 
             var uniqueCMList = containerList.GroupBy(x => x.CONTAINER_NO);
 
             List<CMList> cmList = new List<CMList>();
