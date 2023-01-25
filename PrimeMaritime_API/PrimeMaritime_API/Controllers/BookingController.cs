@@ -30,9 +30,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetBookingList")]
-        public ActionResult<Response<List<BookingList>>> GetBookingList(string AGENT_CODE, string BOOKING_NO)
+        public ActionResult<Response<List<BookingList>>> GetBookingList(string AGENT_CODE, string BOOKING_NO, string FROM_DATE, string TO_DATE)
         {
-            return Ok(JsonConvert.SerializeObject(_bookingService.GetBookingList(AGENT_CODE, BOOKING_NO)));
+            return Ok(JsonConvert.SerializeObject(_bookingService.GetBookingList(AGENT_CODE, BOOKING_NO, FROM_DATE, TO_DATE)));
         }
 
         [HttpGet("GetBookingDetails")]

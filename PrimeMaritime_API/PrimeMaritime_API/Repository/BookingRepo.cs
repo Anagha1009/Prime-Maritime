@@ -90,13 +90,15 @@ namespace PrimeMaritime_API.Repository
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_SLOT_DETAILS", columns);
         }
 
-        public List<BookingList> GetBookingList(string connstring, string AGENT_CODE, string BOOKING_NO)
+        public List<BookingList> GetBookingList(string connstring, string AGENT_CODE, string BOOKING_NO, string FROM_DATE, string TO_DATE)
         {
             SqlParameter[] parameters =
             {
               new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_BOOKINGLIST" },
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
               new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+              new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+              new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE},
             };
 
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BOOKING", parameters);
