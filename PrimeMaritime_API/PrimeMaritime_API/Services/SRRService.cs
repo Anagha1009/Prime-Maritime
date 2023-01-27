@@ -270,7 +270,7 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<string> UpdateSRR(List<SRRRequest> request)
+        public Response<string> UpdateSRR(List<SRR_RATES> request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
