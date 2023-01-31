@@ -208,7 +208,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50),STATUS varchar(50))";
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), STATUS varchar(50))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -226,7 +226,54 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET SRR_NO = Temp.SRR_NO,STATUS = Temp.STATUS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO; DROP TABLE #TmpTable;";
+                        command.CommandText = "UPDATE T SET STATUS = Temp.STATUS FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO; DROP TABLE #TmpTable;";
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
+        public static void UpdateSRRRates<T>(List<T> list, string TableName, string connString, string[] columns)
+        {
+            DataTable dt = new DataTable("TB_SRR_RATES");
+            dt = ConvertToDataTable(list);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand("", conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        //Creating temp table on database
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), APPROVED_RATE decimal, STATUS varchar(50), REMARKS varchar(255), CREATED_BY varchar(255))";
+                        command.ExecuteNonQuery();
+
+                        //Bulk insert into temp table
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(conn))
+                        {
+                            bulkcopy.BulkCopyTimeout = 660;
+                            bulkcopy.DestinationTableName = "#TmpTable";
+                            foreach (var i in columns)
+                            {
+                                bulkcopy.ColumnMappings.Add(i, i);
+                            }
+                            bulkcopy.WriteToServer(dt);
+                            bulkcopy.Close();
+                        }
+
+                        // Updating destination table, and dropping temp table
+                        command.CommandTimeout = 300;
+                        command.CommandText = "UPDATE T SET APPROVED_RATE = Temp.APPROVED_RATE, STATUS = Temp.STATUS, REMARKS = Temp.REMARKS, CREATED_BY = Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
                     catch (Exception)

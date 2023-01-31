@@ -296,15 +296,24 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public void UpdateSRR(string connstring, List<SRRRequest> request)
+        public void UpdateSRR(string connstring, List<SRR_RATES> request)
         {
             try
             {
-                string[] columns = new string[2];
+                string[] columns = new string[5];
                 columns[0] = "SRR_NO";
-                columns[1] = "STATUS";
+                columns[1] = "APPROVED_RATE";
+                columns[2] = "STATUS";
+                columns[3] = "REMARKS";
+                columns[4] = "CREATED_BY";
 
-                SqlHelper.UpdateSRR<SRRRequest>(request, "TB_SRR", connstring, columns);
+                SqlHelper.UpdateSRRRates<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
+
+                string[] columns2 = new string[2];
+                columns2[0] = "SRR_NO";
+                columns2[1] = "STATUS";
+
+                SqlHelper.UpdateSRR<SRR_RATES>(request, "TB_SRR", connstring, columns2);
 
             }
             catch (Exception)

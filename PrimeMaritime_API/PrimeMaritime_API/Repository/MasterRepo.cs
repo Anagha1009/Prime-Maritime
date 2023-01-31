@@ -178,13 +178,24 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        public List<CONTAINER_MASTER> GetContainerMasterList(string dbConn)
+        public List<CONTAINER_MASTER> GetContainerMasterList(string dbConn, string ContainerNo , string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_CONTAINERLIST" },
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_CONTAINERLIST" },                
+                  new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 20) { Value = ContainerNo },
+                  new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 50) { Value = ContType },
+                  new SqlParameter("@CONTAINER_SIZE", SqlDbType.VarChar, 20) { Value = ContSize },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = Status },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
+
+
+
+
+
 
                 };
 
@@ -628,13 +639,25 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        public List<CONTAINER_TYPE> GetContainerTypeMasterList(string dbConn)
+        public List<CONTAINER_TYPE> GetContainerTypeMasterList(string dbConn, string ContTypeCode, string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_CONT_TYPE_LIST" },
+                  new SqlParameter("@CONT_TYPE_CODE", SqlDbType.VarChar, 15) { Value = ContTypeCode },
+                  new SqlParameter("@CONT_TYPE", SqlDbType.VarChar, 50) { Value = ContType },
+                  new SqlParameter("@CONT_SIZE", SqlDbType.Int) { Value = ContSize },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = Status },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime, 20) { Value = TO_DATE },
+
+
+
+
+
+
 
                 };
 
@@ -869,14 +892,21 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<LINER> GetLinerList(string dbConn)
+        public List<LINER> GetLinerList(string dbConn,string Name,string Code,string  Description,bool Status, string FROM_DATE,string TO_DATE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_LINER_LIST" },
-                 
+                  new SqlParameter("@NAME", SqlDbType.VarChar, 255) { Value = Name },
+                  new SqlParameter("@CODE", SqlDbType.VarChar, 50) { Value = Code },
+                  new SqlParameter("@DESCRIPTION", SqlDbType.VarChar, 255) { Value = Description },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = Status },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
+
+
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_LINER", parameters);
@@ -985,14 +1015,18 @@ namespace PrimeMaritime_API.Repository
             }
 
         }
-        public List<SERVICE> GetServiceList(string dbConn)
+        public List<SERVICE> GetServiceList(string dbConn,string LinerCode,string ServiceName,string PortCode,bool Status,string FROM_DATE,string TO_DATE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SERVICELIST" },
-
+                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SERVICELIST" },
+                 new SqlParameter("@LINER_CODE", SqlDbType.VarChar, 100) { Value = LinerCode },
+                 new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = ServiceName },
+                 new SqlParameter("@STATUS", SqlDbType.Bit) { Value = Status },
+                 new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                 new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_SERVICE_MASTER", parameters);
@@ -1105,14 +1139,21 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        public List<SCHEDULE> GetScheduleList(string dbConn)
+        public List<SCHEDULE> GetScheduleList(string dbConn,string VesselName,string ServiceName,string PortCode,string VIANo,bool status,string FROM_DATE,string TO_DATE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_SCHEDULE" },
-
+                  new SqlParameter("@VESSEL_NAME", SqlDbType.VarChar, 255) { Value = VesselName },
+                  new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar, 255) { Value = ServiceName },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = PortCode },
+                  new SqlParameter("@VIA_NO", SqlDbType.VarChar, 100) { Value = VIANo },
+                
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = status },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                   new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_VESSEL_SCHEDULE", parameters);

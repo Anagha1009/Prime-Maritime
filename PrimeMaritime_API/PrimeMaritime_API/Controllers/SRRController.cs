@@ -59,7 +59,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("UpdateSRR")]
-        public ActionResult<Response<SRR>> UpdateSRR(List<SRRRequest> request)
+        public ActionResult<Response<SRR>> UpdateSRR(List<SRR_RATES> request)
         {
             return Ok(_srrService.UpdateSRR(request));
         }

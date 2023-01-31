@@ -40,6 +40,9 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("DEPO"))
                 item.DEPO = SqlHelper.GetNullableString(reader, "DEPO");
 
+            if (reader.IsColumnExists("COUNTRYCODE"))
+                item.COUNTRYCODE = SqlHelper.GetNullableString(reader, "COUNTRYCODE");
+
             return item;
         }
 
