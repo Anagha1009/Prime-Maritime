@@ -147,6 +147,53 @@ namespace PrimeMaritime_API.Helpers
             }
         }
 
+        public static void UpdateContainerMovement<T>(List<T> list, string TableName, string connString, string[] columns)
+        {
+            DataTable dt = new DataTable("TB_CONTAINER_MOVEMENT");
+            dt = ConvertToDataTable(list);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand("", conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        //Creating temp table on database
+                        command.CommandText = "CREATE TABLE #TmpTable(BOOKING_NO varchar(100),CRO_NO varchar(100),CONTAINER_NO varchar(100),CURR_ACT_CODE varchar(50),ACTIVITY_DATE datetime,LOCATION varchar(100),CURRENT_LOCATION varchar(100),STATUS varchar(50))";
+                        command.ExecuteNonQuery();
+
+                        //Bulk insert into temp table
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(conn))
+                        {
+                            bulkcopy.BulkCopyTimeout = 660;
+                            bulkcopy.DestinationTableName = "#TmpTable";
+                            foreach (var i in columns)
+                            {
+                                bulkcopy.ColumnMappings.Add(i, i);
+                            }
+                            bulkcopy.WriteToServer(dt);
+                            bulkcopy.Close();
+                        }
+
+                        // Updating destination table, and dropping temp table
+                        command.CommandTimeout = 300;
+                        command.CommandText = "UPDATE T SET BOOKING_NO = ISNULL(Temp.BOOKING_NO, T.BOOKING_NO),CRO_NO = ISNULL(Temp.CRO_NO, T.CRO_NO),CONTAINER_NO= Temp.CONTAINER_NO,ACTIVITY= Temp.CURR_ACT_CODE,PREV_ACTIVITY= T.ACTIVITY,ACTIVITY_DATE= Temp.ACTIVITY_DATE,LOCATION= Temp.LOCATION,STATUS= Temp.STATUS" +
+                            " FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO AND (T.BOOKING_NO = Temp.BOOKING_NO OR T.CRO_NO = Temp.CRO_NO); DROP TABLE #TmpTable;";
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
         public static void UpdateSRR<T>(List<T> list, string TableName, string connString, string[] columns)
         {
             DataTable dt = new DataTable("TB_SRR");
