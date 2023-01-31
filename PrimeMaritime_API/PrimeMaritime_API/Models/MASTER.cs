@@ -143,6 +143,7 @@ namespace PrimeMaritime_API.Models
 
         public Boolean STATUS { get; set; }
 
+
         public string CREATED_BY { get; set; }
     }
 

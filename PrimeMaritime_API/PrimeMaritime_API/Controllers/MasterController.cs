@@ -61,9 +61,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetContainerMasterList")]
-        public ActionResult<Response<List<CONTAINER_MASTER>>> GET_CONTAINERLIST()
+        public ActionResult<Response<List<CONTAINER_MASTER>>> GET_CONTAINERLIST(string CONTAINER_NO, string CONTAINER_TYPE, string CONTAINER_SIZE, bool STATUS, string FROM_DATE, string TO_DATE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerMasterList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerMasterList(CONTAINER_NO, CONTAINER_TYPE, CONTAINER_SIZE, STATUS, FROM_DATE, TO_DATE)));
         }
 
         [HttpGet("GetContainerMasterDetails")]
@@ -80,7 +80,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpDelete("DeleteContainerMasterList")]
-        public ActionResult<Response<CommonResponse>> DeleteContainerMasterList( int ID)
+        public ActionResult<Response<CommonResponse>> DeleteContainerMasterList(int ID)
         {
             return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerMasterList(ID)));
         }
@@ -192,9 +192,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetContainerTypeMasterList")]
-        public ActionResult<Response<List<CONTAINER_TYPE>>> GetContainerTypeMasterList()
+        public ActionResult<Response<List<CONTAINER_TYPE>>> GetContainerTypeMasterList(string CONT_TYPE_CODE, string CONTAINER_TYPE, string CONTAINER_SIZE, bool STATUS, string FROM_DATE, string TO_DATE)
         {
-           return Ok(JsonConvert.SerializeObject(_masterService.GetContainerTypeMasterList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetContainerTypeMasterList(CONT_TYPE_CODE, CONTAINER_TYPE, CONTAINER_SIZE, STATUS, FROM_DATE, TO_DATE)));
         }
 
         [HttpGet("GetContainerTypeMasterDetails")]
@@ -212,7 +212,7 @@ namespace PrimeMaritime_API.Controllers
         [HttpDelete("DeleteContainerTypeMaster")]
         public ActionResult<Response<CommonResponse>> DeleteContainerTypeMaster(int ID)
         {
-           return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerTypeMaster(ID)));
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteContainerTypeMaster(ID)));
         }
 
         #endregion
@@ -276,9 +276,9 @@ namespace PrimeMaritime_API.Controllers
 
         [HttpGet("GetLinerList")]
 
-        public ActionResult<Response<List<CommonResponse>>> GetLinerList( )
+        public ActionResult<Response<List<CommonResponse>>> GetLinerList(string NAME, string CODE, string DESCRIPTION, bool STATUS, string FROM_DATE, string TO_DATE)
         {
-            return Ok (JsonConvert.SerializeObject(_masterService.GetLinerList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetLinerList(NAME, CODE, DESCRIPTION, STATUS, FROM_DATE, TO_DATE)));
         }
 
         [HttpPost("UpdateLinerList")]
@@ -309,9 +309,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetServiceList")]
-        public ActionResult<Response<List<CommonResponse>>> GetServiceList()
+        public ActionResult<Response<List<CommonResponse>>> GetServiceList(string LINER_CODE, string SERVICE_NAME,string PORT_CODE,bool STATUS,string FROM_DATE,string TO_DATE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetServiceList(LINER_CODE, SERVICE_NAME,PORT_CODE,STATUS,FROM_DATE,TO_DATE)));
         }
 
         [HttpGet("GetServiceDetails")]
@@ -344,9 +344,9 @@ namespace PrimeMaritime_API.Controllers
 
         [HttpGet("GetScheduleList")]
 
-        public ActionResult<Response<List<CommonResponse>>> GetScheduleList()
+        public ActionResult<Response<List<CommonResponse>>> GetScheduleList(string VESSEL_NAME, string SERVICE_NAME,string PORT_CODE,string VIA_NO,bool STATUS,string FROM_DATE,string TO_DATE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetScheduleList()));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetScheduleList(VESSEL_NAME,SERVICE_NAME,PORT_CODE,VIA_NO,STATUS,FROM_DATE,TO_DATE)));
         }
 
         [HttpGet("GetScheduleDetails")]

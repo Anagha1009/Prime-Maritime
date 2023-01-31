@@ -24,7 +24,7 @@ namespace PrimeMaritime_API.IServices
         #region "CONTAINER MASTER"
         Response<CommonResponse> InsertContainerMaster(CONTAINER_MASTER request);
 
-        Response<List<CONTAINER_MASTER>> GetContainerMasterList();
+        Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType,string ContSize,bool Status,string FROM_DATE,string TO_DATE);
 
         Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID, string CONTAINER_NO);
 
@@ -73,7 +73,7 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> InsertContainerTypeMaster(CONTAINER_TYPE request);
 
-        Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList();
+        Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList( string ContTypeCode,string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE);
 
         Response<CONTAINER_TYPE> GetContainerTypeMasterDetails(int ID);
 
@@ -117,7 +117,7 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> InsertLiner(LINER request);
 
-        Response<List<LINER>> GetLinerList();
+        Response<List<LINER>> GetLinerList(string Name,string Code,string Description,bool Status,string FROM_DATE,string TO_DATE);
 
         Response<LINER> GetLinerDetails( int ID);
         Response<CommonResponse> UpdateLinerList(LINER request);
@@ -129,7 +129,7 @@ namespace PrimeMaritime_API.IServices
         #region "LinerService"
         Response<CommonResponse> InsertService(SERVICE request);
 
-        Response<List<SERVICE>> GetServiceList();
+        Response<List<SERVICE>> GetServiceList(string LinerCode,string ServiceName,string PortCode,bool Status,string FROM_DATE,string TO_CODE);
 
         Response<SERVICE> GetServiceDetails(int ID);
 
@@ -141,7 +141,7 @@ namespace PrimeMaritime_API.IServices
         #region "VESSELSCHEDULE"
         Response<CommonResponse> InsertSchedule(SCHEDULE request);
 
-        Response<List<SCHEDULE>> GetScheduleList();
+        Response<List<SCHEDULE>> GetScheduleList(string VesselName, string ServiceName, string PortCode, string VIANo, bool STATUS, string FROM_DATE, string TO_DATE);
 
         Response<SCHEDULE> GetScheduleDetails(int ID);
 
