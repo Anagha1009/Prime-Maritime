@@ -26,6 +26,22 @@ namespace PrimeMaritime_API.Services
             _config = config;
             _mailSettings = mailSettings.Value;
         }
+
+        public Response<int> CheckRandomNo(string RANDOM_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            int randomNo = Convert.ToInt32(DbClientFactory<CommonRepo>.Instance.CheckRandomNo(dbConn, RANDOM_NO));
+
+            Response<int> response = new Response<int>();
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.Data = randomNo;
+
+            return response;
+        }
+
         public Response<List<DROPDOWN>> GetDropdownData(string key, string port, string value, int value1)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

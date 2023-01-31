@@ -16,6 +16,7 @@ namespace PrimeMaritime_API.Models
         public int ROLE_ID { get; set; }
         public string PORT { get; set; }
         public string DEPO { get; set; }
+        public string COUNTRYCODE { get; set; }
         public string STATUS { get; set; }
         public string CREATED_BY { get; set; }
         public string CREATED_DATE { get; set; }
