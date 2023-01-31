@@ -5,10 +5,7 @@ using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
@@ -131,12 +128,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<CONTAINER_MASTER>> GetContainerMasterList()
+        public Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CONTAINER_MASTER>> response = new Response<List<CONTAINER_MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterList(dbConn, ContainerNo, ContType, ContSize, Status, FROM_DATE, TO_DATE);
 
             if (data != null)
             {
@@ -543,12 +540,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList()
+        public Response<List<CONTAINER_TYPE>> GetContainerTypeMasterList(string ContTypeCode, string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CONTAINER_TYPE>> response = new Response<List<CONTAINER_TYPE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerTypeMasterList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerTypeMasterList( dbConn,  ContTypeCode,  ContType,  ContSize,  Status,  FROM_DATE,  TO_DATE);
 
             if (data != null)
             {
@@ -774,12 +771,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<LINER>> GetLinerList()
+        public Response<List<LINER>> GetLinerList(string Name,string Code,string Description,bool Status,string FROM_DATE,string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<LINER>> response = new Response<List<LINER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetLinerList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetLinerList(dbConn , Name,  Code,  Description,  Status,  FROM_DATE,  TO_DATE);
 
             if (data != null)
             {
@@ -875,12 +872,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SERVICE>> GetServiceList()
+        public Response<List<SERVICE>> GetServiceList(string LinerCode,string Servicename,string PortCode,bool Status,string FROM_DATE,string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SERVICE>> response = new Response<List<SERVICE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetServiceList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetServiceList(dbConn, LinerCode, Servicename, PortCode, Status, FROM_DATE, TO_DATE);
 
             if (data != null)
             {
@@ -978,12 +975,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SCHEDULE>> GetScheduleList()
+        public Response<List<SCHEDULE>> GetScheduleList( string VesselName, string ServiceName, string PortCode, string VIANo, bool status, string FROM_DATE, string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SCHEDULE>> response = new Response<List<SCHEDULE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleList(dbConn ,  VesselName,  ServiceName,  PortCode,  VIANo,    status,  FROM_DATE,  TO_DATE);
 
             if (data != null)
             {
