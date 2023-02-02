@@ -76,29 +76,17 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("CONTAINER_TYPE"))
                 item.CONTAINER_TYPE = SqlHelper.GetNullableString(reader, "CONTAINER_TYPE");
 
-            if (reader.IsColumnExists("CONTAINER_SIZE"))
-                item.CONTAINER_SIZE = SqlHelper.GetNullableString(reader, "CONTAINER_SIZE");
+            if (reader.IsColumnExists("ONHIRE_DATE"))
+                item.ONHIRE_DATE = SqlHelper.GetDateTime(reader, "ONHIRE_DATE");
 
-            if (reader.IsColumnExists("ON_HIRE_DATE"))
-                item.ON_HIRE_DATE = SqlHelper.GetDateTime(reader, "ON_HIRE_DATE");
+            if (reader.IsColumnExists("ONHIRE_LOCATION"))
+                item.ONHIRE_LOCATION = SqlHelper.GetNullableString(reader, "ONHIRE_LOCATION");
 
-            if (reader.IsColumnExists("OFF_HIRE_DATE"))
-                item.OFF_HIRE_DATE = SqlHelper.GetDateTime(reader, "OFF_HIRE_DATE");
+            if (reader.IsColumnExists("LEASED_FROM"))
+                item.LEASED_FROM = SqlHelper.GetNullableString(reader, "LEASED_FROM");
 
-            if (reader.IsColumnExists("MANUFACTURING_DATE"))
-                item.MANUFACTURING_DATE = SqlHelper.GetDateTime(reader, "MANUFACTURING_DATE");
-
-            if (reader.IsColumnExists("OWNER_NAME"))
-                item.OWNER_NAME = SqlHelper.GetNullableString(reader, "OWNER_NAME");
-
-            if (reader.IsColumnExists("LESSOR_NAME"))
-                item.LESSOR_NAME = SqlHelper.GetNullableString(reader, "LESSOR_NAME");
-
-            if (reader.IsColumnExists("PICKUP_LOCATION"))
-                item.PICKUP_LOCATION = SqlHelper.GetNullableString(reader, "PICKUP_LOCATION");
-
-            if (reader.IsColumnExists("DROP_LOCATION"))
-                item.DROP_LOCATION = SqlHelper.GetNullableString(reader, "DROP_LOCATION");
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
 
             return item;
         }
@@ -376,11 +364,11 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("VIA_NO"))
                 item.VIA_NO = SqlHelper.GetNullableString(reader, "VIA_NO");
 
-            //if (reader.IsColumnExists("ETA"))
-            //    item.ETA = SqlHelper.GetDateTime(reader, "VIA_NO");
+            if (reader.IsColumnExists("ETA"))
+                item.ETA = SqlHelper.GetDateTime(reader, "ETA");
 
-            //if (reader.IsColumnExists("ETD"))
-            //    item.ETD = SqlHelper.GetDateTime(reader, "ETD");
+            if (reader.IsColumnExists("ETD"))
+                item.ETD = SqlHelper.GetDateTime(reader, "ETD");
 
             if (reader.IsColumnExists("STATUS"))
                 item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
@@ -393,10 +381,66 @@ namespace PrimeMaritime_API.Translators
             return item;
         }
 
+        public static VOYAGE TranslateAsVoyage(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
 
+            var item = new VOYAGE();
 
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
 
+            if (reader.IsColumnExists("VESSEL_NAME"))
+                item.VESSEL_NAME = SqlHelper.GetNullableString(reader, "VESSEL_NAME");
 
+            if (reader.IsColumnExists("VOYAGE_NO"))
+                item.VOYAGE_NO = SqlHelper.GetNullableString(reader, "VOYAGE_NO");
 
+            if (reader.IsColumnExists("ATA"))
+                item.ATA = SqlHelper.GetDateTime(reader, "ATA");
+
+            if (reader.IsColumnExists("ATD"))
+                item.ATD = SqlHelper.GetDateTime(reader, "ATD");
+
+            if (reader.IsColumnExists("IMM_CURR"))
+                item.IMM_CURR = SqlHelper.GetNullableString(reader, "IMM_CURR");
+
+            if (reader.IsColumnExists("IMM_CURR_RATE"))
+                item.IMM_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMM_CURR_RATE"));
+
+            if (reader.IsColumnExists("EXP_CURR"))
+                item.EXP_CURR = SqlHelper.GetNullableString(reader, "EXP_CURR");
+
+            if (reader.IsColumnExists("EXP_CURR_RATE"))
+                item.EXP_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXP_CURR_RATE"));
+
+            if (reader.IsColumnExists("TERMINAL_CODE"))
+                item.TERMINAL_CODE = SqlHelper.GetNullableString(reader, "TERMINAL_CODE");
+
+            if (reader.IsColumnExists("SERVICE_NAME"))
+                item.SERVICE_NAME = SqlHelper.GetNullableString(reader, "SERVICE_NAME");
+
+            if (reader.IsColumnExists("VIA_NO"))
+                item.VIA_NO = SqlHelper.GetNullableString(reader, "VIA_NO");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            if (reader.IsColumnExists("ETA"))
+                item.ETA = SqlHelper.GetDateTime(reader, "ETA");
+
+            if (reader.IsColumnExists("ETD"))
+                item.ETD = SqlHelper.GetDateTime(reader, "ETD");
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+            return item;
+        }
     }
 }

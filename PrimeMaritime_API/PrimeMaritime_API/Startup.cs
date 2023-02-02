@@ -57,6 +57,11 @@ namespace PrimeMaritime_API
                     });
             });
 
+            //services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+            //{
+            //    builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+            //}));
+
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<ISRRService, SRRService>();
@@ -123,18 +128,19 @@ namespace PrimeMaritime_API
                         c.SwaggerEndpoint("v1/swagger.json", "My API V1");
                     });
                 }
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeMaritime_API v1"));
+               // app.UseSwagger();
+               // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeMaritime_API v1"));
             }
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
-                RequestPath = "/Uploads"
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+            //    RequestPath = "/Uploads"
+            //});
 
             app.UseCors();
+            //app.UseCors("ApiCorsPolicy");
 
             app.UseHttpsRedirection();
 

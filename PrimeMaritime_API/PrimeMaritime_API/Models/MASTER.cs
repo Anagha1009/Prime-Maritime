@@ -31,36 +31,10 @@ namespace PrimeMaritime_API.Models
         public int ID { get; set; }
         public string CONTAINER_NO { get; set; }
         public string CONTAINER_TYPE { get; set; }
-
-        public string CONTAINER_SIZE { get; set; }
-
-        public Boolean IS_OWNED { get; set; }
-
-        public DateTime? ON_HIRE_DATE { get; set; } = null;
-
-        public DateTime? OFF_HIRE_DATE { get; set; } = null;
-
-        public DateTime? MANUFACTURING_DATE { get; set; } = null;
-
-        public Boolean SHIPPER_OWNED { get; set; }
-
-        public string OWNER_NAME { get; set; }
-
-        public string LESSOR_NAME { get; set; }
-
-        public string PICKUP_LOCATION { get; set; }
-
-        public string DROP_LOCATION { get; set; }
-
-        public Boolean STATUS { get; set; }
-
-        public string CREATED_BY { get; set; }
-
-        public DateTime? CREATED_DATE { get; set; } = null;
-
-        public string UPDATED_BY { get; set; }
-
-        public DateTime? UPDATED_DATE { get; set; } = null;
+        public DateTime ONHIRE_DATE { get; set; }      
+        public string ONHIRE_LOCATION { get; set; }      
+        public string LEASED_FROM { get; set; }      
+        public bool STATUS { get; set; }
     }
 
     public class MASTER
