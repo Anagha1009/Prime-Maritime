@@ -10,7 +10,9 @@ namespace PrimeMaritime_API.IServices
 {
     public interface IBLService
     {
-        Response<CommonResponse> InsertBL(BL request);
+        Response<string> InsertBL(BL request);
+
+        Response<string> UpdateBL(BL request);
 
         Response<BL> GetBLDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE);
 
