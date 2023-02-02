@@ -89,6 +89,7 @@ namespace PrimeMaritime_API.Services
             response.UserCode = user.USERCODE;
             response.Port = user.PORT;
             response.Depo = user.DEPO;
+            response.countrycode = user.COUNTRYCODE;
 
             return response;
         }

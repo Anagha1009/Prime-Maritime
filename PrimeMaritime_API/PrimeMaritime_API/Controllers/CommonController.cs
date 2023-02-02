@@ -41,5 +41,11 @@ namespace PrimeMaritime_API.Controllers
                 throw;
             }
         }
+
+        [HttpGet("CheckRandomNuber")]
+        public ActionResult<Response<int>> CheckRandomNuber(string RANDOM_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_commonService.CheckRandomNo(RANDOM_NO)));
+        }
     }
 }

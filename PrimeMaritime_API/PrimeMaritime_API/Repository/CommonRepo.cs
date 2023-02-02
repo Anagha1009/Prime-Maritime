@@ -26,5 +26,23 @@ namespace PrimeMaritime_API.Repository
 
             return dropdownList;
         }
+
+        public string CheckRandomNo(string connstring, string RANDOM_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+            {
+                new SqlParameter("@RANDOM_NO", SqlDbType.VarChar, 100) { Value = RANDOM_NO },
+            };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CHECK_RANDOM_NUMBER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }
