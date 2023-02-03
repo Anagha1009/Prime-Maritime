@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace PrimeMaritime_API.Controllers
 {
@@ -30,12 +31,42 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_cmService.InsertContainerMovement(request,fromXL));
         }
 
-        [HttpGet("GetContainerMovementList")]
-        public ActionResult<Response<List<CMList>>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //[HttpGet("GetContainerMovementList")]
+        //public ActionResult<Response<List<CMList>>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //{
+        //    return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO)));
+        //}
+
+        [HttpGet("GetContainerMovement")] //ANAGHA
+        public ActionResult<Response<CONTAINERMOVEMENT>> GetContainerMovement(string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO)));
+            return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovement(BOOKING_NO, CRO_NO, CONTAINER_NO)));
         }
-        
+
+        [HttpGet("GetContainerMovementList")] //ANAGHA
+        public ActionResult<Response<List<CMList>>> GetContainerMovementList(string BOOKING_NO, string CRO_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementList(BOOKING_NO, CRO_NO)));
+        }
+
+        [HttpPost("UpdateContainerMovement")] //ANAGHA
+        public ActionResult<Response<string>> UpdateContainerMovement(CONTAINERMOVEMENT cm)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.UpdateContainerMovement(cm)));
+        }
+
+        [HttpPost("UploadContainerMovement")] //ANAGHA
+        public ActionResult<Response<string>> UploadContainerMovement(List<CONTAINERMOVEMENT> cm)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.UploadContainerMovement(cm)));
+        }
+
+        [HttpGet("GetAvailableContainerListForDepo")] //ANAGHA
+        public ActionResult<Response<List<CM>>> GetAvailableContainerListForDepo(string DEPO_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetAvailableContainerListForDepo(DEPO_CODE)));
+        }
+
         [HttpGet("GetContainerMovementBooking")]
         public ActionResult<Response<List<CM>>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO)
         {

@@ -23,7 +23,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertBL")]
-        public ActionResult<Response<CommonResponse>> InsertBL(BL request)
+        public ActionResult<Response<string>> InsertBL(BL request)
         {
             return Ok(_blService.InsertBL(request));
         }
@@ -56,6 +56,12 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<Response<List<CargoManifest>>> GetCargoManifestList(string AGENT_CODE, string BL_NO)
         {
             return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, BL_NO)));
+        }
+
+        [HttpPost("UpdateBL")]
+        public ActionResult<Response<string>> UpdateBL(BL request)
+        {
+            return Ok(_blService.UpdateBL(request));
         }
 
 

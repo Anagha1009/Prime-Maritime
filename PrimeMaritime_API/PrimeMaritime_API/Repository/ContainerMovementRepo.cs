@@ -12,21 +12,21 @@ namespace PrimeMaritime_API.Repository
 {
     public class ContainerMovementRepo
     {
-        public void InsertContainerMovement(string connstring, CONTAINER_MOVEMENT request,bool fromXL)
+        public void InsertContainerMovement(string connstring, CONTAINER_MOVEMENT request, bool fromXL)
         {
-            
+
 
             if (request.CONTAINER_NO != "")
             {
 
-                
+
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_SINGLE_CONTAINER_MOVEMENT" },
                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 100) { Value = request.CONTAINER_NO }
                 };
 
-                var cmID= SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                var cmID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
                 if (cmID != "")
                 {
                     SqlParameter[] parameters1 =
@@ -106,7 +106,7 @@ namespace PrimeMaritime_API.Repository
                     var newCmID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", paramS);
 
                 }
-                
+
             }
             else
             {
@@ -193,46 +193,108 @@ namespace PrimeMaritime_API.Repository
 
                     SqlHelper.UpdateCMData<CM>(request.CONTAINER_MOVEMENT_LIST, "TB_CONTAINER_MOVEMENT", connstring, columns);
                 }
-                
+
 
             }
         }
-        public List<CMList> GetContainerMovementList(string connstring, string AGENT_CODE, string DEPO_CODE,string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //public List<CMList> GetContainerMovementList(string connstring, string AGENT_CODE, string DEPO_CODE,string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //{
+        //    SqlParameter[] parameters =
+        //    {
+        //        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINER_MOVEMENT" },
+        //        new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = AGENT_CODE },
+        //        new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
+        //        new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+        //        new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+        //        new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,100) { Value = CONTAINER_NO }
+
+        //     };
+        //    DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+        //    List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);
+
+        //    var uniqueCMList = containerList.GroupBy(x => x.CONTAINER_NO);
+
+        //    List<CMList> cmList = new List<CMList>();
+        //    foreach(var cont in uniqueCMList)
+        //    {
+        //        CMList cm = new CMList();
+        //        cm = cont.FirstOrDefault();
+
+        //        var nextActList = cont
+        //        .Where(x => x.CONTAINER_NO == cm.CONTAINER_NO)
+        //        .Select(n => n.Column1).ToList();
+
+        //        cm.NEXT_ACTIVITY_LIST = nextActList;
+        //        cmList.Add(cm);
+        //    }
+
+        //    return cmList;
+        //}
+
+        public List<CMList> GetContainerMovementList(string connstring, string BOOKING_NO, string CRO_NO)
         {
-            SqlParameter[] parameters =
+            try
             {
-                new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINER_MOVEMENT" },
-                new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = AGENT_CODE },
-                new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
-                new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
-                new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
-                new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,100) { Value = CONTAINER_NO }
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERMOVEMENT_LIST" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+                };
 
-             };
-            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
-            List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CMList> containerList = SqlHelper.CreateListFromTable<CMList>(dataTable);
 
-            var uniqueCMList = containerList.GroupBy(x => x.CONTAINER_NO);
-
-            List<CMList> cmList = new List<CMList>();
-            foreach(var cont in uniqueCMList)
-            {
-                CMList cm = new CMList();
-                cm = cont.FirstOrDefault();
-
-                var nextActList = cont
-                .Where(x => x.CONTAINER_NO == cm.CONTAINER_NO)
-                .Select(n => n.Column1).ToList();
-
-                cm.NEXT_ACTIVITY_LIST = nextActList;
-                cmList.Add(cm);
+                return containerList;
             }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<CM> GetAvailableContainerListForDepo(string connstring, string DEPO_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_AVAILABLE_CONTAINERS_FORDEPO" },
+                    new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
+                };
 
-            return cmList;
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+
+                return containerList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet GetContainerMovement(string connstring, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERMOVEMENT" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+                    new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = CONTAINER_NO },
+                };
+
+               return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
 
-        public List<CM> GetContainerMovementBooking(string connstring,string BOOKING_NO,string CRO_NO)
+        public List<CM> GetContainerMovementBooking(string connstring, string BOOKING_NO, string CRO_NO)
         {
             try
             {
@@ -276,6 +338,54 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public string UpdateContainerMovement(string connstring, CONTAINERMOVEMENT cm)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "UPDATE_CONTAINERMOVEMENT" },
+                    new SqlParameter("@BOOKING_NO", SqlDbType.VarChar, 100) { Value = cm.BOOKING_NO },
+                    new SqlParameter("@CRO_NO", SqlDbType.VarChar, 100) { Value = cm.CRO_NO },
+                    new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 50) { Value = cm.CONTAINER_NO },
+                    new SqlParameter("@CURR_ACT_CODE", SqlDbType.VarChar, 50) { Value = cm.CURR_ACT_CODE },
+                    new SqlParameter("@PREV_ACTIVITY", SqlDbType.VarChar, 50) { Value = cm.PREV_ACTIVITY },
+                    new SqlParameter("@ACTIVITY_DATE", SqlDbType.DateTime) { Value = cm.ACTIVITY_DATE },
+                    new SqlParameter("@LOCATION", SqlDbType.VarChar,100) { Value = cm.LOCATION },
+                    new SqlParameter("@STATUS", SqlDbType.VarChar,100) { Value = cm.STATUS }
+                };
+               
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT",parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void UploadContainerMovement(string connstring, List<CONTAINERMOVEMENT> cm)
+        {
+            try
+            {
+                string[] columns1 = new string[7];
+                columns1[0] = "BOOKING_NO";
+                columns1[1] = "CRO_NO";
+                columns1[2] = "CONTAINER_NO";
+                columns1[3] = "CURR_ACT_CODE";
+                columns1[4] = "ACTIVITY_DATE";
+                columns1[5] = "LOCATION";
+                columns1[6] = "STATUS";
+
+                SqlHelper.UpdateContainerMovement<CONTAINERMOVEMENT>(cm,"TB_CONTAINER_MOVEMENT", connstring, columns1);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         public CM GetSingleContainerMovement(string connstring, string CONTAINER_NO)
         {
@@ -293,6 +403,16 @@ namespace PrimeMaritime_API.Repository
             {
                 throw;
             }
+        }
+
+        public static T GetSingleDataFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateItemFromRow<T>(dataTable.Rows[0]);
+        }
+
+        public static List<T> GetListFromDataSet<T>(DataTable dataTable) where T : new()
+        {
+            return SqlHelper.CreateListFromTable<T>(dataTable);
         }
     }
 }
