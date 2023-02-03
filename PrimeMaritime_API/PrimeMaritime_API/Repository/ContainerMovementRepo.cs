@@ -252,6 +252,26 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public List<CM> GetAvailableContainerListForDepo(string connstring, string DEPO_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_AVAILABLE_CONTAINERS_FORDEPO" },
+                    new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+
+                return containerList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DataSet GetContainerMovement(string connstring, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {

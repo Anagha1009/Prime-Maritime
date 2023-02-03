@@ -61,6 +61,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_cmService.UploadContainerMovement(cm)));
         }
 
+        [HttpGet("GetAvailableContainerListForDepo")] //ANAGHA
+        public ActionResult<Response<List<CM>>> GetAvailableContainerListForDepo(string DEPO_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetAvailableContainerListForDepo(DEPO_CODE)));
+        }
+
         [HttpGet("GetContainerMovementBooking")]
         public ActionResult<Response<List<CM>>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO)
         {
