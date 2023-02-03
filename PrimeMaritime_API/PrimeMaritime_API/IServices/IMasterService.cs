@@ -24,7 +24,7 @@ namespace PrimeMaritime_API.IServices
         #region "CONTAINER MASTER"
         Response<CommonResponse> InsertContainerMaster(CONTAINER_MASTER request);
 
-        Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType,string ContSize,bool Status,string FROM_DATE,string TO_DATE);
+        Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType,string ContSize,bool Status, string ONHIRE_DATE);
 
         Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID, string CONTAINER_NO);
 
@@ -36,7 +36,7 @@ namespace PrimeMaritime_API.IServices
         #region "COMMON MASTER"
         Response<CommonResponse> InsertMaster(MASTER request);
 
-        Response<List<MASTER>> GetMasterList(string key);
+        Response<List<MASTER>> GetMasterList(string key, string FROM_DATE, string TO_DATE, string STATUS);
 
         Response<MASTER> GetMasterDetails(int ID);
 
@@ -47,15 +47,11 @@ namespace PrimeMaritime_API.IServices
 
         #region "VESSEL MASTER"
         Response<CommonResponse> InsertVesselMaster(VESSEL_MASTER request);
-        Response<List<VESSEL_MASTER>> GetVesselMasterList();
-
+        Response<List<VESSEL_MASTER>> GetVesselMasterList(string VESSEL_NAME, string IMO_NO, string STATUS, string FROM_DATE, string TO_DATE);
         Response<VESSEL_MASTER> GetVesselMasterDetails(int ID);
-
         Response<CommonResponse> UpdateVesselMasterList(VESSEL_MASTER request);
-
         Response<CommonResponse> DeleteVesselMasterList(int ID);
         #endregion
-
 
         #region "SERVICE MASTER"
         Response<CommonResponse> InsertServiceMaster(SERVICE_MASTER request);
@@ -83,7 +79,6 @@ namespace PrimeMaritime_API.IServices
 
 
         #endregion
-
 
         #region "ICD MASTER"
 
@@ -129,7 +124,7 @@ namespace PrimeMaritime_API.IServices
         #region "LinerService"
         Response<CommonResponse> InsertService(SERVICE request);
 
-        Response<List<SERVICE>> GetServiceList(string LinerCode,string ServiceName,string PortCode,bool Status,string FROM_DATE,string TO_CODE);
+        Response<List<SERVICE>> GetServiceList(bool Status,string FROM_DATE,string TO_CODE);
 
         Response<SERVICE> GetServiceDetails(int ID);
 
@@ -141,13 +136,24 @@ namespace PrimeMaritime_API.IServices
         #region "VESSELSCHEDULE"
         Response<CommonResponse> InsertSchedule(SCHEDULE request);
 
-        Response<List<SCHEDULE>> GetScheduleList(string VesselName, string ServiceName, string PortCode, string VIANo, bool STATUS, string FROM_DATE, string TO_DATE);
+        Response<List<SCHEDULE>> GetScheduleList(string VESSEL_NAME, string PORT_CODE, bool STATUS, string ETA, string ETD);
 
         Response<SCHEDULE> GetScheduleDetails(int ID);
 
         Response<CommonResponse> UpdateSchedule(SCHEDULE request);
 
         Response<CommonResponse> DeleteSchedule(int ID);
+
+        #endregion
+
+        #region "VESSEL VOYAGE"
+        Response<List<VOYAGE>> GetVoyageList(bool STATUS, string FROM_DATE, string TO_DATE);
+
+        Response<VOYAGE> GetVoyageDetails(int ID);
+
+        Response<CommonResponse> UpdateVoyage(VOYAGE request);
+
+        Response<CommonResponse> DeleteVoyage(int ID);
 
         #endregion
     }

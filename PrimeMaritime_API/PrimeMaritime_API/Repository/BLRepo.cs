@@ -37,6 +37,10 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@BL_ISSUE_DATE", SqlDbType.DateTime) { Value = request.BL_ISSUE_DATE },
               new SqlParameter("@NO_OF_ORIGINAL_BL", SqlDbType.Int) { Value = request.NO_OF_ORIGINAL_BL },
               new SqlParameter("@BL_STATUS", SqlDbType.VarChar,20) { Value = request.BL_STATUS },
+              new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
+              new SqlParameter("@PREPAID_AT", SqlDbType.VarChar, 255) { Value = request.PREPAID_AT },
+              new SqlParameter("@PAYABLE_AT", SqlDbType.VarChar, 255) { Value = request.PAYABLE_AT },
+              new SqlParameter("@TOTAL_PREPAID", SqlDbType.Decimal) { Value = request.TOTAL_PREPAID },
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = request.AGENT_CODE },
               new SqlParameter("@AGENT_NAME", SqlDbType.VarChar,255) { Value = request.AGENT_NAME },
               new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = request.CREATED_BY },
@@ -47,21 +51,28 @@ namespace PrimeMaritime_API.Repository
             foreach (var i in request.CONTAINER_LIST)
             {
                 i.BL_NO = request.BL_NO;
+                i.BOOKING_NO = request.BOOKING_NO;
+                i.CRO_NO = request.CRO_NO;
+                i.MARKS_NOS = request.MARKS_NOS;
+                i.DESC_OF_GOODS = request.DESC_OF_GOODS;
+                
             }
 
-            string[] columns = new string[12];
+            string[] columns = new string[14];
             columns[0] = "BL_NO";
-            columns[1] = "CONTAINER_NO";
-            columns[2] = "CONTAINER_TYPE";
-            columns[3] = "CONTAINER_SIZE";
-            columns[4] = "SEAL_NO";
-            columns[5] = "MARKS_NOS";
-            columns[6] = "DESC_OF_GOODS";
-            columns[7] = "GROSS_WEIGHT";
-            columns[8] = "MEASUREMENT";
-            columns[9] = "AGENT_CODE";
-            columns[10] = "AGENT_NAME";
-            columns[11] = "CREATED_BY";
+            columns[1] = "BOOKING_NO";
+            columns[2] = "CRO_NO";
+            columns[3] = "CONTAINER_NO";
+            columns[4] = "CONTAINER_TYPE";
+            columns[5] = "CONTAINER_SIZE";
+            columns[6] = "SEAL_NO";
+            columns[7] = "MARKS_NOS";
+            columns[8] = "DESC_OF_GOODS";
+            columns[9] = "GROSS_WEIGHT";
+            columns[10] = "MEASUREMENT";
+            columns[11] = "AGENT_CODE";
+            columns[12] = "AGENT_NAME";
+            columns[13] = "CREATED_BY";
 
             SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
@@ -76,6 +87,72 @@ namespace PrimeMaritime_API.Repository
             };
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);
+        }
+
+        public void UpdateBL(string connstring, BL request)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                    {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_BL" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 50) { Value = request.BL_NO },
+              new SqlParameter("@SHIPPER", SqlDbType.VarChar, 50) { Value = request.SHIPPER },
+              new SqlParameter("@SHIPPER_ADDRESS", SqlDbType.VarChar, 255) { Value = request.SHIPPER_ADDRESS },
+              new SqlParameter("@CONSIGNEE", SqlDbType.VarChar, 50) { Value = request.CONSIGNEE },
+              new SqlParameter("@CONSIGNEE_ADDRESS", SqlDbType.VarChar, 255) { Value = request.CONSIGNEE_ADDRESS },
+              new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 50) { Value = request.NOTIFY_PARTY },
+              new SqlParameter("@NOTIFY_PARTY_ADDRESS", SqlDbType.VarChar,255) { Value = request.NOTIFY_PARTY_ADDRESS },
+              new SqlParameter("@PRE_CARRIAGE_BY", SqlDbType.VarChar,50) { Value = request.PRE_CARRIAGE_BY },
+              new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar,255) { Value = request.PLACE_OF_RECEIPT },
+              new SqlParameter("@VESSEL_NAME", SqlDbType.VarChar,255) { Value = request.VESSEL_NAME },
+              new SqlParameter("@VOYAGE_NO", SqlDbType.VarChar,50) { Value = request.VOYAGE_NO },
+              new SqlParameter("@PORT_OF_LOADING", SqlDbType.VarChar,255) { Value = request.PORT_OF_LOADING },
+              new SqlParameter("@PORT_OF_DISCHARGE", SqlDbType.VarChar,255) { Value = request.PORT_OF_DISCHARGE },
+              new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar,255) { Value = request.PLACE_OF_DELIVERY },
+              new SqlParameter("@BL_ISSUE_PLACE", SqlDbType.VarChar,100) { Value = request.BL_ISSUE_PLACE },
+              new SqlParameter("@BL_ISSUE_DATE", SqlDbType.DateTime) { Value = request.BL_ISSUE_DATE },
+              new SqlParameter("@NO_OF_ORIGINAL_BL", SqlDbType.Int) { Value = request.NO_OF_ORIGINAL_BL },
+              new SqlParameter("@BL_STATUS", SqlDbType.VarChar,20) { Value = request.BL_STATUS },
+              new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
+              new SqlParameter("@PREPAID_AT", SqlDbType.VarChar, 255) { Value = request.PREPAID_AT },
+              new SqlParameter("@PAYABLE_AT", SqlDbType.VarChar, 255) { Value = request.PAYABLE_AT },
+              new SqlParameter("@TOTAL_PREPAID", SqlDbType.Decimal) { Value = request.TOTAL_PREPAID }
+            };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
+
+                //string[] columns = new string[12];
+                //columns[0] = "BL_NO";
+                //columns[1] = "SHIPPER";
+                //columns[2] = "SHIPPER_ADDRESS";
+                //columns[3] = "CONSIGNEE";
+                //columns[4] = "CONSIGNEE_ADDRESS";
+                //columns[5] = "NOTIFY_PARTY";
+                //columns[6] = "NOTIFY_PARTY_ADDRESS";
+                //columns[7] = "PRE_CARRIAGE_BY";
+                //columns[8] = "PLACE_OF_RECEIPT";
+                //columns[9] = "VESSEL_NAME";
+                //columns[10] = "VOYAGE_NO";
+                //columns[11] = "PORT_OF_LOADING";
+                //columns[12] = "PORT_OF_DISCHARGE";
+                //columns[13] = "PLACE_OF_DELIVERY";
+                //columns[14] = "FINAL_DESTINATION";
+                //columns[15] = "PREPAID_AT";
+                //columns[16] = "PAYABLE_AT";
+                //columns[17] = "BL_ISSUE_PLACE";
+                //columns[18] = "BL_ISSUE_DATE";
+                //columns[19] = "TOTAL_PREPAID";
+                //columns[20] = "NO_OF_ORIGINAL_BL";
+                //columns[21] = "BL_STATUS";
+
+                //SqlHelper.UpdateBL<BL>(request, "TB_BL", connstring, columns);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public List<BL> GetBLHistory(string connstring,string AGENT_CODE)

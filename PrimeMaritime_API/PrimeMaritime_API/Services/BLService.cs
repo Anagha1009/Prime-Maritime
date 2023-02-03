@@ -20,19 +20,36 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }       
 
-        public Response<CommonResponse> InsertBL(BL request)
+        public Response<string> InsertBL(BL request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             DbClientFactory<BLRepo>.Instance.InsertBL(dbConn, request);
 
-            Response<CommonResponse> response = new Response<CommonResponse>();
+            Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "BL Created Successfully.";
             response.ResponseCode = 200;
 
             return response;
         }
+
+
+
+        //public Response<string> UpdateBL(List<BL> request)
+        //{
+        //    string dbConn = _config.GetConnectionString("ConnectionString");
+
+        //    DbClientFactory<BLRepo>.Instance.UpdateBL(dbConn, request);
+
+        //    Response<string> response = new Response<string>();
+        //    response.Succeeded = true;
+        //    response.ResponseMessage = "Updated Successfully.";
+        //    response.ResponseCode = 200;
+        //    response.Data = "1";
+
+        //    return response;
+        //}
         public Response<BL> GetBLDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -196,6 +213,20 @@ namespace PrimeMaritime_API.Services
 
             return response;
 
+        }
+
+        public Response<string> UpdateBL(BL request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BLRepo>.Instance.UpdateBL(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "BL Created Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
         }
     }
 

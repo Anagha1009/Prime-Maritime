@@ -20,12 +20,36 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        public Response<List<CMList>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //public Response<List<CMList>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        //{
+        //    string dbConn = _config.GetConnectionString("ConnectionString");
+
+        //    Response<List<CMList>> response = new Response<List<CMList>>();
+        //    var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
+
+        //    if (data != null)
+        //    {
+        //        response.Succeeded = true;
+        //        response.ResponseCode = 200;
+        //        response.ResponseMessage = "Success";
+        //        response.Data = data;
+        //    }
+        //    else
+        //    {
+        //        response.Succeeded = false;
+        //        response.ResponseCode = 500;
+        //        response.ResponseMessage = "No Data";
+        //    }
+
+        //    return response;
+        //}
+
+        public Response<List<CMList>> GetContainerMovementList(string BOOKING_NO, string CRO_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CMList>> response = new Response<List<CMList>>();
-            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, BOOKING_NO, CRO_NO);
 
             if (data != null)
             {
@@ -137,6 +161,79 @@ namespace PrimeMaritime_API.Services
                 response.ResponseCode = 500;
                 response.ResponseMessage = "No Data";
             }
+
+            return response;
+        }
+
+        public Response<CONTAINERMOVEMENT> GetContainerMovement(string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CONTAINERMOVEMENT> response = new Response<CONTAINERMOVEMENT>();
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovement(dbConn, BOOKING_NO, CRO_NO, CONTAINER_NO);
+
+            if ((data != null) && (data.Tables.Count > 0))
+            {
+                if(data.Tables[0].Rows.Count > 0)
+                {
+                    response.Succeeded = true;
+                    response.ResponseCode = 200;
+                    response.ResponseMessage = "Success";
+                    CONTAINERMOVEMENT cm = new CONTAINERMOVEMENT();
+
+                    cm = ContainerMovementRepo.GetSingleDataFromDataSet<CONTAINERMOVEMENT>(data.Tables[0]);
+
+                    if (data.Tables.Contains("Table1"))
+                    {
+                        cm.NEXT_ACTIVITY_LIST = ContainerMovementRepo.GetListFromDataSet<NEXT_ACTIVITY>(data.Tables[1]);
+                    }
+
+                    response.Data = cm;
+                }
+                else
+                {
+                    response.Succeeded = false;
+                    response.ResponseCode = 500;
+                    response.ResponseMessage = "No Data";
+                }
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<string> UpdateContainerMovement(CONTAINERMOVEMENT cm)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<ContainerMovementRepo>.Instance.UpdateContainerMovement(dbConn, cm);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Updated Successfully !";
+
+            return response;
+        }
+
+        public Response<string> UploadContainerMovement(List<CONTAINERMOVEMENT> cm)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<ContainerMovementRepo>.Instance.UploadContainerMovement(dbConn, cm);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
 
             return response;
         }
