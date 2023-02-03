@@ -68,6 +68,30 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<List<CM>> GetAvailableContainerListForDepo(string DEPO_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CM>> response = new Response<List<CM>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetAvailableContainerListForDepo(dbConn, DEPO_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
         public Response<CommonResponse> InsertContainerMovement(CONTAINER_MOVEMENT request, bool fromXL)
         {
 
