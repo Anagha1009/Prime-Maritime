@@ -30,7 +30,7 @@ namespace PrimeMaritime_API.Models
         public string PREPAID_AT { get; set; }
         public string PAYABLE_AT { get; set; }
         public string BL_ISSUE_PLACE { get; set; }
-        public DateTime BL_ISSUE_DATE { get; set; }
+        public DateTime? BL_ISSUE_DATE { get; set; }
         public decimal TOTAL_PREPAID { get; set; }
         public int NO_OF_ORIGINAL_BL { get; set; }
 
