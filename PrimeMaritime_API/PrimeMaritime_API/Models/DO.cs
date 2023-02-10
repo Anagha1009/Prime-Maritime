@@ -12,7 +12,7 @@ namespace PrimeMaritime_API.Models
 		public string BL_NO { get; set; }
 		public string DO_NO { get; set; }
 
-		public DateTime DO_DATE { get; set; }
+		public DateTime? DO_DATE { get; set; }
 		public DateTime ARRIVAL_DATE { get; set; }
 		public DateTime DO_VALIDITY { get; set; }
 		public string IGM_NO { get; set; }
