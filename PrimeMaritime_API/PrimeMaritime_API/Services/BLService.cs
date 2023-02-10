@@ -127,7 +127,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CONTAINERS>> response = new Response<List<CONTAINERS>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AGENT_CODE, BOOKING_NO, CRO_NO, BL_NO, DO_NO, fromDO);
+            var data = DbClientFactory<BLRepo>.Instance.GetContainerList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, BL_NO, DO_NO, fromDO);
 
             if (data != null)
             {

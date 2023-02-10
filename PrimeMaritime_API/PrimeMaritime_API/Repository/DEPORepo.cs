@@ -20,6 +20,7 @@ namespace PrimeMaritime_API.Repository
             tbl.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
             tbl.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
             tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+            tbl.Columns.Add(new DataColumn("DEPO_CODE", typeof(string)));
 
             foreach (var i in request.CONTAINER_LIST)
             {
@@ -29,15 +30,17 @@ namespace PrimeMaritime_API.Repository
                 dr["CRO_NO"] = request.CRO_NO;
                 dr["CONTAINER_NO"] = i.CONTAINER_NO;
                 dr["CREATED_BY"] = request.CREATED_BY;
+                dr["DEPO_CODE"] = request.DEPO_CODE;
 
                 tbl.Rows.Add(dr);
             }
 
-            string[] columns = new string[4];
+            string[] columns = new string[5];
             columns[0] = "BOOKING_NO";
             columns[1] = "CRO_NO";
             columns[2] = "CONTAINER_NO";
             columns[3] = "CREATED_BY";
+            columns[4] = "DEPO_CODE";
 
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER", columns);
 
@@ -60,8 +63,8 @@ namespace PrimeMaritime_API.Repository
                 dr["CRO_NO"] = request.CRO_NO;
                 dr["CONTAINER_NO"] = i.CONTAINER_NO;
                 dr["ACTIVITY"] = "SNTS";
-                dr["ACTIVITY_DATE"] = request.MOVEMENT_DATE;
-                dr["LOCATION"] = request.TO_LOCATION;
+                dr["ACTIVITY_DATE"] = i.MOVEMENT_DATE;
+                dr["LOCATION"] = i.TO_LOCATION;
                 dr["STATUS"] = "Empty";
                 dr["DEPO_CODE"] = request.DEPO_CODE;
                 dr["CREATED_BY"] = request.CREATED_BY;
@@ -101,8 +104,8 @@ namespace PrimeMaritime_API.Repository
                 dr["CRO_NO"] = request.CRO_NO;
                 dr["CONTAINER_NO"] = i.CONTAINER_NO;
                 dr["ACTIVITY"] = "SNTS";
-                dr["ACTIVITY_DATE"] = request.MOVEMENT_DATE;
-                dr["LOCATION"] = request.TO_LOCATION;
+                dr["ACTIVITY_DATE"] = i.MOVEMENT_DATE;
+                dr["LOCATION"] = i.TO_LOCATION;
                 dr["STATUS"] = "Empty";
                 dr["DEPO_CODE"] = request.DEPO_CODE;
                 dr["CREATED_BY"] = request.CREATED_BY;

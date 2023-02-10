@@ -128,12 +128,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType, string ContSize, bool Status, string FROM_DATE, string TO_DATE)
+        public Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType, string ContSize, bool Status, string ONHIRE_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CONTAINER_MASTER>> response = new Response<List<CONTAINER_MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterList(dbConn, ContainerNo, ContType, ContSize, Status, FROM_DATE, TO_DATE);
+            var data = DbClientFactory<MasterRepo>.Instance.GetContainerMasterList(dbConn, ContainerNo, ContType, ContSize, Status, ONHIRE_DATE);
 
             if (data != null)
             {
@@ -231,12 +231,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<MASTER>> GetMasterList(string key)
+        public Response<List<MASTER>> GetMasterList(string key, string FROM_DATE, string TO_DATE, string STATUS)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<MASTER>> response = new Response<List<MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetMasterList(dbConn, key);
+            var data = DbClientFactory<MasterRepo>.Instance.GetMasterList(dbConn, key,FROM_DATE,TO_DATE,STATUS);
 
             if (data != null)
             {
@@ -333,12 +333,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<VESSEL_MASTER>> GetVesselMasterList()
+        public Response<List<VESSEL_MASTER>> GetVesselMasterList(string VESSEL_NAME, string IMO_NO, string STATUS, string FROM_DATE, string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<VESSEL_MASTER>> response = new Response<List<VESSEL_MASTER>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetVesselMasterList(dbConn);
+            var data = DbClientFactory<MasterRepo>.Instance.GetVesselMasterList(dbConn,VESSEL_NAME,IMO_NO,STATUS,FROM_DATE,TO_DATE);
 
             if (data != null)
             {
@@ -872,12 +872,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SERVICE>> GetServiceList(string LinerCode,string Servicename,string PortCode,bool Status,string FROM_DATE,string TO_DATE)
+        public Response<List<SERVICE>> GetServiceList(bool Status,string FROM_DATE,string TO_DATE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SERVICE>> response = new Response<List<SERVICE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetServiceList(dbConn, LinerCode, Servicename, PortCode, Status, FROM_DATE, TO_DATE);
+            var data = DbClientFactory<MasterRepo>.Instance.GetServiceList(dbConn, Status, FROM_DATE, TO_DATE);
 
             if (data != null)
             {
@@ -959,7 +959,7 @@ namespace PrimeMaritime_API.Services
 
         #endregion
 
-        #region "VESSELSCHEDULE"
+        #region "VESSEL SCHEDULE"
         public Response<CommonResponse> InsertSchedule(SCHEDULE request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -975,12 +975,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<SCHEDULE>> GetScheduleList( string VesselName, string ServiceName, string PortCode, string VIANo, bool status, string FROM_DATE, string TO_DATE)
+        public Response<List<SCHEDULE>> GetScheduleList(string VESSEL_NAME, string PORT_CODE, bool STATUS, string ETA, string ETD)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SCHEDULE>> response = new Response<List<SCHEDULE>>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleList(dbConn ,  VesselName,  ServiceName,  PortCode,  VIANo,    status,  FROM_DATE,  TO_DATE);
+            var data = DbClientFactory<MasterRepo>.Instance.GetScheduleList(dbConn , VESSEL_NAME,  PORT_CODE,  STATUS,    ETA,  ETD);
 
             if (data != null)
             {
@@ -1058,9 +1058,92 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+        #endregion
 
+        #region "VESSEL VOYAGE"
+        public Response<List<VOYAGE>> GetVoyageList(bool STATUS, string FROM_DATE, string TO_DATE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
 
+            Response<List<VOYAGE>> response = new Response<List<VOYAGE>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetVoyageList(dbConn, STATUS, FROM_DATE, TO_DATE);
 
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<VOYAGE> GetVoyageDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<VOYAGE> response = new Response<VOYAGE>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetVoyageDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> UpdateVoyage(VOYAGE request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateVoyage(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteVoyage(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if ((ID == 0) || (ID == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteVoyage(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
         #endregion
     }
 }

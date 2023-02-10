@@ -62,5 +62,7 @@ namespace PrimeMaritime_API.Models
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
+        public string TO_LOCATION { get; set; }
+        public DateTime MOVEMENT_DATE { get; set; }
     }
 }
