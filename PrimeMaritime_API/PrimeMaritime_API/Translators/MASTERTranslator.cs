@@ -407,17 +407,17 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("ATD"))
                 item.ATD = SqlHelper.GetDateTime(reader, "ATD");
 
-            if (reader.IsColumnExists("IMM_CURR"))
-                item.IMM_CURR = SqlHelper.GetNullableString(reader, "IMM_CURR");
+            //if (reader.IsColumnExists("IMM_CURR"))
+            //    item.IMM_CURR = SqlHelper.GetNullableString(reader, "IMM_CURR");
 
-            if (reader.IsColumnExists("IMM_CURR_RATE"))
-                item.IMM_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMM_CURR_RATE"));
+            //if (reader.IsColumnExists("IMM_CURR_RATE"))
+            //    item.IMM_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMM_CURR_RATE"));
 
-            if (reader.IsColumnExists("EXP_CURR"))
-                item.EXP_CURR = SqlHelper.GetNullableString(reader, "EXP_CURR");
+            //if (reader.IsColumnExists("EXP_CURR"))
+            //    item.EXP_CURR = SqlHelper.GetNullableString(reader, "EXP_CURR");
 
-            if (reader.IsColumnExists("EXP_CURR_RATE"))
-                item.EXP_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXP_CURR_RATE"));
+            //if (reader.IsColumnExists("EXP_CURR_RATE"))
+            //    item.EXP_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXP_CURR_RATE"));
 
             if (reader.IsColumnExists("TERMINAL_CODE"))
                 item.TERMINAL_CODE = SqlHelper.GetNullableString(reader, "TERMINAL_CODE");
