@@ -10,7 +10,7 @@ namespace PrimeMaritime_API.Models
         public string SRR_NO { get; set; }
         public string CONTAINER_NO { get; set; }
         public string SEAL_NO { get; set; }
-        public string CONTAINER_SIZE { get; set; }
+        public int CONTAINER_SIZE { get; set; }
         public string CONTAINER_TYPE { get; set; }
         public decimal GROSS_WEIGHT { get; set; }
         public string COMMODITY_TYPE { get; set; }
