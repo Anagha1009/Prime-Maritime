@@ -42,5 +42,6 @@ namespace PrimeMaritime_API.Models
     {
         public List<FREIGHT> FREIGHTLIST { get; set; } = new List<FREIGHT>();
         public List<CHARGE> EXP_COSTLIST { get; set; } = new List<CHARGE>();
+        public List<FREIGHT> EXP_OTHERCOSTLIST { get; set; } = new List<FREIGHT>();
     }
 }
