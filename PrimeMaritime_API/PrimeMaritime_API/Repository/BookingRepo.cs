@@ -124,6 +124,7 @@ namespace PrimeMaritime_API.Repository
         }
 
         public void InsertVoyage(string connstring, VOYAGE request)
+
         {
             SqlParameter[] parameters =
            {
@@ -134,10 +135,6 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@ATD", SqlDbType.DateTime) { Value = request.ATD },
               new SqlParameter("@ETA", SqlDbType.DateTime) { Value = request.ETA },
               new SqlParameter("@ETD", SqlDbType.DateTime) { Value = request.ETD },
-              new SqlParameter("@IMM_CURR", SqlDbType.VarChar,50) { Value = request.IMM_CURR },
-              new SqlParameter("@IMM_CURR_RATE", SqlDbType.Decimal) { Value = request.IMM_CURR_RATE },
-              new SqlParameter("@EXP_CURR", SqlDbType.VarChar,50) { Value = request.EXP_CURR },
-              new SqlParameter("@EXP_CURR_RATE", SqlDbType.Decimal) { Value = request.EXP_CURR_RATE },
               new SqlParameter("@TERMINAL_CODE", SqlDbType.VarChar,100) { Value = request.TERMINAL_CODE },
               new SqlParameter("@SERVICE_NAME", SqlDbType.VarChar,255) { Value = request.SERVICE_NAME },
               new SqlParameter("@VIA_NO", SqlDbType.VarChar,100) { Value = request.VIA_NO },
@@ -165,6 +162,23 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
 
+        }
+
+        public List<ROLLOVER> GetRolloverList(string connstring, string AGENT_CODE)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,100) { Value = "GET_ROLLOVER_LIST" },
+              
+              new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE},
+             
+
+            };
+
+            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BOOKING", parameters);
+            List<ROLLOVER> rollOverList = SqlHelper.CreateListFromTable<ROLLOVER>(dataTable);
+
+            return rollOverList;
         }
 
     }
