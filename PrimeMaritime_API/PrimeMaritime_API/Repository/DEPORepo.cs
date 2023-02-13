@@ -109,7 +109,6 @@ namespace PrimeMaritime_API.Repository
                 dr["STATUS"] = "Empty";
                 dr["DEPO_CODE"] = request.DEPO_CODE;
                 dr["CREATED_BY"] = request.CREATED_BY;
-
                 tbl2.Rows.Add(dr);
             }
 
