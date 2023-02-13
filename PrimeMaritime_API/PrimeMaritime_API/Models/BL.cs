@@ -30,7 +30,7 @@ namespace PrimeMaritime_API.Models
         public string PREPAID_AT { get; set; }
         public string PAYABLE_AT { get; set; }
         public string BL_ISSUE_PLACE { get; set; }
-        public DateTime BL_ISSUE_DATE { get; set; }
+        public DateTime? BL_ISSUE_DATE { get; set; }
         public decimal TOTAL_PREPAID { get; set; }
         public int NO_OF_ORIGINAL_BL { get; set; }
 
@@ -62,5 +62,7 @@ namespace PrimeMaritime_API.Models
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
+        public string TO_LOCATION { get; set; }
+        public DateTime MOVEMENT_DATE { get; set; }
     }
 }

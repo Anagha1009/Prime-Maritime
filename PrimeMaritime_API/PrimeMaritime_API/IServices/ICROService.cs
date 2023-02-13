@@ -13,7 +13,7 @@ namespace PrimeMaritime_API.IServices
     {
         Response<string> InsertCRO(CRORequest CRORequest);
 
-        Response<List<CRO>> GetCROList(string AGENT_CODE);
+        Response<List<CRO>> GetCROList(string AGENT_CODE,string FROM_DATE, string TO_DATE, string CRO_NO);
 
         Response<CRODetails> GetCRODetails(string CRO_NO, string AGENT_CODE);
     }

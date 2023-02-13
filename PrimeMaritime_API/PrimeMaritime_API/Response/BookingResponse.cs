@@ -39,6 +39,8 @@ namespace PrimeMaritime_API.Response
         public string POL { get; set; }
         public string POD { get; set; }
         public string CUSTOMER_NAME { get; set; }
+        public DateTime ETA { get; set; }
+        public DateTime ETD { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public List<SRR_CONTAINERS> CONTAINER_LIST { get; set; }
         public List<SLOT_DETAILS> SLOT_LIST { get; set; }

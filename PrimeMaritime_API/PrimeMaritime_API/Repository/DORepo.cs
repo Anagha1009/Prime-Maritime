@@ -32,7 +32,6 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@BL_ID", SqlDbType.Int) { Value = request.BL_ID },
                   new SqlParameter("@BL_NO", SqlDbType.VarChar,100) { Value = request.BL_NO },
                    new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = request.DO_NO },
-                  new SqlParameter("@DO_DATE", SqlDbType.DateTime) { Value = request.DO_DATE },
                   new SqlParameter("@ARRIVAL_DATE", SqlDbType.DateTime) { Value = request.ARRIVAL_DATE },
                   new SqlParameter("@DO_VALIDITY", SqlDbType.DateTime) { Value = request.DO_VALIDITY },
                  new SqlParameter("@IGM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_NO },
@@ -57,7 +56,7 @@ namespace PrimeMaritime_API.Repository
                     i.DO_NO = request.DO_NO;
                 }
 
-                string[] columns = new string[13];
+                string[] columns = new string[15];
                 columns[0] = "BL_NO";
                 columns[1] = "DO_NO";
                 columns[2] = "CONTAINER_NO";
@@ -71,6 +70,8 @@ namespace PrimeMaritime_API.Repository
                 columns[10] = "AGENT_CODE";
                 columns[11] = "AGENT_NAME";
                 columns[12] = "CREATED_BY";
+                columns[13] = "BOOKING_NO";
+                columns[14] = "CRO_NO";
 
                 SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST2, "TB_CONTAINER", connstring, columns);
             }
