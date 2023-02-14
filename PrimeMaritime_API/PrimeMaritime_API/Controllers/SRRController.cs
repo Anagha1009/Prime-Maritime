@@ -16,10 +16,10 @@ using System.Linq;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class SRRController : ControllerBase
     {
-
         private ISRRService _srrService;
         private readonly IWebHostEnvironment _environment;
         public SRRController(ISRRService srrService, IWebHostEnvironment environment)
