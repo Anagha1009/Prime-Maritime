@@ -45,4 +45,6 @@ namespace PrimeMaritime_API.Response
         public List<SRR_CONTAINERS> CONTAINER_LIST { get; set; }
         public List<SLOT_DETAILS> SLOT_LIST { get; set; }
     }
+
+    
 }

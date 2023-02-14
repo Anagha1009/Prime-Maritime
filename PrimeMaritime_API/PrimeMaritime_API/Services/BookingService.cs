@@ -158,5 +158,55 @@ namespace PrimeMaritime_API.Services
             return response;
 
         }
+
+        public Response<List<ROLLOVER>> GetRolloverList( string AGENT_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<ROLLOVER>> response = new Response<List<ROLLOVER>>();
+            var data = DbClientFactory<BookingRepo>.Instance.GetRolloverList(dbConn,  AGENT_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        //public Response<List<RollOverList>> GetRolloverList()
+        //{
+        //    string dbConn = _config.GetConnectionString("ConnectionString");
+
+        //    Response<List<RollOverList>> response = new Response<List<GetRolloverList>>();
+        //    var data = DbClientFactory<BookingRepo>.Instance.GetRolloverList(dbConn);
+
+        //    if (data != null)
+        //    {
+        //        response.Succeeded = true;
+        //        response.ResponseCode = 200;
+        //        response.ResponseMessage = "Success";
+        //        response.Data = data;
+        //    }
+        //    else
+        //    {
+        //        response.Succeeded = false;
+        //        response.ResponseCode = 500;
+        //        response.ResponseMessage = "No Data";
+        //    }
+
+        //    return response;
+        //}
+
     }
 }
+
