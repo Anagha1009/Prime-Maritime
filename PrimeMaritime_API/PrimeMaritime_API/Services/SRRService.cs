@@ -229,6 +229,17 @@ namespace PrimeMaritime_API.Services
                     rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
                 }
 
+                var z = data.Tables[2].Rows[0].ItemArray[0].ToString();
+
+                if (String.IsNullOrEmpty(y))
+                {
+                    rates.EXP_OTHERCOSTLIST = new List<FREIGHT>();
+                }
+                else
+                {
+                    rates.EXP_OTHERCOSTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
+                }
+
                 response.Data = rates;
             }
             else
