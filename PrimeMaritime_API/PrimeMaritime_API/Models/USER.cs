@@ -14,6 +14,7 @@ namespace PrimeMaritime_API.Models
         public string PASSWORD { get; set; }
         public string EMAIL { get; set; }
         public int ROLE_ID { get; set; }
+        public string ROLE_NAME { get; set; }
         public string PORT { get; set; }
         public string DEPO { get; set; }
         public string COUNTRYCODE { get; set; }
