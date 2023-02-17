@@ -36,6 +36,10 @@ namespace PrimeMaritime_API.Models
 
         public string BL_STATUS { get; set; }
 
+        public int? OGView { get; set; }
+
+        public int? NNView { get; set; }
+
         public string MARKS_NOS { get; set; }
         public string DESC_OF_GOODS { get; set; }
         public string AGENT_CODE { get; set; }
