@@ -33,6 +33,7 @@ namespace PrimeMaritime_API.Response
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
         public string CONTAINERS { get; set; }
+        public string COMMODITY { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public BOOKING BookingDetails { get; set; }
         public List<SRR_CONTAINERS> ContainerList { get; set; }

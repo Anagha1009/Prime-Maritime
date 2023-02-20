@@ -45,6 +45,7 @@ namespace PrimeMaritime_API.Models
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
         public string CONTAINERS { get; set; }     
+        public string COMMODITY { get; set; }     
         public DateTime CREATED_DATE { get; set; }     
         public DateTime ETA { get; set; }     
         public DateTime ETD { get; set; }     
