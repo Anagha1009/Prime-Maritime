@@ -93,6 +93,39 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<EXC_RATES> GetExcRates(string CURRENCY_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<EXC_RATES> response = new Response<EXC_RATES>();
+
+            if ((CURRENCY_CODE == "") || (CURRENCY_CODE == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide CURRENCY CODE";
+                return response;
+            }
+
+
+            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE);
+
+            if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
         public Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

@@ -16,7 +16,7 @@ using System.Linq;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class SRRController : ControllerBase
     {
@@ -32,6 +32,12 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<Response<SRR>> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
             return Ok(JsonConvert.SerializeObject(_srrService.GetSRRBySRRNo(SRR_NO, AGENT_CODE)));
+        }
+
+        [HttpGet("GetExcRates")]
+        public ActionResult<Response<DO>> GetExcRates(string CURRENCY_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_srrService.GetExcRates(CURRENCY_CODE)));
         }
 
         [HttpGet("GetRate")]

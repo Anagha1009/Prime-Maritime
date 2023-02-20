@@ -422,5 +422,24 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+
+        public EXC_RATES GetExcRates(string connstring, string CURRENCY_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_EXC_RATE" },
+                new SqlParameter("@CURRENCY_CODE", SqlDbType.VarChar, 20) { Value = CURRENCY_CODE }
+            };
+
+                return SqlHelper.ExtecuteProcedureReturnData<EXC_RATES>(connstring, "SP_CRUD_EXC_RATES", r => r.TranslateEXCRATES(), parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }
