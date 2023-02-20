@@ -81,6 +81,11 @@ namespace PrimeMaritime_API.Services
                     rates.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[3].Rows[0].ItemArray[0]);
                 }
 
+                if (data.Tables.Contains("Table4"))
+                {
+                    rates.EMPTY_BACK_COST = Convert.ToDecimal(data.Tables[4].Rows[0].ItemArray[0]);
+                }
+
                 response.Data = rates;
             }
             else

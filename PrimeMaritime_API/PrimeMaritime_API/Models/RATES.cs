@@ -11,6 +11,7 @@ namespace PrimeMaritime_API.Models
         public List<SRR_RATES> POL_EXP { get; set; } = new List<SRR_RATES>();
         public List<CHARGE> POD_IMP { get; set; } = new List<CHARGE>();
         public decimal LADEN_BACK_COST { get; set; }
+        public decimal EMPTY_BACK_COST { get; set; }
 
     }
 

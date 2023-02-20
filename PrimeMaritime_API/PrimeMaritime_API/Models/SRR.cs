@@ -19,6 +19,7 @@ namespace PrimeMaritime_API.Models
         public DateTime EFFECT_FROM { get; set; }
         public DateTime EFFECT_TO { get; set; }
         public bool IS_VESSELVALIDITY { get; set; }
+        public string BOOKING_NO { get; set; }
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
         public int DAYS { get; set; }
