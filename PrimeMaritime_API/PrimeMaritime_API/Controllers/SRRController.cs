@@ -64,6 +64,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_srrService.InsertSRR(request));
         }
 
+        [HttpPost("InsertExcRate")]
+        public ActionResult<Response<EXC_RATE>> InsertExcRate(List<EXC_RATE> excRateList)
+        {
+            return Ok(_srrService.InsertExcRate(excRateList));
+        }
+
         [HttpPost("UpdateSRR")]
         public ActionResult<Response<SRR>> UpdateSRR(List<SRR_RATES> request)
         {

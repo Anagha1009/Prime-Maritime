@@ -319,6 +319,21 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<string> InsertExcRate(List<EXC_RATE> excRateList)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.InsertExcRate(dbConn, excRateList);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+            response.Data = "1";
+
+            return response;
+        }
+
         public Response<string> UpdateSRR(List<SRR_RATES> request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

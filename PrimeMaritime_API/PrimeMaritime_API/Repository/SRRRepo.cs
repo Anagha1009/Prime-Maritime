@@ -441,5 +441,39 @@ namespace PrimeMaritime_API.Repository
             }
 
         }
+
+        public void InsertExcRate(string connstring, List<EXC_RATE> excRateList)
+        {
+            DataTable tbl = new DataTable();
+            tbl.Columns.Add(new DataColumn("CURRENCY_TYPE", typeof(string)));
+            tbl.Columns.Add(new DataColumn("CURRENCY_CODE", typeof(string)));
+            tbl.Columns.Add(new DataColumn("TT_SELLING", typeof(decimal)));
+
+            foreach (var i in excRateList)
+            {
+                DataRow dr = tbl.NewRow();
+
+                dr["CURRENCY_TYPE"] = i.CURRENCY_TYPE;
+                dr["CURRENCY_CODE"] = i.CURRENCY_CODE;
+                dr["TT_SELLING"] = i.TT_SELLING;
+               
+                tbl.Rows.Add(dr);
+            }
+
+            string[] columns = new string[3];
+            columns[0] = "CURRENCY_TYPE";
+            columns[1] = "CURRENCY_CODE";
+            columns[2] = "TT_SELLING";
+
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "TRUNC_EXC_RATE" }
+            };
+
+            var result=SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
+
+            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_EXC_RATES", columns);
+
+        }
     }
 }

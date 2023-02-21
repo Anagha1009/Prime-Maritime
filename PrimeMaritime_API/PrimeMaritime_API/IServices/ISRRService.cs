@@ -23,5 +23,7 @@ namespace PrimeMaritime_API.IServices
         Response<SRR_RATE_LIST> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS);
 
         Response<EXC_RATES> GetExcRates(string CURRENCY_CODE);
+
+        Response<string> InsertExcRate(List<EXC_RATE> excRateList);
     }
 }
