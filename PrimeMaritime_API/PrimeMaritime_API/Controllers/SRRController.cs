@@ -73,6 +73,12 @@ namespace PrimeMaritime_API.Controllers
         [HttpPost("UploadFiles")]
         public IActionResult UploadFiles(string SRR_NO)
         {
+            string upload = Path.Combine(_environment.ContentRootPath, "Uploads");
+
+            if (!Directory.Exists(upload))
+            {
+                Directory.CreateDirectory(upload);
+            }
 
             string path = Path.Combine(_environment.ContentRootPath, "Uploads", "SRRFiles");
             string HAZpath = Path.Combine(_environment.ContentRootPath, "Uploads", "SRRFiles/HAZFiles");
