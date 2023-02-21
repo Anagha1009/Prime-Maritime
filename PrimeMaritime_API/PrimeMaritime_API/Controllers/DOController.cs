@@ -24,9 +24,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetDOList")]
-        public ActionResult<Response<List<DO>>> GetDOList(string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
+        public ActionResult<Response<List<DO>>> GetDOList(string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_doService.GetDOList(OPERATION, DO_NO, DO_DATE, DO_VALIDITY, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_doService.GetDOList(DO_NO, FROM_DATE, TO_DATE, AGENT_CODE)));
         }
 
         [HttpPost("InsertDO")]

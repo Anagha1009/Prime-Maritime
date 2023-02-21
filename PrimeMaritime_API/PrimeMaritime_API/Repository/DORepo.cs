@@ -31,10 +31,10 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_DO" },
                   new SqlParameter("@BL_ID", SqlDbType.Int) { Value = request.BL_ID },
                   new SqlParameter("@BL_NO", SqlDbType.VarChar,100) { Value = request.BL_NO },
-                   new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = request.DO_NO },
+                  new SqlParameter("@DO_NO", SqlDbType.VarChar,100) { Value = request.DO_NO },
                   new SqlParameter("@ARRIVAL_DATE", SqlDbType.DateTime) { Value = request.ARRIVAL_DATE },
                   new SqlParameter("@DO_VALIDITY", SqlDbType.DateTime) { Value = request.DO_VALIDITY },
-                 new SqlParameter("@IGM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_NO },
+                  new SqlParameter("@IGM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_NO },
                   new SqlParameter("@IGM_ITEM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_ITEM_NO },
                   new SqlParameter("@IGM_DATE", SqlDbType.DateTime) { Value = request.IGM_DATE },
                   new SqlParameter("@CLEARING_PARTY", SqlDbType.VarChar,100) { Value = request.CLEARING_PARTY },
@@ -81,7 +81,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<DO> GetDOList(string connstring, string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
+        public List<DO> GetDOList(string connstring, string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
             try
             {
@@ -89,8 +89,8 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DOLIST" },
                   new SqlParameter("@DO_NO", SqlDbType.VarChar, 100) { Value = DO_NO },
-                  new SqlParameter("@DO_DATE", SqlDbType.DateTime) { Value = DO_DATE },
-                  new SqlParameter("@DO_VALIDITY", SqlDbType.DateTime) { Value = DO_VALIDITY },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
                 };
 

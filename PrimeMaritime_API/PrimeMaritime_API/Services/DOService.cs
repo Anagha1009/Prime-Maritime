@@ -18,8 +18,6 @@ namespace PrimeMaritime_API.Services
         {
             _config = config;
         }
-
-
         
         public Response<string> InsertDO(DO doRequest)
         {
@@ -35,12 +33,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<DO>> GetDOList(string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
+        public Response<List<DO>> GetDOList(string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<DO>> response = new Response<List<DO>>();
-            var data = DbClientFactory<DORepo>.Instance.GetDOList(dbConn, OPERATION, DO_NO, DO_DATE, DO_VALIDITY,AGENT_CODE);
+            var data = DbClientFactory<DORepo>.Instance.GetDOList(dbConn, DO_NO, FROM_DATE, TO_DATE,AGENT_CODE);
 
             if (data.Count > 0)
             {
