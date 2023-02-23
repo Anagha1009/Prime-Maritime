@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     [ApiController]
     public class CROController : ControllerBase
     {

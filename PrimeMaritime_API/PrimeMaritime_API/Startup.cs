@@ -132,12 +132,12 @@ namespace PrimeMaritime_API
                // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PrimeMaritime_API v1"));
             }
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
-                RequestPath = "/Uploads"
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+            //    RequestPath = "/Uploads"
+            //});
 
             app.UseCors();
             //app.UseCors("ApiCorsPolicy");
