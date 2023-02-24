@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class BookingController : ControllerBase
     {
@@ -58,5 +60,14 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_bookingService.GetTrackingDetails(BOOKING_NO)));
         }
+
+        [HttpGet("GetRolloverList")]
+        public ActionResult<Response<List<ROLLOVER>>> GetRolloverList(string AGENT_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_bookingService.GetRolloverList(AGENT_CODE)));
+
+        }
+
+        
     }
 }

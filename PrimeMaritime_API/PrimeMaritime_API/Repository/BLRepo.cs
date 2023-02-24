@@ -114,6 +114,8 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@BL_ISSUE_DATE", SqlDbType.DateTime) { Value = request.BL_ISSUE_DATE },
               new SqlParameter("@NO_OF_ORIGINAL_BL", SqlDbType.Int) { Value = request.NO_OF_ORIGINAL_BL },
               new SqlParameter("@BL_STATUS", SqlDbType.VarChar,20) { Value = request.BL_STATUS },
+              new SqlParameter("@OGView", SqlDbType.Int) { Value = request.OGView },
+              new SqlParameter("@NNView", SqlDbType.Int) { Value = request.NNView },
               new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
               new SqlParameter("@PREPAID_AT", SqlDbType.VarChar, 255) { Value = request.PREPAID_AT },
               new SqlParameter("@PAYABLE_AT", SqlDbType.VarChar, 255) { Value = request.PAYABLE_AT },
@@ -200,7 +202,7 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
+        public List<CONTAINERS> GetContainerList(string connstring, string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string BL_NO, string DO_NO, bool fromDO)
         {
 
             if (fromDO == true)
@@ -221,6 +223,7 @@ namespace PrimeMaritime_API.Repository
                 {
                     new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CONTAINERLIST" },
                     new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
+                    new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,50) { Value = DEPO_CODE },
                     new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
                     new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
                     new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO },

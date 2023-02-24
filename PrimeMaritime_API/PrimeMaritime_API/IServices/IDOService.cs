@@ -11,7 +11,7 @@ namespace PrimeMaritime_API.IServices
     {
         Response<string> InsertDO(DO doRequest);
 
-        Response<List<DO>> GetDOList(string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE);
+        Response<List<DO>> GetDOList(string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE);
 
         Response<DO> GetDODetails(string BL_NO, string AGENT_CODE);
     }

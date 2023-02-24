@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class DetentionController : Controller
     {
@@ -20,7 +22,6 @@ namespace PrimeMaritime_API.Controllers
         {
             _detentionService = detentionService;
         }
-
 
         [HttpGet("GetDetentionListByDO")]
         public ActionResult<Response<List<DETENTION_WAIVER_REQUEST>>> GetDetentionListByDO(string DO_NO)

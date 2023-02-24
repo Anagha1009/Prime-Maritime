@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class CROController : ControllerBase
     {
@@ -24,9 +26,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCROList")]
-        public ActionResult<Response<List<CRO>>> GetCROList(string AGENT_CODE)
+        public ActionResult<Response<List<CRO>>> GetCROList(string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(AGENT_CODE,FROM_DATE,TO_DATE,CRO_NO)));
         }
 
         [HttpPost("InsertCRO")]

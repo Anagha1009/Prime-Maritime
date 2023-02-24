@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class MasterController : ControllerBase
     {

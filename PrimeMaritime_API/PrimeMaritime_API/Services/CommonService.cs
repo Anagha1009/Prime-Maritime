@@ -72,6 +72,7 @@ namespace PrimeMaritime_API.Services
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
+            email.Cc.Add(MailboxAddress.Parse(mailRequest.CC));
             email.Subject = mailRequest.Subject;
             var builder = new BodyBuilder();       
 

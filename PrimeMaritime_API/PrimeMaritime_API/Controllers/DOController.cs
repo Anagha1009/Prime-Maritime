@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace PrimeMaritime_API.Controllers
 {
     [Route("api/[controller]")]
+    //[Authorize]
     [ApiController]
     public class DOController : ControllerBase
     {
@@ -22,9 +24,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetDOList")]
-        public ActionResult<Response<List<DO>>> GetDOList(string OPERATION, string DO_NO, string DO_DATE, string DO_VALIDITY, string AGENT_CODE)
+        public ActionResult<Response<List<DO>>> GetDOList(string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
-                return Ok(JsonConvert.SerializeObject(_doService.GetDOList(OPERATION, DO_NO, DO_DATE, DO_VALIDITY,AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_doService.GetDOList(DO_NO, FROM_DATE, TO_DATE, AGENT_CODE)));
         }
 
         [HttpPost("InsertDO")]
