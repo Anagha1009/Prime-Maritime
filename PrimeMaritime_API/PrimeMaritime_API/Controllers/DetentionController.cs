@@ -30,7 +30,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertDetention")]
-        public ActionResult<Response<ACTIVITY_MAPPING>> InsertDetention(DETENTION request)
+        public ActionResult<Response<DETENTION_WAIVER_REQUEST>> InsertDetention(DETENTION request)
         {
             return Ok(_detentionService.InsertDetention(request));
         }
@@ -40,6 +40,13 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_detentionService.GetTotalDetentionCost(CONTAINER_NO)));
         }
+
+        [HttpGet("GetContainerDetentionList")]
+        public ActionResult<Response<List<DETENTION_WAIVER_REQUEST>>> GetContainerDetentionList()
+        {
+            return Ok(JsonConvert.SerializeObject(_detentionService.GetContainerDetentionList()));
+        }
+
 
     }
 }
