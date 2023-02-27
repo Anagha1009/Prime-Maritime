@@ -10,6 +10,17 @@ namespace PrimeMaritime_API.Models
         public int ID { get; set; }
 		public int BL_ID { get; set; }
 		public string BL_NO { get; set; }
+
+		//BL RELATED
+		public string SHIPPER { get; set; }
+		public string CONSIGNEE { get; set; }
+		public string VESSEL_NAME { get; set; }
+		public string VOYAGE_NO { get; set; }
+		public string PORT_OF_LOADING { get; set; }
+		public string PORT_OF_DISCHARGE { get; set; }
+		public string PLACE_OF_DELIVERY { get; set; }
+
+		//DO RELATED
 		public string DO_NO { get; set; }
 		public DateTime? DO_DATE { get; set; }
 		public DateTime ARRIVAL_DATE { get; set; }
