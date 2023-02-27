@@ -73,5 +73,29 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+
+        public Response<List<CONTAINER_DETENTION>> GetContainerDetentionList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CONTAINER_DETENTION>> response = new Response<List<CONTAINER_DETENTION>>();
+            var data = DbClientFactory<DetentionRepo>.Instance.GetContainerDetentionList(dbConn);
+
+            if (data.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
     }
 }

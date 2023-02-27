@@ -109,6 +109,28 @@ namespace PrimeMaritime_API.Repository
 
         }
 
+        public List<CONTAINER_DETENTION> GetContainerDetentionList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "CONTAINER_DETENTION_CALCULATION" },
+                   
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_DETENTION", parameters);
+                List<CONTAINER_DETENTION> detention_Request = SqlHelper.CreateListFromTable<CONTAINER_DETENTION>(dataTable);
+
+                return detention_Request;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
 
