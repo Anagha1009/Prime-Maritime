@@ -19,7 +19,7 @@ namespace PrimeMaritime_API.Repository
             SqlParameter[] parameters =
             {
                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SRRDETAILS" },
-                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = SRR_NO },
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 
@@ -33,8 +33,20 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@POL", SqlDbType.VarChar, 100) { Value = POL },
                 new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = POD },
                 new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = CONTAINER_TYPE },
-                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = SRR_NO },
                 new SqlParameter("@NO_OF_CONTAINERS", SqlDbType.Int) { Value = NO_OF_CONTAINERS },
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
+        }
+
+        public DataSet GetInvoiceDetails(string connstring, string INVOICE_NO, string CONTAINER_TYPE)
+        {
+            SqlParameter[] parameters =
+          {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_INVOICEDETAILS" },
+                new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar, 100) { Value = CONTAINER_TYPE },
+                new SqlParameter("@INVOICE_NO", SqlDbType.VarChar, 100) { Value = INVOICE_NO },
             };
 
             return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_SRR", parameters);
@@ -71,7 +83,7 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = OPERATION },
-                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = SRR_NO },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = SRR_NO },
                   new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = CUSTOMER_NAME },
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = STATUS },
                   new SqlParameter("@FROMDATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(FROMDATE) ? null : Convert.ToDateTime(FROMDATE) },
@@ -90,6 +102,56 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public string InsertInvoice(string connstring, INVOICELIST request)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "INSERT_INVOICE" },
+                  new SqlParameter("@INVOICE_NO", SqlDbType.VarChar, 100) { Value = request.INVOICE_NO },
+                  new SqlParameter("@INVOICE_FOR", SqlDbType.VarChar, 255) { Value = request.INVOICE_FOR },
+                  new SqlParameter("@INVOICE_FOR_ADDRESS", SqlDbType.VarChar) { Value = request.INVOICE_FOR_ADDRESS },
+                  new SqlParameter("@BL_NO", SqlDbType.VarChar, 100) { Value = request.BL_NO },
+                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
+                  new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
+                };
+
+                string ID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+               
+                return ID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<INVOICELIST> GetInvoiceList(string connstring, string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_INVOICE_LIST" },
+                  new SqlParameter("@INVOICE_NO", SqlDbType.VarChar, 100) { Value = INVOICE_NO },
+                  new SqlParameter("@FROMDATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(FROM_DATE) ? null : Convert.ToDateTime(FROM_DATE) },
+                  new SqlParameter("@TODATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(TO_DATE) ? null : Convert.ToDateTime(TO_DATE) },
+                  new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
+                List<INVOICELIST> invoiceList = SqlHelper.CreateListFromTable<INVOICELIST>(dataTable);
+
+                return invoiceList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public string InsertSRR(string connstring, SRRRequest request)
         {
             try
@@ -97,7 +159,7 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "CREATE_SRR" },
-                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request.SRR_NO },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = request.SRR_NO },
                   new SqlParameter("@POL", SqlDbType.VarChar, 255) { Value = request.POL },
                   new SqlParameter("@POD", SqlDbType.VarChar, 255) { Value = request.POD },
                   new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
@@ -358,7 +420,7 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "COUNTER_SRR" },
-                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request[0].SRR_NO },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = request[0].SRR_NO },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
@@ -388,7 +450,7 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "COUNTER_SRR" },
-                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 50) { Value = request[0].SRR_NO },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = request[0].SRR_NO },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);

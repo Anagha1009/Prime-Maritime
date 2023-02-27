@@ -20,10 +20,11 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> ApproveRate(List<SRR_RATES> request);
         Response<CommonResponse> CounterRate(List<SRR_RATES> request);
         Response<RATES> GetCalRates(string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS);
+        Response<string> InsertInvoice(INVOICELIST request);
+        Response<INVOICE> GetInvoiceDetails(string INVOICE_NO, string CONTAINER_TYPE);        
+        Response<List<INVOICELIST>> GetInvoiceList(string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE);
         Response<SRR_RATE_LIST> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS);
-
         Response<EXC_RATES> GetExcRates(string CURRENCY_CODE);
-
         Response<string> InsertExcRate(List<EXC_RATE> excRateList);
     }
 }

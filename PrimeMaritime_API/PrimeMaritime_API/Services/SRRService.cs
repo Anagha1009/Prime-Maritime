@@ -98,6 +98,96 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<string> InsertInvoice(INVOICELIST request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            string ID = DbClientFactory<SRRRepo>.Instance.InsertInvoice(dbConn, request);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
+            response.Data = ID;
+
+            return response;
+        }
+
+        public Response<List<INVOICELIST>> GetInvoiceList(string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<INVOICELIST>> response = new Response<List<INVOICELIST>>();
+            var data = DbClientFactory<SRRRepo>.Instance.GetInvoiceList(dbConn, INVOICE_NO, FROM_DATE, TO_DATE,  AGENT_CODE);
+
+            if (data.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<INVOICE> GetInvoiceDetails(string INVOICE_NO, string CONTAINER_TYPE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<INVOICE> response = new Response<INVOICE>();
+
+            if ((INVOICE_NO == "") || (INVOICE_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Invoice No";
+                return response;
+            }
+
+            var data = DbClientFactory<SRRRepo>.Instance.GetInvoiceDetails(dbConn, INVOICE_NO, CONTAINER_TYPE);
+
+            if ((data != null) && (data.Tables.Count > 0))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                INVOICE rates = new INVOICE();
+
+                rates = SRRRepo.GetSingleDataFromDataSet<INVOICE>(data.Tables[0]);
+
+                if (data.Tables.Contains("Table1"))
+                {
+                    rates.LOCALCHARGES = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[1]);
+                }
+
+                if (data.Tables.Contains("Table2"))
+                {
+                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
+                }
+
+                if (data.Tables.Contains("Table3"))
+                {
+                    rates.PODCHARGES = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[3]);
+                }
+
+                response.Data = rates;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
         public Response<EXC_RATES> GetExcRates(string CURRENCY_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
