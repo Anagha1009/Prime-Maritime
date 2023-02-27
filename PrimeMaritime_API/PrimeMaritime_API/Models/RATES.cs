@@ -45,4 +45,46 @@ namespace PrimeMaritime_API.Models
         public List<CHARGE> EXP_COSTLIST { get; set; } = new List<CHARGE>();
         public List<FREIGHT> EXP_OTHERCOSTLIST { get; set; } = new List<FREIGHT>();
     }
+
+    public class INVOICELIST
+    {
+        public int ID { get; set; }
+        public string INVOICE_NO { get; set; }
+        public string INVOICE_FOR { get; set; }
+        public string INVOICE_FOR_ADDRESS { get; set; }
+        public string BL_NO { get; set; }
+        public string AGENT_CODE { get; set; }
+        public string AGENT_NAME { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+    }
+
+    public class INVOICE
+    {
+        public string INVOICE_NO { get; set; }
+        public string INVOICE_FOR { get; set; }
+        public string INVOICE_FOR_ADDRESS { get; set; }
+        public DateTime INVOICE_DATE { get; set; }
+        public string BL_NO { get; set; }
+        public string USERNAME { get; set; }
+        public string USERADDRESS { get; set; }
+        public string SHIPPER { get; set; }
+        public string SHIPPER_ADDRESS { get; set; }
+        public string CONSIGNEE { get; set; }
+        public string CONSIGNEE_ADDRESS { get; set; }
+        public string NOTIFY_PARTY { get; set; }
+        public string NOTIFY_PARTY_ADDRESS { get; set; }
+        public string VESSEL_NAME { get; set; }
+        public string VOYAGE_NO { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
+        public string FINAL_DESTINATION { get; set; }
+        public string PLACE_OF_DELIVERY { get; set; }
+        public string SERVICE_NAME { get; set; }
+        public int TOTAL_CONTAINERS { get; set; }
+        public string CONTAINERS { get; set; }
+        public List<FREIGHT> LOCALCHARGES { get; set; } = new List<FREIGHT>();
+        public List<FREIGHT> FREIGHTLIST { get; set; } = new List<FREIGHT>();
+        public List<FREIGHT> PODCHARGES { get; set; } = new List<FREIGHT>();
+    }
 }

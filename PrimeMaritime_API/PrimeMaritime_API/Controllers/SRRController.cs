@@ -52,6 +52,24 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_srrService.GetCalRates(POL, POD, CONTAINER_TYPE, SRR_NO, NO_OF_CONTAINERS)));
         }
 
+        [HttpGet("GetInvoiceDetails")]
+        public ActionResult<Response<INVOICE>> GetInvoiceDetails(string INVOICE_NO, string CONTAINER_TYPE)
+        {
+            return Ok(JsonConvert.SerializeObject(_srrService.GetInvoiceDetails(INVOICE_NO, CONTAINER_TYPE)));
+        }
+
+        [HttpGet("GetInvoiceList")]
+        public ActionResult<Response<List<INVOICELIST>>> GetInvoiceList(string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_srrService.GetInvoiceList(INVOICE_NO,FROM_DATE,TO_DATE,AGENT_CODE)));
+        }
+
+        [HttpPost("InsertInvoice")]
+        public ActionResult<Response<SRR>> InsertInvoice(INVOICELIST request)
+        {
+            return Ok(_srrService.InsertInvoice(request));
+        }
+
         [HttpGet("GetSRRList")]
         public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
         {
