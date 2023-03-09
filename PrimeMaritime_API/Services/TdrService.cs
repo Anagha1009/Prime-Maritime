@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using PrimeMaritime_API.Helpers;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Response;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Services
 {
-    public class TdrService : ITdrService
+    public class TdrService : ITDRService
     {
         private readonly IConfiguration _config;
 
