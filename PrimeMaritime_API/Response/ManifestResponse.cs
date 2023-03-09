@@ -36,7 +36,7 @@ namespace PrimeMaritime_API.Response
     {
         public int ID { get; set; }
         public string CONTAINER_NO { get; set; }
-        public string CONTAINER_SIZE { get; set; }
+        public int CONTAINER_SIZE { get; set; }
         public string CONTAINER_TYPE { get; set; }
         public string SEAL_NO { get; set; }
         public string STATUS { get; set; }
