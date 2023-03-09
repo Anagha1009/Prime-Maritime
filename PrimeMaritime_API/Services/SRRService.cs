@@ -118,7 +118,7 @@ namespace PrimeMaritime_API.Services
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<INVOICELIST>> response = new Response<List<INVOICELIST>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetInvoiceList(dbConn, INVOICE_NO, FROM_DATE, TO_DATE,  AGENT_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetInvoiceList(dbConn, INVOICE_NO, FROM_DATE, TO_DATE, AGENT_CODE);
 
             if (data.Count > 0)
             {
@@ -335,37 +335,37 @@ namespace PrimeMaritime_API.Services
                 response.ResponseMessage = "Success";
                 SRR_RATE_LIST rates = new SRR_RATE_LIST();
 
-                var x = data.Tables[0].Rows[0].ItemArray[0].ToString();
-
-                if (String.IsNullOrEmpty(x))
-                {
-                    rates.FREIGHTLIST = new List<FREIGHT>();
-                }
-                else
+                if (data.Tables[0].Rows.Count > 0)
                 {
                     rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
                 }
-
-                var y = data.Tables[1].Rows[0].ItemArray[0].ToString();
-
-                if (String.IsNullOrEmpty(y))
-                {
-                    rates.EXP_COSTLIST = new List<CHARGE>();
-                }
                 else
                 {
-                    rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                    rates.FREIGHTLIST = new List<FREIGHT>();
                 }
 
-                var z = data.Tables[2].Rows[0].ItemArray[0].ToString();
-
-                if (String.IsNullOrEmpty(y))
+                if (data.Tables.Contains("Table1"))
                 {
-                    rates.EXP_OTHERCOSTLIST = new List<FREIGHT>();
+                    if (data.Tables[1].Rows.Count > 0)
+                    {
+                        rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                    }
+                    else
+                    {
+                        rates.EXP_COSTLIST = new List<CHARGE>();
+                    }
                 }
-                else
+
+                if (data.Tables.Contains("Table2"))
                 {
-                    rates.EXP_OTHERCOSTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
+                    if (data.Tables[2].Rows.Count > 0)
+                    {
+                        rates.EXP_OTHERCOSTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
+                    }
+                    else
+                    {
+                        rates.EXP_OTHERCOSTLIST = new List<FREIGHT>();
+                    }
                 }
 
                 response.Data = rates;
