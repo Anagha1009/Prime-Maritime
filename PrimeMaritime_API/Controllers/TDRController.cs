@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PrimeMaritime_API.Helpers;
+using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Response;
 using System;
@@ -16,8 +17,8 @@ namespace PrimeMaritime_API.Controllers
     [ApiController]
     public class TDRController : Controller
     {
-        private ITdrService _tdrService;
-        public TDRController(ITdrService tdrService)
+        private ITDRService _tdrService;
+        public TDRController(ITDRService tdrService)
         {
             _tdrService = tdrService;
         }
