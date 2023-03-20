@@ -12,5 +12,6 @@ namespace PrimeMaritime_API.IServices
     {
         Response<CommonResponse> InsertTdr(TDR request);
         Response<List<TDR>> GetTdrList();
+        Response<TDR> GetTdrDetails(string TDR_NO);
     }
 }

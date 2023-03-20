@@ -241,7 +241,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRRateList")]
-        public ActionResult<Response<List<SRRList>>> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS)
+        public ActionResult<Response<List<SRR_RATE_LIST>>> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS)
         {
             return Ok(JsonConvert.SerializeObject(_srrService.GetSRRRateList(POL,POD,CONTAINER_TYPE,NO_OF_CONTAINERS)));
         }

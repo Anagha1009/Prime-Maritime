@@ -26,7 +26,6 @@ namespace PrimeMaritime_API.Services
 
             DbClientFactory<TdrRepo>.Instance.InsertTdr(dbConn, request);
 
-
             Response<CommonResponse> response = new Response<CommonResponse>();
             response.Succeeded = true;
             response.ResponseMessage = "Master saved Successfully.";
@@ -59,6 +58,36 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
+        public Response<TDR> GetTdrDetails(string TDR_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
 
+            Response<TDR> response = new Response<TDR>();
+
+            if ((TDR_NO == "") || (TDR_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide TDR No";
+                return response;
+            }
+
+           var data =  DbClientFactory<TdrRepo>.Instance.GetTDRDetails(dbConn, TDR_NO);
+
+            if (data != null)
+            {
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Succeeded = true;
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
     }
 }

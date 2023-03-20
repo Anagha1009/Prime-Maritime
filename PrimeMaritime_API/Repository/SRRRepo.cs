@@ -240,12 +240,33 @@ namespace PrimeMaritime_API.Repository
                 tbl1.Columns.Add(new DataColumn("TRANSPORT_TYPE", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("CURRENCY", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("PAYMENT_TERM", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("RATE_TYPE", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("STANDARD_RATE", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("STATUS", typeof(string)));
 
-                foreach (var i in request.SRR_RATES)
+                foreach (var i in request.FREIGHT_CHARGES)
+                {                   
+                    DataRow dr = tbl1.NewRow();
+
+                    dr["SRR_ID"] = Convert.ToInt32(SRRID);
+                    dr["SRR_NO"] = request.SRR_NO;
+                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
+                    dr["CHARGE_CODE"] = i.CHARGE_CODE;
+                    dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
+                    dr["CURRENCY"] = i.CURRENCY;
+                    dr["PAYMENT_TERM"] = i.PAYMENT_TERM;
+                    dr["RATE_TYPE"] = "FREIGHT_CHARGES";
+                    dr["STANDARD_RATE"] = i.RATE;
+                    dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["STATUS"] = "Requested";
+
+                    tbl1.Rows.Add(dr);
+                }
+
+                foreach (var i in request.POL_CHARGES)
                 {
                     DataRow dr = tbl1.NewRow();
 
@@ -256,7 +277,8 @@ namespace PrimeMaritime_API.Repository
                     dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
                     dr["CURRENCY"] = i.CURRENCY;
                     dr["PAYMENT_TERM"] = i.PAYMENT_TERM;
-                    dr["STANDARD_RATE"] = i.STANDARD_RATE;
+                    dr["RATE_TYPE"] = "POL CHARGES";
+                    dr["STANDARD_RATE"] = i.RATE;
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
@@ -264,18 +286,39 @@ namespace PrimeMaritime_API.Repository
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[11];
+                foreach (var i in request.POD_CHARGES)
+                {
+                    DataRow dr = tbl1.NewRow();
+
+                    dr["SRR_ID"] = Convert.ToInt32(SRRID);
+                    dr["SRR_NO"] = request.SRR_NO;
+                    dr["CONTAINER_TYPE"] = i.CONTAINER_TYPE;
+                    dr["CHARGE_CODE"] = i.CHARGE_CODE;
+                    dr["TRANSPORT_TYPE"] = i.TRANSPORT_TYPE;
+                    dr["CURRENCY"] = i.CURRENCY;
+                    dr["PAYMENT_TERM"] = i.PAYMENT_TERM;
+                    dr["RATE_TYPE"] = "POD_CHARGES";
+                    dr["STANDARD_RATE"] = i.RATE;
+                    dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
+                    dr["CREATED_BY"] = request.CREATED_BY;
+                    dr["STATUS"] = "Requested";
+
+                    tbl1.Rows.Add(dr);
+                }
+
+                string[] columns1 = new string[12];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
                 columns1[2] = "CONTAINER_TYPE";
                 columns1[3] = "CHARGE_CODE";
                 columns1[4] = "TRANSPORT_TYPE";
                 columns1[5] = "CURRENCY";
-                columns1[6] = "PAYMENT_TERM";
-                columns1[7] = "STANDARD_RATE";
-                columns1[8] = "RATE_REQUESTED";
-                columns1[9] = "CREATED_BY";
-                columns1[10] = "STATUS";
+                columns1[6] = "RATE_TYPE";
+                columns1[7] = "PAYMENT_TERM";
+                columns1[8] = "STANDARD_RATE";
+                columns1[9] = "RATE_REQUESTED";
+                columns1[10] = "CREATED_BY";
+                columns1[11] = "STATUS";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 
@@ -406,7 +449,7 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[7];
+                string[] columns = new string[8];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "APPROVED_RATE";
@@ -414,6 +457,7 @@ namespace PrimeMaritime_API.Repository
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
                 columns[6] = "CREATED_BY";
+                columns[7] = "RATE_TYPE";
 
                 SqlHelper.UpdateSRRData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
@@ -436,7 +480,7 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[7];
+                string[] columns = new string[8];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "RATE_REQUESTED";
@@ -444,6 +488,7 @@ namespace PrimeMaritime_API.Repository
                 columns[4] = "STATUS";
                 columns[5] = "REMARKS";
                 columns[6] = "CREATED_BY";
+                columns[7] = "RATE_TYPE";
 
                 SqlHelper.UpdateSRRCounterData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
