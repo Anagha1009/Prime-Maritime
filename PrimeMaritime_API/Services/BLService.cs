@@ -18,7 +18,7 @@ namespace PrimeMaritime_API.Services
         public BLService(IConfiguration config)
         {
             _config = config;
-        }       
+        }
 
         public Response<string> InsertBL(BL request)
         {
@@ -146,20 +146,27 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CargoManifest> GetCargoManifestList(string AgentCode, string BL_NO)
+        public Response<CargoManifest> GetCargoManifestList(string AgentCode, string VESSEL_NAME, string VOYAGE_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<CargoManifest> response = new Response<CargoManifest>();
 
-            if ((BL_NO == "") || (BL_NO == null))
+            if ((VESSEL_NAME == "") || (VESSEL_NAME == null))
             {
                 response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide BL No";
+                response.ResponseMessage = "Please provide Vessel Name";
                 return response;
             }
 
-            var data = DbClientFactory<BLRepo>.Instance.CargoManifestData(dbConn, AgentCode, BL_NO);
+            if ((VOYAGE_NO == "") || (VOYAGE_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Voyage No";
+                return response;
+            }
+
+            var data = DbClientFactory<BLRepo>.Instance.CargoManifestData(dbConn, AgentCode, VESSEL_NAME, VOYAGE_NO);
 
             if ((data != null) && (data.Tables[0].Rows.Count > 0))
             {
@@ -168,7 +175,10 @@ namespace PrimeMaritime_API.Services
                 response.ResponseMessage = "Success";
                 CargoManifest cargoManifest = new CargoManifest();
 
-                cargoManifest = BLRepo.GetSingleDataFromDataSet<CargoManifest>(data.Tables[0]);
+                if (data.Tables.Contains("Table"))
+                {
+                   cargoManifest.CUSTOMER_LIST = BLRepo.GetListFromDataSet<BL_CUSTOMERLIST>(data.Tables[0]);
+                }
 
                 if (data.Tables.Contains("Table1"))
                 {

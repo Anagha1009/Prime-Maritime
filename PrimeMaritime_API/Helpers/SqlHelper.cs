@@ -98,8 +98,6 @@ namespace PrimeMaritime_API.Helpers
             }
         }
 
-
-
         public static void UpdateData<T>(List<T> list, string TableName, string connString, string[] columns)
         {
             DataTable dt = new DataTable("TB_CONTAINER");
@@ -140,6 +138,54 @@ namespace PrimeMaritime_API.Helpers
                     catch (Exception)
                     {
                         
+                    }
+                    finally
+                    {
+                        conn.Close();
+                    }
+                }
+            }
+        }
+
+        public static void UpdateDataDO<T>(List<T> list, string TableName, string connString, string[] columns)
+        {
+            DataTable dt = new DataTable("TB_CONTAINER");
+            dt = ConvertToDataTable(list);
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                using (SqlCommand command = new SqlCommand("", conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        //Creating temp table on database
+                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),DO_NO varchar(100),CONTAINER_NO varchar(20))";
+                        command.ExecuteNonQuery();
+
+                        //Bulk insert into temp table
+                        using (SqlBulkCopy bulkcopy = new SqlBulkCopy(conn))
+                        {
+                            bulkcopy.BulkCopyTimeout = 660;
+                            bulkcopy.DestinationTableName = "#TmpTable";
+                            foreach (var i in columns)
+                            {
+                                bulkcopy.ColumnMappings.Add(i, i);
+                            }
+                            bulkcopy.WriteToServer(dt);
+                            bulkcopy.Close();
+                        }
+
+                        // Updating destination table, and dropping temp table
+                        command.CommandTimeout = 300;
+                        command.CommandText = "UPDATE T SET DO_NO = Temp.DO_NO" +
+                            " FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO and T.BL_NO = Temp.BL_NO; DROP TABLE #TmpTable;";
+                        command.ExecuteNonQuery();
+                    }
+                    catch (Exception)
+                    {
+
                     }
                     finally
                     {
@@ -447,7 +493,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(20), RATE_REQUESTED decimal,STATUS varchar(50), REMARKS varchar(255), CREATED_BY varchar(255), RATE_TYPE varchar(20))";
+                        command.CommandText = "CREATE TABLE #TmpTable(SRR_NO varchar(50), CONTAINER_TYPE varchar(100), CHARGE_CODE varchar(100), RATE_REQUESTED decimal,STATUS varchar(50), REMARKS varchar(255), CREATED_BY varchar(255), RATE_TYPE varchar(20))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -468,7 +514,7 @@ namespace PrimeMaritime_API.Helpers
                         command.CommandText = "UPDATE T SET RATE_REQUESTED = Temp.RATE_REQUESTED,STATUS = Temp.STATUS, REMARKS = Temp.REMARKS, CREATED_BY = Temp.CREATED_BY FROM " + TableName + " T INNER JOIN #TmpTable Temp ON T.SRR_NO = Temp.SRR_NO AND T.CHARGE_CODE = Temp.CHARGE_CODE AND T.CONTAINER_TYPE = Temp.CONTAINER_TYPE AND T.RATE_TYPE = Temp.RATE_TYPE; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }
-                    catch (Exception )
+                    catch (Exception ex)
                     {
 
                     }

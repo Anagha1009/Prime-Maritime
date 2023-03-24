@@ -237,7 +237,7 @@ namespace PrimeMaritime_API.Repository
 
         }
 
-        public DataSet CargoManifestData(string connstring,string AGENT_CODE, string BL_NO)
+        public DataSet CargoManifestData(string connstring,string AGENT_CODE, string VESSEL_NAME, string VOYAGE_NO)
         {
             try
             {
@@ -245,7 +245,8 @@ namespace PrimeMaritime_API.Repository
 {
                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_CARGO_MANIFEST_LIST" },
                    new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,50) { Value = AGENT_CODE },
-                   new SqlParameter("@BL_NO", SqlDbType.VarChar,50) { Value = BL_NO }
+                   new SqlParameter("@VESSEL_NAME", SqlDbType.VarChar,255) { Value = VESSEL_NAME },
+                   new SqlParameter("@VOYAGE_NO", SqlDbType.VarChar,50) { Value = VOYAGE_NO }
                  };
         
                 return SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_BL", parameters);

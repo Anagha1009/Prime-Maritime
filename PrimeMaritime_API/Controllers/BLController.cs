@@ -55,9 +55,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCargoManifestList")]
-        public ActionResult<Response<List<CargoManifest>>> GetCargoManifestList(string AGENT_CODE, string BL_NO)
+        public ActionResult<Response<CargoManifest>> GetCargoManifestList(string AGENT_CODE, string VESSEL_NAME, string VOYAGE_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, BL_NO)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, VESSEL_NAME, VOYAGE_NO)));
         }
 
         [HttpPost("UpdateBL")]
