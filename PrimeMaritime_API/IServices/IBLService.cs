@@ -18,6 +18,8 @@ namespace PrimeMaritime_API.IServices
 
         Response<List<BL>> GetBLHistory(string AGENT_CODE);
 
+        Response<List<BL>> GetBLFORMERGE(string PORT_OF_LOADING, string PORT_OF_DISCHARGE, string SHIPPER, string CONSIGNEE, string VESSEL_NAME, string VOYAGE_NO, string NOTIFY_PARTY);
+
         Response<List<CONTAINERS>> GetContainerList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO,string BL_NO,string DO_NO,bool fromDO);
 
         Response<SRR> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE);

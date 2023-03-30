@@ -18,7 +18,7 @@ namespace PrimeMaritime_API.Services
         public BLService(IConfiguration config)
         {
             _config = config;
-        }
+        }       
 
         public Response<string> InsertBL(BL request)
         {
@@ -177,7 +177,7 @@ namespace PrimeMaritime_API.Services
 
                 if (data.Tables.Contains("Table"))
                 {
-                   cargoManifest.CUSTOMER_LIST = BLRepo.GetListFromDataSet<BL_CUSTOMERLIST>(data.Tables[0]);
+                    cargoManifest.CUSTOMER_LIST = BLRepo.GetListFromDataSet<BL_CUSTOMERLIST>(data.Tables[0]);
                 }
 
                 if (data.Tables.Contains("Table1"))
@@ -235,6 +235,30 @@ namespace PrimeMaritime_API.Services
             response.Succeeded = true;
             response.ResponseMessage = "BL Created Successfully.";
             response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<BL>> GetBLFORMERGE(string PORT_OF_LOADING, string PORT_OF_DISCHARGE, string SHIPPER, string CONSIGNEE, string VESSEL_NAME, string VOYAGE_NO, string NOTIFY_PARTY)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<BL>> response = new Response<List<BL>>();
+            var data = DbClientFactory<BLRepo>.Instance.GetBLFORMERGE(dbConn, PORT_OF_LOADING, PORT_OF_DISCHARGE, SHIPPER, CONSIGNEE, VESSEL_NAME, VOYAGE_NO, NOTIFY_PARTY);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
 
             return response;
         }

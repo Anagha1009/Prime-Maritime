@@ -17,7 +17,9 @@ namespace PrimeMaritime_API.Models
         public string RATE_TYPE { get; set; }
         public string PAYMENT_TERM { get; set; }
         public decimal RATE { get; set; }
+        public decimal COST { get; set; }
         public decimal RATE_REQUESTED { get; set; }
+        public decimal STANDARD_RATE { get; set; }
         public decimal APPROVED_RATE { get; set; }
         public string STATUS { get; set; }
         public string REMARKS { get; set; }

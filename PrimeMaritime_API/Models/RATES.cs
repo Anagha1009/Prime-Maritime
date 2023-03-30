@@ -21,6 +21,7 @@ namespace PrimeMaritime_API.Models
         public string POD { get; set; }
         public string CURRENCY { get; set; }
         public string CHARGE_CODE { get; set; }
+        public decimal COST { get; set; }
         public decimal RATE { get; set; }
         public decimal RATE_REQUESTED { get; set; }
         public string PAYMENT_TERM { get; set; } = null;

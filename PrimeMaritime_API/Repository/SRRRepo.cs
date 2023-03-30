@@ -245,6 +245,7 @@ namespace PrimeMaritime_API.Repository
                 tbl1.Columns.Add(new DataColumn("RATE_REQUESTED", typeof(decimal)));
                 tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("STATUS", typeof(string)));
+                tbl1.Columns.Add(new DataColumn("COST", typeof(decimal)));
 
                 foreach (var i in request.FREIGHT_CHARGES)
                 {                   
@@ -262,6 +263,7 @@ namespace PrimeMaritime_API.Repository
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
+                    dr["COST"] = i.COST;
 
                     tbl1.Rows.Add(dr);
                 }
@@ -282,6 +284,7 @@ namespace PrimeMaritime_API.Repository
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
+                    dr["COST"] = i.COST;
 
                     tbl1.Rows.Add(dr);
                 }
@@ -302,11 +305,12 @@ namespace PrimeMaritime_API.Repository
                     dr["RATE_REQUESTED"] = i.RATE_REQUESTED;
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
+                    dr["COST"] = i.COST;
 
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[12];
+                string[] columns1 = new string[13];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
                 columns1[2] = "CONTAINER_TYPE";
@@ -319,6 +323,7 @@ namespace PrimeMaritime_API.Repository
                 columns1[9] = "RATE_REQUESTED";
                 columns1[10] = "CREATED_BY";
                 columns1[11] = "STATUS";
+                columns1[12] = "COST";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 

@@ -42,6 +42,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE)));
         }
 
+        [HttpGet("GetBLFORMERGE")]
+        public ActionResult<Response<List<BL>>> GetBLFORMERGE(string PORT_OF_LOADING, string PORT_OF_DISCHARGE, string SHIPPER, string CONSIGNEE, string VESSEL_NAME, string VOYAGE_NO, string NOTIFY_PARTY)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLFORMERGE(PORT_OF_LOADING, PORT_OF_DISCHARGE, SHIPPER, CONSIGNEE, VESSEL_NAME, VOYAGE_NO, NOTIFY_PARTY)));
+        }
+
         [HttpGet("GetSRRDetails")]
         public ActionResult<Response<SRR>> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
