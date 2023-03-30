@@ -368,16 +368,67 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns1 = new string[7];
-                columns1[0] = "BOOKING_NO";
-                columns1[1] = "CRO_NO";
-                columns1[2] = "CONTAINER_NO";
-                columns1[3] = "CURR_ACT_CODE";
-                columns1[4] = "ACTIVITY_DATE";
-                columns1[5] = "LOCATION";
-                columns1[6] = "STATUS";
+               foreach(var items in cm)
+                {
+                    SqlParameter[] parameters =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "DELETE_CONTAINER" },
+                        new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = items.CONTAINER_NO },
+                    };
 
-                SqlHelper.UpdateContainerMovement<CONTAINERMOVEMENT>(cm,"TB_CONTAINER_MOVEMENT", connstring, columns1);
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                }
+
+                DataTable tbl = new DataTable();
+                tbl.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
+                tbl.Columns.Add(new DataColumn("ACTIVITY", typeof(string)));
+                tbl.Columns.Add(new DataColumn("PREV_ACTIVITY", typeof(string)));
+                tbl.Columns.Add(new DataColumn("ACTIVITY_DATE", typeof(DateTime)));
+                tbl.Columns.Add(new DataColumn("LOCATION", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CURRENT_LOCATION", typeof(string)));
+                tbl.Columns.Add(new DataColumn("STATUS", typeof(string)));
+                tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("DEPO_CODE", typeof(string)));
+                tbl.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
+
+                foreach (var i in cm)
+                {
+                    DataRow dr = tbl.NewRow();
+
+                    dr["BOOKING_NO"] = i.BOOKING_NO;
+                    dr["CRO_NO"] = i.CRO_NO;
+                    dr["CONTAINER_NO"] = i.CONTAINER_NO;
+                    dr["ACTIVITY"] = i.CURR_ACT_CODE;
+                    dr["PREV_ACTIVITY"] = i.PREV_ACTIVITY;
+                    dr["ACTIVITY_DATE"] = i.ACTIVITY_DATE;
+                    dr["LOCATION"] = i.LOCATION;
+                    dr["CURRENT_LOCATION"] = i.CURRENT_LOCATION;
+                    dr["STATUS"] = i.STATUS;
+                    dr["AGENT_CODE"] = i.AGENT_CODE;
+                    dr["DEPO_CODE"] = i.DEPO_CODE;
+                    dr["CREATED_BY"] = i.CREATED_BY;
+
+                    tbl.Rows.Add(dr);
+                }
+
+                string[] columns = new string[12];
+                columns[0] = "BOOKING_NO";
+                columns[1] = "CRO_NO";
+                columns[2] = "CONTAINER_NO";
+                columns[3] = "ACTIVITY";
+                columns[4] = "PREV_ACTIVITY";
+                columns[5] = "ACTIVITY_DATE";
+                columns[6] = "LOCATION";
+                columns[7] = "CURRENT_LOCATION";
+                columns[8] = "STATUS";
+                columns[9] = "AGENT_CODE";
+                columns[10] = "DEPO_CODE";
+                columns[11] = "CREATED_BY";
+
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER_MOVEMENT", columns);
+                SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER_TRACKING", columns);
 
             }
             catch (Exception)

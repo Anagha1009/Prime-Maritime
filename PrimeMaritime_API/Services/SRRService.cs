@@ -163,17 +163,17 @@ namespace PrimeMaritime_API.Services
 
                 if (data.Tables.Contains("Table1"))
                 {
-                    rates.LOCALCHARGES = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[1]);
+                    rates.LOCALCHARGES = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
                 }
 
                 if (data.Tables.Contains("Table2"))
                 {
-                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
+                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
                 }
 
                 if (data.Tables.Contains("Table3"))
                 {
-                    rates.PODCHARGES = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[3]);
+                    rates.PODCHARGES = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[3]);
                 }
 
                 response.Data = rates;
@@ -284,6 +284,16 @@ namespace PrimeMaritime_API.Services
                     srr.SRR_RATES = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[3]);
                 }
 
+                if (data.Tables.Contains("Table3"))
+                {
+                    srr.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[3].Rows[0].ItemArray[0]);
+                }
+
+                if (data.Tables.Contains("Table4"))
+                {
+                    srr.EMPTY_BACK_COST = Convert.ToDecimal(data.Tables[4].Rows[0].ItemArray[0]);
+                }
+
                 response.Data = srr;
             }
             else
@@ -337,35 +347,47 @@ namespace PrimeMaritime_API.Services
 
                 if (data.Tables[0].Rows.Count > 0)
                 {
-                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[0]);
+                    rates.FREIGHTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[0]);
                 }
                 else
                 {
-                    rates.FREIGHTLIST = new List<FREIGHT>();
+                    rates.FREIGHTLIST = new List<CHARGE>();
                 }
 
-                if (data.Tables.Contains("Table1"))
+                if (data.Tables[1].Rows.Count > 0)
                 {
-                    if (data.Tables[1].Rows.Count > 0)
-                    {
-                        rates.EXP_COSTLIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
-                    }
-                    else
-                    {
-                        rates.EXP_COSTLIST = new List<CHARGE>();
-                    }
+                    rates.EXP_INCOMELIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[1]);
+                }
+                else
+                {
+                    rates.EXP_INCOMELIST = new List<CHARGE>();
                 }
 
-                if (data.Tables.Contains("Table2"))
+                if (data.Tables[2].Rows.Count > 0)
                 {
-                    if (data.Tables[2].Rows.Count > 0)
-                    {
-                        rates.EXP_OTHERCOSTLIST = SRRRepo.GetListFromDataSet<FREIGHT>(data.Tables[2]);
-                    }
-                    else
-                    {
-                        rates.EXP_OTHERCOSTLIST = new List<FREIGHT>();
-                    }
+                    rates.EXP_OTHERINCOMELIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[2]);
+                }
+                else
+                {
+                    rates.EXP_OTHERINCOMELIST = new List<CHARGE>();
+                }
+
+                if (data.Tables[3].Rows.Count > 0)
+                {
+                    rates.IMP_INCOMELIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[3]);
+                }
+                else
+                {
+                    rates.IMP_INCOMELIST = new List<CHARGE>();
+                }
+
+                if (data.Tables[4].Rows.Count > 0)
+                {
+                    rates.IMP_OTHERINCOMELIST = SRRRepo.GetListFromDataSet<CHARGE>(data.Tables[4]);
+                }
+                else
+                {
+                    rates.IMP_OTHERINCOMELIST = new List<CHARGE>();
                 }
 
                 response.Data = rates;

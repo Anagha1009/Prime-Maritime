@@ -30,10 +30,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetTdrList")]
-        public ActionResult<Response<List<TDR>>> GET_CONTAINERLIST()
+        public ActionResult<Response<List<TDR>>> GetTdrList()
         {
             return Ok(JsonConvert.SerializeObject(_tdrService.GetTdrList()));
         }
 
+        [HttpGet("GetTdrDetails")]
+        public ActionResult<Response<TDR>> GetTdrDetails(string TDR_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_tdrService.GetTdrDetails(TDR_NO)));
+        }
     }
 }

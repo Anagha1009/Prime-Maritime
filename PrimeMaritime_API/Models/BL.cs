@@ -36,6 +36,10 @@ namespace PrimeMaritime_API.Models
 
         public string BL_STATUS { get; set; }
 
+        public string BL_TYPE { get; set; }
+
+        public string OG_TYPE { get; set; }
+
         public int? OGView { get; set; }
 
         public int? NNView { get; set; }
@@ -45,7 +49,11 @@ namespace PrimeMaritime_API.Models
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
+
+        public DateTime? CREATED_DATE { get; set; }
         public List<CONTAINERS> CONTAINER_LIST { get; set; } = new List<CONTAINERS>();
+
+        public List<CONTAINERS> CONTAINER_LIST2 { get; set; } = new List<CONTAINERS>();
     }
 
     public class CONTAINERS

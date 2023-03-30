@@ -18,14 +18,9 @@ namespace PrimeMaritime_API.Repository
             {
                 SqlParameter[] parameters =
                 {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_COUNT" },
-
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 255) { Value = "GET_COUNT" }
                 };
 
-                //DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_COUNT", parameters);
-                //COUNT tdrList = SqlHelper.CreateListFromTable<COUNT>(dataTable);
-
-                //return tdrList;
                 return SqlHelper.ExtecuteProcedureReturnData<COUNT>(dbConn, "SP_COUNT", r => r.TranslateAsCountTranslator(), parameters);
             }
             catch (Exception)

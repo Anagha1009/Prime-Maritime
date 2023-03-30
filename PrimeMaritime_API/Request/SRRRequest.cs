@@ -38,7 +38,9 @@ namespace PrimeMaritime_API.Request
         public string UPDATED_BY { get; set; }
         public DateTime UPDATED_DATE { get; set; }
         public List<SRR_CONTAINERS> SRR_CONTAINERS { get; set; } = new List<SRR_CONTAINERS>();
-        public List<SRR_RATES> SRR_RATES { get; set; } = new List<SRR_RATES>();
+        public List<SRR_RATES> FREIGHT_CHARGES { get; set; } = new List<SRR_RATES>();
+        public List<SRR_RATES> POL_CHARGES { get; set; } = new List<SRR_RATES>();
+        public List<SRR_RATES> POD_CHARGES { get; set; } = new List<SRR_RATES>();
         public List<SRR_COMMODITIES> SRR_COMMODITIES { get; set; } = new List<SRR_COMMODITIES>();
     }
 }

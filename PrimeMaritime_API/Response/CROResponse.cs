@@ -30,6 +30,8 @@ namespace PrimeMaritime_API.Response
         public string POL { get; set; }
         public string POD { get; set; }
         public string FINAL_DESTINATION { get; set; }
+        public int CRO_QTY { get; set; }
+        public int ALLOTED_CONTAINERS { get; set; }
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
         public string CONTAINERS { get; set; }

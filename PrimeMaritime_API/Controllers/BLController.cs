@@ -42,6 +42,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE)));
         }
 
+        [HttpGet("GetBLFORMERGE")]
+        public ActionResult<Response<List<BL>>> GetBLFORMERGE(string PORT_OF_LOADING, string PORT_OF_DISCHARGE, string SHIPPER, string CONSIGNEE, string VESSEL_NAME, string VOYAGE_NO, string NOTIFY_PARTY)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLFORMERGE(PORT_OF_LOADING, PORT_OF_DISCHARGE, SHIPPER, CONSIGNEE, VESSEL_NAME, VOYAGE_NO, NOTIFY_PARTY)));
+        }
+
         [HttpGet("GetSRRDetails")]
         public ActionResult<Response<SRR>> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
@@ -55,9 +61,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCargoManifestList")]
-        public ActionResult<Response<List<CargoManifest>>> GetCargoManifestList(string AGENT_CODE, string BL_NO)
+        public ActionResult<Response<CargoManifest>> GetCargoManifestList(string AGENT_CODE, string VESSEL_NAME, string VOYAGE_NO)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, BL_NO)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetCargoManifestList(AGENT_CODE, VESSEL_NAME, VOYAGE_NO)));
         }
 
         [HttpPost("UpdateBL")]
