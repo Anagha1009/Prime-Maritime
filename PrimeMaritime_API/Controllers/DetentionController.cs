@@ -42,7 +42,7 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetContainerDetentionList")]
-        public ActionResult<Response<List<DETENTION_WAIVER_REQUEST>>> GetContainerDetentionList()
+        public ActionResult<Response<List<CONTAINER_DETENTION>>> GetContainerDetentionList()
         {
             return Ok(JsonConvert.SerializeObject(_detentionService.GetContainerDetentionList()));
         }

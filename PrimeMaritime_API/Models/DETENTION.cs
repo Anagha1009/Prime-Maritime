@@ -33,7 +33,8 @@ namespace PrimeMaritime_API.Models
         public string VESSEL_NAME { get; set; }
         public string DCHF_DATE { get; set; }
         public string RCCN_DATE { get; set; }
-        public string DETENTION_DAYS { get; set; }
+        public decimal POL_DETENTION { get; set; }
+        public decimal POD_DETENTION { get; set; }
         public string RCCN_MONTH { get; set; }
     }
 }

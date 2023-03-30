@@ -284,6 +284,16 @@ namespace PrimeMaritime_API.Services
                     srr.SRR_RATES = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[3]);
                 }
 
+                if (data.Tables.Contains("Table3"))
+                {
+                    srr.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[3].Rows[0].ItemArray[0]);
+                }
+
+                if (data.Tables.Contains("Table4"))
+                {
+                    srr.EMPTY_BACK_COST = Convert.ToDecimal(data.Tables[4].Rows[0].ItemArray[0]);
+                }
+
                 response.Data = srr;
             }
             else
