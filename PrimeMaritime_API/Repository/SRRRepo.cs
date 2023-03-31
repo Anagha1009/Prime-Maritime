@@ -579,12 +579,12 @@ namespace PrimeMaritime_API.Repository
             columns[2] = "TT_SELLING";
             columns[3] = "AGENT_CODE";
 
-            SqlParameter[] parameters =
-            {
-                new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "TRUNC_EXC_RATE" }
-            };
+            //SqlParameter[] parameters =
+            //{
+            //    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "TRUNC_EXC_RATE" }
+            //};
 
-            var result = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
+            //var result = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
 
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_EXC_RATES", columns);
 
