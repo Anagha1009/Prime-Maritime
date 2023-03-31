@@ -35,9 +35,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetExcRates")]
-        public ActionResult<Response<DO>> GetExcRates(string CURRENCY_CODE)
+        public ActionResult<Response<DO>> GetExcRates(string CURRENCY_CODE, string AGENT_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetExcRates(CURRENCY_CODE)));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetExcRates(CURRENCY_CODE, AGENT_CODE)));
         }
 
         [HttpGet("GetRate")]

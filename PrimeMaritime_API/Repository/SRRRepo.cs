@@ -535,14 +535,15 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public EXC_RATES GetExcRates(string connstring, string CURRENCY_CODE)
+        public EXC_RATES GetExcRates(string connstring, string CURRENCY_CODE, string AGENT_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
             {
                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_EXC_RATE" },
-                new SqlParameter("@CURRENCY_CODE", SqlDbType.VarChar, 20) { Value = CURRENCY_CODE }
+                new SqlParameter("@CURRENCY_CODE", SqlDbType.VarChar, 20) { Value = CURRENCY_CODE },
+                new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 
                 return SqlHelper.ExtecuteProcedureReturnData<EXC_RATES>(connstring, "SP_CRUD_EXC_RATES", r => r.TranslateEXCRATES(), parameters);
@@ -551,15 +552,14 @@ namespace PrimeMaritime_API.Repository
             {
                 throw;
             }
-
         }
-
         public void InsertExcRate(string connstring, List<EXC_RATE> excRateList)
         {
             DataTable tbl = new DataTable();
             tbl.Columns.Add(new DataColumn("CURRENCY_TYPE", typeof(string)));
             tbl.Columns.Add(new DataColumn("CURRENCY_CODE", typeof(string)));
             tbl.Columns.Add(new DataColumn("TT_SELLING", typeof(decimal)));
+            tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
 
             foreach (var i in excRateList)
             {
@@ -568,21 +568,23 @@ namespace PrimeMaritime_API.Repository
                 dr["CURRENCY_TYPE"] = i.CURRENCY_TYPE;
                 dr["CURRENCY_CODE"] = i.CURRENCY_CODE;
                 dr["TT_SELLING"] = i.TT_SELLING;
-               
+                dr["AGENT_CODE"] = i.AGENT_CODE;
+
                 tbl.Rows.Add(dr);
             }
 
-            string[] columns = new string[3];
+            string[] columns = new string[4];
             columns[0] = "CURRENCY_TYPE";
             columns[1] = "CURRENCY_CODE";
             columns[2] = "TT_SELLING";
+            columns[3] = "AGENT_CODE";
 
             SqlParameter[] parameters =
             {
                 new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "TRUNC_EXC_RATE" }
             };
 
-            var result=SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
+            var result = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
 
             SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_EXC_RATES", columns);
 

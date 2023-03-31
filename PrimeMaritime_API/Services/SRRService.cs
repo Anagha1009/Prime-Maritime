@@ -188,21 +188,21 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<EXC_RATES> GetExcRates(string CURRENCY_CODE)
+        public Response<EXC_RATES> GetExcRates(string CURRENCY_CODE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<EXC_RATES> response = new Response<EXC_RATES>();
 
-            if ((CURRENCY_CODE == "") || (CURRENCY_CODE == null))
+            if ((CURRENCY_CODE == "") || (CURRENCY_CODE == null) || (AGENT_CODE == "") || (AGENT_CODE == null))
             {
                 response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide CURRENCY CODE";
+                response.ResponseMessage = "Please provide all parameters";
                 return response;
             }
 
 
-            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE, AGENT_CODE);
 
             if ((data != null))
             {

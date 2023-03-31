@@ -35,6 +35,9 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("CREATED_BY"))
                 item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
 
+            if (reader.IsColumnExists("AGENT_CODE"))
+                item.AGENT_CODE = SqlHelper.GetNullableString(reader, "AGENT_CODE");
+
             return item;
         }
     }
