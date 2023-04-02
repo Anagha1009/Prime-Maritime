@@ -470,6 +470,7 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "COUNTER_SRR" },
                   new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = request[0].SRR_NO },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 100) { Value = request[0].CREATED_BY },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
@@ -501,6 +502,7 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "COUNTER_SRR" },
                   new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = request[0].SRR_NO },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 100) { Value = request[0].CREATED_BY },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
@@ -535,7 +537,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public EXC_RATES GetExcRates(string connstring, string CURRENCY_CODE, string AGENT_CODE)
+        public EXC_RATE GetExcRates(string connstring, string CURRENCY_CODE, string AGENT_CODE)
         {
             try
             {
@@ -546,7 +548,7 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
             };
 
-                return SqlHelper.ExtecuteProcedureReturnData<EXC_RATES>(connstring, "SP_CRUD_EXC_RATES", r => r.TranslateEXCRATES(), parameters);
+                return SqlHelper.ExtecuteProcedureReturnData<EXC_RATE>(connstring, "SP_CRUD_EXC_RATES", r => r.TranslateEXCRATES(), parameters);
             }
             catch (Exception)
             {
@@ -555,39 +557,48 @@ namespace PrimeMaritime_API.Repository
         }
         public void InsertExcRate(string connstring, List<EXC_RATE> excRateList)
         {
-            DataTable tbl = new DataTable();
-            tbl.Columns.Add(new DataColumn("CURRENCY_TYPE", typeof(string)));
-            tbl.Columns.Add(new DataColumn("CURRENCY_CODE", typeof(string)));
-            tbl.Columns.Add(new DataColumn("TT_SELLING", typeof(decimal)));
-            tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
+            //DataTable tbl = new DataTable();
+            //tbl.Columns.Add(new DataColumn("CURRENCY_CODE", typeof(string)));
+            //tbl.Columns.Add(new DataColumn("RATE", typeof(decimal)));
+            //tbl.Columns.Add(new DataColumn("AGENT_CODE", typeof(string)));
 
-            foreach (var i in excRateList)
-            {
-                DataRow dr = tbl.NewRow();
-
-                dr["CURRENCY_TYPE"] = i.CURRENCY_TYPE;
-                dr["CURRENCY_CODE"] = i.CURRENCY_CODE;
-                dr["TT_SELLING"] = i.TT_SELLING;
-                dr["AGENT_CODE"] = i.AGENT_CODE;
-
-                tbl.Rows.Add(dr);
-            }
-
-            string[] columns = new string[4];
-            columns[0] = "CURRENCY_TYPE";
-            columns[1] = "CURRENCY_CODE";
-            columns[2] = "TT_SELLING";
-            columns[3] = "AGENT_CODE";
-
-            //SqlParameter[] parameters =
+            //foreach (var i in excRateList)
             //{
-            //    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "TRUNC_EXC_RATE" }
-            //};
+            //    DataRow dr = tbl.NewRow();
 
-            //var result = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
+            //    dr["CURRENCY_CODE"] = i.CURRENCY_CODE;
+            //    dr["RATE"] = i.RATE;
+            //    dr["AGENT_CODE"] = i.AGENT_CODE;
 
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_EXC_RATES", columns);
+            //    tbl.Rows.Add(dr);
+            //}
 
+            //string[] columns = new string[3];
+            //columns[1] = "CURRENCY_CODE";
+            //columns[2] = "RATE";
+            //columns[3] = "AGENT_CODE";
+
+            //SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_EXC_RATES", columns);
+
+            try
+            {
+                foreach(var item in excRateList)
+                {
+                    SqlParameter[] parameters =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "INSERT_EXC_RATE" },
+                        new SqlParameter("@CURRENCY_CODE", SqlDbType.VarChar, 20) { Value = item.CURRENCY },
+                        new SqlParameter("@RATE", SqlDbType.Decimal) { Value = item.RATE },
+                        new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = item.AGENT_CODE },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_EXC_RATES", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

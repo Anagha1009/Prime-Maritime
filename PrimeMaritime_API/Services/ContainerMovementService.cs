@@ -105,7 +105,31 @@ namespace PrimeMaritime_API.Services
             response.ResponseCode = 200;
 
             return response;
+        }
+        public Response<CommonResponse> ValidContainer(string ContainerNo)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
 
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.ValidContainer(dbConn, ContainerNo);
+
+            if(data != "")
+            {
+                Response<CommonResponse> response = new Response<CommonResponse>();
+                response.Succeeded = true;
+                response.ResponseMessage = "Container No is Valid";
+                response.ResponseCode = 200;
+
+                return response;
+            }
+            else
+            {
+                Response<CommonResponse> response = new Response<CommonResponse>();
+                response.Succeeded = true;
+                response.ResponseMessage = "Container No is not Valid";
+                response.ResponseCode = 500;
+
+                return response;
+            }
         }
 
         public Response<CM> GetSingleContainerMovement(string CONTAINER_NO)

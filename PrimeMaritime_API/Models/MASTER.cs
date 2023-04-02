@@ -11,19 +11,14 @@ namespace PrimeMaritime_API.Models
         public string CUST_NAME { get; set; }
         public string CUST_ADDRESS { get; set; }
         public string CUST_EMAIL { get; set; }
-
         public string CUST_CONTACT { get; set; }
-
         public string CUST_TYPE { get; set; }
-
         public string GSTIN { get; set; }
+        public string VAT_NO { get; set; }
         public Boolean STATUS { get; set; }
         public string REMARKS { get; set; }
-
         public string AGENT_CODE { get; set; }
-
         public string CREATED_BY { get; set; }
-
     }
 
     public class CONTAINER_MASTER

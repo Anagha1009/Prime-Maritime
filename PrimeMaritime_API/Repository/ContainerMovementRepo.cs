@@ -14,12 +14,8 @@ namespace PrimeMaritime_API.Repository
     {
         public void InsertContainerMovement(string connstring, CONTAINER_MOVEMENT request, bool fromXL)
         {
-
-
             if (request.CONTAINER_NO != "")
             {
-
-
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_SINGLE_CONTAINER_MOVEMENT" },
@@ -331,6 +327,24 @@ namespace PrimeMaritime_API.Repository
                 List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
                 return containerList;
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string ValidContainer(string connstring, string CONTAINER_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "VALID_CONTAINERNO" },
+                    new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 50) { Value = CONTAINER_NO },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
             }
             catch (Exception)
             {
