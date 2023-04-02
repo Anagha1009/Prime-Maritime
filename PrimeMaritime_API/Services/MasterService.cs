@@ -101,7 +101,6 @@ namespace PrimeMaritime_API.Services
 
             DbClientFactory<MasterRepo>.Instance.InsertPartyMaster(dbConn, request);
 
-
             Response<CommonResponse> response = new Response<CommonResponse>();
             response.Succeeded = true;
             response.ResponseMessage = "Master saved Successfully.";

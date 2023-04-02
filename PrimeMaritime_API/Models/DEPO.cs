@@ -54,4 +54,11 @@ namespace PrimeMaritime_API.Models
         public DateTime CREATED_DATE { get; set; }
     }
 
+    public class MNR_TARIFF
+    {
+        public decimal MAN_HOUR { get; set; }
+        public decimal LABOUR_CHARGE { get; set; }
+        public decimal MATERIAL_COST { get; set; }
+        public decimal TOTAL { get; set; }     
+    }
 }

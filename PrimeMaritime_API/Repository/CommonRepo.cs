@@ -11,7 +11,7 @@ namespace PrimeMaritime_API.Repository
 {
     public class CommonRepo
     {
-        public List<DROPDOWN> GetDropdownData(string connstring, string key, string port, string value, int value1)
+        public List<DROPDOWN> GetDropdownData(string connstring, string key, string port, string value, int value1, string value2)
         {
             SqlParameter[] parameters =
            {
@@ -19,6 +19,7 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = port },
                 new SqlParameter("@VALUE", SqlDbType.VarChar, 250) { Value = value },
                 new SqlParameter("@VALUE1", SqlDbType.Int) { Value = value1 },
+                new SqlParameter("@VALUE2", SqlDbType.VarChar, 250) { Value = value2 },
             };
 
             DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_GET_MASTER_DATA", parameters);

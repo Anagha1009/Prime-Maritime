@@ -20,8 +20,6 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-
-
         public Response<CommonResponse> InsertContainer(DEPO_CONTAINER request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -116,7 +114,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<List<MR_LIST>> GetMNRDetails(string OPERATION, string MR_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -125,6 +122,29 @@ namespace PrimeMaritime_API.Services
             var data = DbClientFactory<DEPORepo>.Instance.GetMRREQDetails(dbConn, OPERATION, MR_NO);
 
             if (data.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<MNR_TARIFF> GetMNRTariff(string COMPONENT, string REPAIR, string LENGTH, string WIDTH, string HEIGHT, string QUANTITY)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+            Response<MNR_TARIFF> response = new Response<MNR_TARIFF>();
+
+            var data = DbClientFactory<DEPORepo>.Instance.GetMNRTariff(dbConn, COMPONENT,REPAIR,LENGTH,WIDTH,HEIGHT,QUANTITY);
+
+            if(data != null)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;

@@ -188,21 +188,21 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<EXC_RATES> GetExcRates(string CURRENCY_CODE)
+        public Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
-            Response<EXC_RATES> response = new Response<EXC_RATES>();
+            Response<EXC_RATE> response = new Response<EXC_RATE>();
 
-            if ((CURRENCY_CODE == "") || (CURRENCY_CODE == null))
+            if ((CURRENCY_CODE == "") || (CURRENCY_CODE == null) || (AGENT_CODE == "") || (AGENT_CODE == null))
             {
                 response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide CURRENCY CODE";
+                response.ResponseMessage = "Please provide all parameters";
                 return response;
             }
 
 
-            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE, AGENT_CODE);
 
             if ((data != null))
             {
@@ -284,14 +284,14 @@ namespace PrimeMaritime_API.Services
                     srr.SRR_RATES = SRRRepo.GetListFromDataSet<SRR_RATES>(data.Tables[3]);
                 }
 
-                if (data.Tables.Contains("Table3"))
-                {
-                    srr.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[3].Rows[0].ItemArray[0]);
-                }
-
                 if (data.Tables.Contains("Table4"))
                 {
-                    srr.EMPTY_BACK_COST = Convert.ToDecimal(data.Tables[4].Rows[0].ItemArray[0]);
+                    srr.LADEN_BACK_COST = Convert.ToDecimal(data.Tables[4].Rows[0].ItemArray[0]);
+                }
+
+                if (data.Tables.Contains("Table5"))
+                {
+                    srr.EMPTY_BACK_COST = Convert.ToDecimal(data.Tables[5].Rows[0].ItemArray[0]);
                 }
 
                 response.Data = srr;

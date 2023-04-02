@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.Response;
 using System.IO;
+using PrimeMaritime_API.Translators;
 
 namespace PrimeMaritime_API.Repository
 {
@@ -401,6 +402,29 @@ namespace PrimeMaritime_API.Repository
             SqlHelper.ExtecuteProcedureReturnDataSet(connstring, "SP_CRUD_MNR", parameters);
         }
 
+        public MNR_TARIFF GetMNRTariff(string connstring, string COMPONENT, string REPAIR, string LENGTH, string WIDTH, string HEIGHT, string QUANTITY)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_MNR_TARIFF" },
+                new SqlParameter("@COMPONENT", SqlDbType.VarChar, 50) { Value = COMPONENT },
+                new SqlParameter("@REPAIR", SqlDbType.VarChar, 50) { Value = REPAIR },
+                new SqlParameter("@LENGTH", SqlDbType.VarChar, 50) { Value = LENGTH },
+                new SqlParameter("@WIDTH", SqlDbType.VarChar, 50) { Value = WIDTH },
+                new SqlParameter("@HEIGHT", SqlDbType.VarChar, 50) { Value = HEIGHT },
+                new SqlParameter("@QUANTITY", SqlDbType.VarChar, 50) { Value = QUANTITY },
+            };
+
+                return SqlHelper.ExtecuteProcedureReturnData<MNR_TARIFF>(connstring, "SP_CRUD_MNR", r => r.TranslateMNR(), parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
 
 
     }

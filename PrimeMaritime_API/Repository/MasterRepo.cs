@@ -28,6 +28,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@CUST_CONTACT", SqlDbType.VarChar, 20) { Value = master.CUST_CONTACT },
                   new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,10) { Value = master.CUST_TYPE },
                   new SqlParameter("@GSTIN", SqlDbType.VarChar,15) { Value = master.GSTIN },
+                  new SqlParameter("@VAT_NO", SqlDbType.VarChar,30) { Value = master.VAT_NO },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
                   new SqlParameter("@REMARKS", SqlDbType.VarChar, 200) { Value = master.REMARKS },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 100) { Value = master.AGENT_CODE },
