@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
+using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Request;
 using PrimeMaritime_API.Response;
 using System;
@@ -31,6 +34,22 @@ namespace PrimeMaritime_API.Controllers
         public ActionResult<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request)
         {
             return Ok(_authenticationService.RefreshTokenAsync(request));
+        }
+
+        [HttpPost("Validate-Pwd")]
+        public ActionResult<Response<USER>> ValidatePwd(USER user)
+        {
+            string password = user.PASSWORD;
+            int userId = user.ID;
+            return Ok(JsonConvert.SerializeObject(_authenticationService.ValidatePwd(password, userId)));
+        }
+
+        [HttpPost("Reset-Pwd")]
+        public ActionResult<Response<string>> ResetPwd(USER user)
+        {
+            string password = user.PASSWORD;
+            int userId = user.ID;
+            return Ok(_authenticationService.ResetPwd(userId, password));
         }
     }
 }

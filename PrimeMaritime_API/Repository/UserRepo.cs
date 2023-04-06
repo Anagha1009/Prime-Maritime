@@ -83,5 +83,29 @@ namespace PrimeMaritime_API.Repository
 
             return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
         }
+
+        public USER ValidatePwd(string connstring, string password, int userId)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@PASSWORD", SqlDbType.VarChar, 100) { Value = password },
+              new SqlParameter("@USER_ID", SqlDbType.Int) { Value =  userId},
+              new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "VALIDATE_PWD" }
+            };
+
+            return SqlHelper.ExtecuteProcedureReturnData<USER>(connstring, "SP_USER_MANAGEMENT", r => r.TranslateAsUser1(), parameters);
+        }
+
+        public void ResetPwd(string connstring, int userId, string password)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@USER_ID", SqlDbType.Int) { Value = userId },
+              new SqlParameter("@PASSWORD", SqlDbType.VarChar, 100) { Value = password },
+              new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "RESET_PWD" }
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+        }
     }
 }
