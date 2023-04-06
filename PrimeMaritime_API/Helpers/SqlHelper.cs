@@ -63,7 +63,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(255),GROSS_WEIGHT numeric(18,2),MEASUREMENT varchar(50))";
+                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(max),GROSS_WEIGHT numeric(18,2),MEASUREMENT varchar(50))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -159,7 +159,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),BOOKING_NO varchar(100),CRO_NO varchar(100),DO_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),CONTAINER_SIZE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(255),GROSS_WEIGHT numeric(18,2),MEASUREMENT varchar(50)," +
+                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),BOOKING_NO varchar(100),CRO_NO varchar(100),DO_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),CONTAINER_SIZE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(max),GROSS_WEIGHT numeric(18,2),MEASUREMENT varchar(50)," +
                             "AGENT_CODE varchar(20),AGENT_NAME varchar(255),CREATED_BY varchar(255))";
                         command.ExecuteNonQuery();
 

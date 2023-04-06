@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.IServices;
 using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
@@ -198,6 +199,51 @@ namespace PrimeMaritime_API.Services
                     CREATED = DateTime.UtcNow
                 };
             }
+        }
+        public Response<USER> ValidatePwd(string password, int userId)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<USER> response = new Response<USER>();
+
+            if ((password == "") || (password == null) || (userId == 0))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Data inaccurate";
+                return response;
+            }
+
+
+            var data = DbClientFactory<UserRepo>.Instance.ValidatePwd(dbConn, password, userId);
+
+            if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<string> ResetPwd(int userId, string password)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<UserRepo>.Instance.ResetPwd(dbConn, userId, password);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Password Updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
         }
     }
 }
