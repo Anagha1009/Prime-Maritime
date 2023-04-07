@@ -5,6 +5,7 @@ using PrimeMaritime_API.Models;
 using PrimeMaritime_API.Repository;
 using PrimeMaritime_API.Response;
 using PrimeMaritime_API.Utility;
+using System;
 using System.Collections.Generic;
 
 namespace PrimeMaritime_API.Services
@@ -1136,6 +1137,106 @@ namespace PrimeMaritime_API.Services
             }
 
             DbClientFactory<MasterRepo>.Instance.DeleteVoyage(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
+        #region "LOCATION MASTER"
+        public Response<CommonResponse> InsertLocationMaster(LOCATION_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertLocationMaster(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<List<LOCATION_MASTER>> GetLocationMasterList(string LOC_NAME, string LOC_TYPE, bool STATUS, string FROM_DATE, string TO_DATE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<LOCATION_MASTER>> response = new Response<List<LOCATION_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetLocationMasterList(dbConn, LOC_NAME,LOC_TYPE,STATUS,FROM_DATE,TO_DATE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<LOCATION_MASTER> GetLocationMasterDetails(string LOC_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<LOCATION_MASTER> response = new Response<LOCATION_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetLocationMasterDetails(dbConn, LOC_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> UpdateLocationMasterList(LOCATION_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateLocationMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteLocationMasterList(string LOC_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (String.IsNullOrEmpty(LOC_CODE))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteLocationMaster(dbConn, LOC_CODE);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";

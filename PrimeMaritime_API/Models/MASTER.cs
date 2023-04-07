@@ -205,35 +205,34 @@ namespace PrimeMaritime_API.Models
     public class SCHEDULE
     {
         public int ID { get; set; }
-
         public string VESSEL_NAME { get; set; }
-
         public string SERVICE_NAME { get; set; }
-
         public string PORT_CODE { get; set; }
-
         public string VIA_NO { get; set; }
-
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public DateTime CREATED_DATE { get; set; }
-
         public string CREATED_BY { get; set; }
-
         public string UPDATED_BY { get; set; }
-
         public DateTime UPDATED_DATE { get; set; }
+    }
 
-
-
-
-
-
-
-
+    public class LOCATION_MASTER
+    {
+        public int ID { get; set; }
+        public string LOC_NAME { get; set; }
+        public string LOC_CODE { get; set; }
+        public bool IS_DEPO { get; set; }
+        public bool IS_CFS { get; set; }
+        public bool IS_TERMINAL { get; set; }
+        public bool IS_YARD { get; set; }
+        public string ADDRESS { get; set; }
+        public string COUNTRY_CODE { get; set; }
+        public string PORT_CODE { get; set; }
+        public bool STATUS { get; set; }
+        public DateTime CREATED_DATE { get; set; }     
+        public string CREATED_BY { get; set; }
     }
 
 }

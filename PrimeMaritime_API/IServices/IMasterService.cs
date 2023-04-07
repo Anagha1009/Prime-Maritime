@@ -24,7 +24,7 @@ namespace PrimeMaritime_API.IServices
         #region "CONTAINER MASTER"
         Response<CommonResponse> InsertContainerMaster(CONTAINER_MASTER request);
 
-        Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType,string ContSize,bool Status, string ONHIRE_DATE);
+        Response<List<CONTAINER_MASTER>> GetContainerMasterList(string ContainerNo, string ContType, string ContSize, bool Status, string ONHIRE_DATE);
 
         Response<CONTAINER_MASTER> GetContainerMasterDetails(int ID, string CONTAINER_NO);
 
@@ -155,6 +155,18 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> DeleteVoyage(int ID);
 
+        #endregion
+
+        #region "LOCATION MASTER"
+        Response<CommonResponse> InsertLocationMaster(LOCATION_MASTER request);
+
+        Response<List<LOCATION_MASTER>> GetLocationMasterList(string LOC_NAME, string LOC_TYPE, bool STATUS, string FROM_DATE, string TO_DATE);
+
+        Response<LOCATION_MASTER> GetLocationMasterDetails(string LOC_CODE);
+
+        Response<CommonResponse> UpdateLocationMasterList(LOCATION_MASTER request);
+
+        Response<CommonResponse> DeleteLocationMasterList(string LOC_CODE);
         #endregion
     }
 }
