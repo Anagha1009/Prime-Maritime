@@ -33,27 +33,21 @@ namespace PrimeMaritime_API.Models
         public DateTime? BL_ISSUE_DATE { get; set; }
         public decimal TOTAL_PREPAID { get; set; }
         public int NO_OF_ORIGINAL_BL { get; set; }
-
         public string BL_STATUS { get; set; }
-
         public string BL_TYPE { get; set; }
-
         public string OG_TYPE { get; set; }
-
         public int? OGView { get; set; }
-
         public int? NNView { get; set; }
-
         public string MARKS_NOS { get; set; }
         public string DESC_OF_GOODS { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
         public string CREATED_BY { get; set; }
-
         public DateTime? CREATED_DATE { get; set; }
         public List<CONTAINERS> CONTAINER_LIST { get; set; } = new List<CONTAINERS>();
-
         public List<CONTAINERS> CONTAINER_LIST2 { get; set; } = new List<CONTAINERS>();
+        public string CONTAINERS { get; set; }
+        public string COMMODITY { get; set; }
     }
 
     public class CONTAINERS

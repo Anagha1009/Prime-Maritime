@@ -40,6 +40,9 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("IS_YARD"))
                 item.IS_YARD = SqlHelper.GetBoolean(reader, "IS_YARD");
 
+            if (reader.IsColumnExists("IS_ICD"))
+                item.IS_ICD = SqlHelper.GetBoolean(reader, "IS_ICD");
+
             if (reader.IsColumnExists("ADDRESS"))
                 item.ADDRESS = SqlHelper.GetNullableString(reader, "ADDRESS");
 

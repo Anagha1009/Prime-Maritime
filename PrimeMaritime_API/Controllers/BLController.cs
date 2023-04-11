@@ -72,6 +72,10 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_blService.UpdateBL(request));
         }
 
-
+        [HttpGet("GetBLListPM")]
+        public ActionResult<Response<List<BL>>> GetBLListPM()
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLListPM()));
+        }
     }
 }

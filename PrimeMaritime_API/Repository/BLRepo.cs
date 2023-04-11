@@ -173,6 +173,25 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public List<BL> GetBLListPM(string connstring)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BLLIST_PM" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<BL> blList = SqlHelper.CreateListFromTable<BL>(dataTable);
+                return blList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public List<BL> GetBLFORMERGE(string connstring, string PORT_OF_LOADING,string PORT_OF_DISCHARGE,string SHIPPER,string CONSIGNEE,string VESSEL_NAME,string VOYAGE_NO,string NOTIFY_PARTY)
         {

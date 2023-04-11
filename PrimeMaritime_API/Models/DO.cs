@@ -27,7 +27,7 @@ namespace PrimeMaritime_API.Models
 		public DateTime DO_VALIDITY { get; set; }
 		public string IGM_NO { get; set; }
 		public string IGM_ITEM_NO { get; set; }
-		public DateTime IGM_DATE { get; set; }
+		public DateTime? IGM_DATE { get; set; }
 		public string CLEARING_PARTY { get; set; }
 		public string ACCEPTANCE_LOCATION { get; set; }
 		public DateTime LETTER_VALIDITY { get; set; }

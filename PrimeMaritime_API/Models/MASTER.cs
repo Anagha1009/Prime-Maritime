@@ -227,6 +227,7 @@ namespace PrimeMaritime_API.Models
         public bool IS_CFS { get; set; }
         public bool IS_TERMINAL { get; set; }
         public bool IS_YARD { get; set; }
+        public bool IS_ICD { get; set; }
         public string ADDRESS { get; set; }
         public string COUNTRY_CODE { get; set; }
         public string PORT_CODE { get; set; }

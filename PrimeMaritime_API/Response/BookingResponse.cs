@@ -29,6 +29,7 @@ namespace PrimeMaritime_API.Response
         public DateTime ETD { get; set; }
         public string SLOTS { get; set; }
         public DateTime CREATED_DATE { get; set; }
+        public string CREATED_BY { get; set; }
         public int TOTAL_VOLUME_EXPECTED { get; set; }
         public int CRO_QTY { get; set; }
     }

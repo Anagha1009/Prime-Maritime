@@ -107,5 +107,139 @@ namespace PrimeMaritime_API.Repository
 
             SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
         }
+        public List<USERLIST> GetUserList(string connstring)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_USERLIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_USER_MANAGEMENT", parameters);
+                List<USERLIST> userList = SqlHelper.CreateListFromTable<USERLIST>(dataTable);
+                return userList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string InsertUser(string connstring, USERLIST user)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_USER" },
+                  new SqlParameter("@NAME", SqlDbType.VarChar,255) { Value = user.NAME },
+                  new SqlParameter("@USERNAME", SqlDbType.VarChar, 100) { Value = user.USERNAME },
+                  new SqlParameter("@USERTYPE", SqlDbType.VarChar, 20) { Value = user.USERTYPE },
+                  new SqlParameter("@PASSWORD", SqlDbType.VarChar, 100) { Value = user.PASSWORD },
+                  new SqlParameter("@USERCODE", SqlDbType.VarChar, 50) { Value = user.USERCODE },
+                  new SqlParameter("@PORT", SqlDbType.VarChar, 50) { Value = user.PORT },
+                  new SqlParameter("@DEPO", SqlDbType.VarChar, 100) { Value = user.DEPO },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = user.EMAIL },
+                  new SqlParameter("@LOCATION", SqlDbType.VarChar, 255) { Value = user.LOCATION },
+                  new SqlParameter("@COUNTRYCODE", SqlDbType.VarChar, 50) { Value = user.COUNTRYCODE },
+                  new SqlParameter("@USERADDRESS", SqlDbType.VarChar, 255) { Value = user.USERADDRESS },
+                  new SqlParameter("@ROLE_ID", SqlDbType.Int) { Value = user.ROLE_ID },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar,50) { Value = user.ORG_CODE },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = user.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = user.CREATED_BY },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string ValidateUsercode(string connstring, string usercode)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_USERCODE" },
+                  new SqlParameter("@USERCODE", SqlDbType.VarChar,50) { Value = usercode },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public USERLIST GetUserByUsercode(string connstring, string usercode)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@USERCODE", SqlDbType.VarChar, 50) { Value = usercode },
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_USER_BY_USERCODE" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<USERLIST>(connstring, "SP_USER_MANAGEMENT", r => r.TranslateAsUser(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public string UpdateUser(string connstring, USERLIST user)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_USER" },
+                  new SqlParameter("@NAME", SqlDbType.VarChar,255) { Value = user.NAME },
+                  new SqlParameter("@USERNAME", SqlDbType.VarChar, 100) { Value = user.USERNAME },
+                  new SqlParameter("@USERTYPE", SqlDbType.VarChar, 20) { Value = user.USERTYPE },
+                  new SqlParameter("@USERCODE", SqlDbType.VarChar, 50) { Value = user.USERCODE },
+                  new SqlParameter("@PORT", SqlDbType.VarChar, 50) { Value = user.PORT },
+                  new SqlParameter("@DEPO", SqlDbType.VarChar, 100) { Value = user.DEPO },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = user.EMAIL },
+                  new SqlParameter("@LOCATION", SqlDbType.VarChar, 255) { Value = user.LOCATION },
+                  new SqlParameter("@COUNTRYCODE", SqlDbType.VarChar, 50) { Value = user.COUNTRYCODE },
+                  new SqlParameter("@USERADDRESS", SqlDbType.VarChar, 255) { Value = user.USERADDRESS },
+                  new SqlParameter("@ROLE_ID", SqlDbType.Int) { Value = user.ROLE_ID },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar,50) { Value = user.ORG_CODE },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = user.STATUS },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public string DeleteUser(string connstring, string usercode)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "DELETE_USER" },
+                  new SqlParameter("@USERCODE", SqlDbType.VarChar, 50) { Value = usercode },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
