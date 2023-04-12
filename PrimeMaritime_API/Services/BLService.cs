@@ -33,8 +33,38 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+        public Response<Organisation> GetOrgDetails(string ORG_CODE, string ORG_LOC_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<Organisation> response = new Response<Organisation>();
+
+            if ((ORG_CODE == "") || (ORG_CODE == null) || (ORG_LOC_CODE == "") || (ORG_LOC_CODE == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Sufficient details";
+                return response;
+            }
 
 
+            var data = DbClientFactory<BLRepo>.Instance.GetOrgDetails(dbConn, ORG_CODE, ORG_LOC_CODE);
+
+            if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
 
         //public Response<string> UpdateBL(List<BL> request)
         //{

@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using PrimeMaritime_API.Helpers;
 using PrimeMaritime_API.Response;
+using PrimeMaritime_API.Translators;
 
 namespace PrimeMaritime_API.Repository
 {
@@ -44,6 +45,7 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@AGENT_CODE", SqlDbType.VarChar,20) { Value = request.AGENT_CODE },
               new SqlParameter("@AGENT_NAME", SqlDbType.VarChar,255) { Value = request.AGENT_NAME },
               new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = request.CREATED_BY },
+              new SqlParameter("@DESTINATION_AGENT_CODE", SqlDbType.VarChar,20) { Value = request.DESTINATION_AGENT_CODE },
             };
 
             var BLNO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
@@ -122,7 +124,8 @@ namespace PrimeMaritime_API.Repository
               new SqlParameter("@FINAL_DESTINATION", SqlDbType.VarChar, 255) { Value = request.FINAL_DESTINATION },
               new SqlParameter("@PREPAID_AT", SqlDbType.VarChar, 255) { Value = request.PREPAID_AT },
               new SqlParameter("@PAYABLE_AT", SqlDbType.VarChar, 255) { Value = request.PAYABLE_AT },
-              new SqlParameter("@TOTAL_PREPAID", SqlDbType.Decimal) { Value = request.TOTAL_PREPAID }
+              new SqlParameter("@TOTAL_PREPAID", SqlDbType.Decimal) { Value = request.TOTAL_PREPAID },
+              new SqlParameter("@DESTINATION_AGENT_CODE", SqlDbType.VarChar,20) { Value = request.DESTINATION_AGENT_CODE },
             };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
@@ -298,6 +301,23 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public Organisation GetOrgDetails(string connstring, string ORG_CODE, string ORG_LOC_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+            {
+                new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_ORG_DETAILS" },
+                new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 100) { Value = ORG_CODE },
+                new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = ORG_LOC_CODE },
+            };
 
+                return SqlHelper.ExtecuteProcedureReturnData<Organisation>(connstring, "SP_CRUD_BL", r => r.TranslateOrganisation(), parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

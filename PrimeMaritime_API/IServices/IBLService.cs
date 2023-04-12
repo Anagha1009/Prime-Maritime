@@ -19,5 +19,6 @@ namespace PrimeMaritime_API.IServices
         Response<SRR> GetSRRDetails(string BL_NO, string BOOKING_NO, string AGENT_CODE);
         Response<CargoManifest> GetCargoManifestList(string AGENT_CODE, string VESSEL_NAME, string VOYAGE_NO);
         Response<List<BL>> GetBLListPM();
+        Response<Organisation> GetOrgDetails(string ORG_CODE, string ORG_LOC_CODE);
     }
 }
