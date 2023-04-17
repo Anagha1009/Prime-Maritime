@@ -33,12 +33,6 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_cmService.InsertContainerMovement(request,fromXL));
         }
 
-        //[HttpGet("GetContainerMovementList")]
-        //public ActionResult<Response<List<CMList>>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
-        //{
-        //    return Ok(JsonConvert.SerializeObject(_cmService.GetContainerMovementList(AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO)));
-        //}
-
         [HttpGet("GetContainerMovement")] //ANAGHA
         public ActionResult<Response<CONTAINERMOVEMENT>> GetContainerMovement(string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
@@ -69,10 +63,22 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_cmService.GetAvailableContainerListForDepo(DEPO_CODE)));
         }
 
-        [HttpPost("ValidContainer")]
+        [HttpGet("GetAllContainerListForDepo")] //ANAGHA
+        public ActionResult<Response<List<CM>>> GetAllContainerListForDepo(string DEPO_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetAllContainerListForDepo(DEPO_CODE)));
+        }
+
+        [HttpPost("ValidContainer")] //ANAGHA
         public ActionResult<Response<CommonResponse>> ValidContainer(string CONTAINER_NO)
         {
             return Ok(_cmService.ValidContainer(CONTAINER_NO));
+        }
+
+        [HttpGet("GetNextActivityList")] //ANAGHA
+        public ActionResult<Response<List<NEXT_ACTIVITY>>> GetNextActivityList(string CONTAINER_NO)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetNextActivityList(CONTAINER_NO)));
         }
 
         [HttpGet("GetContainerMovementBooking")]
@@ -93,7 +99,6 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_cmService.GetSingleContainerMovement(CONTAINER_NO)));
         }
 
-
         //ContainerTracking
         [HttpPost("InsertContainerTracking")]
         public ActionResult<Response<CommonResponse>> InsertContainerTracking(CONTAINER_TRACKING request)
@@ -112,7 +117,5 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_ctService.GetContainerTrackingAsPerBooking(BOOKING_NO, CRO_NO,CONTAINER_NO)));
         }
-
-
     }
 }

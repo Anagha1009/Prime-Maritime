@@ -39,12 +39,12 @@ namespace PrimeMaritime_API.Services
 
             Response<Organisation> response = new Response<Organisation>();
 
-            if ((ORG_CODE == "") || (ORG_CODE == null) || (ORG_LOC_CODE == "") || (ORG_LOC_CODE == null))
-            {
-                response.ResponseCode = 500;
-                response.ResponseMessage = "Please provide Sufficient details";
-                return response;
-            }
+            //if ((ORG_CODE == "") || (ORG_CODE == null) || (ORG_LOC_CODE == "") || (ORG_LOC_CODE == null))
+            //{
+            //    response.ResponseCode = 500;
+            //    response.ResponseMessage = "Please provide Sufficient details";
+            //    return response;
+            //}
 
 
             var data = DbClientFactory<BLRepo>.Instance.GetOrgDetails(dbConn, ORG_CODE, ORG_LOC_CODE);
