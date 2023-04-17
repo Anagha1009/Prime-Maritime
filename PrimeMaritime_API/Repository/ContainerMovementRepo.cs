@@ -366,6 +366,23 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public string ValidCROForContainer(string connstring, string CONTAINER_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_CRONO" },
+                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = CONTAINER_NO },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public string UpdateContainerMovement(string connstring, CONTAINERMOVEMENT cm)
         {
             try
@@ -412,38 +429,35 @@ namespace PrimeMaritime_API.Repository
 
                 foreach (var i in cm)
                 {
-                    foreach (var items in cm)
-                    {
-                        var CRONO = "NULL";
+                    var CRONO = "NULL";
 
-                        if (items.CRO_NO == "" || items.CRO_NO == null)
+                    if (i.CRO_NO == "" || i.CRO_NO == null)
+                    {
+                        SqlParameter[] parameters =
                         {
-                            SqlParameter[] parameters =
-                            {
                             new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_CRONO" },
-                            new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = items.CONTAINER_NO },
+                            new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = i.CONTAINER_NO },
                             };
 
-                            CRONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
-                        }
+                        CRONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                    }
 
-                        DataRow dr = tbl.NewRow();
+                    DataRow dr = tbl.NewRow();
 
-                        dr["BOOKING_NO"] = i.BOOKING_NO;
-                        dr["CRO_NO"] = CRONO != "NULL" ? CRONO : i.CRO_NO;
-                        dr["CONTAINER_NO"] = i.CONTAINER_NO;
-                        dr["ACTIVITY"] = i.CURR_ACT_CODE;
-                        dr["PREV_ACTIVITY"] = i.PREV_ACTIVITY;
-                        dr["ACTIVITY_DATE"] = i.ACTIVITY_DATE;
-                        dr["LOCATION"] = i.LOCATION;
-                        dr["CURRENT_LOCATION"] = i.CURRENT_LOCATION;
-                        dr["STATUS"] = i.STATUS;
-                        dr["AGENT_CODE"] = i.AGENT_CODE;
-                        dr["DEPO_CODE"] = i.DEPO_CODE;
-                        dr["CREATED_BY"] = i.CREATED_BY;
+                    dr["BOOKING_NO"] = i.BOOKING_NO;
+                    dr["CRO_NO"] = CRONO != "NULL" ? CRONO : i.CRO_NO;
+                    dr["CONTAINER_NO"] = i.CONTAINER_NO;
+                    dr["ACTIVITY"] = i.CURR_ACT_CODE;
+                    dr["PREV_ACTIVITY"] = i.PREV_ACTIVITY;
+                    dr["ACTIVITY_DATE"] = i.ACTIVITY_DATE;
+                    dr["LOCATION"] = i.LOCATION;
+                    dr["CURRENT_LOCATION"] = i.CURRENT_LOCATION;
+                    dr["STATUS"] = i.STATUS;
+                    dr["AGENT_CODE"] = i.AGENT_CODE;
+                    dr["DEPO_CODE"] = i.DEPO_CODE;
+                    dr["CREATED_BY"] = i.CREATED_BY;
 
-                        tbl.Rows.Add(dr);
-                    }                    
+                    tbl.Rows.Add(dr);
                 }
 
                 string[] columns = new string[12];

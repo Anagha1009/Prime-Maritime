@@ -131,6 +131,32 @@ namespace PrimeMaritime_API.Services
                 return response;
             }
         }
+        public Response<string> ValidCROForContainer(string ContainerNo)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.ValidCROForContainer(dbConn, ContainerNo);
+
+            if (data != "")
+            {
+                Response<string> response = new Response<string>();
+                response.Succeeded = true;
+                response.ResponseMessage = "CRO No is Valid";
+                response.ResponseCode = 200;
+                response.Data = data;
+
+                return response;
+            }
+            else
+            {
+                Response<string> response = new Response<string>();
+                response.Succeeded = true;
+                response.ResponseMessage = "CRO No is not Valid";
+                response.ResponseCode = 500;
+
+                return response;
+            }
+        }
 
         public Response<CM> GetSingleContainerMovement(string CONTAINER_NO)
         {

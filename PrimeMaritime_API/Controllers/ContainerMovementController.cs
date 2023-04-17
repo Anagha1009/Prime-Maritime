@@ -75,6 +75,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_cmService.ValidContainer(CONTAINER_NO));
         }
 
+        [HttpGet("ValidCROForContainer")] //ANAGHA
+        public ActionResult<Response<string>> ValidCROForContainer(string CONTAINER_NO)
+        {
+            return Ok(_cmService.ValidCROForContainer(CONTAINER_NO));
+        }
+
         [HttpGet("GetNextActivityList")] //ANAGHA
         public ActionResult<Response<List<NEXT_ACTIVITY>>> GetNextActivityList(string CONTAINER_NO)
         {
