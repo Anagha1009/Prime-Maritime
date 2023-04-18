@@ -51,5 +51,17 @@ namespace PrimeMaritime_API.Controllers
             int userId = user.ID;
             return Ok(_authenticationService.ResetPwd(userId, password));
         }
+
+        [HttpPost("send-reset-email/{email}")]
+        public ActionResult<Response<string>> SendEmail(string email)
+        {
+            return Ok(_authenticationService.SendEmail(email));
+        }
+
+        [HttpPost("renew-pwd")]
+        public ActionResult<Response<string>> RenewPassword(RESET_PASSWORD resetPassword)
+        {
+            return Ok(_authenticationService.RenewPassword(resetPassword));
+        }
     }
 }

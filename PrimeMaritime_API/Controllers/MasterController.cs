@@ -395,5 +395,37 @@ namespace PrimeMaritime_API.Controllers
         }
 
         #endregion
+
+        #region "LOCATION MASTER"
+        [HttpPost("InsertLocationMaster")]
+        public ActionResult<Response<CommonResponse>> InsertLocationMaster(LOCATION_MASTER request)
+        {
+            return Ok(_masterService.InsertLocationMaster(request));
+        }
+
+        [HttpGet("GetLocationMasterList")]
+        public ActionResult<Response<List<LOCATION_MASTER>>> GetLocationMasterList(string LOC_NAME, string LOC_TYPE, bool STATUS, string FROM_DATE, string TO_DATE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetLocationMasterList(LOC_NAME, LOC_TYPE, STATUS, FROM_DATE,TO_DATE)));
+        }
+
+        [HttpGet("GetLocationMasterDetails")]
+        public ActionResult<Response<LOCATION_MASTER>> GetLocationMasterDetails(string LOC_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetLocationMasterDetails(LOC_CODE)));
+        }
+
+        [HttpPost("UpdateLocationMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateLocationMasterList(LOCATION_MASTER request)
+        {
+            return Ok(_masterService.UpdateLocationMasterList(request));
+        }
+
+        [HttpPost("DeleteLocationMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteLocationMasterList(string LOC_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteLocationMasterList(LOC_CODE)));
+        }
+        #endregion
     }
 }

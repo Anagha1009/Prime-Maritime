@@ -1306,6 +1306,128 @@ namespace PrimeMaritime_API.Repository
             }
         }
         #endregion
+
+        #region "LOCATION MASTER"
+        public void InsertLocationMaster(string connstring, LOCATION_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+               {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_LOCATION" },
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 50) { Value = master.LOC_CODE },
+                  new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
+                  new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
+                  new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
+                  new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
+                  new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,255) { Value = master.ADDRESS },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_LOCATION_MASTER", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<LOCATION_MASTER> GetLocationMasterList(string dbConn, string LOC_NAME, string LOC_TYPE, bool STATUS, string FROM_DATE, string TO_DATE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_LOCATIONLIST" },
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar, 255) { Value = LOC_NAME },
+                  new SqlParameter("@LOC_TYPE", SqlDbType.VarChar, 50) { Value = LOC_TYPE },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = STATUS },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_LOCATION_MASTER", parameters);
+                List<LOCATION_MASTER> master = SqlHelper.CreateListFromTable<LOCATION_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public LOCATION_MASTER GetLocationMasterDetails(string connstring, string LOC_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 20) { Value = LOC_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_LOCATIONDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<LOCATION_MASTER>(connstring, "SP_CRUD_LOCATION_MASTER", r => r.TranslateAsLocation(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateLocationMasterList(string connstring, LOCATION_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_LOCATION" },
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 20) { Value = master.LOC_CODE },
+                  new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
+                  new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
+                  new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
+                  new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
+                  new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar,20) { Value = master.COUNTRY_CODE },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_LOCATION_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void DeleteLocationMaster(string connstring, string LOC_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@LOC_CODE", SqlDbType.VarChar,20) { Value = LOC_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_LOCATION" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_LOCATION_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 
 }

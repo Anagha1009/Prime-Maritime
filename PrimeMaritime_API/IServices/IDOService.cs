@@ -10,9 +10,8 @@ namespace PrimeMaritime_API.IServices
     public interface IDOService
     {
         Response<string> InsertDO(DO doRequest);
-
         Response<List<DO>> GetDOList(string DO_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE);
-
+        Response<List<DO>> GetDOListPM(string DO_NO, string FROM_DATE, string TO_DATE);
         Response<DO> GetDODetails(string BL_NO, string AGENT_CODE);
     }
 }

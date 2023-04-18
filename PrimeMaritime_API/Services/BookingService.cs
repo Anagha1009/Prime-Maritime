@@ -90,7 +90,29 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+        public Response<List<BookingList>> GetBookingListPM(string BOOKING_NO, string FROM_DATE, string TO_DATE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
 
+            Response<List<BookingList>> response = new Response<List<BookingList>>();
+            var data = DbClientFactory<BookingRepo>.Instance.GetBookingListPM(dbConn, BOOKING_NO, FROM_DATE, TO_DATE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
         public Response<int> GetTrackingDetails(string BOOKING_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");

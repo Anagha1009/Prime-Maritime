@@ -34,15 +34,14 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@ARRIVAL_DATE", SqlDbType.DateTime) { Value = request.ARRIVAL_DATE },
                   new SqlParameter("@IGM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_NO },
                   new SqlParameter("@IGM_ITEM_NO", SqlDbType.VarChar, 50) { Value = request.IGM_ITEM_NO },
-                  new SqlParameter("@IGM_DATE", SqlDbType.DateTime) { Value = request.IGM_DATE },
                   new SqlParameter("@CLEARING_PARTY", SqlDbType.VarChar,100) { Value = request.CLEARING_PARTY },
                   new SqlParameter("@ACCEPTANCE_LOCATION", SqlDbType.VarChar, 100) { Value = request.ACCEPTANCE_LOCATION },
                   new SqlParameter("@LETTER_VALIDITY",SqlDbType.DateTime) { Value = request.LETTER_VALIDITY },
                   new SqlParameter("@SHIPPING_TERMS", SqlDbType.VarChar, 50) { Value = request.SHIPPING_TERMS },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = request.AGENT_CODE },
                   new SqlParameter("@AGENT_NAME", SqlDbType.VarChar, 255) { Value = request.AGENT_NAME },
-                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY }
-
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar, 255) { Value = request.CREATED_BY },
+                  new SqlParameter("@IGM_DATE", SqlDbType.DateTime) { Value = request.IGM_DATE }
                 };
 
                 var DONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_DO", parameters);
@@ -91,6 +90,28 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public List<DO> GetDOListPM(string connstring, string DO_NO, string FROM_DATE, string TO_DATE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DOLIST_PM" },
+                  new SqlParameter("@DO_NO", SqlDbType.VarChar, 100) { Value = DO_NO },
+                  new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+                  new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_DO", parameters);
+                List<DO> doList = SqlHelper.CreateListFromTable<DO>(dataTable);
+
+                return doList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public DO GetDODetails(string connstring, string DO_NO, string AGENT_CODE)
         {
@@ -111,9 +132,5 @@ namespace PrimeMaritime_API.Repository
             }
 
         }
-
-        
-
-
     }
 }

@@ -65,9 +65,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("InsertInvoice")]
-        public ActionResult<Response<SRR>> InsertInvoice(INVOICELIST request)
+        public ActionResult<Response<string>> InsertInvoice(INVOICELIST request)
         {
             return Ok(_srrService.InsertInvoice(request));
+        }
+
+        [HttpPost("InsertDestinationAgent")]
+        public ActionResult<Response<string>> InsertDestinationAgent(string DESTINATION_AGENT_CODE, string SRR_NO)
+        {
+            return Ok(_srrService.InsertDestinationAgent(DESTINATION_AGENT_CODE, SRR_NO));
         }
 
         [HttpGet("GetSRRList")]

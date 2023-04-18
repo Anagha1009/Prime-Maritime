@@ -106,6 +106,21 @@ namespace PrimeMaritime_API.Repository
 
             return bookingList;
         }
+        public List<BookingList> GetBookingListPM(string connstring,string BOOKING_NO, string FROM_DATE, string TO_DATE)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_BOOKINGLIST_PM" },
+              new SqlParameter("@BOOKING_NO", SqlDbType.VarChar,100) { Value = BOOKING_NO },
+              new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
+              new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE},
+            };
+
+            DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BOOKING", parameters);
+            List<BookingList> bookingList = SqlHelper.CreateListFromTable<BookingList>(dataTable);
+
+            return bookingList;
+        }
 
         public string ValidateSlots(string connstring, string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR)
         {

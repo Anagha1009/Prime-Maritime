@@ -268,7 +268,26 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public List<CM> GetAllContainerListForDepo(string connstring, string DEPO_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "GET_ALL_CONTAINERS_FORDEPO" },
+                    new SqlParameter("@DEPO_CODE", SqlDbType.VarChar,20) { Value = DEPO_CODE },
+                };
 
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<CM> containerList = SqlHelper.CreateListFromTable<CM>(dataTable);
+
+                return containerList;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public DataSet GetContainerMovement(string connstring, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
         {
             try
@@ -288,8 +307,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
-
         public List<CM> GetContainerMovementBooking(string connstring, string BOOKING_NO, string CRO_NO)
         {
             try
@@ -311,7 +328,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public List<CM> GetCMAvailable(string connstring, string STATUS, string CURRENT_LOCATION)
         {
             try
@@ -333,7 +349,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public string ValidContainer(string connstring, string CONTAINER_NO)
         {
             try
@@ -351,7 +366,23 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public string ValidCROForContainer(string connstring, string CONTAINER_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_CRONO" },
+                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = CONTAINER_NO },
+                };
 
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public string UpdateContainerMovement(string connstring, CONTAINERMOVEMENT cm)
         {
             try
@@ -382,17 +413,6 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-               foreach(var items in cm)
-                {
-                    SqlParameter[] parameters =
-                    {
-                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "DELETE_CONTAINER" },
-                        new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = items.CONTAINER_NO },
-                    };
-
-                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
-                }
-
                 DataTable tbl = new DataTable();
                 tbl.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
                 tbl.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
@@ -409,10 +429,23 @@ namespace PrimeMaritime_API.Repository
 
                 foreach (var i in cm)
                 {
+                    var CRONO = "NULL";
+
+                    if (i.CRO_NO == "" || i.CRO_NO == null)
+                    {
+                        SqlParameter[] parameters =
+                        {
+                            new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_CRONO" },
+                            new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = i.CONTAINER_NO },
+                            };
+
+                        CRONO = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                    }
+
                     DataRow dr = tbl.NewRow();
 
                     dr["BOOKING_NO"] = i.BOOKING_NO;
-                    dr["CRO_NO"] = i.CRO_NO;
+                    dr["CRO_NO"] = CRONO != "NULL" ? CRONO : i.CRO_NO;
                     dr["CONTAINER_NO"] = i.CONTAINER_NO;
                     dr["ACTIVITY"] = i.CURR_ACT_CODE;
                     dr["PREV_ACTIVITY"] = i.PREV_ACTIVITY;
@@ -441,6 +474,17 @@ namespace PrimeMaritime_API.Repository
                 columns[10] = "DEPO_CODE";
                 columns[11] = "CREATED_BY";
 
+                foreach (var items in cm)
+                {
+                    SqlParameter[] parameters =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "DELETE_CONTAINER" },
+                        new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = items.CONTAINER_NO },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                }
+
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER_MOVEMENT", columns);
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl, "TB_CONTAINER_TRACKING", columns);
 
@@ -463,6 +507,26 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 return SqlHelper.ExtecuteProcedureReturnData<CM>(connstring, "SP_CRUD_CONTAINER_MOVEMENT", r => r.TranslateCM(), parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<NEXT_ACTIVITY> GetNextActivityList(string connstring, string CONTAINER_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_NEXTACT_LIST" },
+                    new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar, 100) { Value = CONTAINER_NO }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+                List<NEXT_ACTIVITY> List = SqlHelper.CreateListFromTable<NEXT_ACTIVITY>(dataTable);
+                return List;
             }
             catch (Exception)
             {

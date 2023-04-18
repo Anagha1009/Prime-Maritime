@@ -82,6 +82,8 @@ namespace PrimeMaritime_API
             services.AddScoped<ITDRService, TdrService>();
             services.AddScoped<ISRRReportService, SRRReportService>();
             services.AddScoped<ICountService, CountService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddAuthentication(options =>
             {
 

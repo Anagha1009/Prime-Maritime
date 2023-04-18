@@ -128,6 +128,27 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
+        public string InsertDestinationAgent(string connstring, string DESTINATION_AGENT_CODE, string SRR_NO)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "INSERT_DESTINATION_AGENT_CODE" },
+                  new SqlParameter("@DESTINATION_AGENT_CODE", SqlDbType.VarChar, 100) { Value = DESTINATION_AGENT_CODE },
+                  new SqlParameter("@SRR_NO", SqlDbType.VarChar, 100) { Value = SRR_NO },
+                };
+
+                string ID = SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SRR", parameters);
+
+                return ID;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<INVOICELIST> GetInvoiceList(string connstring, string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
             try

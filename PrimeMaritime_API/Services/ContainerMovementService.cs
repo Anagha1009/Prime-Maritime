@@ -20,30 +20,6 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        //public Response<List<CMList>> GetContainerMovementList(string AGENT_CODE, string DEPO_CODE, string BOOKING_NO, string CRO_NO, string CONTAINER_NO)
-        //{
-        //    string dbConn = _config.GetConnectionString("ConnectionString");
-
-        //    Response<List<CMList>> response = new Response<List<CMList>>();
-        //    var data = DbClientFactory<ContainerMovementRepo>.Instance.GetContainerMovementList(dbConn, AGENT_CODE, DEPO_CODE, BOOKING_NO, CRO_NO, CONTAINER_NO);
-
-        //    if (data != null)
-        //    {
-        //        response.Succeeded = true;
-        //        response.ResponseCode = 200;
-        //        response.ResponseMessage = "Success";
-        //        response.Data = data;
-        //    }
-        //    else
-        //    {
-        //        response.Succeeded = false;
-        //        response.ResponseCode = 500;
-        //        response.ResponseMessage = "No Data";
-        //    }
-
-        //    return response;
-        //}
-
         public Response<List<CMList>> GetContainerMovementList(string BOOKING_NO, string CRO_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -74,6 +50,30 @@ namespace PrimeMaritime_API.Services
 
             Response<List<CM>> response = new Response<List<CM>>();
             var data = DbClientFactory<ContainerMovementRepo>.Instance.GetAvailableContainerListForDepo(dbConn, DEPO_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<List<CM>> GetAllContainerListForDepo(string DEPO_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CM>> response = new Response<List<CM>>();
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetAllContainerListForDepo(dbConn, DEPO_CODE);
 
             if (data != null)
             {
@@ -126,6 +126,32 @@ namespace PrimeMaritime_API.Services
                 Response<CommonResponse> response = new Response<CommonResponse>();
                 response.Succeeded = true;
                 response.ResponseMessage = "Container No is not Valid";
+                response.ResponseCode = 500;
+
+                return response;
+            }
+        }
+        public Response<string> ValidCROForContainer(string ContainerNo)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.ValidCROForContainer(dbConn, ContainerNo);
+
+            if (data != "")
+            {
+                Response<string> response = new Response<string>();
+                response.Succeeded = true;
+                response.ResponseMessage = "CRO No is Valid";
+                response.ResponseCode = 200;
+                response.Data = data;
+
+                return response;
+            }
+            else
+            {
+                Response<string> response = new Response<string>();
+                response.Succeeded = true;
+                response.ResponseMessage = "CRO No is not Valid";
                 response.ResponseCode = 500;
 
                 return response;
@@ -282,6 +308,38 @@ namespace PrimeMaritime_API.Services
             response.ResponseCode = 200;
             response.ResponseMessage = "Success";
             response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
+
+        public Response<List<NEXT_ACTIVITY>> GetNextActivityList(string CONTAINER_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<NEXT_ACTIVITY>> response = new Response<List<NEXT_ACTIVITY>>();
+
+            if ((CONTAINER_NO == "") || (CONTAINER_NO == null))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide Container No";
+                return response;
+            }
+
+            var data = DbClientFactory<ContainerMovementRepo>.Instance.GetNextActivityList(dbConn, CONTAINER_NO);
+
+            if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
 
             return response;
         }

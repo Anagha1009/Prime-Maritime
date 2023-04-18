@@ -16,6 +16,17 @@ namespace PrimeMaritime_API.Repository
     {
         public void InsertContainer(string connstring, DEPO_CONTAINER request)
         {
+            foreach (var items in request.CONTAINER_LIST)
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "DELETE_CONTAINER" },
+                   new SqlParameter("@CONTAINER_NO", SqlDbType.VarChar,50) { Value = items.CONTAINER_NO },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CONTAINER_MOVEMENT", parameters);
+            }
+
             DataTable tbl = new DataTable();
             tbl.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
             tbl.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
@@ -84,47 +95,8 @@ namespace PrimeMaritime_API.Repository
             columns1[7] = "DEPO_CODE";
             columns1[8] = "CREATED_BY";
 
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_CONTAINER_MOVEMENT", columns1);
-
-            DataTable tbl2 = new DataTable();
-            tbl2.Columns.Add(new DataColumn("BOOKING_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("CRO_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("CONTAINER_NO", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("ACTIVITY", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("ACTIVITY_DATE", typeof(DateTime)));
-            tbl2.Columns.Add(new DataColumn("LOCATION", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("STATUS", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("DEPO_CODE", typeof(string)));
-            tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
-
-            foreach (var i in request.CONTAINER_LIST)
-            {
-                DataRow dr = tbl2.NewRow();
-
-                dr["BOOKING_NO"] = request.BOOKING_NO;
-                dr["CRO_NO"] = request.CRO_NO;
-                dr["CONTAINER_NO"] = i.CONTAINER_NO;
-                dr["ACTIVITY"] = "SNTS";
-                dr["ACTIVITY_DATE"] = i.MOVEMENT_DATE;
-                dr["LOCATION"] = i.TO_LOCATION;
-                dr["STATUS"] = "Empty";
-                dr["DEPO_CODE"] = request.DEPO_CODE;
-                dr["CREATED_BY"] = request.CREATED_BY;
-                tbl2.Rows.Add(dr);
-            }
-
-            string[] columns2 = new string[9];
-            columns2[0] = "BOOKING_NO";
-            columns2[1] = "CRO_NO";
-            columns2[2] = "CONTAINER_NO";
-            columns2[3] = "ACTIVITY";
-            columns2[4] = "ACTIVITY_DATE";
-            columns2[5] = "LOCATION";
-            columns2[6] = "STATUS";
-            columns2[7] = "DEPO_CODE";
-            columns2[8] = "CREATED_BY";
-
-            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl2, "TB_CONTAINER_TRACKING", columns2);
+            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_CONTAINER_MOVEMENT", columns1);          
+            SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_CONTAINER_TRACKING", columns1);
         }
 
         public void InsertMRRequest(string connstring, List<MR_LIST> request)

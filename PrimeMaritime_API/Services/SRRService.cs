@@ -31,9 +31,7 @@ namespace PrimeMaritime_API.Services
             response.ResponseCode = 200;
 
             return response;
-
         }
-
         public Response<CommonResponse> CounterRate(List<SRR_RATES> request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -46,9 +44,7 @@ namespace PrimeMaritime_API.Services
             response.ResponseCode = 200;
 
             return response;
-
         }
-
         public Response<RATES> GetCalRates(string POL, string POD, string CONTAINER_TYPE, string SRR_NO, int NO_OF_CONTAINERS)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -97,7 +93,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<string> InsertInvoice(INVOICELIST request)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -109,6 +104,20 @@ namespace PrimeMaritime_API.Services
             response.ResponseMessage = "Inserted Successfully.";
             response.ResponseCode = 200;
             response.Data = ID;
+
+            return response;
+        }
+
+        public Response<string> InsertDestinationAgent(string DESTINATION_AGENT_CODE, string SRR_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<SRRRepo>.Instance.InsertDestinationAgent(dbConn, DESTINATION_AGENT_CODE, SRR_NO);
+
+            Response<string> response = new Response<string>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Inserted Successfully.";
+            response.ResponseCode = 200;
 
             return response;
         }
