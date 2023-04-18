@@ -308,7 +308,7 @@ namespace PrimeMaritime_API.Services
                 return response;
             }
 
-            var tokenCode = user.RESET_PASSWORD_TOKEN;
+            var tokenCode = user.RESET_PASSWORD_TOKEN.Replace(" ", "+");
             DateTime emailTokenExpiry = user.RESET_PASSWORD_EXPIRY;
             if (tokenCode != resetPassword.EmailToken || emailTokenExpiry < DateTime.Now)
             {

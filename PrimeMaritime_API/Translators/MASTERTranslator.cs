@@ -407,18 +407,6 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("ATD"))
                 item.ATD = SqlHelper.GetDateTime(reader, "ATD");
 
-            //if (reader.IsColumnExists("IMM_CURR"))
-            //    item.IMM_CURR = SqlHelper.GetNullableString(reader, "IMM_CURR");
-
-            //if (reader.IsColumnExists("IMM_CURR_RATE"))
-            //    item.IMM_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMM_CURR_RATE"));
-
-            //if (reader.IsColumnExists("EXP_CURR"))
-            //    item.EXP_CURR = SqlHelper.GetNullableString(reader, "EXP_CURR");
-
-            //if (reader.IsColumnExists("EXP_CURR_RATE"))
-            //    item.EXP_CURR_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXP_CURR_RATE"));
-
             if (reader.IsColumnExists("TERMINAL_CODE"))
                 item.TERMINAL_CODE = SqlHelper.GetNullableString(reader, "TERMINAL_CODE");
 
@@ -439,6 +427,44 @@ namespace PrimeMaritime_API.Translators
 
             if (reader.IsColumnExists("STATUS"))
                 item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+            return item;
+        }
+
+        public static FREIGHT_MASTER TranslateAsFreightMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new FREIGHT_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("POL"))
+                item.POL = SqlHelper.GetNullableString(reader, "POL");
+
+            if (reader.IsColumnExists("POD"))
+                item.POD = SqlHelper.GetNullableString(reader, "POD");
+
+            if (reader.IsColumnExists("Charge"))
+                item.Charge = SqlHelper.GetNullableString(reader, "Charge");
+
+            if (reader.IsColumnExists("Currency"))
+                item.Currency = SqlHelper.GetNullableString(reader, "Currency");
+
+            if (reader.IsColumnExists("LadenStatus"))
+                item.LadenStatus = SqlHelper.GetNullableString(reader, "LadenStatus");
+
+            if (reader.IsColumnExists("ServiceMode"))
+                item.ServiceMode = SqlHelper.GetNullableString(reader, "ServiceMode");
+
+            if (reader.IsColumnExists("DRY20"))
+                item.DRY20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY20"));
 
             return item;
         }

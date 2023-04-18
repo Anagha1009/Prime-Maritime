@@ -168,5 +168,13 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> DeleteLocationMasterList(string LOC_CODE);
         #endregion
+
+        #region "FREIGHT MASTER"
+        Response<CommonResponse> InsertFreightMaster(FREIGHT_MASTER request);
+        Response<List<FREIGHT_MASTER>> GetFreightMasterList();
+        Response<FREIGHT_MASTER> GetFreightMasterDetails(int ID);
+        Response<CommonResponse> UpdateFreightMasterList(FREIGHT_MASTER request);
+        Response<CommonResponse> DeleteFreightMasterList(int ID);
+        #endregion
     }
 }

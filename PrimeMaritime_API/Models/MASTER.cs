@@ -235,5 +235,15 @@ namespace PrimeMaritime_API.Models
         public DateTime CREATED_DATE { get; set; }     
         public string CREATED_BY { get; set; }
     }
-
+    public class FREIGHT_MASTER
+    {
+        public int ID { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
+        public string Charge { get; set; }
+        public string Currency { get; set; }
+        public string LadenStatus { get; set; }
+        public string ServiceMode { get; set; }
+        public decimal DRY20 { get; set; }
+    }
 }

@@ -1245,5 +1245,101 @@ namespace PrimeMaritime_API.Services
             return response;
         }
         #endregion
+
+        #region "FREIGHT MASTER"
+        public Response<CommonResponse> InsertFreightMaster(FREIGHT_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertFreightMaster(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<List<FREIGHT_MASTER>> GetFreightMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<FREIGHT_MASTER>> response = new Response<List<FREIGHT_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetFreightMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<FREIGHT_MASTER> GetFreightMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<FREIGHT_MASTER> response = new Response<FREIGHT_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetFreightMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateFreightMasterList(FREIGHT_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateFreightMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> DeleteFreightMasterList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (ID == 0)
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteFreightMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
     }
 }

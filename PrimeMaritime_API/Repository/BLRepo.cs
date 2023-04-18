@@ -61,7 +61,7 @@ namespace PrimeMaritime_API.Repository
                 
             }
 
-            string[] columns = new string[14];
+            string[] columns = new string[15];
             columns[0] = "BL_NO";
             columns[1] = "BOOKING_NO";
             columns[2] = "CRO_NO";
@@ -76,6 +76,7 @@ namespace PrimeMaritime_API.Repository
             columns[11] = "AGENT_CODE";
             columns[12] = "AGENT_NAME";
             columns[13] = "CREATED_BY";
+            columns[14] = "AGENT_SEAL_NO";
 
             SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
@@ -137,7 +138,7 @@ namespace PrimeMaritime_API.Repository
                     i.DESC_OF_GOODS = request.DESC_OF_GOODS;
                 }
 
-             string[] columns = new string[8];
+             string[] columns = new string[9];
                 columns[0] = "BL_NO";   
                 columns[1] = "CONTAINER_NO";
                 columns[2] = "CONTAINER_TYPE";
@@ -146,6 +147,8 @@ namespace PrimeMaritime_API.Repository
                 columns[5] = "DESC_OF_GOODS";
                 columns[6] = "GROSS_WEIGHT";
                 columns[7] = "MEASUREMENT";
+                columns[8] = "AGENT_SEAL_NO";
+                
 
                 SqlHelper.UpdateContainerDataForBL<CONTAINERS>(request.CONTAINER_LIST2, "TB_CONTAINER", connstring, columns);
 

@@ -427,5 +427,37 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_masterService.DeleteLocationMasterList(LOC_CODE)));
         }
         #endregion
+
+        #region "FREIGHT MASTER"
+        [HttpPost("InsertFreightMaster")]
+        public ActionResult<Response<CommonResponse>> InsertFreightMaster(FREIGHT_MASTER request)
+        {
+            return Ok(_masterService.InsertFreightMaster(request));
+        }
+
+        [HttpGet("GetFreightMasterList")]
+        public ActionResult<Response<List<FREIGHT_MASTER>>> GetFreightMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetFreightMasterList()));
+        }
+
+        [HttpGet("GetFreightMasterDetails")]
+        public ActionResult<Response<FREIGHT_MASTER>> GetFreightMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetFreightMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateFreightMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateFreightMasterList(FREIGHT_MASTER request)
+        {
+            return Ok(_masterService.UpdateFreightMasterList(request));
+        }
+
+        [HttpDelete("DeleteFreightMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteFreightMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteFreightMasterList(ID)));
+        }
+        #endregion
     }
 }
