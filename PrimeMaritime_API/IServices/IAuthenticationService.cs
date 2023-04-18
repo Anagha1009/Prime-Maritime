@@ -14,5 +14,7 @@ namespace PrimeMaritime_API.IServices
         Task<RevokeTokenResponse> RevokeToken(RevokeTokenRequest request);
         Response<USER> ValidatePwd(string password, int userId);
         Response<string> ResetPwd(int userId, string password);
+        Response<string> SendEmail(string email);
+        Response<string> RenewPassword(RESET_PASSWORD resetPassword);
     }
 }

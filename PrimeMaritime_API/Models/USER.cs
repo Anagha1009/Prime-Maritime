@@ -23,7 +23,8 @@ namespace PrimeMaritime_API.Models
         public string CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }
         public string UPDATED_DATE { get; set; }
-
+        public string RESET_PASSWORD_TOKEN { get; set; }
+        public DateTime RESET_PASSWORD_EXPIRY { get; set; }
         public List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     }
     public class USERLIST

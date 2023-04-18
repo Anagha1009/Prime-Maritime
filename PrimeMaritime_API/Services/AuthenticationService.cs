@@ -23,13 +23,15 @@ namespace PrimeMaritime_API.Services
     {
         private readonly JwtSettings _jwtSettings;
         private readonly IConfiguration _config;
+        private readonly IEmailService _emailService;
 
         public AuthenticationService(
             IOptions<JwtSettings> jwtSettings,
-           IConfiguration config)
+           IConfiguration config, IEmailService emailService)
         {
             _jwtSettings = jwtSettings.Value;
             _config = config;
+            _emailService = emailService;
         }
 
         public AuthenticationResponse AuthenticateAsync(AuthenticationRequest request)
@@ -241,6 +243,88 @@ namespace PrimeMaritime_API.Services
             Response<string> response = new Response<string>();
             response.Succeeded = true;
             response.ResponseMessage = "Password Updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<string> SendEmail(string email)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            var user = DbClientFactory<UserRepo>.Instance.CheckUserByEmail(dbConn, email);
+
+            Response<string> response = new Response<string>();
+
+            if (user != null)
+            {
+                using (var cryptoProvider = new RNGCryptoServiceProvider())
+                {
+                    byte[] bytes = new byte[64];
+                    cryptoProvider.GetBytes(bytes);                    
+
+                    string emailToken = Convert.ToBase64String(bytes);
+                    user.RESET_PASSWORD_TOKEN = emailToken;
+                    user.RESET_PASSWORD_EXPIRY = DateTime.Now.AddMinutes(15);
+                    var emailModel = new EmailModel(email, "RESET PASSWORD", EmailBody.EmailStringBody(email, emailToken));
+
+                    _emailService.SendEmail(emailModel);
+
+                    DbClientFactory<UserRepo>.Instance.UpdateResetPwd(dbConn, user);
+                }
+
+               
+                response.Succeeded = true;
+                response.ResponseMessage = "Password reset successfull";
+                response.ResponseCode = 200;
+
+                return response;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseMessage = "Token Doesn't exist";
+                response.ResponseCode = 500;
+
+                return response;
+            }            
+        }
+
+        public Response<string> RenewPassword(RESET_PASSWORD resetPassword)
+        {
+            Response<string> response = new Response<string>();
+            var newToken = resetPassword.EmailToken.Replace(" ", "+");
+            
+            string connstring = _config.GetConnectionString("ConnectionString");
+           
+            var user = DbClientFactory<UserRepo>.Instance.CheckUserByEmail(connstring, resetPassword.Email);
+
+            if (user is null)
+            {
+                response.Succeeded = true;
+                response.ResponseMessage = "User Doesn't exist";
+                response.ResponseCode = 500;
+
+                return response;
+            }
+
+            var tokenCode = user.RESET_PASSWORD_TOKEN;
+            DateTime emailTokenExpiry = user.RESET_PASSWORD_EXPIRY;
+            if (tokenCode != resetPassword.EmailToken || emailTokenExpiry < DateTime.Now)
+            {
+
+                response.Succeeded = true;
+                response.ResponseMessage = "Token Doesn't exist";
+                response.ResponseCode = 500;
+
+                return response;
+            }
+
+
+            DbClientFactory<UserRepo>.Instance.RenewPwd(connstring, user.ID, resetPassword.NewPassword);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Password reset successfull";
             response.ResponseCode = 200;
 
             return response;

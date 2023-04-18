@@ -46,6 +46,12 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("COUNTRYCODE"))
                 item.COUNTRYCODE = SqlHelper.GetNullableString(reader, "COUNTRYCODE");
 
+            if (reader.IsColumnExists("RESET_PASSWORD_TOKEN"))
+                item.RESET_PASSWORD_TOKEN = SqlHelper.GetNullableString(reader, "RESET_PASSWORD_TOKEN");
+
+            if (reader.IsColumnExists("RESET_PASSWORD_EXPIRY"))
+                item.RESET_PASSWORD_EXPIRY = SqlHelper.GetDateTime(reader, "RESET_PASSWORD_EXPIRY");
+
             return item;
         }
 

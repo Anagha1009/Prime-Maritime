@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace PrimeMaritime_API.Repository
@@ -235,6 +236,63 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public USER CheckUserByEmail(string connstring, string email)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = email },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_USER_BY_EMAIL" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<USER>(connstring, "SP_USER_MANAGEMENT", r => r.TranslateAsUser1(), parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }          
+
+        public string UpdateResetPwd(string connstring, USER user)
+        {
+            try
+            {
+                SqlParameter[] parameters1 =
+                {
+                    new SqlParameter("@USER_ID", SqlDbType.Int) { Value = user.ID },
+                    new SqlParameter("@RESET_PASSWORD_TOKEN", SqlDbType.VarChar, 255) { Value = user.RESET_PASSWORD_TOKEN},
+                    new SqlParameter("@RESET_PASSWORD_EXPIRY", SqlDbType.DateTime) { Value = user.RESET_PASSWORD_EXPIRY},
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "RESET_PASSWORD_TOKEN" }
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters1);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void RenewPwd(string connstring, int userid, string newPwd)
+        {
+            try
+            {
+                SqlParameter[] parameters1 =
+                {
+                  new SqlParameter("@USER_ID", SqlDbType.Int) { Value = userid},
+                  new SqlParameter("@PASSWORD", SqlDbType.VarChar, 100) { Value = newPwd },
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "RESET_PWD" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_USER_MANAGEMENT", parameters1);
             }
             catch (Exception)
             {
