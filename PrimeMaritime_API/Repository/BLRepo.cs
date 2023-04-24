@@ -61,7 +61,7 @@ namespace PrimeMaritime_API.Repository
                 
             }
 
-            string[] columns = new string[15];
+            string[] columns = new string[17];
             columns[0] = "BL_NO";
             columns[1] = "BOOKING_NO";
             columns[2] = "CRO_NO";
@@ -71,12 +71,14 @@ namespace PrimeMaritime_API.Repository
             columns[6] = "SEAL_NO";
             columns[7] = "MARKS_NOS";
             columns[8] = "DESC_OF_GOODS";
-            columns[9] = "GROSS_WEIGHT";
-            columns[10] = "MEASUREMENT";
-            columns[11] = "AGENT_CODE";
-            columns[12] = "AGENT_NAME";
-            columns[13] = "CREATED_BY";
-            columns[14] = "AGENT_SEAL_NO";
+            columns[9] = "PKG_COUNT";
+            columns[10] = "PKG_DESC";
+            columns[11] = "GROSS_WEIGHT";
+            columns[12] = "NET_WEIGHT";
+            columns[13] = "MEASUREMENT";
+            columns[14] = "AGENT_CODE";
+            columns[15] = "AGENT_NAME";
+            columns[16] = "CREATED_BY";
 
             SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
@@ -138,17 +140,18 @@ namespace PrimeMaritime_API.Repository
                     i.DESC_OF_GOODS = request.DESC_OF_GOODS;
                 }
 
-             string[] columns = new string[9];
-                columns[0] = "BL_NO";   
+                string[] columns = new string[11];
+                columns[0] = "BL_NO";
                 columns[1] = "CONTAINER_NO";
                 columns[2] = "CONTAINER_TYPE";
                 columns[3] = "SEAL_NO";
                 columns[4] = "MARKS_NOS";
                 columns[5] = "DESC_OF_GOODS";
-                columns[6] = "GROSS_WEIGHT";
-                columns[7] = "MEASUREMENT";
-                columns[8] = "AGENT_SEAL_NO";
-                
+                columns[6] = "PKG_COUNT";
+                columns[7] = "PKG_DESC";
+                columns[8] = "GROSS_WEIGHT";
+                columns[9] = "NET_WEIGHT";
+                columns[10] = "MEASUREMENT";
 
                 SqlHelper.UpdateContainerDataForBL<CONTAINERS>(request.CONTAINER_LIST2, "TB_CONTAINER", connstring, columns);
 

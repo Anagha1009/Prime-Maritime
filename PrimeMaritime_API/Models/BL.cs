@@ -72,6 +72,9 @@ namespace PrimeMaritime_API.Models
         public string CREATED_BY { get; set; }
         public string TO_LOCATION { get; set; }
         public DateTime MOVEMENT_DATE { get; set; }
+        public int PKG_COUNT { get; set; }
+        public string PKG_DESC { get; set; }
+        public decimal NET_WEIGHT { get; set; }
     }
     public class Organisation
     {
