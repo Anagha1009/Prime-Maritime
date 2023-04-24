@@ -1672,6 +1672,121 @@ namespace PrimeMaritime_API.Repository
             }
         }
         #endregion
+
+        #region "LOCATION MASTER"
+        public void InsertOrgMaster(string connstring, ORG_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+               {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_ORG" },
+                  new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = master.ORG_CODE },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string ValidateOrgCode(string connstring, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_ORG_CODE" },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = ORG_CODE },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<ORG_MASTER> GetOrgMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_ORG_LIST" }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_ORGANISATION", parameters);
+                List<ORG_MASTER> master = SqlHelper.CreateListFromTable<ORG_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ORG_MASTER GetOrgMasterDetails(string connstring, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_ORG_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<ORG_MASTER>(connstring, "SP_CRUD_ORGANISATION", r => r.TranslateAsOrgMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateOrgMasterList(string connstring, ORG_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_ORG" },
+                  new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = master.ORG_CODE },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteOrgMaster(string connstring, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar,20) { Value = ORG_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_ORG" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
     }
 
 }

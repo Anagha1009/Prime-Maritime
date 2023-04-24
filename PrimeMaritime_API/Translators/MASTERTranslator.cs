@@ -134,7 +134,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static VESSEL_MASTER TranslateAsVessel(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -178,7 +177,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static SERVICE_MASTER TranslateAsService(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -223,7 +221,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static CONTAINER_TYPE TranslateAsContainerType(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -267,7 +264,6 @@ namespace PrimeMaritime_API.Translators
           
             return item;
         }
-
         public static LINER TranslateAsLiner(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -302,7 +298,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static SERVICE TranslateAsLinerService(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -337,7 +332,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static SCHEDULE TranslateAsSchedule(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -380,7 +374,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static VOYAGE TranslateAsVoyage(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -430,7 +423,6 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
-
         public static FREIGHT_MASTER TranslateAsFreightMaster(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
@@ -465,6 +457,34 @@ namespace PrimeMaritime_API.Translators
 
             if (reader.IsColumnExists("DRY20"))
                 item.DRY20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY20"));
+
+            return item;
+        }
+        public static ORG_MASTER TranslateAsOrgMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new ORG_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("ORG_NAME"))
+                item.ORG_NAME = SqlHelper.GetNullableString(reader, "ORG_NAME");
+
+            if (reader.IsColumnExists("ORG_CODE"))
+                item.ORG_CODE = SqlHelper.GetNullableString(reader, "ORG_CODE");
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+            if (reader.IsColumnExists("CREATED_DATE"))
+                item.CREATED_DATE = SqlHelper.GetDateTime(reader, "CREATED_DATE");
 
             return item;
         }

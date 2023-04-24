@@ -1387,5 +1387,130 @@ namespace PrimeMaritime_API.Services
             return response;
         }
         #endregion
+
+        #region "ORGANISATION MASTER"
+        public Response<CommonResponse> InsertOrgMaster(ORG_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<MasterRepo>.Instance.InsertOrgMaster(dbConn, request);
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            response.Succeeded = true;
+            response.ResponseMessage = "Master saved Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> ValidateOrgCode(string ORG_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            var data = DbClientFactory<MasterRepo>.Instance.ValidateOrgCode(dbConn, ORG_CODE);
+
+            if (String.IsNullOrEmpty(data))
+            {
+                Response<CommonResponse> response = new Response<CommonResponse>();
+                response.Succeeded = true;
+                response.ResponseMessage = "ORG CODE is valid !";
+                response.ResponseCode = 200;
+
+                return response;
+            }
+            else
+            {
+                Response<CommonResponse> response = new Response<CommonResponse>();
+                response.Succeeded = true;
+                response.ResponseMessage = "Already Exists";
+                response.ResponseCode = 500;
+
+                return response;
+            }            
+        }
+
+        public Response<List<ORG_MASTER>> GetOrgMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<ORG_MASTER>> response = new Response<List<ORG_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetOrgMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<ORG_MASTER> GetOrgMasterDetails(string LOC_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<ORG_MASTER> response = new Response<ORG_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetOrgMasterDetails(dbConn, LOC_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+
+        public Response<CommonResponse> UpdateOrgMasterList(ORG_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateOrgMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+
+        public Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (String.IsNullOrEmpty(ORG_CODE))
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteOrgMaster(dbConn, ORG_CODE);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
     }
 }

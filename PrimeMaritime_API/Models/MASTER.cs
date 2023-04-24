@@ -68,7 +68,6 @@ namespace PrimeMaritime_API.Models
         public Boolean STATUS { get; set; }
         public string CREATED_BY { get; set; }
     }
-
     public class CONTAINER_TYPE
     {
         public int ID { get; set; }
@@ -81,7 +80,6 @@ namespace PrimeMaritime_API.Models
         public Boolean STATUS { get; set; }
         public string CREATED_BY { get; set; }
     }
-
     public class ICD_MASTER
     {
         public int ID { get; set; }
@@ -94,7 +92,6 @@ namespace PrimeMaritime_API.Models
         public bool LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
     }
-
     public class DEPO_MASTER
     {
         public int ID { get; set; }
@@ -107,7 +104,6 @@ namespace PrimeMaritime_API.Models
         public string LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
     }
-
     public class TERMINAL_MASTER
     {
         public int ID { get; set; }
@@ -120,7 +116,6 @@ namespace PrimeMaritime_API.Models
         public bool LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
     }
-
     public class LINER
     {
         public int ID { get; set; }
@@ -133,7 +128,6 @@ namespace PrimeMaritime_API.Models
         public string UPDATED_BY { get; set; }
         public DateTime UPDATED_DATE { get; set; }
     }
-
     public class SERVICE
     {
         public int ID { get; set; }
@@ -146,7 +140,6 @@ namespace PrimeMaritime_API.Models
         public string UPDATED_BY { get; set; }
         public DateTime UPDATED_DATE { get; set; }
     }
-
     public class SCHEDULE
     {
         public int ID { get; set; }
@@ -162,7 +155,6 @@ namespace PrimeMaritime_API.Models
         public string UPDATED_BY { get; set; }
         public DateTime UPDATED_DATE { get; set; }
     }
-
     public class LOCATION_MASTER
     {
         public int ID { get; set; }
@@ -247,5 +239,13 @@ namespace PrimeMaritime_API.Models
         public decimal HAZ45 { get; set; }
         public decimal SEQ20 { get; set; }
         public decimal SEQ40 { get; set; }
+    }
+    public class ORG_MASTER
+    {
+        public int ID { get; set; }
+        public string ORG_NAME { get; set; }
+        public string ORG_CODE { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
     }
 }

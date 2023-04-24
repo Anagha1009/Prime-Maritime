@@ -460,6 +460,7 @@ namespace PrimeMaritime_API.Controllers
         }
         #endregion
 
+        #region "UPLOAD TARIFF"
         [HttpPost("UploadFreightTariff")] //ANAGHA
         public ActionResult<Response<string>> UploadFreightTariff(List<FREIGHT_MASTER> master)
         {
@@ -477,5 +478,44 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_masterService.UploadStevTariff(master)));
         }
+        #endregion
+
+        #region "ORGANISATION MASTER"
+        [HttpPost("InsertOrgMaster")]
+        public ActionResult<Response<CommonResponse>> InsertOrgMaster(ORG_MASTER request)
+        {
+            return Ok(_masterService.InsertOrgMaster(request));
+        }
+
+        [HttpPost("ValidateOrgCode")]
+        public ActionResult<Response<CommonResponse>> ValidateOrgCode(string ORG_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.ValidateOrgCode(ORG_CODE)));
+        }
+
+        [HttpGet("GetOrgMasterList")]
+        public ActionResult<Response<List<ORG_MASTER>>> GetOrgMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetOrgMasterList()));
+        }
+
+        [HttpGet("GetOrgMasterDetails")]
+        public ActionResult<Response<ORG_MASTER>> GetOrgMasterDetails(string ORG_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetOrgMasterDetails(ORG_CODE)));
+        }
+
+        [HttpPost("UpdateOrgMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateOrgMasterList(ORG_MASTER request)
+        {
+            return Ok(_masterService.UpdateOrgMasterList(request));
+        }
+
+        [HttpPost("DeleteOrgMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteOrgMasterList(string ORG_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteOrgMasterList(ORG_CODE)));
+        }
+        #endregion
     }
 }
