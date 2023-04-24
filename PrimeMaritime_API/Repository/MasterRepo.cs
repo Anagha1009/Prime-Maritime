@@ -1430,19 +1430,47 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                SqlParameter[] parameters =
-               {
-                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_FREIGHT" },
-                  new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = master.POL},
-                  new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = master.POD },
-                  new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = master.Charge },
-                  new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = master.Currency },
-                  new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = master.LadenStatus },
-                  new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = master.ServiceMode },
-                  new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = master.DRY20 },
-                };
+                if (master.CHARGELIST.Count > 0)
+                {
+                    foreach (var i in master.CHARGELIST)
+                    {
+                        SqlParameter[] param1 =
+                        {
+                           new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_CHARGE" },
+                           new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                           new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                           new SqlParameter("@IMPCOST20", SqlDbType.Decimal) { Value = i.IMPCOST20 },
+                           new SqlParameter("@IMPCOST40", SqlDbType.Decimal) { Value = i.IMPCOST40 },
+                           new SqlParameter("@IMPREVENUE20", SqlDbType.Decimal) { Value = i.IMPINCOME20 },
+                           new SqlParameter("@IMPREVENUE40", SqlDbType.Decimal) { Value = i.IMPINCOME40 },
+                           new SqlParameter("@EXPCOST20", SqlDbType.Decimal) { Value = i.EXPCOST20 },
+                           new SqlParameter("@EXPCOST40", SqlDbType.Decimal) { Value = i.EXPCOST40 },
+                           new SqlParameter("@EXPREVENUE20", SqlDbType.Decimal) { Value = i.EXPINCOME20 },
+                           new SqlParameter("@EXPREVENUE40", SqlDbType.Decimal) { Value = i.EXPINCOME40 },
+                           new SqlParameter("@Currency", SqlDbType.VarChar,10) { Value = i.CURRENCY },
+                           new SqlParameter("@FROM_VAL", SqlDbType.Int) { Value = i.FROM_VAL },
+                           new SqlParameter("@TO_VAL", SqlDbType.Int) { Value = i.TO_VAL },
+                        };
 
-                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                        SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", param1);
+                    }
+                }
+                else
+                {
+                    SqlParameter[] parameters =
+                    {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_FREIGHT" },
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = master.POL},
+                      new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = master.POD },
+                      new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = master.Charge },
+                      new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = master.Currency },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = master.LadenStatus },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = master.ServiceMode },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = master.DRY20 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
 
             }
             catch (Exception)
@@ -1526,6 +1554,120 @@ namespace PrimeMaritime_API.Repository
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        #endregion
+
+        #region "UPLOAD TARIFF"
+        public void UploadFreightTariff(string connstring, List<FREIGHT_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                    {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_FREIGHT" },
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                      new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = i.POD },
+                      new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = i.Charge },
+                      new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = i.Currency },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LadenStatus },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = i.ServiceMode },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = i.DRY20 },
+                      new SqlParameter("@DRY40", SqlDbType.Decimal) { Value = i.DRY40 },
+                      new SqlParameter("@DRY40HC", SqlDbType.Decimal) { Value = i.DRY40HC },
+                      new SqlParameter("@DRY45", SqlDbType.Decimal) { Value = i.DRY45 },
+                      new SqlParameter("@RF20", SqlDbType.Decimal) { Value = i.RF20 },
+                      new SqlParameter("@RF40", SqlDbType.Decimal) { Value = i.RF40 },
+                      new SqlParameter("@RF40HC", SqlDbType.Decimal) { Value = i.RF40HC },
+                      new SqlParameter("@RF45", SqlDbType.Decimal) { Value = i.RF45 },
+                      new SqlParameter("@HAZ20", SqlDbType.Decimal) { Value = i.HAZ20 },
+                      new SqlParameter("@HAZ40", SqlDbType.Decimal) { Value = i.HAZ40 },
+                      new SqlParameter("@HAZ40HC", SqlDbType.Decimal) { Value = i.HAZ40HC },
+                      new SqlParameter("@HAZ45", SqlDbType.Decimal) { Value = i.HAZ45 },
+                      new SqlParameter("@SEQ20", SqlDbType.Decimal) { Value = i.SEQ20 },
+                      new SqlParameter("@SEQ40", SqlDbType.Decimal) { Value = i.SEQ40 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadChargeTariff(string connstring, List<CHARGE_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_CHARGE" },
+                        new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                        new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                        new SqlParameter("@IMPCOST20", SqlDbType.Decimal) { Value = i.IMPCOST20 },
+                        new SqlParameter("@IMPCOST40", SqlDbType.Decimal) { Value = i.IMPCOST40 },
+                        new SqlParameter("@IMPREVENUE20", SqlDbType.Decimal) { Value = i.IMPINCOME20 },
+                        new SqlParameter("@IMPREVENUE40", SqlDbType.Decimal) { Value = i.IMPINCOME40 },
+                        new SqlParameter("@EXPCOST20", SqlDbType.Decimal) { Value = i.EXPCOST20 },
+                        new SqlParameter("@EXPCOST40", SqlDbType.Decimal) { Value = i.EXPCOST40 },
+                        new SqlParameter("@EXPREVENUE20", SqlDbType.Decimal) { Value = i.EXPINCOME20 },
+                        new SqlParameter("@EXPREVENUE40", SqlDbType.Decimal) { Value = i.EXPINCOME40 },
+                        new SqlParameter("@Currency", SqlDbType.VarChar,10) { Value = i.CURRENCY },
+                        new SqlParameter("@FROM_VAL", SqlDbType.Int) { Value = i.FROM_VAL },
+                        new SqlParameter("@TO_VAL", SqlDbType.Int) { Value = i.TO_VAL },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadStevTariff(string connstring, List<STEV_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_STEV" },
+                      new SqlParameter("@IE_TYPE", SqlDbType.VarChar,255) { Value = i.IE_TYPE},
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                      new SqlParameter("@TERMINAL", SqlDbType.VarChar, 255) { Value = i.TERMINAL },
+                      new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = i.SERVICE_MODE },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = i.DRY20 },
+                      new SqlParameter("@DRY40", SqlDbType.Decimal) { Value = i.DRY40 },
+                      new SqlParameter("@DRY40HC", SqlDbType.Decimal) { Value = i.DRY40HC },
+                      new SqlParameter("@DRY45", SqlDbType.Decimal) { Value = i.DRY45 },
+                      new SqlParameter("@RF20", SqlDbType.Decimal) { Value = i.RF20 },
+                      new SqlParameter("@RF40", SqlDbType.Decimal) { Value = i.RF40 },
+                      new SqlParameter("@RF40HC", SqlDbType.Decimal) { Value = i.RF40HC },
+                      new SqlParameter("@RF45", SqlDbType.Decimal) { Value = i.RF45 },
+                      new SqlParameter("@HAZ20", SqlDbType.Decimal) { Value = i.HAZ20 },
+                      new SqlParameter("@HAZ40", SqlDbType.Decimal) { Value = i.HAZ40 },
+                      new SqlParameter("@HAZ40HC", SqlDbType.Decimal) { Value = i.HAZ40HC },
+                      new SqlParameter("@HAZ45", SqlDbType.Decimal) { Value = i.HAZ45 },
+                      new SqlParameter("@SEQ20", SqlDbType.Decimal) { Value = i.SEQ20 },
+                      new SqlParameter("@SEQ40", SqlDbType.Decimal) { Value = i.SEQ40 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

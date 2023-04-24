@@ -20,7 +20,6 @@ namespace PrimeMaritime_API.Models
         public string AGENT_CODE { get; set; }
         public string CREATED_BY { get; set; }
     }
-
     public class CONTAINER_MASTER
     {
         public int ID { get; set; }
@@ -31,45 +30,27 @@ namespace PrimeMaritime_API.Models
         public string LEASED_FROM { get; set; }      
         public bool STATUS { get; set; }
     }
-
     public class MASTER
     {
         public int ID { get; set; }
-
         public string KEY_NAME { get; set; }
-
         public string CODE { get; set; }
-
         public string CODE_DESC { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public string PARENT_CODE { get; set; }
-
         public string CREATED_BY { get; set; }
-
         public DateTime? CREATED_DATE { get; set; } = null;
-
         public string UPDATED_BY { get; set; }
-
         public DateTime? UPDATED_DATE { get; set; } = null;
-
     }
-
     public class VESSEL_MASTER
     {
         public int ID { get; set; }
-
         public string VESSEL_NAME { get; set; }
-
         public string IMO_NO { get; set; }
-
         public string COUNTRY_CODE { get; set; }
-
         public string VESSEL_CODE { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public string CREATED_BY { get; set; }
 
         //public DateTime CREATED_ON { get; set; }
@@ -78,41 +59,26 @@ namespace PrimeMaritime_API.Models
 
         //public DateTime UPDATED_DATE { get; set; }
     }
-
     public class SERVICE_MASTER
     {
         public int ID { get; set; }
-
         public string LINER_CODE { get; set; }
-
         public string SERVICE_NAME { get; set; }
-
         public string PORT_CODE { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public string CREATED_BY { get; set; }
     }
 
     public class CONTAINER_TYPE
     {
         public int ID { get; set; }
-
         public string CONT_TYPE_CODE { get; set; }
-
         public string CONT_TYPE { get; set; }
-
         public int CONT_SIZE { get; set; }
-
         public string ISO_CODE { get; set; }
-
         public int TEUS { get; set; }
-
         public string OUT_DIM { get; set; }
-
         public Boolean STATUS { get; set; }
-
-
         public string CREATED_BY { get; set; }
     }
 
@@ -127,7 +93,6 @@ namespace PrimeMaritime_API.Models
         public string ASSOCIATE_PORT_CODE { get; set; }
         public bool LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
-
     }
 
     public class DEPO_MASTER
@@ -141,7 +106,6 @@ namespace PrimeMaritime_API.Models
         public string ASSOCIATE_PORT_CODE { get; set; }
         public string LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
-
     }
 
     public class TERMINAL_MASTER
@@ -155,51 +119,32 @@ namespace PrimeMaritime_API.Models
         public string ASSOCIATE_PORT_CODE { get; set; }
         public bool LOC_TYPE_STATUS { get; set; }
         public DateTime CREATED_DATE { get; set; }
-
     }
 
     public class LINER
     {
         public int ID { get; set; }
-
         public string NAME { get; set; }
-
         public string CODE { get; set; }
-
         public string DESCRIPTION { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public DateTime CREATED_DATE { get; set; }
-
         public string CREATED_BY { get; set; }
-
         public string UPDATED_BY { get; set; }
-
         public DateTime UPDATED_DATE { get; set; }
     }
 
     public class SERVICE
     {
         public int ID { get; set; }
-
         public String LINER_CODE { get; set; }
-
         public String SERVICE_NAME { get; set; }
-
         public String PORT_CODE { get; set; }
-
         public Boolean STATUS { get; set; }
-
         public DateTime CREATED_DATE { get; set; }
-
         public string CREATED_BY { get; set; }
-
         public string UPDATED_BY { get; set; }
-
         public DateTime UPDATED_DATE { get; set; }
-
-
     }
 
     public class SCHEDULE
@@ -245,5 +190,62 @@ namespace PrimeMaritime_API.Models
         public string LadenStatus { get; set; }
         public string ServiceMode { get; set; }
         public decimal DRY20 { get; set; }
+        public decimal DRY40 { get; set; }
+        public decimal DRY40HC { get; set; }
+        public decimal DRY45 { get; set; }
+        public decimal RF20 { get; set; }
+        public decimal RF40 { get; set; }
+        public decimal RF40HC { get; set; }
+        public decimal RF45 { get; set; }
+        public decimal HAZ20 { get; set; }
+        public decimal HAZ40 { get; set; }
+        public decimal HAZ40HC { get; set; }
+        public decimal HAZ45 { get; set; }
+        public decimal SEQ20 { get; set; }
+        public decimal SEQ40 { get; set; }
+        public List<CHARGE_MASTER> CHARGELIST { get; set; } = new List<CHARGE_MASTER>();
+    }
+    public class CHARGE_MASTER
+    {
+        public int ID { get; set; }
+        public string POL { get; set; }
+        public string POD { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string CURRENCY { get; set; }
+        public decimal IMPCOST20 { get; set; }
+        public decimal IMPCOST40 { get; set; }
+        public decimal IMPINCOME20 { get; set; }
+        public decimal IMPINCOME40 { get; set; }
+        public decimal EXPCOST20 { get; set; }
+        public decimal EXPCOST40 { get; set; }
+        public decimal EXPINCOME20 { get; set; }
+        public decimal EXPINCOME40 { get; set; }
+        public int FROM_VAL { get; set; }
+        public int TO_VAL { get; set; }
+    }
+    public class STEV_MASTER
+    {
+        public int ID { get; set; }
+        public string IE_TYPE { get; set; }
+        public string POL { get; set; }
+        public string TERMINAL { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string CURRENCY { get; set; }
+        public string LADEN_STATUS { get; set; }
+        public string SERVICE_MODE { get; set; }
+        public decimal DRY20 { get; set; }
+        public decimal DRY40 { get; set; }
+        public decimal DRY40HC { get; set; }
+        public decimal DRY45 { get; set; }
+        public decimal RF20 { get; set; }
+        public decimal RF40 { get; set; }
+        public decimal RF40HC { get; set; }
+        public decimal RF45 { get; set; }
+        public decimal HAZ20 { get; set; }
+        public decimal HAZ40 { get; set; }
+        public decimal HAZ40HC { get; set; }
+        public decimal HAZ45 { get; set; }
+        public decimal SEQ20 { get; set; }
+        public decimal SEQ40 { get; set; }
     }
 }

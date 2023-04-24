@@ -176,5 +176,11 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> UpdateFreightMasterList(FREIGHT_MASTER request);
         Response<CommonResponse> DeleteFreightMasterList(int ID);
         #endregion
+
+        #region "UPLOAD TARIFF"
+        Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request);
+        Response<string> UploadChargeTariff(List<CHARGE_MASTER> request);
+        Response<string> UploadStevTariff(List<STEV_MASTER> request);
+        #endregion
     }
 }

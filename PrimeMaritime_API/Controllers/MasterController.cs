@@ -459,5 +459,23 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_masterService.DeleteFreightMasterList(ID)));
         }
         #endregion
+
+        [HttpPost("UploadFreightTariff")] //ANAGHA
+        public ActionResult<Response<string>> UploadFreightTariff(List<FREIGHT_MASTER> master)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UploadFreightTariff(master)));
+        }
+
+        [HttpPost("UploadChargeTariff")] //ANAGHA
+        public ActionResult<Response<string>> UploadChargeTariff(List<CHARGE_MASTER> master)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UploadChargeTariff(master)));
+        }
+
+        [HttpPost("UploadStevTariff")] //ANAGHA
+        public ActionResult<Response<string>> UploadStevTariff(List<STEV_MASTER> master)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UploadStevTariff(master)));
+        }
     }
 }

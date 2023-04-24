@@ -22,6 +22,7 @@ namespace PrimeMaritime_API.IServices
         Response<string> UploadContainerMovement(List<CONTAINERMOVEMENT> cm);
         Response<List<CM>> GetAvailableContainerListForDepo(string DEPO_CODE);
         Response<List<CM>> GetAllContainerListForDepo(string DEPO_CODE);
+        Response<List<CM>> GetAllContainerListForAdmin(string LOCATION);
         Response<List<CM>> GetCMAvailable(string STATUS, string CURRENT_LOCATION);
         Response<List<CM>> GetContainerMovementBooking(string BOOKING_NO, string CRO_NO);
 

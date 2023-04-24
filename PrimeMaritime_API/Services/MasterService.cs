@@ -1341,5 +1341,51 @@ namespace PrimeMaritime_API.Services
             return response;
         }
         #endregion
+
+        #region "UPLOAD TARIFF"
+        public Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<MasterRepo>.Instance.UploadFreightTariff(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
+        public Response<string> UploadChargeTariff(List<CHARGE_MASTER> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<MasterRepo>.Instance.UploadChargeTariff(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
+
+        public Response<string> UploadStevTariff(List<STEV_MASTER> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<MasterRepo>.Instance.UploadStevTariff(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
+        #endregion
     }
 }
