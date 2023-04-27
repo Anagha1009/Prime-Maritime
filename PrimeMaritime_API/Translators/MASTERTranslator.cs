@@ -480,6 +480,27 @@ namespace PrimeMaritime_API.Translators
             if (reader.IsColumnExists("ORG_CODE"))
                 item.ORG_CODE = SqlHelper.GetNullableString(reader, "ORG_CODE");
 
+            if (reader.IsColumnExists("ORG_LOCATION"))
+                item.ORG_LOCATION = SqlHelper.GetNullableString(reader, "ORG_LOCATION");
+
+            if (reader.IsColumnExists("ORG_LOC_CODE"))
+                item.ORG_LOC_CODE = SqlHelper.GetNullableString(reader, "ORG_LOC_CODE");
+
+            if (reader.IsColumnExists("ORG_ADDRESS1"))
+                item.ORG_ADDRESS1 = SqlHelper.GetNullableString(reader, "ORG_ADDRESS1");
+
+            if (reader.IsColumnExists("CONTACT"))
+                item.CONTACT = SqlHelper.GetNullableString(reader, "CONTACT");
+
+            if (reader.IsColumnExists("FAX"))
+                item.FAX = SqlHelper.GetNullableString(reader, "FAX");
+
+            if (reader.IsColumnExists("EMAIL"))
+                item.EMAIL = SqlHelper.GetNullableString(reader, "EMAIL");
+
+            if (reader.IsColumnExists("COUNTRY_CODE"))
+                item.COUNTRY_CODE = SqlHelper.GetNullableString(reader, "COUNTRY_CODE");
+
             if (reader.IsColumnExists("CREATED_BY"))
                 item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
 

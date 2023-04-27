@@ -187,9 +187,9 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> InsertOrgMaster(ORG_MASTER request);
         Response<CommonResponse> ValidateOrgCode(string ORG_CODE);
         Response<List<ORG_MASTER>> GetOrgMasterList();
-        Response<ORG_MASTER> GetOrgMasterDetails(string ORG_CODE);
+        Response<ORG_MASTER> GetOrgMasterDetails(string ORG_CODE, string ORG_LOC_CODE);
         Response<CommonResponse> UpdateOrgMasterList(ORG_MASTER request);
-        Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE);
+        Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE,string ORG_LOC_CODE);
         #endregion
     }
 }

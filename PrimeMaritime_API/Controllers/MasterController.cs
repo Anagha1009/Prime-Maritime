@@ -500,9 +500,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetOrgMasterDetails")]
-        public ActionResult<Response<ORG_MASTER>> GetOrgMasterDetails(string ORG_CODE)
+        public ActionResult<Response<ORG_MASTER>> GetOrgMasterDetails(string ORG_CODE, string ORG_LOC_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.GetOrgMasterDetails(ORG_CODE)));
+            return Ok(JsonConvert.SerializeObject(_masterService.GetOrgMasterDetails(ORG_CODE, ORG_LOC_CODE)));
         }
 
         [HttpPost("UpdateOrgMasterList")]
@@ -512,9 +512,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpPost("DeleteOrgMasterList")]
-        public ActionResult<Response<CommonResponse>> DeleteOrgMasterList(string ORG_CODE)
+        public ActionResult<Response<CommonResponse>> DeleteOrgMasterList(string ORG_CODE, string ORG_LOC_CODE)
         {
-            return Ok(JsonConvert.SerializeObject(_masterService.DeleteOrgMasterList(ORG_CODE)));
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteOrgMasterList(ORG_CODE, ORG_LOC_CODE)));
         }
         #endregion
     }

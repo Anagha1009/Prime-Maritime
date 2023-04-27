@@ -1452,12 +1452,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<ORG_MASTER> GetOrgMasterDetails(string LOC_CODE)
+        public Response<ORG_MASTER> GetOrgMasterDetails(string ORG_CODE, string ORG_LOC_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<ORG_MASTER> response = new Response<ORG_MASTER>();
-            var data = DbClientFactory<MasterRepo>.Instance.GetOrgMasterDetails(dbConn, LOC_CODE);
+            var data = DbClientFactory<MasterRepo>.Instance.GetOrgMasterDetails(dbConn, ORG_CODE, ORG_LOC_CODE);
 
             if (data != null)
             {
@@ -1490,7 +1490,7 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE)
+        public Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE, string ORG_LOC_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -1503,7 +1503,7 @@ namespace PrimeMaritime_API.Services
                 return response;
             }
 
-            DbClientFactory<MasterRepo>.Instance.DeleteOrgMaster(dbConn, ORG_CODE);
+            DbClientFactory<MasterRepo>.Instance.DeleteOrgMaster(dbConn, ORG_CODE, ORG_LOC_CODE);
 
             response.Succeeded = true;
             response.ResponseMessage = "Master deleted Successfully.";

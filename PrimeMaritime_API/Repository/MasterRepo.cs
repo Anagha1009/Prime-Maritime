@@ -26,7 +26,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@CUST_ADDRESS", SqlDbType.VarChar, 500) { Value = master.CUST_ADDRESS },
                   new SqlParameter("@CUST_EMAIL", SqlDbType.VarChar, 50) { Value = master.CUST_EMAIL },
                   new SqlParameter("@CUST_CONTACT", SqlDbType.VarChar, 20) { Value = master.CUST_CONTACT },
-                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,10) { Value = master.CUST_TYPE },
+                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,100) { Value = master.CUST_TYPE },
                   new SqlParameter("@GSTIN", SqlDbType.VarChar,15) { Value = master.GSTIN },
                   new SqlParameter("@VAT_NO", SqlDbType.VarChar,30) { Value = master.VAT_NO },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
@@ -122,7 +122,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@CUST_ADDRESS", SqlDbType.VarChar, 100) { Value = master.CUST_ADDRESS },
                   new SqlParameter("@CUST_EMAIL", SqlDbType.VarChar, 50) { Value = master.CUST_EMAIL },
                   new SqlParameter("@CUST_CONTACT", SqlDbType.VarChar, 20) { Value = master.CUST_CONTACT },
-                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,10) { Value = master.CUST_TYPE },
+                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,100) { Value = master.CUST_TYPE },
                   new SqlParameter("@GSTIN", SqlDbType.VarChar,15) { Value = master.GSTIN },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = master.AGENT_CODE },
@@ -1673,7 +1673,7 @@ namespace PrimeMaritime_API.Repository
         }
         #endregion
 
-        #region "LOCATION MASTER"
+        #region "ORGANISATION MASTER"
         public void InsertOrgMaster(string connstring, ORG_MASTER master)
         {
             try
@@ -1683,6 +1683,13 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_ORG" },
                   new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = master.ORG_CODE },
+                  new SqlParameter("@ORG_LOCATION", SqlDbType.VarChar, 100) { Value = master.ORG_LOCATION },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = master.ORG_LOC_CODE },
+                  new SqlParameter("@ORG_ADDRESS1", SqlDbType.VarChar, 255) { Value = master.ORG_ADDRESS1 },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = master.EMAIL },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 50) { Value = master.CONTACT },
+                  new SqlParameter("@FAX", SqlDbType.VarChar, 50) { Value = master.FAX },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
                   new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
                 };
 
@@ -1712,7 +1719,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public List<ORG_MASTER> GetOrgMasterList(string dbConn)
         {
             try
@@ -1732,13 +1738,14 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-        public ORG_MASTER GetOrgMasterDetails(string connstring, string ORG_CODE)
+        public ORG_MASTER GetOrgMasterDetails(string connstring, string ORG_CODE, string ORG_LOC_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                    new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                   new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = ORG_LOC_CODE },
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_ORG_DETAILS" }
                 };
 
@@ -1758,7 +1765,14 @@ namespace PrimeMaritime_API.Repository
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_ORG" },
                   new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
-                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = master.ORG_CODE },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = master.ORG_CODE },
+                  new SqlParameter("@ORG_LOCATION", SqlDbType.VarChar, 100) { Value = master.ORG_LOCATION },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = master.ORG_LOC_CODE },
+                  new SqlParameter("@ORG_ADDRESS1", SqlDbType.VarChar, 255) { Value = master.ORG_ADDRESS1 },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = master.EMAIL },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 50) { Value = master.CONTACT },
+                  new SqlParameter("@FAX", SqlDbType.VarChar, 50) { Value = master.FAX },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
@@ -1768,13 +1782,14 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-        public void DeleteOrgMaster(string connstring, string ORG_CODE)
+        public void DeleteOrgMaster(string connstring, string ORG_CODE,string ORG_LOC_CODE)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar,20) { Value = ORG_CODE },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar,100) { Value = ORG_LOC_CODE },
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_ORG" }
                 };
 

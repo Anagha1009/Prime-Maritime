@@ -245,6 +245,13 @@ namespace PrimeMaritime_API.Models
         public int ID { get; set; }
         public string ORG_NAME { get; set; }
         public string ORG_CODE { get; set; }
+        public string ORG_LOCATION { get; set; }
+        public string ORG_LOC_CODE { get; set; }
+        public string ORG_ADDRESS1 { get; set; }
+        public string CONTACT { get; set; }
+        public string FAX { get; set; }
+        public string EMAIL { get; set; }
+        public string COUNTRY_CODE { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
     }

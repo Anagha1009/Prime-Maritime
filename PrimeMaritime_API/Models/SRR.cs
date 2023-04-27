@@ -21,6 +21,8 @@ namespace PrimeMaritime_API.Models
         public string BOOKING_NO { get; set; }
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
+        public string VESSEL_NAME { get; set; }
+        public string VOYAGE_NO { get; set; }
         public int DAYS { get; set; }
         public bool MTY_REPO { get; set; }
         public string CUSTOMER_NAME { get; set; }
