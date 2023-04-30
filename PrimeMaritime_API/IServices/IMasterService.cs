@@ -191,5 +191,13 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> UpdateOrgMasterList(ORG_MASTER request);
         Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE,string ORG_LOC_CODE);
         #endregion
+
+        #region "SLOT MASTER"
+        Response<CommonResponse> InsertSlotMaster(SLOT_MASTER request);
+        Response<List<SLOT_MASTER>> GetSlotMasterList(string SERVICE, string PORT);
+        Response<SLOT_MASTER> GetSlotMasterDetails(int ID);
+        Response<CommonResponse> UpdateSlotMasterList(SLOT_MASTER request);
+        Response<CommonResponse> DeleteSlotMasterList(int ID);
+        #endregion
     }
 }

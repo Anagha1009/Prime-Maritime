@@ -364,9 +364,9 @@ namespace PrimeMaritime_API.Repository
                 tbl2.Columns.Add(new DataColumn("FLASH_POINT", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("CAS_NO", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("REMARKS", typeof(string)));
-                tbl2.Columns.Add(new DataColumn("TEMPERATURE", typeof(decimal)));
-                tbl2.Columns.Add(new DataColumn("VENTILATION", typeof(decimal)));
-                tbl2.Columns.Add(new DataColumn("HUMIDITY", typeof(decimal)));
+                tbl2.Columns.Add(new DataColumn("TEMPERATURE", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("VENTILATION", typeof(string)));
+                tbl2.Columns.Add(new DataColumn("HUMIDITY", typeof(string)));
                 tbl2.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
 
                 foreach (var i in request.SRR_COMMODITIES)
@@ -431,12 +431,13 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[5];
+                string[] columns = new string[6];
                 columns[0] = "SRR_NO";
                 columns[1] = "APPROVED_RATE";
                 columns[2] = "STATUS";
                 columns[3] = "REMARKS";
                 columns[4] = "CREATED_BY";
+                columns[5] = "AGENT_REMARKS";
 
                 SqlHelper.UpdateSRRRates<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
@@ -475,7 +476,7 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[8];
+                string[] columns = new string[9];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "APPROVED_RATE";
@@ -484,6 +485,7 @@ namespace PrimeMaritime_API.Repository
                 columns[5] = "REMARKS";
                 columns[6] = "CREATED_BY";
                 columns[7] = "RATE_TYPE";
+                columns[8] = "AGENT_REMARKS";
 
                 SqlHelper.UpdateSRRData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 
@@ -507,7 +509,7 @@ namespace PrimeMaritime_API.Repository
         {
             try
             {
-                string[] columns = new string[8];
+                string[] columns = new string[9];
                 columns[0] = "SRR_NO";
                 columns[1] = "CHARGE_CODE";
                 columns[2] = "RATE_REQUESTED";
@@ -516,6 +518,7 @@ namespace PrimeMaritime_API.Repository
                 columns[5] = "REMARKS";
                 columns[6] = "CREATED_BY";
                 columns[7] = "RATE_TYPE";
+                columns[8] = "AGENT_REMARKS";
 
                 SqlHelper.UpdateSRRCounterData<SRR_RATES>(request, "TB_SRR_RATES", connstring, columns);
 

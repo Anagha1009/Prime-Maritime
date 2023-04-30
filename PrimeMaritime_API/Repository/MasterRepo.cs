@@ -1315,14 +1315,14 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_LOCATION" },
-                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,500) { Value = master.LOC_NAME},
                   new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 50) { Value = master.LOC_CODE },
                   new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
                   new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
                   new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
                   new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
                   new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
-                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,255) { Value = master.ADDRESS },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,500) { Value = master.ADDRESS },
                   new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
                   new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
@@ -1386,13 +1386,14 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_LOCATION" },
-                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,500) { Value = master.LOC_NAME},
                   new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 20) { Value = master.LOC_CODE },
                   new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
                   new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
                   new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
                   new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
                   new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,500) { Value = master.ADDRESS },
                   new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
                   new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar,20) { Value = master.COUNTRY_CODE },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
@@ -1794,6 +1795,112 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "SLOT MASTER"
+        public void InsertSlotMaster(string connstring, SLOT_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_SLOT" },
+                  new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar,255) { Value = master.SLOT_OPERATOR},
+                  new SqlParameter("@SERVICES", SqlDbType.VarChar, 100) { Value = master.SERVICES },
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar, 100) { Value = master.LINER_CODE },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = master.PORT_CODE },
+                  new SqlParameter("@TERM", SqlDbType.VarChar, 50) { Value = master.TERM },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<SLOT_MASTER> GetSlotMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SLOT_LIST" }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_SLOT", parameters);
+                List<SLOT_MASTER> master = SqlHelper.CreateListFromTable<SLOT_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public SLOT_MASTER GetSlotMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_SLOT_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<SLOT_MASTER>(connstring, "SP_CRUD_SLOT", r => r.TranslateAsSlotMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateSlotMasterList(string connstring, SLOT_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_SLOT" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID},
+                  new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar,255) { Value = master.SLOT_OPERATOR},
+                  new SqlParameter("@SERVICES", SqlDbType.VarChar, 100) { Value = master.SERVICES },
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar, 100) { Value = master.LINER_CODE },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = master.PORT_CODE },
+                  new SqlParameter("@TERM", SqlDbType.VarChar, 50) { Value = master.TERM },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteSlotMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_SLOT" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
             }
             catch (Exception)
             {

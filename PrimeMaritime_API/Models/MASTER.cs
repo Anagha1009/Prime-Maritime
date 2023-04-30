@@ -255,4 +255,16 @@ namespace PrimeMaritime_API.Models
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
     }
+    public class SLOT_MASTER
+    {
+        public int ID { get; set; }
+        public string SLOT_OPERATOR { get; set; }
+        public string SERVICES { get; set; }
+        public string LINER_CODE { get; set; }
+        public string PORT_CODE { get; set; }
+        public string TERM { get; set; }
+        public bool STATUS { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+    }
 }

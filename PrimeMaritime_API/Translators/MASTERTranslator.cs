@@ -509,5 +509,45 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
+        public static SLOT_MASTER TranslateAsSlotMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new SLOT_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("SLOT_OPERATOR"))
+                item.SLOT_OPERATOR = SqlHelper.GetNullableString(reader, "SLOT_OPERATOR");
+
+            if (reader.IsColumnExists("SERVICES"))
+                item.SERVICES = SqlHelper.GetNullableString(reader, "SERVICES");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            if (reader.IsColumnExists("LINER_CODE"))
+                item.LINER_CODE = SqlHelper.GetNullableString(reader, "LINER_CODE");
+
+            if (reader.IsColumnExists("TERM"))
+                item.TERM = SqlHelper.GetNullableString(reader, "TERM");
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+            if (reader.IsColumnExists("CREATED_DATE"))
+                item.CREATED_DATE = SqlHelper.GetDateTime(reader, "CREATED_DATE");
+
+            return item;
+        }
     }
 }
