@@ -1386,6 +1386,34 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+        public Response<string> UploadDetentionTariff(List<DETENTION_MASTER> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<MasterRepo>.Instance.UploadDetentionTariff(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
+        public Response<string> UploadMandatoryTariff(List<MANDATORY_MASTER> request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<string> response = new Response<string>();
+            DbClientFactory<MasterRepo>.Instance.UploadMandatoryTariff(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseCode = 200;
+            response.ResponseMessage = "Success";
+            response.Data = "Uploaded Successfully !";
+
+            return response;
+        }
         #endregion
 
         #region "ORGANISATION MASTER"

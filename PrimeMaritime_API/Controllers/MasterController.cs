@@ -478,6 +478,18 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_masterService.UploadStevTariff(master)));
         }
+
+        [HttpPost("UploadDetentionTariff")] //ANAGHA
+        public ActionResult<Response<string>> UploadDetentionTariff(List<DETENTION_MASTER> master)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UploadDetentionTariff(master)));
+        }
+
+        [HttpPost("UploadMandatoryTariff")] //ANAGHA
+        public ActionResult<Response<string>> UploadMandatoryTariff(List<MANDATORY_MASTER> master)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.UploadMandatoryTariff(master)));
+        }
         #endregion
 
         #region "ORGANISATION MASTER"

@@ -240,6 +240,34 @@ namespace PrimeMaritime_API.Models
         public decimal SEQ20 { get; set; }
         public decimal SEQ40 { get; set; }
     }
+    public class DETENTION_MASTER
+    {
+        public int ID { get; set; }
+        public string PORT_CODE { get; set; }
+        public string CONTAINER_TYPE { get; set; }
+        public string CURRENCY { get; set; }
+        public int FROM_DAYS { get; set; }
+        public int TO_DAYS { get; set; }
+        public decimal RATE20 { get; set; }
+        public decimal RATE40 { get; set; }
+        public decimal HC_RATE { get; set; }
+        public string CREATED_BY { get; set; }
+        public DateTime CREATED_DATE { get; set; }
+    }
+    public class MANDATORY_MASTER
+    {
+        public int ID { get; set; }
+        public string PORT_CODE { get; set; }
+        public string ORG_CODE { get; set; }
+        public string CHARGE_CODE { get; set; }
+        public string IE_TYPE { get; set; }
+        public string LADEN_STATUS { get; set; }
+        public string CURRENCY { get; set; }
+        public decimal RATE20 { get; set; }
+        public decimal RATE40 { get; set; }
+        public bool IS_PERCENTAGE { get; set; }
+        public int PERCENTAGE_VALUE { get; set; }
+    }
     public class ORG_MASTER
     {
         public int ID { get; set; }

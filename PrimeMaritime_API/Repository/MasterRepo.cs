@@ -1672,6 +1672,63 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public void UploadDetentionTariff(string connstring, List<DETENTION_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_DETENTION" },
+                      new SqlParameter("@PORT_CODE", SqlDbType.VarChar,50) { Value = i.PORT_CODE},
+                      new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,20) { Value = i.CONTAINER_TYPE},
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                      new SqlParameter("@FROM_DAYS", SqlDbType.Int) { Value = i.FROM_DAYS },
+                      new SqlParameter("@TO_DAYS", SqlDbType.Int) { Value = i.TO_DAYS },
+                      new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                      new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                      new SqlParameter("@HC_RATE", SqlDbType.Decimal) { Value = i.HC_RATE },
+                      new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = i.CREATED_BY },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadMandatoryTariff(string connstring, List<MANDATORY_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_MANDATORY" },
+                      new SqlParameter("@ORG_CODE", SqlDbType.VarChar,50) { Value = i.ORG_CODE},
+                      new SqlParameter("@PORT_CODE", SqlDbType.VarChar,100) { Value = i.PORT_CODE},
+                      new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE},
+                      new SqlParameter("@IE_TYPE", SqlDbType.VarChar, 50) { Value = i.IE_TYPE },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar,50) { Value = i.CURRENCY },
+                      new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                      new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                      new SqlParameter("@IS_PERCENTAGE", SqlDbType.Bit) { Value = i.IS_PERCENTAGE },
+                      new SqlParameter("@PERCENTAGE_VALUE", SqlDbType.Int) { Value = i.PERCENTAGE_VALUE },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
 
         #region "ORGANISATION MASTER"

@@ -181,6 +181,8 @@ namespace PrimeMaritime_API.IServices
         Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request);
         Response<string> UploadChargeTariff(List<CHARGE_MASTER> request);
         Response<string> UploadStevTariff(List<STEV_MASTER> request);
+        Response<string> UploadDetentionTariff(List<DETENTION_MASTER> request);
+        Response<string> UploadMandatoryTariff(List<MANDATORY_MASTER> request);
         #endregion
 
         #region "ORGANISATION MASTER"
