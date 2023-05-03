@@ -177,6 +177,34 @@ namespace PrimeMaritime_API.IServices
         Response<CommonResponse> DeleteFreightMasterList(int ID);
         #endregion
 
+        #region "CHARGE MASTER"
+        Response<List<CHARGE_MASTER>> GetChargeMasterList();
+        Response<CHARGE_MASTER> GetChargeMasterDetails(int ID);
+        Response<CommonResponse> UpdateChargeMasterList(CHARGE_MASTER request);
+        Response<CommonResponse> DeleteChargeMasterList(int ID);
+        #endregion
+
+        #region "STEVEDORING MASTER"
+        Response<List<STEV_MASTER>> GetStevedoringMasterList();
+        Response<STEV_MASTER> GetStevedoringMasterDetails(int ID);
+        Response<CommonResponse> UpdateStevedoringMasterList(STEV_MASTER request);
+        Response<CommonResponse> DeleteStevedoringMasterList(int ID);
+        #endregion
+
+        #region "DETENTION MASTER"
+        Response<List<DETENTION_MASTER>> GetDetentionMasterList();
+        Response<DETENTION_MASTER> GetDetentionMasterDetails(int ID);
+        Response<CommonResponse> UpdateDetentionMasterList(DETENTION_MASTER request);
+        Response<CommonResponse> DeleteDetentionMasterList(int ID);
+        #endregion
+
+        #region "MANDATORY MASTER"
+        Response<List<MANDATORY_MASTER>> GetMandatoryMasterList();
+        Response<MANDATORY_MASTER> GetMandatoryMasterDetails(int ID);
+        Response<CommonResponse> UpdateMandatoryMasterList(MANDATORY_MASTER request);
+        Response<CommonResponse> DeleteMandatoryMasterList(int ID);
+        #endregion
+
         #region "UPLOAD TARIFF"
         Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request);
         Response<string> UploadChargeTariff(List<CHARGE_MASTER> request);

@@ -460,6 +460,110 @@ namespace PrimeMaritime_API.Controllers
         }
         #endregion
 
+        #region "CHARGE MASTER"       
+        [HttpGet("GetChargeMasterList")]
+        public ActionResult<Response<List<CHARGE_MASTER>>> GetChargeMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetChargeMasterList()));
+        }
+
+        [HttpGet("GetChargeMasterDetails")]
+        public ActionResult<Response<CHARGE_MASTER>> GetChargeMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetChargeMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateChargeMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateChargeMasterList(CHARGE_MASTER request)
+        {
+            return Ok(_masterService.UpdateChargeMasterList(request));
+        }
+
+        [HttpDelete("DeleteChargeMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteChargeMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteChargeMasterList(ID)));
+        }
+        #endregion
+
+        #region "STEVEDORING MASTER"       
+        [HttpGet("GetStevedoringMasterList")]
+        public ActionResult<Response<List<STEV_MASTER>>> GetStevedoringMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetStevedoringMasterList()));
+        }
+
+        [HttpGet("GetStevedoringMasterDetails")]
+        public ActionResult<Response<STEV_MASTER>> GetStevedoringMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetStevedoringMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateStevedoringMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateStevedoringMasterList(STEV_MASTER request)
+        {
+            return Ok(_masterService.UpdateStevedoringMasterList(request));
+        }
+
+        [HttpDelete("DeleteStevedoringMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteStevedoringMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteStevedoringMasterList(ID)));
+        }
+        #endregion
+
+        #region "DETENTION MASTER"       
+        [HttpGet("GetDetentionMasterList")]
+        public ActionResult<Response<List<DETENTION_MASTER>>> GetDetentionMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetDetentionMasterList()));
+        }
+
+        [HttpGet("GetDetentionMasterDetails")]
+        public ActionResult<Response<DETENTION_MASTER>> GetDetentionMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetDetentionMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateDetentionMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateDetentionMasterList(DETENTION_MASTER request)
+        {
+            return Ok(_masterService.UpdateDetentionMasterList(request));
+        }
+
+        [HttpDelete("DeleteDetentionMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteDetentionMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteDetentionMasterList(ID)));
+        }
+        #endregion
+
+        #region "MANDATORY MASTER"       
+        [HttpGet("GetMandatoryMasterList")]
+        public ActionResult<Response<List<MANDATORY_MASTER>>> GetMandatoryMasterList()
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetMandatoryMasterList()));
+        }
+
+        [HttpGet("GetMandatoryMasterDetails")]
+        public ActionResult<Response<MANDATORY_MASTER>> GetMandatoryMasterDetails(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.GetMandatoryMasterDetails(ID)));
+        }
+
+        [HttpPost("UpdateMandatoryMasterList")]
+        public ActionResult<Response<CommonResponse>> UpdateMandatoryMasterList(MANDATORY_MASTER request)
+        {
+            return Ok(_masterService.UpdateMandatoryMasterList(request));
+        }
+
+        [HttpDelete("DeleteMandatoryMasterList")]
+        public ActionResult<Response<CommonResponse>> DeleteMandatoryMasterList(int ID)
+        {
+            return Ok(JsonConvert.SerializeObject(_masterService.DeleteMandatoryMasterList(ID)));
+        }
+        #endregion
+
         #region "UPLOAD TARIFF"
         [HttpPost("UploadFreightTariff")] //ANAGHA
         public ActionResult<Response<string>> UploadFreightTariff(List<FREIGHT_MASTER> master)

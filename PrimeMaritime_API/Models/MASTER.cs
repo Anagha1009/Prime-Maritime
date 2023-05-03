@@ -214,6 +214,7 @@ namespace PrimeMaritime_API.Models
         public decimal EXPINCOME40 { get; set; }
         public int FROM_VAL { get; set; }
         public int TO_VAL { get; set; }
+        public bool STATUS { get; set; }
     }
     public class STEV_MASTER
     {

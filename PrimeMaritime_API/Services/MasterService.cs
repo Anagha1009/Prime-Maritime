@@ -1342,6 +1342,338 @@ namespace PrimeMaritime_API.Services
         }
         #endregion
 
+        #region "CHARGE MASTER"
+        public Response<List<CHARGE_MASTER>> GetChargeMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<CHARGE_MASTER>> response = new Response<List<CHARGE_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetChargeMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CHARGE_MASTER> GetChargeMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CHARGE_MASTER> response = new Response<CHARGE_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetChargeMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateChargeMasterList(CHARGE_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateChargeMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> DeleteChargeMasterList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (ID == 0)
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteChargeMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
+        #region "STEVEDORING MASTER"
+        public Response<List<STEV_MASTER>> GetStevedoringMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<STEV_MASTER>> response = new Response<List<STEV_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetStevedoringMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<STEV_MASTER> GetStevedoringMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<STEV_MASTER> response = new Response<STEV_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetStevedoringMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateStevedoringMasterList(STEV_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateStevedoringMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> DeleteStevedoringMasterList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (ID == 0)
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteStevedoringMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
+        #region "DETENTION MASTER"
+        public Response<List<DETENTION_MASTER>> GetDetentionMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<DETENTION_MASTER>> response = new Response<List<DETENTION_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetDetentionMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<DETENTION_MASTER> GetDetentionMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<DETENTION_MASTER> response = new Response<DETENTION_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetDetentionMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateDetentionMasterList(DETENTION_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateDetentionMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> DeleteDetentionMasterList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (ID == 0)
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteDetentionMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
+        #region "MANDATORY MASTER"
+        public Response<List<MANDATORY_MASTER>> GetMandatoryMasterList()
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<MANDATORY_MASTER>> response = new Response<List<MANDATORY_MASTER>>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetMandatoryMasterList(dbConn);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<MANDATORY_MASTER> GetMandatoryMasterDetails(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<MANDATORY_MASTER> response = new Response<MANDATORY_MASTER>();
+            var data = DbClientFactory<MasterRepo>.Instance.GetMandatoryMasterDetails(dbConn, ID);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<CommonResponse> UpdateMandatoryMasterList(MANDATORY_MASTER request)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+            DbClientFactory<MasterRepo>.Instance.UpdateMandatoryMasterList(dbConn, request);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master updated Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        public Response<CommonResponse> DeleteMandatoryMasterList(int ID)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<CommonResponse> response = new Response<CommonResponse>();
+
+            if (ID == 0)
+            {
+                response.ResponseCode = 500;
+                response.ResponseMessage = "Please provide ID ";
+                return response;
+            }
+
+            DbClientFactory<MasterRepo>.Instance.DeleteMandatoryMaster(dbConn, ID);
+
+            response.Succeeded = true;
+            response.ResponseMessage = "Master deleted Successfully.";
+            response.ResponseCode = 200;
+
+            return response;
+        }
+        #endregion
+
         #region "UPLOAD TARIFF"
         public Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request)
         {

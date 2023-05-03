@@ -460,6 +460,235 @@ namespace PrimeMaritime_API.Translators
 
             return item;
         }
+        public static CHARGE_MASTER TranslateAsChargeMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new CHARGE_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("POL"))
+                item.POL = SqlHelper.GetNullableString(reader, "POL");
+
+            if (reader.IsColumnExists("CHARGE_CODE"))
+                item.CHARGE_CODE = SqlHelper.GetNullableString(reader, "CHARGE_CODE");
+
+            if (reader.IsColumnExists("IMPCOST20"))
+                item.IMPCOST20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMPCOST20"));
+
+            if (reader.IsColumnExists("IMPCOST40"))
+                item.IMPCOST40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMPCOST40"));
+
+            if (reader.IsColumnExists("IMPINCOME20"))
+                item.IMPINCOME20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMPINCOME20"));
+
+            if (reader.IsColumnExists("IMPINCOME40"))
+                item.IMPINCOME40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "IMPINCOME40"));
+
+            if (reader.IsColumnExists("EXPCOST20"))
+                item.EXPCOST20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXPCOST20"));
+
+            if (reader.IsColumnExists("EXPCOST40"))
+                item.EXPCOST40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXPCOST40"));
+
+            if (reader.IsColumnExists("EXPINCOME20"))
+                item.EXPINCOME20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXPINCOME20"));
+
+            if (reader.IsColumnExists("EXPINCOME40"))
+                item.EXPINCOME40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "EXPINCOME40"));
+
+            if (reader.IsColumnExists("CURRENCY"))
+                item.CURRENCY = SqlHelper.GetNullableString(reader, "CURRENCY");
+
+            if (reader.IsColumnExists("FROM_VAL"))
+                item.FROM_VAL = SqlHelper.GetNullableInt32(reader, "FROM_VAL");
+
+            if (reader.IsColumnExists("TO_VAL"))
+                item.TO_VAL = SqlHelper.GetNullableInt32(reader, "TO_VAL");
+
+            if (reader.IsColumnExists("STATUS"))
+                item.STATUS = SqlHelper.GetBoolean(reader, "STATUS");
+
+            return item;
+        }
+        public static STEV_MASTER TranslateAsStevMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new STEV_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("IE_TYPE"))
+                item.IE_TYPE = SqlHelper.GetNullableString(reader, "IE_TYPE");
+
+            if (reader.IsColumnExists("POL"))
+                item.POL = SqlHelper.GetNullableString(reader, "POL");
+
+            if (reader.IsColumnExists("CHARGE_CODE"))
+                item.CHARGE_CODE = SqlHelper.GetNullableString(reader, "CHARGE_CODE");
+
+            if (reader.IsColumnExists("TERMINAL"))
+                item.TERMINAL = SqlHelper.GetNullableString(reader, "TERMINAL");
+
+            if (reader.IsColumnExists("CURRENCY"))
+                item.CURRENCY = SqlHelper.GetNullableString(reader, "CURRENCY");
+
+            if (reader.IsColumnExists("LADEN_STATUS"))
+                item.LADEN_STATUS = SqlHelper.GetNullableString(reader, "LADEN_STATUS");
+
+            if (reader.IsColumnExists("SERVICE_MODE"))
+                item.SERVICE_MODE = SqlHelper.GetNullableString(reader, "SERVICE_MODE");
+
+            if (reader.IsColumnExists("DRY20"))
+                item.DRY20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY20"));
+
+            if (reader.IsColumnExists("DRY40"))
+                item.DRY40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY40"));
+
+            if (reader.IsColumnExists("DRY40HC"))
+                item.DRY40HC = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY40HC"));
+
+            if (reader.IsColumnExists("DRY45"))
+                item.DRY45 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "DRY45"));
+
+            if (reader.IsColumnExists("RF20"))
+                item.RF20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RF20"));
+
+            if (reader.IsColumnExists("RF40"))
+                item.RF40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RF40"));
+
+            if (reader.IsColumnExists("RF40HC"))
+                item.RF40HC = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RF40HC"));
+
+            if (reader.IsColumnExists("RF45"))
+                item.RF45 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RF45"));
+
+            if (reader.IsColumnExists("HAZ20"))
+                item.HAZ20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "HAZ20"));
+
+            if (reader.IsColumnExists("HAZ40"))
+                item.HAZ40 = Convert.ToDecimal(SqlHelper.GetNullableInt32(reader, "HAZ40"));
+
+            if (reader.IsColumnExists("HAZ40HC"))
+                item.HAZ40HC = Convert.ToDecimal(SqlHelper.GetBoolean(reader, "HAZ40HC"));
+
+            if (reader.IsColumnExists("HAZ45"))
+                item.HAZ45 = Convert.ToDecimal(SqlHelper.GetBoolean(reader, "HAZ45"));
+
+            if (reader.IsColumnExists("SEQ20"))
+                item.SEQ20 = Convert.ToDecimal(SqlHelper.GetBoolean(reader, "SEQ20"));
+
+            if (reader.IsColumnExists("SEQ40"))
+                item.SEQ40 = Convert.ToDecimal(SqlHelper.GetBoolean(reader, "SEQ40"));
+
+            return item;
+        }
+        public static DETENTION_MASTER TranslateAsDetentionMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new DETENTION_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            if (reader.IsColumnExists("CONTAINER_TYPE"))
+                item.CONTAINER_TYPE = SqlHelper.GetNullableString(reader, "CONTAINER_TYPE");
+
+            if (reader.IsColumnExists("CURRENCY"))
+                item.CURRENCY = SqlHelper.GetNullableString(reader, "CURRENCY");
+
+            if (reader.IsColumnExists("FROM_DAYS"))
+                item.FROM_DAYS = SqlHelper.GetNullableInt32(reader, "FROM_DAYS");
+
+            if (reader.IsColumnExists("TO_DAYS"))
+                item.TO_DAYS = SqlHelper.GetNullableInt32(reader, "TO_DAYS");
+
+            if (reader.IsColumnExists("20FT_RATE"))
+                item.RATE20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "20FT_RATE"));
+
+            if (reader.IsColumnExists("40FT_RATE"))
+                item.RATE40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "40FT_RATE"));
+
+            if (reader.IsColumnExists("HC_RATE"))
+                item.HC_RATE = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "HC_RATE"));
+
+            if (reader.IsColumnExists("CREATED_BY"))
+                item.CREATED_BY = SqlHelper.GetNullableString(reader, "CREATED_BY");
+
+            if (reader.IsColumnExists("CREATED_DATE"))
+                item.CREATED_DATE = SqlHelper.GetDateTime(reader, "CREATED_DATE");
+
+            return item;
+        }
+        public static MANDATORY_MASTER TranslateAsMandatoryMaster(this SqlDataReader reader, bool isList = false)
+        {
+            if (!isList)
+            {
+                if (!reader.HasRows)
+                    return null;
+                reader.Read();
+            }
+
+            var item = new MANDATORY_MASTER();
+
+            if (reader.IsColumnExists("ID"))
+                item.ID = SqlHelper.GetNullableInt32(reader, "ID");
+
+            if (reader.IsColumnExists("PORT_CODE"))
+                item.PORT_CODE = SqlHelper.GetNullableString(reader, "PORT_CODE");
+
+            if (reader.IsColumnExists("ORG_CODE"))
+                item.ORG_CODE = SqlHelper.GetNullableString(reader, "ORG_CODE");
+
+            if (reader.IsColumnExists("CHARGE_CODE"))
+                item.CHARGE_CODE = SqlHelper.GetNullableString(reader, "CHARGE_CODE");
+
+            if (reader.IsColumnExists("IE_TYPE"))
+                item.IE_TYPE = SqlHelper.GetNullableString(reader, "IE_TYPE");
+
+            if (reader.IsColumnExists("LADEN_STATUS"))
+                item.LADEN_STATUS = SqlHelper.GetNullableString(reader, "LADEN_STATUS");
+
+            if (reader.IsColumnExists("CURRENCY"))
+                item.CURRENCY = SqlHelper.GetNullableString(reader, "CURRENCY");
+
+            if (reader.IsColumnExists("RATE20"))
+                item.RATE20 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RATE20"));
+
+            if (reader.IsColumnExists("RATE40"))
+                item.RATE40 = Convert.ToDecimal(SqlHelper.GetNullableString(reader, "RATE40"));
+
+            if (reader.IsColumnExists("IS_PERCENTAGE"))
+                item.IS_PERCENTAGE = SqlHelper.GetBoolean(reader, "IS_PERCENTAGE");
+
+            if (reader.IsColumnExists("PERCENTAGE_VALUE"))
+                item.PERCENTAGE_VALUE = SqlHelper.GetNullableInt32(reader, "PERCENTAGE_VALUE");
+
+            return item;
+        }
         public static ORG_MASTER TranslateAsOrgMaster(this SqlDataReader reader, bool isList = false)
         {
             if (!isList)
