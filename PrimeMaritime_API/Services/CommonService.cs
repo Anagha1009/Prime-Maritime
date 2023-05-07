@@ -48,9 +48,9 @@ namespace PrimeMaritime_API.Services
 
             Response<List<DROPDOWN>> response = new Response<List<DROPDOWN>>();
 
-            var data = DbClientFactory<CommonRepo>.Instance.GetDropdownData(dbConn, key,port, value, value1, value2);
+            var data = DbClientFactory<CommonRepo>.Instance.GetDropdownData(dbConn, key, port, value, value1, value2);
 
-            if(data != null)
+            if (data != null)
             {
                 response.Succeeded = true;
                 response.ResponseMessage = "Success";
@@ -74,7 +74,44 @@ namespace PrimeMaritime_API.Services
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
             //email.Cc.Add(MailboxAddress.Parse(mailRequest.CC));
             email.Subject = mailRequest.Subject;
-            var builder = new BodyBuilder();       
+            var builder = new BodyBuilder();
+
+            if (mailRequest.Attachments != null)
+            {
+                byte[] fileBytes;
+                foreach (var file in mailRequest.Attachments)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            file.CopyTo(ms);
+                            fileBytes = ms.ToArray();
+                        }
+                        builder.Attachments.Add(file.FileName, fileBytes, ContentType.Parse(file.ContentType));
+                    }
+                }
+            }
+            builder.HtmlBody = mailRequest.Body;
+            email.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
+            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+            await smtp.SendAsync(email);
+            smtp.Disconnect(true);
+        }
+
+        public async Task SendEmailBLAsync(MailRequest mailRequest)
+        {
+            var email = new MimeMessage();
+            email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
+            foreach (var items in mailRequest.ToEmails)
+            {
+                email.To.Add(MailboxAddress.Parse(items));
+            }
+            //email.Cc.Add(MailboxAddress.Parse(mailRequest.CC));
+            email.Subject = mailRequest.Subject;
+            var builder = new BodyBuilder();
 
             if (mailRequest.Attachments != null)
             {

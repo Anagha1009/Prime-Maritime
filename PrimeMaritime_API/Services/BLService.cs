@@ -33,6 +33,19 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
+        public void InsertSurrender(string BL_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BLRepo>.Instance.InsertSurrender(dbConn, BL_NO);
+        }
+        public void InsertUploadedSurrender(string BL_NO)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            DbClientFactory<BLRepo>.Instance.InsertUploadedSurrender(dbConn, BL_NO);
+        }
+
         public Response<Organisation> GetOrgDetails(string ORG_CODE, string ORG_LOC_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -253,6 +266,30 @@ namespace PrimeMaritime_API.Services
 
             return response;
 
+        }
+
+        public Response<List<BL>> GetBLSurrenderedList(string POD, string ORG_CODE)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<BL>> response = new Response<List<BL>>();
+            var data = DbClientFactory<BLRepo>.Instance.GetBLSurrenderedList(dbConn, POD, ORG_CODE);
+
+            if (data != null)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
         }
 
         public Response<List<BL>> GetBLListPM()

@@ -40,6 +40,7 @@ namespace PrimeMaritime_API.Models
 		public string POD { get; set; }
 		public string CONTAINERS { get; set; }
 		public string COMMODITY { get; set; }
+		public string DESTINATION_AGENT { get; set; }
 		public List<CONTAINERS> CONTAINER_LIST { get; set; } = new List<CONTAINERS>();
 
 	}

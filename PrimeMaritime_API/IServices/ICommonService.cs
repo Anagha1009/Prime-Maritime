@@ -11,6 +11,7 @@ namespace PrimeMaritime_API.IServices
     {
         Response<List<DROPDOWN>> GetDropdownData(string key,string port, string value, int value1, string value2);
         Task SendEmailAsync(MailRequest mailRequest);
+        Task SendEmailBLAsync(MailRequest mailRequest);
         Response<int> CheckRandomNo(string RANDOM_NO);
     }
 }

@@ -82,6 +82,29 @@ namespace PrimeMaritime_API.Repository
 
             SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
+
+        public void InsertSurrender(string connstring, string BL_NO)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_SURRENDER" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 50) { Value = BL_NO },             
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
+        }
+
+        public void InsertUploadedSurrender(string connstring, string BL_NO)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_UPLOADED_SURRENDER" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 50) { Value = BL_NO },
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
+        }
+
         public DataSet GetBLData(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
@@ -170,6 +193,28 @@ namespace PrimeMaritime_API.Repository
                 {
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_HISTORY" },
                    new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<BL> blList = SqlHelper.CreateListFromTable<BL>(dataTable);
+                return blList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<BL> GetBLSurrenderedList(string connstring, string POD, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_SURRENDEREDLIST" },
+                   new SqlParameter("@POD", SqlDbType.VarChar, 20) { Value = POD },
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE }
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
