@@ -21,12 +21,12 @@ namespace PrimeMaritime_API.Services
             _config = config;
         }
 
-        public Response<List<CRO>> GetCROList(string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO)
+        public Response<List<CRO>> GetCROList(string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO, string ORG_CODE, string PORT)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<CRO>> response = new Response<List<CRO>>();
-            var data = DbClientFactory<CRORepo>.Instance.GetCROList(dbConn, AGENT_CODE,FROM_DATE,TO_DATE,CRO_NO);
+            var data = DbClientFactory<CRORepo>.Instance.GetCROList(dbConn, AGENT_CODE,FROM_DATE,TO_DATE,CRO_NO,ORG_CODE,PORT);
 
             if (data.Count > 0)
             {

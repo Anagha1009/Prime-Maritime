@@ -67,12 +67,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<BookingList>> GetBookingList(string AGENT_CODE, string BOOKING_NO, string FROM_DATE, string TO_DATE)
+        public Response<List<BookingList>> GetBookingList(string AGENT_CODE, string BOOKING_NO, string FROM_DATE, string TO_DATE, string ORG_CODE, string PORT)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<BookingList>> response = new Response<List<BookingList>>();
-            var data = DbClientFactory<BookingRepo>.Instance.GetBookingList(dbConn, AGENT_CODE, BOOKING_NO, FROM_DATE, TO_DATE);
+            var data = DbClientFactory<BookingRepo>.Instance.GetBookingList(dbConn, AGENT_CODE, BOOKING_NO, FROM_DATE, TO_DATE,ORG_CODE,PORT);
 
             if (data != null)
             {

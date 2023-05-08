@@ -77,9 +77,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetSRRList")]
-        public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
+        public ActionResult<Response<List<SRRList>>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE, string ORG_CODE, string PORT)
         {
-            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(OPERATION, SRR_NO, CUSTOMER_NAME, STATUS, FROMDATE, TODATE, AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_srrService.GetSRRList(OPERATION, SRR_NO, CUSTOMER_NAME, STATUS, FROMDATE, TODATE, AGENT_CODE,ORG_CODE,PORT)));
         }
 
         [HttpPost("InsertSRR")]

@@ -243,12 +243,12 @@ namespace PrimeMaritime_API.Services
             return response;
         }
 
-        public Response<List<BL>> GetBLHistory(string AGENT_CODE)
+        public Response<List<BL>> GetBLHistory(string AGENT_CODE, string ORG_CODE, string PORT)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<BL>> response = new Response<List<BL>>();
-            var data = DbClientFactory<BLRepo>.Instance.GetBLHistory(dbConn, AGENT_CODE);
+            var data = DbClientFactory<BLRepo>.Instance.GetBLHistory(dbConn, AGENT_CODE,ORG_CODE,PORT);
 
             if (data != null)
             {

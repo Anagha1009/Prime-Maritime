@@ -43,9 +43,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetBLHistory")]
-        public ActionResult<Response<List<BL>>> GetBLHistory(string AGENT_CODE)
+        public ActionResult<Response<List<BL>>> GetBLHistory(string AGENT_CODE, string ORG_CODE, string PORT)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE,ORG_CODE,PORT)));
         }
 
         [HttpGet("GetBLSurrenderedList")]

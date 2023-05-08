@@ -185,14 +185,16 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<BL> GetBLHistory(string connstring,string AGENT_CODE)
+        public List<BL> GetBLHistory(string connstring,string AGENT_CODE, string ORG_CODE, string PORT)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_HISTORY" },
-                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE }
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE },
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                   new SqlParameter("@PORT", SqlDbType.VarChar, 100) { Value = PORT }
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);

@@ -107,7 +107,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<string> InsertDestinationAgent(string DESTINATION_AGENT_CODE, string SRR_NO)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -121,7 +120,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<List<INVOICELIST>> GetInvoiceList(string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -145,7 +143,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<INVOICE> GetInvoiceDetails(string INVOICE_NO, string CONTAINER_TYPE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -196,7 +193,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -229,7 +225,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -254,7 +249,6 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
         public Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
@@ -314,13 +308,12 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-
-        public Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
+        public Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE, string ORG_CODE, string PORT)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
             Response<List<SRRList>> response = new Response<List<SRRList>>();
-            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn, OPERATION, SRR_NO, CUSTOMER_NAME, STATUS, FROMDATE, TODATE, AGENT_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetSRRList(dbConn, OPERATION, SRR_NO, CUSTOMER_NAME, STATUS, FROMDATE, TODATE, AGENT_CODE,ORG_CODE,PORT);
 
             if (data.Count > 0)
             {

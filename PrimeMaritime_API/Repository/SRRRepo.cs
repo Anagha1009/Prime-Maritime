@@ -76,7 +76,7 @@ namespace PrimeMaritime_API.Repository
             return SqlHelper.CreateListFromTable<T>(dataTable);
         }
 
-        public List<SRRList> GetSRRList(string connstring, string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE)
+        public List<SRRList> GetSRRList(string connstring, string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS, string FROMDATE, string TODATE, string AGENT_CODE, string ORG_CODE, string PORT)
         {
             try
             {
@@ -89,6 +89,8 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@FROMDATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(FROMDATE) ? null : Convert.ToDateTime(FROMDATE) },
                   new SqlParameter("@TODATE", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(TODATE) ? null : Convert.ToDateTime(TODATE) },
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                  new SqlParameter("@PORT", SqlDbType.VarChar, 100) { Value = PORT },
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_SRR", parameters);
