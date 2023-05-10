@@ -22,11 +22,11 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_CUSTOMER" },
-                  new SqlParameter("@CUST_NAME", SqlDbType.VarChar,50) { Value = master.CUST_NAME},
-                  new SqlParameter("@CUST_ADDRESS", SqlDbType.VarChar, 100) { Value = master.CUST_ADDRESS },
+                  new SqlParameter("@CUST_NAME", SqlDbType.VarChar,500) { Value = master.CUST_NAME},
+                  new SqlParameter("@CUST_ADDRESS", SqlDbType.VarChar, 500) { Value = master.CUST_ADDRESS },
                   new SqlParameter("@CUST_EMAIL", SqlDbType.VarChar, 50) { Value = master.CUST_EMAIL },
                   new SqlParameter("@CUST_CONTACT", SqlDbType.VarChar, 20) { Value = master.CUST_CONTACT },
-                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,10) { Value = master.CUST_TYPE },
+                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,100) { Value = master.CUST_TYPE },
                   new SqlParameter("@GSTIN", SqlDbType.VarChar,15) { Value = master.GSTIN },
                   new SqlParameter("@VAT_NO", SqlDbType.VarChar,30) { Value = master.VAT_NO },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
@@ -122,7 +122,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@CUST_ADDRESS", SqlDbType.VarChar, 100) { Value = master.CUST_ADDRESS },
                   new SqlParameter("@CUST_EMAIL", SqlDbType.VarChar, 50) { Value = master.CUST_EMAIL },
                   new SqlParameter("@CUST_CONTACT", SqlDbType.VarChar, 20) { Value = master.CUST_CONTACT },
-                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,10) { Value = master.CUST_TYPE },
+                  new SqlParameter("@CUST_TYPE", SqlDbType.VarChar,100) { Value = master.CUST_TYPE },
                   new SqlParameter("@GSTIN", SqlDbType.VarChar,15) { Value = master.GSTIN },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS},
                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = master.AGENT_CODE },
@@ -1315,14 +1315,14 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_LOCATION" },
-                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,500) { Value = master.LOC_NAME},
                   new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 50) { Value = master.LOC_CODE },
                   new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
                   new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
                   new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
                   new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
                   new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
-                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,255) { Value = master.ADDRESS },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,500) { Value = master.ADDRESS },
                   new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
                   new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
@@ -1337,7 +1337,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public List<LOCATION_MASTER> GetLocationMasterList(string dbConn, string LOC_NAME, string LOC_TYPE, bool STATUS, string FROM_DATE, string TO_DATE)
         {
             try
@@ -1362,7 +1361,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public LOCATION_MASTER GetLocationMasterDetails(string connstring, string LOC_CODE)
         {
             try
@@ -1381,7 +1379,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public void UpdateLocationMasterList(string connstring, LOCATION_MASTER master)
         {
             try
@@ -1389,13 +1386,14 @@ namespace PrimeMaritime_API.Repository
                 SqlParameter[] parameters =
                 {
                   new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_LOCATION" },
-                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,255) { Value = master.LOC_NAME},
+                  new SqlParameter("@LOC_NAME", SqlDbType.VarChar,500) { Value = master.LOC_NAME},
                   new SqlParameter("@LOC_CODE", SqlDbType.VarChar, 20) { Value = master.LOC_CODE },
                   new SqlParameter("@IS_DEPO", SqlDbType.Bit) { Value = master.IS_DEPO },
                   new SqlParameter("@IS_CFS", SqlDbType.Bit) { Value = master.IS_CFS },
                   new SqlParameter("@IS_TERMINAL", SqlDbType.Bit) { Value = master.IS_TERMINAL },
                   new SqlParameter("@IS_YARD", SqlDbType.Bit) { Value = master.IS_YARD },
                   new SqlParameter("@IS_ICD", SqlDbType.Bit) { Value = master.IS_ICD },
+                  new SqlParameter("@ADDRESS", SqlDbType.VarChar,500) { Value = master.ADDRESS },
                   new SqlParameter("@PORT_CODE", SqlDbType.VarChar,255) { Value = master.PORT_CODE },
                   new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar,20) { Value = master.COUNTRY_CODE },
                   new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
@@ -1408,7 +1406,6 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
-
         public void DeleteLocationMaster(string connstring, string LOC_CODE)
         {
             try
@@ -1420,6 +1417,901 @@ namespace PrimeMaritime_API.Repository
                 };
 
                 SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_LOCATION_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "FREIGHT MASTER"
+        public void InsertFreightMaster(string connstring, FREIGHT_MASTER master)
+        {
+            try
+            {
+                if (master.CHARGELIST.Count > 0)
+                {
+                    foreach (var i in master.CHARGELIST)
+                    {
+                        SqlParameter[] param1 =
+                        {
+                           new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_CHARGE" },
+                           new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                           new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                           new SqlParameter("@IMPCOST20", SqlDbType.Decimal) { Value = i.IMPCOST20 },
+                           new SqlParameter("@IMPCOST40", SqlDbType.Decimal) { Value = i.IMPCOST40 },
+                           new SqlParameter("@IMPREVENUE20", SqlDbType.Decimal) { Value = i.IMPINCOME20 },
+                           new SqlParameter("@IMPREVENUE40", SqlDbType.Decimal) { Value = i.IMPINCOME40 },
+                           new SqlParameter("@EXPCOST20", SqlDbType.Decimal) { Value = i.EXPCOST20 },
+                           new SqlParameter("@EXPCOST40", SqlDbType.Decimal) { Value = i.EXPCOST40 },
+                           new SqlParameter("@EXPREVENUE20", SqlDbType.Decimal) { Value = i.EXPINCOME20 },
+                           new SqlParameter("@EXPREVENUE40", SqlDbType.Decimal) { Value = i.EXPINCOME40 },
+                           new SqlParameter("@Currency", SqlDbType.VarChar,10) { Value = i.CURRENCY },
+                           new SqlParameter("@FROM_VAL", SqlDbType.Int) { Value = i.FROM_VAL },
+                           new SqlParameter("@TO_VAL", SqlDbType.Int) { Value = i.TO_VAL },
+                        };
+
+                        SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", param1);
+                    }
+                }
+                else
+                {
+                    SqlParameter[] parameters =
+                    {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_FREIGHT" },
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = master.POL},
+                      new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = master.POD },
+                      new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = master.Charge },
+                      new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = master.Currency },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = master.LadenStatus },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = master.ServiceMode },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = master.DRY20 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<FREIGHT_MASTER> GetFreightMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_FREIGHTLIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CHARGE_MASTER", parameters);
+                List<FREIGHT_MASTER> master = SqlHelper.CreateListFromTable<FREIGHT_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public FREIGHT_MASTER GetFreightMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_FREIGHTDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<FREIGHT_MASTER>(connstring, "SP_CRUD_CHARGE_MASTER", r => r.TranslateAsFreightMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateFreightMasterList(string connstring, FREIGHT_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_FREIGHT" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID },
+                  new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = master.POL},
+                  new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = master.POD },
+                  new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = master.Charge },
+                  new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = master.Currency },
+                  new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = master.LadenStatus },
+                  new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = master.ServiceMode },
+                  new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = master.DRY20 },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteFreightMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_FREIGHT" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "CHARGE MASTER"
+        public List<CHARGE_MASTER> GetChargeMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_CHARGELIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CHARGE_MASTER", parameters);
+                List<CHARGE_MASTER> master = SqlHelper.CreateListFromTable<CHARGE_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public CHARGE_MASTER GetChargeMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_CHARGEDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<CHARGE_MASTER>(connstring, "SP_CRUD_CHARGE_MASTER", r => r.TranslateAsChargeMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateChargeMasterList(string connstring, CHARGE_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_CHARGE" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID },
+                  new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = master.POL},
+                  new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = master.CHARGE_CODE },
+                  new SqlParameter("@Currency", SqlDbType.VarChar,100) { Value = master.CURRENCY },
+                  new SqlParameter("@IMPCOST20", SqlDbType.Decimal) { Value = master.IMPCOST20 },
+                  new SqlParameter("@IMPCOST40", SqlDbType.Decimal) { Value = master.IMPCOST40 },
+                  new SqlParameter("@IMPREVENUE20", SqlDbType.Decimal) { Value = master.IMPINCOME20 },
+                  new SqlParameter("@IMPREVENUE40", SqlDbType.Decimal) { Value = master.IMPINCOME40 },
+                  new SqlParameter("@EXPCOST20", SqlDbType.Decimal) { Value = master.EXPCOST20 },
+                  new SqlParameter("@EXPCOST40", SqlDbType.Decimal) { Value = master.EXPCOST40 },
+                  new SqlParameter("@EXPREVENUE20", SqlDbType.Decimal) { Value = master.EXPINCOME20 },
+                  new SqlParameter("@EXPREVENUE40", SqlDbType.Decimal) { Value = master.EXPINCOME40 },
+                  new SqlParameter("@FROM_VAL", SqlDbType.Int) { Value = master.FROM_VAL },
+                  new SqlParameter("@TO_VAL", SqlDbType.Int) { Value = master.TO_VAL },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteChargeMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_CHARGE" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "STEVEDORING MASTER"
+        public List<STEV_MASTER> GetStevedoringMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_STEVLIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CHARGE_MASTER", parameters);
+                List<STEV_MASTER> master = SqlHelper.CreateListFromTable<STEV_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public STEV_MASTER GetStevedoringMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_STEVDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<STEV_MASTER>(connstring, "SP_CRUD_CHARGE_MASTER", r => r.TranslateAsStevMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateStevedoringMasterList(string connstring, STEV_MASTER i)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_STEV" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = i.ID},
+                  new SqlParameter("@IE_TYPE", SqlDbType.VarChar,255) { Value = i.IE_TYPE},
+                  new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                  new SqlParameter("@TERMINAL", SqlDbType.VarChar, 255) { Value = i.TERMINAL },
+                  new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                  new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                  new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                  new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = i.SERVICE_MODE },
+                  new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = i.DRY20 },
+                  new SqlParameter("@DRY40", SqlDbType.Decimal) { Value = i.DRY40 },
+                  new SqlParameter("@DRY40HC", SqlDbType.Decimal) { Value = i.DRY40HC },
+                  new SqlParameter("@DRY45", SqlDbType.Decimal) { Value = i.DRY45 },
+                  new SqlParameter("@RF20", SqlDbType.Decimal) { Value = i.RF20 },
+                  new SqlParameter("@RF40", SqlDbType.Decimal) { Value = i.RF40 },
+                  new SqlParameter("@RF40HC", SqlDbType.Decimal) { Value = i.RF40HC },
+                  new SqlParameter("@RF45", SqlDbType.Decimal) { Value = i.RF45 },
+                  new SqlParameter("@HAZ20", SqlDbType.Decimal) { Value = i.HAZ20 },
+                  new SqlParameter("@HAZ40", SqlDbType.Decimal) { Value = i.HAZ40 },
+                  new SqlParameter("@HAZ40HC", SqlDbType.Decimal) { Value = i.HAZ40HC },
+                  new SqlParameter("@HAZ45", SqlDbType.Decimal) { Value = i.HAZ45 },
+                  new SqlParameter("@SEQ20", SqlDbType.Decimal) { Value = i.SEQ20 },
+                  new SqlParameter("@SEQ40", SqlDbType.Decimal) { Value = i.SEQ40 },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteStevedoringMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_STEV" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "DETENTION MASTER"
+        public List<DETENTION_MASTER> GetDetentionMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_DETENTIONLIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CHARGE_MASTER", parameters);
+                List<DETENTION_MASTER> master = SqlHelper.CreateListFromTable<DETENTION_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DETENTION_MASTER GetDetentionMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_DETENTIONDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<DETENTION_MASTER>(connstring, "SP_CRUD_CHARGE_MASTER", r => r.TranslateAsDetentionMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateDetentionMasterList(string connstring, DETENTION_MASTER i)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_DETENTION" },
+                    new SqlParameter("@ID", SqlDbType.Int) { Value = i.ID },
+                    new SqlParameter("@PORT_CODE", SqlDbType.VarChar,50) { Value = i.PORT_CODE},
+                    new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,20) { Value = i.CONTAINER_TYPE},
+                    new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                    new SqlParameter("@FROM_DAYS", SqlDbType.Int) { Value = i.FROM_DAYS },
+                    new SqlParameter("@TO_DAYS", SqlDbType.Int) { Value = i.TO_DAYS },
+                    new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                    new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                    new SqlParameter("@HC_RATE", SqlDbType.Decimal) { Value = i.HC_RATE },
+                    new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = i.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteDetentionMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_DETENTION" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "MANDATORY MASTER"
+        public List<MANDATORY_MASTER> GetMandatoryMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_MANDATORYLIST" },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_CHARGE_MASTER", parameters);
+                List<MANDATORY_MASTER> master = SqlHelper.CreateListFromTable<MANDATORY_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public MANDATORY_MASTER GetMandatoryMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_MANDATORYDETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<MANDATORY_MASTER>(connstring, "SP_CRUD_CHARGE_MASTER", r => r.TranslateAsMandatoryMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateMandatoryMasterList(string connstring, MANDATORY_MASTER i)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                    new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_MANDATORY" },
+                    new SqlParameter("@ID", SqlDbType.Int) { Value = i.ID },
+                    new SqlParameter("@ORG_CODE", SqlDbType.VarChar,50) { Value = i.ORG_CODE},
+                    new SqlParameter("@PORT_CODE", SqlDbType.VarChar,100) { Value = i.PORT_CODE},
+                    new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE},
+                    new SqlParameter("@IE_TYPE", SqlDbType.VarChar, 50) { Value = i.IE_TYPE },
+                    new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                    new SqlParameter("@CURRENCY", SqlDbType.VarChar,50) { Value = i.CURRENCY },
+                    new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                    new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                    new SqlParameter("@IS_PERCENTAGE", SqlDbType.Bit) { Value = i.IS_PERCENTAGE },
+                    new SqlParameter("@PERCENTAGE_VALUE", SqlDbType.Int) { Value = i.PERCENTAGE_VALUE },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteMandatoryMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_MANDATORY" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "UPLOAD TARIFF"
+        public void UploadFreightTariff(string connstring, List<FREIGHT_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                    {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_FREIGHT" },
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                      new SqlParameter("@POD", SqlDbType.VarChar, 100) { Value = i.POD },
+                      new SqlParameter("@Charge", SqlDbType.VarChar,100) { Value = i.Charge },
+                      new SqlParameter("@Currency", SqlDbType.VarChar, 10) { Value = i.Currency },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LadenStatus },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = i.ServiceMode },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = i.DRY20 },
+                      new SqlParameter("@DRY40", SqlDbType.Decimal) { Value = i.DRY40 },
+                      new SqlParameter("@DRY40HC", SqlDbType.Decimal) { Value = i.DRY40HC },
+                      new SqlParameter("@DRY45", SqlDbType.Decimal) { Value = i.DRY45 },
+                      new SqlParameter("@RF20", SqlDbType.Decimal) { Value = i.RF20 },
+                      new SqlParameter("@RF40", SqlDbType.Decimal) { Value = i.RF40 },
+                      new SqlParameter("@RF40HC", SqlDbType.Decimal) { Value = i.RF40HC },
+                      new SqlParameter("@RF45", SqlDbType.Decimal) { Value = i.RF45 },
+                      new SqlParameter("@HAZ20", SqlDbType.Decimal) { Value = i.HAZ20 },
+                      new SqlParameter("@HAZ40", SqlDbType.Decimal) { Value = i.HAZ40 },
+                      new SqlParameter("@HAZ40HC", SqlDbType.Decimal) { Value = i.HAZ40HC },
+                      new SqlParameter("@HAZ45", SqlDbType.Decimal) { Value = i.HAZ45 },
+                      new SqlParameter("@SEQ20", SqlDbType.Decimal) { Value = i.SEQ20 },
+                      new SqlParameter("@SEQ40", SqlDbType.Decimal) { Value = i.SEQ40 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadChargeTariff(string connstring, List<CHARGE_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                    {
+                        new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_CHARGE" },
+                        new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                        new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                        new SqlParameter("@IMPCOST20", SqlDbType.Decimal) { Value = i.IMPCOST20 },
+                        new SqlParameter("@IMPCOST40", SqlDbType.Decimal) { Value = i.IMPCOST40 },
+                        new SqlParameter("@IMPREVENUE20", SqlDbType.Decimal) { Value = i.IMPINCOME20 },
+                        new SqlParameter("@IMPREVENUE40", SqlDbType.Decimal) { Value = i.IMPINCOME40 },
+                        new SqlParameter("@EXPCOST20", SqlDbType.Decimal) { Value = i.EXPCOST20 },
+                        new SqlParameter("@EXPCOST40", SqlDbType.Decimal) { Value = i.EXPCOST40 },
+                        new SqlParameter("@EXPREVENUE20", SqlDbType.Decimal) { Value = i.EXPINCOME20 },
+                        new SqlParameter("@EXPREVENUE40", SqlDbType.Decimal) { Value = i.EXPINCOME40 },
+                        new SqlParameter("@Currency", SqlDbType.VarChar,10) { Value = i.CURRENCY },
+                        new SqlParameter("@FROM_VAL", SqlDbType.Int) { Value = i.FROM_VAL },
+                        new SqlParameter("@TO_VAL", SqlDbType.Int) { Value = i.TO_VAL },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadStevTariff(string connstring, List<STEV_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_STEV" },
+                      new SqlParameter("@IE_TYPE", SqlDbType.VarChar,255) { Value = i.IE_TYPE},
+                      new SqlParameter("@POL", SqlDbType.VarChar,100) { Value = i.POL},
+                      new SqlParameter("@TERMINAL", SqlDbType.VarChar, 255) { Value = i.TERMINAL },
+                      new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE },
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                      new SqlParameter("@ServiceMode", SqlDbType.VarChar,20) { Value = i.SERVICE_MODE },
+                      new SqlParameter("@DRY20", SqlDbType.Decimal) { Value = i.DRY20 },
+                      new SqlParameter("@DRY40", SqlDbType.Decimal) { Value = i.DRY40 },
+                      new SqlParameter("@DRY40HC", SqlDbType.Decimal) { Value = i.DRY40HC },
+                      new SqlParameter("@DRY45", SqlDbType.Decimal) { Value = i.DRY45 },
+                      new SqlParameter("@RF20", SqlDbType.Decimal) { Value = i.RF20 },
+                      new SqlParameter("@RF40", SqlDbType.Decimal) { Value = i.RF40 },
+                      new SqlParameter("@RF40HC", SqlDbType.Decimal) { Value = i.RF40HC },
+                      new SqlParameter("@RF45", SqlDbType.Decimal) { Value = i.RF45 },
+                      new SqlParameter("@HAZ20", SqlDbType.Decimal) { Value = i.HAZ20 },
+                      new SqlParameter("@HAZ40", SqlDbType.Decimal) { Value = i.HAZ40 },
+                      new SqlParameter("@HAZ40HC", SqlDbType.Decimal) { Value = i.HAZ40HC },
+                      new SqlParameter("@HAZ45", SqlDbType.Decimal) { Value = i.HAZ45 },
+                      new SqlParameter("@SEQ20", SqlDbType.Decimal) { Value = i.SEQ20 },
+                      new SqlParameter("@SEQ40", SqlDbType.Decimal) { Value = i.SEQ40 },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadDetentionTariff(string connstring, List<DETENTION_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_DETENTION" },
+                      new SqlParameter("@PORT_CODE", SqlDbType.VarChar,50) { Value = i.PORT_CODE},
+                      new SqlParameter("@CONTAINER_TYPE", SqlDbType.VarChar,20) { Value = i.CONTAINER_TYPE},
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar, 10) { Value = i.CURRENCY },
+                      new SqlParameter("@FROM_DAYS", SqlDbType.Int) { Value = i.FROM_DAYS },
+                      new SqlParameter("@TO_DAYS", SqlDbType.Int) { Value = i.TO_DAYS },
+                      new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                      new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                      new SqlParameter("@HC_RATE", SqlDbType.Decimal) { Value = i.HC_RATE },
+                      new SqlParameter("@CREATED_BY", SqlDbType.VarChar,255) { Value = i.CREATED_BY },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void UploadMandatoryTariff(string connstring, List<MANDATORY_MASTER> master)
+        {
+            try
+            {
+                foreach (var i in master)
+                {
+                    SqlParameter[] parameters =
+                   {
+                      new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_MANDATORY" },
+                      new SqlParameter("@ORG_CODE", SqlDbType.VarChar,50) { Value = i.ORG_CODE},
+                      new SqlParameter("@PORT_CODE", SqlDbType.VarChar,100) { Value = i.PORT_CODE},
+                      new SqlParameter("@CHARGE_CODE", SqlDbType.VarChar,100) { Value = i.CHARGE_CODE},
+                      new SqlParameter("@IE_TYPE", SqlDbType.VarChar, 50) { Value = i.IE_TYPE },
+                      new SqlParameter("@LadenStatus", SqlDbType.Char,1) { Value = i.LADEN_STATUS },
+                      new SqlParameter("@CURRENCY", SqlDbType.VarChar,50) { Value = i.CURRENCY },
+                      new SqlParameter("@RATE20", SqlDbType.Decimal) { Value = i.RATE20 },
+                      new SqlParameter("@RATE40", SqlDbType.Decimal) { Value = i.RATE40 },
+                      new SqlParameter("@IS_PERCENTAGE", SqlDbType.Bit) { Value = i.IS_PERCENTAGE },
+                      new SqlParameter("@PERCENTAGE_VALUE", SqlDbType.Int) { Value = i.PERCENTAGE_VALUE },
+                    };
+
+                    SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_CHARGE_MASTER", parameters);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region "ORGANISATION MASTER"
+        public void InsertOrgMaster(string connstring, ORG_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+               {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_ORG" },
+                  new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = master.ORG_CODE },
+                  new SqlParameter("@ORG_LOCATION", SqlDbType.VarChar, 100) { Value = master.ORG_LOCATION },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = master.ORG_LOC_CODE },
+                  new SqlParameter("@ORG_ADDRESS1", SqlDbType.VarChar, 255) { Value = master.ORG_ADDRESS1 },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = master.EMAIL },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 50) { Value = master.CONTACT },
+                  new SqlParameter("@FAX", SqlDbType.VarChar, 50) { Value = master.FAX },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public string ValidateOrgCode(string connstring, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "VALIDATE_ORG_CODE" },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = ORG_CODE },
+                };
+
+                return SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<ORG_MASTER> GetOrgMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_ORG_LIST" }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_ORGANISATION", parameters);
+                List<ORG_MASTER> master = SqlHelper.CreateListFromTable<ORG_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public ORG_MASTER GetOrgMasterDetails(string connstring, string ORG_CODE, string ORG_LOC_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                   new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = ORG_LOC_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_ORG_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<ORG_MASTER>(connstring, "SP_CRUD_ORGANISATION", r => r.TranslateAsOrgMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateOrgMasterList(string connstring, ORG_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,255) { Value = "UPDATE_ORG" },
+                  new SqlParameter("@ORG_NAME", SqlDbType.VarChar,255) { Value = master.ORG_NAME},
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 50) { Value = master.ORG_CODE },
+                  new SqlParameter("@ORG_LOCATION", SqlDbType.VarChar, 100) { Value = master.ORG_LOCATION },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar, 100) { Value = master.ORG_LOC_CODE },
+                  new SqlParameter("@ORG_ADDRESS1", SqlDbType.VarChar, 255) { Value = master.ORG_ADDRESS1 },
+                  new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = master.EMAIL },
+                  new SqlParameter("@CONTACT", SqlDbType.VarChar, 50) { Value = master.CONTACT },
+                  new SqlParameter("@FAX", SqlDbType.VarChar, 50) { Value = master.FAX },
+                  new SqlParameter("@COUNTRY_CODE", SqlDbType.VarChar, 10) { Value = master.COUNTRY_CODE },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteOrgMaster(string connstring, string ORG_CODE,string ORG_LOC_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar,20) { Value = ORG_CODE },
+                  new SqlParameter("@ORG_LOC_CODE", SqlDbType.VarChar,100) { Value = ORG_LOC_CODE },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_ORG" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_ORGANISATION", parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #endregion
+
+        #region "SLOT MASTER"
+        public void InsertSlotMaster(string connstring, SLOT_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_SLOT" },
+                  new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar,255) { Value = master.SLOT_OPERATOR},
+                  new SqlParameter("@SERVICES", SqlDbType.VarChar, 100) { Value = master.SERVICES },
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar, 100) { Value = master.LINER_CODE },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = master.PORT_CODE },
+                  new SqlParameter("@TERM", SqlDbType.VarChar, 50) { Value = master.TERM },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public List<SLOT_MASTER> GetSlotMasterList(string dbConn)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_SLOT_LIST" }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(dbConn, "SP_CRUD_SLOT", parameters);
+                List<SLOT_MASTER> master = SqlHelper.CreateListFromTable<SLOT_MASTER>(dataTable);
+
+                return master;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public SLOT_MASTER GetSlotMasterDetails(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "GET_SLOT_DETAILS" }
+                };
+
+                return SqlHelper.ExtecuteProcedureReturnData<SLOT_MASTER>(connstring, "SP_CRUD_SLOT", r => r.TranslateAsSlotMaster(), parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateSlotMasterList(string connstring, SLOT_MASTER master)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "UPDATE_SLOT" },
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = master.ID},
+                  new SqlParameter("@SLOT_OPERATOR", SqlDbType.VarChar,255) { Value = master.SLOT_OPERATOR},
+                  new SqlParameter("@SERVICES", SqlDbType.VarChar, 100) { Value = master.SERVICES },
+                  new SqlParameter("@LINER_CODE", SqlDbType.VarChar, 100) { Value = master.LINER_CODE },
+                  new SqlParameter("@PORT_CODE", SqlDbType.VarChar, 100) { Value = master.PORT_CODE },
+                  new SqlParameter("@TERM", SqlDbType.VarChar, 50) { Value = master.TERM },
+                  new SqlParameter("@STATUS", SqlDbType.Bit) { Value = master.STATUS },
+                  new SqlParameter("@CREATED_BY", SqlDbType.VarChar,50) { Value = master.CREATED_BY },
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public void DeleteSlotMaster(string connstring, int ID)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@ID", SqlDbType.Int) { Value = ID },
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 20) { Value = "DELETE_SLOT" }
+                };
+
+                SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_SLOT", parameters);
             }
             catch (Exception)
             {

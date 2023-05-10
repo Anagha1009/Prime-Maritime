@@ -23,6 +23,7 @@ namespace PrimeMaritime_API.Models
         public decimal APPROVED_RATE { get; set; }
         public string STATUS { get; set; }
         public string REMARKS { get; set; }
+        public string AGENT_REMARKS { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }
         public string UPDATED_BY { get; set; }

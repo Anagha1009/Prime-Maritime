@@ -27,6 +27,7 @@ namespace PrimeMaritime_API.Models
         public string PAYMENT_TERM { get; set; } = null;
         public string TRANSPORT_TYPE { get; set; } = null;
         public string CONTAINER_TYPE { get; set; }
+        public string AGENT_REMARKS { get; set; }
     }
 
     public class SRR_RATE_LIST

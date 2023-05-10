@@ -28,5 +28,6 @@ namespace PrimeMaritime_API.Response
         public string COMMODITY { get; set; }
         public string CURRENCY { get; set; }
         public int BOOKINGS { get; set; }
+        public int NO_OF_SLOTS { get; set; }
     }
 }

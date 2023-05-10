@@ -61,7 +61,7 @@ namespace PrimeMaritime_API.Repository
                 
             }
 
-            string[] columns = new string[14];
+            string[] columns = new string[17];
             columns[0] = "BL_NO";
             columns[1] = "BOOKING_NO";
             columns[2] = "CRO_NO";
@@ -71,14 +71,40 @@ namespace PrimeMaritime_API.Repository
             columns[6] = "SEAL_NO";
             columns[7] = "MARKS_NOS";
             columns[8] = "DESC_OF_GOODS";
-            columns[9] = "GROSS_WEIGHT";
-            columns[10] = "MEASUREMENT";
-            columns[11] = "AGENT_CODE";
-            columns[12] = "AGENT_NAME";
-            columns[13] = "CREATED_BY";
+            columns[9] = "PKG_COUNT";
+            columns[10] = "PKG_DESC";
+            columns[11] = "GROSS_WEIGHT";
+            columns[12] = "NET_WEIGHT";
+            columns[13] = "MEASUREMENT";
+            columns[14] = "AGENT_CODE";
+            columns[15] = "AGENT_NAME";
+            columns[16] = "CREATED_BY";
 
             SqlHelper.UpdateData<CONTAINERS>(request.CONTAINER_LIST, "TB_CONTAINER", connstring, columns);
         }
+
+        public void InsertSurrender(string connstring, string BL_NO)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_SURRENDER" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 50) { Value = BL_NO },             
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
+        }
+
+        public void InsertUploadedSurrender(string connstring, string BL_NO)
+        {
+            SqlParameter[] parameters =
+            {
+              new SqlParameter("@OPERATION", SqlDbType.VarChar,50) { Value = "INSERT_UPLOADED_SURRENDER" },
+              new SqlParameter("@BL_NO", SqlDbType.VarChar, 50) { Value = BL_NO },
+            };
+
+            SqlHelper.ExecuteProcedureReturnString(connstring, "SP_CRUD_BL", parameters);
+        }
+
         public DataSet GetBLData(string connstring, string BL_NO, string BOOKING_NO, string AGENT_CODE)
         {
             SqlParameter[] parameters =
@@ -137,15 +163,19 @@ namespace PrimeMaritime_API.Repository
                     i.DESC_OF_GOODS = request.DESC_OF_GOODS;
                 }
 
-             string[] columns = new string[8];
-                columns[0] = "BL_NO";   
+                string[] columns = new string[12];
+                columns[0] = "BL_NO";
                 columns[1] = "CONTAINER_NO";
                 columns[2] = "CONTAINER_TYPE";
                 columns[3] = "SEAL_NO";
                 columns[4] = "MARKS_NOS";
                 columns[5] = "DESC_OF_GOODS";
-                columns[6] = "GROSS_WEIGHT";
-                columns[7] = "MEASUREMENT";
+                columns[6] = "PKG_COUNT";
+                columns[7] = "PKG_DESC";
+                columns[8] = "GROSS_WEIGHT";
+                columns[9] = "NET_WEIGHT";
+                columns[10] = "MEASUREMENT";
+                columns[11] = "AGENT_SEAL_NO";
 
                 SqlHelper.UpdateContainerDataForBL<CONTAINERS>(request.CONTAINER_LIST2, "TB_CONTAINER", connstring, columns);
 
@@ -156,14 +186,38 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<BL> GetBLHistory(string connstring,string AGENT_CODE)
+        public List<BL> GetBLHistory(string connstring,string AGENT_CODE, string ORG_CODE, string PORT)
         {
             try
             {
                 SqlParameter[] parameters =
                 {
                    new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_HISTORY" },
-                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE }
+                   new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 20) { Value = AGENT_CODE },
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                   new SqlParameter("@PORT", SqlDbType.VarChar, 100) { Value = PORT }
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);
+                List<BL> blList = SqlHelper.CreateListFromTable<BL>(dataTable);
+                return blList;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<BL> GetBLSurrenderedList(string connstring, string POD, string ORG_CODE)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                   new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_BL_SURRENDEREDLIST" },
+                   new SqlParameter("@POD", SqlDbType.VarChar, 20) { Value = POD },
+                   new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE }
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_BL", parameters);

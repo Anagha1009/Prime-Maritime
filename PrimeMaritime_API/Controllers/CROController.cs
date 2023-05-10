@@ -26,9 +26,9 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetCROList")]
-        public ActionResult<Response<List<CRO>>> GetCROList(string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO)
+        public ActionResult<Response<List<CRO>>> GetCROList(string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO, string ORG_CODE, string PORT)
         {
-            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(AGENT_CODE,FROM_DATE,TO_DATE,CRO_NO)));
+            return Ok(JsonConvert.SerializeObject(_cROService.GetCROList(AGENT_CODE,FROM_DATE,TO_DATE,CRO_NO,ORG_CODE,PORT)));
         }
 
         [HttpGet("GetCROListPM")]

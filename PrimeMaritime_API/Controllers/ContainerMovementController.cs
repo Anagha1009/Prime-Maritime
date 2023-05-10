@@ -69,6 +69,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(JsonConvert.SerializeObject(_cmService.GetAllContainerListForDepo(DEPO_CODE)));
         }
 
+        [HttpGet("GetAllContainerListForAdmin")] //ANAGHA
+        public ActionResult<Response<List<CM>>> GetAllContainerListForAdmin(string LOCATION)
+        {
+            return Ok(JsonConvert.SerializeObject(_cmService.GetAllContainerListForAdmin(LOCATION)));
+        }
+
         [HttpPost("ValidContainer")] //ANAGHA
         public ActionResult<Response<CommonResponse>> ValidContainer(string CONTAINER_NO)
         {

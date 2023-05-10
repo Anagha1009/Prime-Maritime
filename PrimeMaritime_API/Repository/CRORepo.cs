@@ -50,7 +50,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public List<CRO> GetCROList(string connstring, string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO)
+        public List<CRO> GetCROList(string connstring, string AGENT_CODE, string FROM_DATE, string TO_DATE, string CRO_NO, string ORG_CODE, string PORT)
         {
             try
             {
@@ -61,6 +61,8 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@FROM_DATE", SqlDbType.DateTime) { Value = FROM_DATE },
                   new SqlParameter("@TO_DATE", SqlDbType.DateTime) { Value = TO_DATE },
                   new SqlParameter("@CRO_NO", SqlDbType.VarChar,100) { Value = CRO_NO },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar,20) { Value = ORG_CODE },
+                  new SqlParameter("@PORT", SqlDbType.VarChar,100) { Value = PORT },
                 };
 
                 DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_CRO", parameters);

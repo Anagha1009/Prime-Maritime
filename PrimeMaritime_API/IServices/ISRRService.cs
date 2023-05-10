@@ -13,7 +13,7 @@ namespace PrimeMaritime_API.IServices
     {
         Response<SRR> GetSRRBySRRNo(string SRR_NO, string AGENT_CODE);
         Response<string> GetRate(string POL, string POD, string CHARGE, string CONT_TYPE);
-        Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS,string FROMDATE,string TODATE, string AGENT_CODE);
+        Response<List<SRRList>> GetSRRList(string OPERATION, string SRR_NO, string CUSTOMER_NAME, string STATUS,string FROMDATE,string TODATE, string AGENT_CODE, string ORG_CODE, string PORT);
         Response<string> InsertSRR(SRRRequest sRRRequest);
         Response<string> UpdateSRR(List<SRR_RATES> request);
         Response<string> InsertContainer(List<SRR_CONTAINERS> request);
@@ -25,7 +25,8 @@ namespace PrimeMaritime_API.IServices
         Response<INVOICE> GetInvoiceDetails(string INVOICE_NO, string CONTAINER_TYPE);        
         Response<List<INVOICELIST>> GetInvoiceList(string INVOICE_NO, string FROM_DATE, string TO_DATE, string AGENT_CODE);
         Response<SRR_RATE_LIST> GetSRRRateList(string POL, string POD, string CONTAINER_TYPE, int NO_OF_CONTAINERS);
-        Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE);
+        Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE, string ORG_CODE, string PORT);
+        Response<List<EXC_RATE>> GetExcRateList(string ORG_CODE, string PORT);
         Response<string> InsertExcRate(List<EXC_RATE> excRateList);
     }
 }

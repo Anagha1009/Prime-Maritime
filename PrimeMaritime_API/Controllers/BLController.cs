@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace PrimeMaritime_API.Controllers
 {
@@ -19,9 +21,13 @@ namespace PrimeMaritime_API.Controllers
     public class BLController : ControllerBase
     {
         private IBLService _blService;
-        public BLController(IBLService blService)
+        private ICommonService _commonService;
+        private readonly IWebHostEnvironment _environment;
+        public BLController(IBLService blService, IWebHostEnvironment environment, ICommonService commonService)
         {
             _blService = blService;
+            _environment = environment;
+            _commonService = commonService;
         }
 
         [HttpPost("InsertBL")]
@@ -37,9 +43,15 @@ namespace PrimeMaritime_API.Controllers
         }
 
         [HttpGet("GetBLHistory")]
-        public ActionResult<Response<List<BL>>> GetBLHistory(string AGENT_CODE)
+        public ActionResult<Response<List<BL>>> GetBLHistory(string AGENT_CODE, string ORG_CODE, string PORT)
         {
-            return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE)));
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLHistory(AGENT_CODE,ORG_CODE,PORT)));
+        }
+
+        [HttpGet("GetBLSurrenderedList")]
+        public ActionResult<Response<List<BL>>> GetBLSurrenderedList(string POD, string ORG_CODE)
+        {
+            return Ok(JsonConvert.SerializeObject(_blService.GetBLSurrenderedList(POD,ORG_CODE)));
         }
 
         [HttpGet("GetBLFORMERGE")]
@@ -72,6 +84,12 @@ namespace PrimeMaritime_API.Controllers
             return Ok(_blService.UpdateBL(request));
         }
 
+        [HttpGet("InsertSurrender")]
+        public void InsertSurrender(string BL_NO)
+        {
+            _blService.InsertSurrender(BL_NO);
+        }
+
         [HttpGet("GetBLListPM")]
         public ActionResult<Response<List<BL>>> GetBLListPM()
         {
@@ -83,5 +101,88 @@ namespace PrimeMaritime_API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(_blService.GetOrgDetails(ORG_CODE, ORG_LOC_CODE)));
         }
+
+        [HttpPost("UploadBLFiles")]
+        public async Task<IActionResult> UploadBLFiles(string BL_NO, [FromForm] MailRequest request)
+        {
+            try
+            {
+                await _commonService.SendEmailBLAsync(request);
+                string upload = Path.Combine(_environment.ContentRootPath, "Uploads");
+
+                if (!Directory.Exists(upload))
+                {
+                    Directory.CreateDirectory(upload);
+                }
+
+                string path = Path.Combine(_environment.ContentRootPath, "Uploads", "BLFiles");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                List<string> uploadedFiles = new List<string>();
+                foreach (IFormFile postedFile in Request.Form.Files)
+                {
+                    string fileName = Path.GetFileName(BL_NO + "_" + postedFile.FileName);
+                    using (FileStream stream = new FileStream(Path.Combine(_environment.ContentRootPath, path, fileName), FileMode.Create))
+                    {
+                        postedFile.CopyTo(stream);
+                        uploadedFiles.Add(fileName);
+                    }
+                }
+
+                _blService.InsertUploadedSurrender(BL_NO);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }            
+        }
+
+        [HttpGet("GetBLFiles")]
+        public ActionResult<Response<List<ALL_FILE>>> GetBLFiles(string BL_NO)
+        {
+            string[] array1 = Directory.GetFiles("Uploads/BLFiles/");
+
+            List<ALL_FILE> imgFiles = new List<ALL_FILE>();
+            Response<List<ALL_FILE>> response = new Response<List<ALL_FILE>>();
+
+            // Get list of files.
+            List<string> filesList = array1.ToList();
+
+            foreach (var file in filesList)
+            {
+                if (file.Contains(BL_NO))
+                {
+                    ALL_FILE img = new ALL_FILE();
+                    long length = new System.IO.FileInfo(file).Length / 1024;
+                    img.FILE_NAME = file.Split('/')[2];
+                    img.FILE_SIZE = length.ToString() + "KB";
+                    img.FILE_PATH = file;
+
+                    imgFiles.Add(img);
+
+                }
+            }
+
+            if (imgFiles.Count > 0)
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = imgFiles;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+            return response;
+        }
+
     }
 }

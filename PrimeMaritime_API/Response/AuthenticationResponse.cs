@@ -17,6 +17,7 @@ namespace PrimeMaritime_API.Response
         public string Port { get; set; }
         public string Depo { get; set; }
         public string countrycode { get; set; }
+        public string orgcode { get; set; }
         public string Token { get; set; }
         public string RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiration { get; set; }

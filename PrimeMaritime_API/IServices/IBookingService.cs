@@ -12,7 +12,7 @@ namespace PrimeMaritime_API.IServices
     public interface IBookingService
     {
         Response<CommonResponse> InsertBooking(BOOKING request);
-        Response<List<BookingList>> GetBookingList(string AgentID, string BOOKING_NO, string FROM_DATE, string TO_DATE);
+        Response<List<BookingList>> GetBookingList(string AgentID, string BOOKING_NO, string FROM_DATE, string TO_DATE, string ORG_CODE, string PORT);
         Response<List<BookingList>> GetBookingListPM(string BOOKING_NO, string FROM_DATE, string TO_DATE);
         Response<BookingDetails> GetBookingDetails(string AgentID, string BOOKING_NO);
         Response<string> ValidateSlots(string SRR_NO, int NO_OF_SLOTS, string BOOKING_NO, string SLOT_OPERATOR);

@@ -22,9 +22,9 @@ namespace PrimeMaritime_API.Models
         public string HAZ_APPROVAL_REF { get; set; }
         public string FLASH_POINT { get; set; }
         public string CAS_NO { get; set; }
-        public decimal TEMPERATURE { get; set; }
-        public decimal VENTILATION { get; set; }
-        public decimal HUMIDITY { get; set; }
+        public string TEMPERATURE { get; set; }
+        public string VENTILATION { get; set; }
+        public string HUMIDITY { get; set; }
         public string REMARKS { get; set; }
         public string CREATED_BY { get; set; }
         public DateTime CREATED_DATE { get; set; }

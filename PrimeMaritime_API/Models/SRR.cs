@@ -11,7 +11,6 @@ namespace PrimeMaritime_API.Models
         public string SRR_NO { get; set; }
         public string POL { get; set; }
         public string POD { get; set; }
-
         public string FINAL_DESTINATION { get; set; }
         public string ORIGIN_ICD { get; set; }
         public string DESTINATION_ICD { get; set; }
@@ -22,6 +21,8 @@ namespace PrimeMaritime_API.Models
         public string BOOKING_NO { get; set; }
         public DateTime ETA { get; set; }
         public DateTime ETD { get; set; }
+        public string VESSEL_NAME { get; set; }
+        public string VOYAGE_NO { get; set; }
         public int DAYS { get; set; }
         public bool MTY_REPO { get; set; }
         public string CUSTOMER_NAME { get; set; }
@@ -52,6 +53,9 @@ namespace PrimeMaritime_API.Models
         public decimal LADEN_BACK_COST { get; set; }
         public decimal EMPTY_BACK_COST { get; set; }
         public string AGENT_CODE { get; set; }
+        public string AGENT_NAME { get; set; }
+        public string ORG_CODE { get; set; }
+        public string PORT { get; set; }
         public List<SRR_CONTAINERS> SRR_CONTAINERS { get; set; } = new List<SRR_CONTAINERS>();
         public List<SRR_RATES> SRR_RATES { get; set; } = new List<SRR_RATES>();
         public List<SRR_COMMODITIES> SRR_COMMODITIES { get; set; } = new List<SRR_COMMODITIES>();

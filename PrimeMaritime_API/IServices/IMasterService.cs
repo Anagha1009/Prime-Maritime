@@ -168,5 +168,66 @@ namespace PrimeMaritime_API.IServices
 
         Response<CommonResponse> DeleteLocationMasterList(string LOC_CODE);
         #endregion
+
+        #region "FREIGHT MASTER"
+        Response<CommonResponse> InsertFreightMaster(FREIGHT_MASTER request);
+        Response<List<FREIGHT_MASTER>> GetFreightMasterList();
+        Response<FREIGHT_MASTER> GetFreightMasterDetails(int ID);
+        Response<CommonResponse> UpdateFreightMasterList(FREIGHT_MASTER request);
+        Response<CommonResponse> DeleteFreightMasterList(int ID);
+        #endregion
+
+        #region "CHARGE MASTER"
+        Response<List<CHARGE_MASTER>> GetChargeMasterList();
+        Response<CHARGE_MASTER> GetChargeMasterDetails(int ID);
+        Response<CommonResponse> UpdateChargeMasterList(CHARGE_MASTER request);
+        Response<CommonResponse> DeleteChargeMasterList(int ID);
+        #endregion
+
+        #region "STEVEDORING MASTER"
+        Response<List<STEV_MASTER>> GetStevedoringMasterList();
+        Response<STEV_MASTER> GetStevedoringMasterDetails(int ID);
+        Response<CommonResponse> UpdateStevedoringMasterList(STEV_MASTER request);
+        Response<CommonResponse> DeleteStevedoringMasterList(int ID);
+        #endregion
+
+        #region "DETENTION MASTER"
+        Response<List<DETENTION_MASTER>> GetDetentionMasterList();
+        Response<DETENTION_MASTER> GetDetentionMasterDetails(int ID);
+        Response<CommonResponse> UpdateDetentionMasterList(DETENTION_MASTER request);
+        Response<CommonResponse> DeleteDetentionMasterList(int ID);
+        #endregion
+
+        #region "MANDATORY MASTER"
+        Response<List<MANDATORY_MASTER>> GetMandatoryMasterList();
+        Response<MANDATORY_MASTER> GetMandatoryMasterDetails(int ID);
+        Response<CommonResponse> UpdateMandatoryMasterList(MANDATORY_MASTER request);
+        Response<CommonResponse> DeleteMandatoryMasterList(int ID);
+        #endregion
+
+        #region "UPLOAD TARIFF"
+        Response<string> UploadFreightTariff(List<FREIGHT_MASTER> request);
+        Response<string> UploadChargeTariff(List<CHARGE_MASTER> request);
+        Response<string> UploadStevTariff(List<STEV_MASTER> request);
+        Response<string> UploadDetentionTariff(List<DETENTION_MASTER> request);
+        Response<string> UploadMandatoryTariff(List<MANDATORY_MASTER> request);
+        #endregion
+
+        #region "ORGANISATION MASTER"
+        Response<CommonResponse> InsertOrgMaster(ORG_MASTER request);
+        Response<CommonResponse> ValidateOrgCode(string ORG_CODE);
+        Response<List<ORG_MASTER>> GetOrgMasterList();
+        Response<ORG_MASTER> GetOrgMasterDetails(string ORG_CODE, string ORG_LOC_CODE);
+        Response<CommonResponse> UpdateOrgMasterList(ORG_MASTER request);
+        Response<CommonResponse> DeleteOrgMasterList(string ORG_CODE,string ORG_LOC_CODE);
+        #endregion
+
+        #region "SLOT MASTER"
+        Response<CommonResponse> InsertSlotMaster(SLOT_MASTER request);
+        Response<List<SLOT_MASTER>> GetSlotMasterList(string SERVICE, string PORT);
+        Response<SLOT_MASTER> GetSlotMasterDetails(int ID);
+        Response<CommonResponse> UpdateSlotMasterList(SLOT_MASTER request);
+        Response<CommonResponse> DeleteSlotMasterList(int ID);
+        #endregion
     }
 }
