@@ -40,6 +40,7 @@ namespace PrimeMaritime_API.Models
         public int? NNView { get; set; }
         public bool? IS_SURRENDERED { get; set; }
         public bool? IS_UPLOADED { get; set; }
+        public string PAYMENT_TERM { get; set; }
         public string MARKS_NOS { get; set; }
         public string DESC_OF_GOODS { get; set; }
         public string AGENT_CODE { get; set; }

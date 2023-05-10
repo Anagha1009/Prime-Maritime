@@ -193,7 +193,7 @@ namespace PrimeMaritime_API.Services
 
             return response;
         }
-        public Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE)
+        public Response<EXC_RATE> GetExcRates(string CURRENCY_CODE, string AGENT_CODE, string ORG_CODE, string PORT)
         {
             string dbConn = _config.GetConnectionString("ConnectionString");
 
@@ -207,9 +207,32 @@ namespace PrimeMaritime_API.Services
             }
 
 
-            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE, AGENT_CODE);
+            var data = DbClientFactory<SRRRepo>.Instance.GetExcRates(dbConn, CURRENCY_CODE, AGENT_CODE,ORG_CODE,PORT);
 
             if ((data != null))
+            {
+                response.Succeeded = true;
+                response.ResponseCode = 200;
+                response.ResponseMessage = "Success";
+                response.Data = data;
+            }
+            else
+            {
+                response.Succeeded = false;
+                response.ResponseCode = 500;
+                response.ResponseMessage = "No Data";
+            }
+
+            return response;
+        }
+        public Response<List<EXC_RATE>> GetExcRateList(string ORG_CODE, string PORT)
+        {
+            string dbConn = _config.GetConnectionString("ConnectionString");
+
+            Response<List<EXC_RATE>> response = new Response<List<EXC_RATE>>();
+            var data = DbClientFactory<SRRRepo>.Instance.GetExcRateList(dbConn, ORG_CODE, PORT);
+
+            if (data.Count > 0)
             {
                 response.Succeeded = true;
                 response.ResponseCode = 200;

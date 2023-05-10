@@ -63,7 +63,7 @@ namespace PrimeMaritime_API.Helpers
                         conn.Open();
 
                         //Creating temp table on database
-                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(max),PKG_COUNT int,PKG_DESC varchar(max),GROSS_WEIGHT numeric(18,2),NET_WEIGHT numeric(18,2),MEASUREMENT varchar(50))";
+                        command.CommandText = "CREATE TABLE #TmpTable(BL_NO varchar(100),CONTAINER_NO varchar(20),CONTAINER_TYPE varchar(50),SEAL_NO varchar(50),AGENT_SEAL_NO varchar(50),MARKS_NOS varchar(max),DESC_OF_GOODS varchar(max),PKG_COUNT int,PKG_DESC varchar(max),GROSS_WEIGHT numeric(18,2),NET_WEIGHT numeric(18,2),MEASUREMENT varchar(50))";
                         command.ExecuteNonQuery();
 
                         //Bulk insert into temp table
@@ -81,7 +81,7 @@ namespace PrimeMaritime_API.Helpers
 
                         // Updating destination table, and dropping temp table
                         command.CommandTimeout = 300;
-                        command.CommandText = "UPDATE T SET BL_NO = Temp.BL_NO,CONTAINER_NO= Temp.CONTAINER_NO,CONTAINER_TYPE= Temp.CONTAINER_TYPE,SEAL_NO= Temp.SEAL_NO,MARKS_NOS= Temp.MARKS_NOS,DESC_OF_GOODS= Temp.DESC_OF_GOODS,PKG_COUNT= Temp.PKG_COUNT,PKG_DESC= Temp.PKG_DESC,GROSS_WEIGHT= Temp.GROSS_WEIGHT,NET_WEIGHT= Temp.NET_WEIGHT,MEASUREMENT= Temp.MEASUREMENT FROM " +
+                        command.CommandText = "UPDATE T SET BL_NO = Temp.BL_NO,CONTAINER_NO= Temp.CONTAINER_NO,CONTAINER_TYPE= Temp.CONTAINER_TYPE,SEAL_NO= Temp.SEAL_NO,AGENT_SEAL_NO= Temp.AGENT_SEAL_NO,MARKS_NOS= Temp.MARKS_NOS,DESC_OF_GOODS= Temp.DESC_OF_GOODS,PKG_COUNT= Temp.PKG_COUNT,PKG_DESC= Temp.PKG_DESC,GROSS_WEIGHT= Temp.GROSS_WEIGHT,NET_WEIGHT= Temp.NET_WEIGHT,MEASUREMENT= Temp.MEASUREMENT FROM " +
                              TableName + " T INNER JOIN #TmpTable Temp ON T.CONTAINER_NO = Temp.CONTAINER_NO and T.BL_NO = Temp.BL_NO; DROP TABLE #TmpTable;";
                         command.ExecuteNonQuery();
                     }

@@ -190,15 +190,7 @@ namespace PrimeMaritime_API.Repository
                   new SqlParameter("@EFFECT_FROM", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_FROM) ? null : Convert.ToDateTime(request.EFFECT_FROM) },
                   new SqlParameter("@EFFECT_TO", SqlDbType.DateTime) { Value = String.IsNullOrEmpty(request.EFFECT_TO) ? null : Convert.ToDateTime(request.EFFECT_TO)},
                   new SqlParameter("@IS_VESSELVALIDITY",SqlDbType.Bit) {Value = request.IS_VESSELVALIDITY},
-                  //new SqlParameter("@MTY_REPO", SqlDbType.Bit) { Value = request.MTY_REPO },
-                  new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },
-                  //new SqlParameter("@ADDRESS", SqlDbType.VarChar, 255) { Value = request.ADDRESS },
-                  //new SqlParameter("@EMAIL", SqlDbType.VarChar, 255) { Value = request.EMAIL },
-                  //new SqlParameter("@CONTACT", SqlDbType.VarChar, 20) { Value = request.CONTACT },
-                  //new SqlParameter("@SHIPPER", SqlDbType.VarChar, 250) { Value = request.SHIPPER },
-                  //new SqlParameter("@NOTIFY_PARTY", SqlDbType.VarChar, 250) { Value = request.NOTIFY_PARTY },
-                  //new SqlParameter("@OTHER_PARTY", SqlDbType.VarChar, 20) { Value = request.OTHER_PARTY },
-                  //new SqlParameter("@OTHER_PARTY_NAME", SqlDbType.VarChar, 255) { Value = request.OTHER_PARTY_NAME },
+                  new SqlParameter("@CUSTOMER_NAME", SqlDbType.VarChar, 255) { Value = request.CUSTOMER_NAME },                
                   new SqlParameter("@STATUS", SqlDbType.VarChar, 50) { Value = request.STATUS },
                   new SqlParameter("@PLACE_OF_RECEIPT", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_RECEIPT },
                   new SqlParameter("@PLACE_OF_DELIVERY", SqlDbType.VarChar, 100) { Value = request.PLACE_OF_DELIVERY },
@@ -269,6 +261,7 @@ namespace PrimeMaritime_API.Repository
                 tbl1.Columns.Add(new DataColumn("CREATED_BY", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("STATUS", typeof(string)));
                 tbl1.Columns.Add(new DataColumn("COST", typeof(decimal)));
+                tbl1.Columns.Add(new DataColumn("AGENT_REMARKS", typeof(string)));
 
                 foreach (var i in request.FREIGHT_CHARGES)
                 {                   
@@ -287,6 +280,7 @@ namespace PrimeMaritime_API.Repository
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
                     dr["COST"] = i.COST;
+                    dr["AGENT_REMARKS"] = i.AGENT_REMARKS;
 
                     tbl1.Rows.Add(dr);
                 }
@@ -308,6 +302,7 @@ namespace PrimeMaritime_API.Repository
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
                     dr["COST"] = i.COST;
+                    dr["AGENT_REMARKS"] = i.AGENT_REMARKS;
 
                     tbl1.Rows.Add(dr);
                 }
@@ -329,11 +324,12 @@ namespace PrimeMaritime_API.Repository
                     dr["CREATED_BY"] = request.CREATED_BY;
                     dr["STATUS"] = "Requested";
                     dr["COST"] = i.COST;
+                    dr["AGENT_REMARKS"] = i.AGENT_REMARKS;
 
                     tbl1.Rows.Add(dr);
                 }
 
-                string[] columns1 = new string[13];
+                string[] columns1 = new string[14];
                 columns1[0] = "SRR_ID";
                 columns1[1] = "SRR_NO";
                 columns1[2] = "CONTAINER_TYPE";
@@ -347,6 +343,7 @@ namespace PrimeMaritime_API.Repository
                 columns1[10] = "CREATED_BY";
                 columns1[11] = "STATUS";
                 columns1[12] = "COST";
+                columns1[13] = "AGENT_REMARKS";
 
                 SqlHelper.ExecuteProcedureBulkInsert(connstring, tbl1, "TB_SRR_RATES", columns1);
 
@@ -563,7 +560,7 @@ namespace PrimeMaritime_API.Repository
             }
         }
 
-        public EXC_RATE GetExcRates(string connstring, string CURRENCY_CODE, string AGENT_CODE)
+        public EXC_RATE GetExcRates(string connstring, string CURRENCY_CODE, string AGENT_CODE, string ORG_CODE, string PORT)
         {
             try
             {
@@ -572,6 +569,8 @@ namespace PrimeMaritime_API.Repository
                 new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_EXC_RATE" },
                 new SqlParameter("@CURRENCY_CODE", SqlDbType.VarChar, 20) { Value = CURRENCY_CODE },
                 new SqlParameter("@AGENT_CODE", SqlDbType.VarChar, 50) { Value = AGENT_CODE },
+                new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                new SqlParameter("@PORT", SqlDbType.VarChar, 100) { Value = PORT },
             };
 
                 return SqlHelper.ExtecuteProcedureReturnData<EXC_RATE>(connstring, "SP_CRUD_EXC_RATES", r => r.TranslateEXCRATES(), parameters);
@@ -581,6 +580,28 @@ namespace PrimeMaritime_API.Repository
                 throw;
             }
         }
+        public List<EXC_RATE> GetExcRateList(string connstring, string ORG_CODE, string PORT)
+        {
+            try
+            {
+                SqlParameter[] parameters =
+                {
+                  new SqlParameter("@OPERATION", SqlDbType.VarChar, 50) { Value = "GET_EXC_RATELIST" },
+                  new SqlParameter("@ORG_CODE", SqlDbType.VarChar, 20) { Value = ORG_CODE },
+                  new SqlParameter("@PORT", SqlDbType.VarChar, 100) { Value = PORT },
+                };
+
+                DataTable dataTable = SqlHelper.ExtecuteProcedureReturnDataTable(connstring, "SP_CRUD_EXC_RATES", parameters);
+                List<EXC_RATE> List = SqlHelper.CreateListFromTable<EXC_RATE>(dataTable);
+
+                return List;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public void InsertExcRate(string connstring, List<EXC_RATE> excRateList)
         {
             //DataTable tbl = new DataTable();

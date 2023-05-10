@@ -11,5 +11,6 @@ namespace PrimeMaritime_API.Models
         public string CURRENCY { get; set; }
         public decimal RATE { get; set; }
         public string AGENT_CODE { get; set; }
+        public string CREATED_BY { get; set; }
     }
 }

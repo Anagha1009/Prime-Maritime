@@ -163,7 +163,7 @@ namespace PrimeMaritime_API.Repository
                     i.DESC_OF_GOODS = request.DESC_OF_GOODS;
                 }
 
-                string[] columns = new string[11];
+                string[] columns = new string[12];
                 columns[0] = "BL_NO";
                 columns[1] = "CONTAINER_NO";
                 columns[2] = "CONTAINER_TYPE";
@@ -175,6 +175,7 @@ namespace PrimeMaritime_API.Repository
                 columns[8] = "GROSS_WEIGHT";
                 columns[9] = "NET_WEIGHT";
                 columns[10] = "MEASUREMENT";
+                columns[11] = "AGENT_SEAL_NO";
 
                 SqlHelper.UpdateContainerDataForBL<CONTAINERS>(request.CONTAINER_LIST2, "TB_CONTAINER", connstring, columns);
 

@@ -54,6 +54,8 @@ namespace PrimeMaritime_API.Models
         public decimal EMPTY_BACK_COST { get; set; }
         public string AGENT_CODE { get; set; }
         public string AGENT_NAME { get; set; }
+        public string ORG_CODE { get; set; }
+        public string PORT { get; set; }
         public List<SRR_CONTAINERS> SRR_CONTAINERS { get; set; } = new List<SRR_CONTAINERS>();
         public List<SRR_RATES> SRR_RATES { get; set; } = new List<SRR_RATES>();
         public List<SRR_COMMODITIES> SRR_COMMODITIES { get; set; } = new List<SRR_COMMODITIES>();
